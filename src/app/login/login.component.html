@@ -1,0 +1,66 @@
+<div id="login" >
+    <div id="imageSet">
+     <div class="row hide-on-med-and-down center" id="Rui">
+       <!---Animation for the Logo Coming in-->
+        <img src="assets/Ruimel.png" v-if="show"  class="Rui" style="width:10%;">         
+   </div>
+   <div class="row hide-on-large-only center" id="Logo">
+         <img src="assets/Ruimel.png" v-if="show"  class="Rui2" style="width:10%;">        
+   </div>
+    </div>
+
+    <div name="fade">
+    <div class="group" v-if="show">
+        <h2 class="title pulse center">Obsidian Rune</h2>
+         <div class="center">
+             <h5 class="stitle"><i>A Palace of Poetry</i></h5>
+
+                    <div class="row">
+                        <div class="container">
+                            <div class="col s12 m6 offset-m3">
+                                   <div class="login card-panel  white-text z-depth-5" style="border-radius: 20%; background-color:#171A23;">
+                                <h3 class="white-text" id="loginTxt">Login</h3>
+                                <h6 class="red-text" id="ErrorMsg"></h6>
+                                <form>
+                                    <div class="input-field ">
+                                            <input type="email" id="password" class="white-text" v-model="email">
+                                            <label for="email" class="white-text">Email</label>
+                                        </div><br>
+                                        <div class="input-field">
+                                            <input type="password" id="password" class="white-text" v-model="password">
+                                            <label for="password" class="white-text">Password</label>
+                                        </div>&nbsp;
+                                          <span class="white-text"><i>By using Obsidian Rune you agree to the <b class="blue-text"><i><a to="/terms/conditions">Terms and Conditions.</a></i></b></i></span><br><br>
+
+                                        <button v-on:click="Login" class="btn btn-large black darken-3 white-text pulse" style="border-radius: 50%; padding-bottom:10%;">Login</button>
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <h6 class="white-text"><i>Don't have an account?</i></h6>
+                    <h6 class="blue-text"><div to="/SignUp/new"><i>Create an account</i></div></h6>
+                </div>
+    </div>
+
+    <!-- New Background Row -->
+    
+
+    <!--Beginning of background Beauty Eternal-->
+    <div class="row">
+        <div class="col s12 m12">
+              <div class="eternal">
+        <ul id="eternalList">
+            <li  *ngFor="let word in infinity">
+                <h2 id="glowText">{{word.word}}</h2>
+            </li>
+        </ul>
+    </div>
+</div>
+        </div>
+    </div>
+    </div>
+
+</div>

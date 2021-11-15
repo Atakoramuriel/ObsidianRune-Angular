@@ -1,2 +1,83 @@
-<h1 class="red">Atakora Muriel
-</h1>
+<div id="Nav"  ref="TOPNAV">
+    <!--Start of Div for Nav/SideNav-->  
+       <div  class="navbar-fixed">
+
+           <!---NavBar Start-->
+               <nav class="black nav-extended" style="position:fixed; top: 0%;">
+                       <div class="nav-wrapper" style=""> 
+                           <div to="/" class="hide-on-small-only">
+                                   <a href="#!" class="brand-logo center" id="title"> Obsidian<i class="material-icons right" style="rotation:180deg;">brightness_2</i>Rune</a>
+                           </div>
+                            <div to="/" class="hide-on-med-and-up">
+                                   <a href="#!" class="brand-logo center" id="MobileTitle"> Obsidian<i class="material-icons right" style="rotation:180deg;">brightness_2</i>Rune</a>
+                           </div>
+                               <a href="#" v-on:click="sidebar" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons white-text">menu</i></a>
+                           <ul class="right hide-on-med-and-down" style="padding-right:05%;">
+                           <li>
+                               <div to="/" style="padding-right: 25%;">
+                                   <i class="material-icons">home</i>
+                               </div>
+                           </li>
+                           <li>
+                               <div style="padding-right: 10%;" v-bind:to="{name: 'profile', params: {userid: userid}}">
+                                   <i class="material-icons">account_circle</i>
+                               </div>
+                           </li>
+                           <li>
+                               <div to="" style="padding-right: 10%;">
+                                   <i class="material-icons" v-on:click="GetRuiNotes">announcement</i>
+                               </div>
+                           </li>
+                           <li>
+                               <div to="" style="padding-right: 10%;">
+                                   <i class="material-icons" v-on:click="displayNotes=!displayNotes; loadRequests();">brightness_2</i>
+                               </div>
+                           </li>
+                           <li>
+                                   <i v-on:click="signout" class="tiny material-icons red-text">cancel</i>
+                           </li>
+                           
+                           </ul>
+                       </div>
+                       <div class="nav-content hide-on-med-and-down">
+                           <ul class="white-text">
+                               <li id="tab" class="white-text tab" style="padding-left: 3%;"><div to="/"><h5>Home</h5></div></li>
+                               <li id="tab" class="white-text tab" style="padding-left: 3%;"><div to=""><h5 v-on:click="loadFriends();">Friends</h5></div></li>
+                               <li id="tab" class="white-text tab" style="padding-left: 3%;"><div to=""><h5 v-on:click="NewMessagePull">Messages</h5></div></li>
+                               <li id="tab" class=" tab right" style="padding-right:2%;"><h5 class=" text-darken-1" style="color:#C2934A;  font-family:Parisienne, cursive;" v-if="RuiMel" v-on:click="newEntry=!newEntry">LA. Notes</h5></li>
+                               <li id="tab" class=" tab right" style="padding-right:2%;"><div to="/Admin/AevumEepa"><h5 class=" text-darken-2" style="color:#C2934A;  font-family:Parisienne, cursive;" v-if="RuiMel">Aevum E.</h5></div></li>
+                           </ul>
+                       </div>
+               </nav>
+           <!--End of Navbar--->
+
+               <!--Start of the side Nav Bar List items-->
+                   <ul v-if="SignedIn"  class="sidenav  center" id="mobile-demo" style="background-color:#000000;">
+                               <br>
+                               <li>
+                                   <img :src="profileImg" style="width:25%; border-radius:50%;">
+                               </li>
+                               <li>
+                                 <h4 id="userName"> <span class="blue-grey-text text-lighten-2"><h5>Username</h5></span></h4>
+                              </li>
+                              <li><div class="container"><hr></div></li>
+                               <li><div to="/"  class="white-text center" ><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Home</a></h4></div></li>
+                               <li><div class="container"><hr></div></li>
+                               <li><div to="/Messages"  class="white-text center"><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Messages</a></h4></div></li>                         
+                               <li><div class="container"><hr></div></li>
+                               <li><div to="/profile" class="white-text"><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Profile</a></h4></div></li>
+                               <li><div class="container"><hr></div></li>
+                               <li><div to="" class="white-text"><h4><a v-on:click="GetRuiNotes" class="sidenav-close white-text" href="#">Notifications</a></h4></div></li>
+                               <li><div class="container"><hr></div></li>
+                               <li v-if="SignedIn"><h4 v-on:click="signout" class="red-text" style="border: none; background-color:#000000;"><a href="#" style="color:red;">Sign Out</a></h4></li>
+                               <li><a v-on:click="sidebar" class="sidenav-close white-text" href="#">X</a></li><br>
+                   </ul>
+               <!--End of the side Nav Bar List items-->
+       </div>
+    <!--End of Div for Nav/SideNav-->
+
+
+
+
+
+</div>

@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './login/login.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

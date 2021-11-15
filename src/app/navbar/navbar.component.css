@@ -1,3 +1,534 @@
-h1{
+/*temp*/
+#dropdown1{
+    position: absolute;
+    z-index: 21;
+}
+
+#friendPhoto{
+  object-fit:cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+}
+
+/*FriendMenu Btn*/
+#friendMenu{
+    z-index: 10;
+    position: absolute;
+    top: 0%;
+    right: 0%;
+}
+
+
+/*Area for the left side menu*/
+.leftSideMenu
+{
+    position:fixed;
+    bottom: 10%;
+    left:1.0%;
+    height: 60%;
+    min-width: 20%;
+    background-color: #0F0F12;
+    border: solid white 2px;
+    border-radius: 10px;
+    z-index: 2;
+}
+
+/*Info for friendsBtn at top */
+
+
+#FriendsBtn{
+    transition-delay: 0.5s;
+}
+
+#FriendsBtn:hover{
+    border: solid white 1px;
+    cursor: pointer;
+}
+
+#searchFriend{
+    border: solid white 1px;
+    background-color: rgba(128, 128, 128, 0.123);
+    border-radius: 50px;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    color: white
+}
+
+
+.FriendsBox{
+    position:fixed;
+    left:0.1%;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding:3%;
+    max-width:24%;
+    height: 100%;
+    top: 8%;
+}
+
+#wrap{
+    /* border: solid rgb(56, 66, 110) 2px;  */
+    /* border: solid white 2px; */
+    border-radius:10px;
+    padding:0%;
+    width: 230px;
+    height: 125px;
+    max-height: 150px;
+    background: rgba(0, 0, 0, 0);
+    position: absolute;
+    left: 5%;
+    z-index: 9;
+}
+
+#wrap:hover{
+    border: solid rgb(235, 198, 35) 2px;
+    /* background-color: rgb(11, 11, 29); */
+    cursor: pointer;
+}
+
+/*End of the CSS for the messages*/
+
+#fTitle{
+    color:rgb(202, 144, 58);
+    font-family:'Times New Roman', Times, serif
+}
+#friendName{
+    object-fit:cover;
+    position: absolute;
+    bottom: 0%;
+    right: 5%;
+    font-size: 30px;
+    color:rgb(255, 255, 255);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+#fnText{
+    color:white;
+    font-family:serif
+}
+
+/*For Friend Requests*/
+#friendBtn{
+    background-color: rgb(201, 83, 40);
+}
+
+#friendBtn:hover{
+    background-color: coral;
+    cursor: pointer;
+}
+#friendBtn2{
+    background-color: rgb(136, 2, 2);
+}
+
+#friendBtn2:hover{
+    background-color: rgb(245, 13, 13);
+    cursor: pointer;
+}
+
+
+
+#openChatList{
+    position: fixed;
+    left:1%;
+    bottom: 15%;
+    width:20%;
+    z-index:5;
+}
+
+#mesUploadBtn{
+    position: fixed;
+    bottom: 3%;
+    right: 22%;
+    z-index: 14;
+
+}
+
+#chatOptions{
+    position:fixed;
+    bottom: 7%;
+    right:1.5%;
+    z-index: 12;
+}
+/*Test the Send Message*/
+
+@import url('https://fonts.googleapis.com/css?family=Allura|Dancing+Script|Parisienne&display=swap');
+/*Imports End*/
+#postBtn{
+    background-color: rgb(0, 98, 209);
+}
+
+#noteTitle{
+    color: #94A1D8;
+}
+#noteBanner{
+    color: rgb(235, 166, 62); 
+    font-family:'Times New Roman', Times, serif ;
+}
+.NewEntry{
+    position:fixed;
+    bottom:1%;
+    right:1%;
+    z-index: 10;
+    background:rgba(0, 0, 0, 0.75);
+    border-radius: 20%;
+    padding:2%;
+    width: 35%;
+   
+}
+
+#userName{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+h4{
+    font-family:'Times New Roman', Times, serif
+}
+
+#tab{
+    /* font-family:Georgia, 'Times New Roman', Times, serif */
+    font-family:'Allura', cursive;
+}
+
+#title{
+ font-family:'Allura', cursive;
+ padding-top: 1px;
+ font-size: 275%;
+}
+
+
+#MobileTitle{
+ font-family:'Allura', cursive;
+ padding-top:0px;
+ font-size: 205%;
+}
+/*RuiNotes Section*/
+.collection{
+    border:none;
+}
+.RuiBox{
+    position:fixed;
+    left:0.1%;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding:3%;
+    max-width:23%;
+    height: 100%;
+    top: 8%;
+}
+
+.RuiBox2{
+    position:fixed;
+    left:0.1%;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding:3%;
+    max-width:100%;
+    height: 62%;
+    top: 6%;
+    padding-bottom:5%;
+    border: solid #C2934A 1px;
+    border-radius: 25px;
+    overflow: auto;
+}
+/*This is the Start of the CSS for the Messages*/
+#messageMenu{
+    position:fixed;
+    z-index: 12;
+    top:10%;
+    left:0%;
+    width:22%;
+    background-color: rgba(0, 0, 0, 6);
+}
+
+#msgDeleteBtn{
+    color:firebrick;
+    font-size: 100%;
+
+}
+
+#msgDeleteBtn:hover{
+    color:red;
+    cursor: pointer;
+    font-size: 150%;
+}
+
+
+.hold{
+    position:fixed;
+    left:0.1%;
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding-top:5.9%;
+    max-width:40%;
+    width: 22.5%;
+    height: 100%;
+    top: 8%;
+    overflow: scroll;
+    padding-bottom:15%;
+}
+
+.MessageBox{
+    position:fixed;
+    left:0.1%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding-top:5.9%;
+    max-width:38%;
+    width: 22%;
+    height: 95%;
+    top: 8%;
+    overflow: scroll;
+    padding-bottom:0%;
+    -ms-overflow-style: none;
+    
+}
+
+#MessageListTitle{
+    color:white;
+    font-family:serif;
+    
+}
+
+#messageCard{
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid #272C3C 2px;
+    border-radius:25px;
+     transition: width 2s;
+     padding:1%;
+}
+
+#messageCard:hover{
+    background-color: rgba(0, 0, 0, 0.8);
+    border: solid rgb(46, 95, 255) 2px;
+    border-radius:20px;
+    cursor: pointer;
+}
+
+#messageProfileImg{
+    width:15%; 
+    position: absolute;
+     left:5%; 
+     top:15%;
+}
+
+#messageUsername{
+    color: #C1934B;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 150%;
+    position: relative;
+    left:0%;
+    top:0%;
+    z-index:10;
+}
+
+#messageTxt{
+    color:white;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 125%;
+    position: relative;
+    z-index: 10; 
+    left:20%;
+    max-width: 80%;
+    max-height: 30px;
+    padding-bottom: 2%;
+}
+
+#MsgBtn:hover{
+    cursor: pointer;
+}
+
+#convoTop{
+    position: fixed;
+    top:10%;
+    padding-left: 1%;
+    text-align: center;
+    z-index: 11;
+   background: rgba(0, 0, 0, 0.75);
+   padding-right: 25%;
+    
+}
+
+#convoWith{
+    color:rgb(206, 169, 7); 
+    font-family:'Times New Roman', Times, serif;
+    font-size: 200%;
+}
+
+#convoWith:hover{
+      color:rgb(158, 78, 3); 
+    font-family:'Times New Roman', Times, serif;
+    font-size: 200%;
+    cursor: pointer;
+}
+
+#chatDisplay{
+    background-color: rgba(0, 0, 0, 0.95);
+    position: fixed;
+    z-index: 10;
+    right:0;
+    top:12%;
+    height:100%;
+    width: 22%;
+}
+
+#chatCloseBtn{
+    color:red;
+    position: absolute;
+    left: 50%;
+    top:40%;
+    font-size: 200%;
+    z-index: 14;
+}
+
+#chatCloseBtn:hover{
+    cursor: pointer;
+    color:white;
+}
+
+#chatBox{
+    position: relative;
+    max-height: 70%;
+    height: 68%;
+    overflow: scroll;
+}
+
+/*Start of the actual message bubbles*/
+#messageBubble{
+    background-color:#714E23;
+    max-width:70%;
+    width:fit-content;
+    min-width: 20%;
+    border-radius: 15px;
+    padding-top:0.2%;
+    padding-bottom:0.2%;
+    padding-left:1%;
+    padding-right:1%;
+}
+
+#myProfileImg{
+    position:absolute;
+    right:2%;
+}
+
+#otherProfileImg{
+    position: absolute; 
+    left: 2%;
+}
+
+#messageBubble2{
+    background-color: rgba(59, 59, 59, 0.637);
+    max-width:70%;
+    width: fit-content;
+    min-width: 23%;
+    position: relative;
+    left: 20%;
+    border-radius: 15px;
+    padding-top:0.2%;
+    padding-bottom:0.2%;
+}
+
+#messageBubbleTxt{
+    padding-bottom:0%;
+    
+}
+
+#newMessage{
+    position: fixed;
+    right:0.5%;
+    bottom:0%;
+    z-index: 11;
+    border-radius: 5px;
     color: white;
+    background-color: #34334180;
+    width: 21.4%;
+    max-height: 250px;
+    overflow: scroll;
+}
+
+#newMessageSearch{
+    position: fixed;
+    top: 10%;
+    right: 0%;
+    z-index: 15;
+    background-color: rgba(0, 0, 0, 0.75);
+    height: 100%;
+    width: 20%;
+}
+
+#searchIcon{
+    position: absolute;
+    right: 5%;
+    top:20%;
+}
+
+#userSearch{
+    background-color: rgba(160, 160, 160, 0.2);
+    border-radius: 50px;
+}
+
+#searchUser{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding-left:1%;
+}
+
+#newMessageArea{
+    position: relative;
+    left: 0%;
+    width:40%;
+    max-width: 80%;
+}
+
+#sendMessageBtn{
+    position:fixed;
+    bottom: 4%;
+    right:1%;
+    z-index: 13;
+    color: rgb(199, 137, 61);
+}
+
+#sendMessageBtn:hover{
+    position:fixed;
+    bottom: 3.4%;
+    right:1%;
+    color:white;
+    cursor: pointer;
+}
+
+/*End of the CSS for the messages*/
+
+#rTitle{
+    color:rgb(202, 144, 58);
+    font-family:'Times New Roman', Times, serif
+}
+#rnTitle{
+    
+    color:#90A1DD;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+#rnText{
+    color:white;
+    font-family:serif
+}
+
+#closeBtn{
+    background-color:rgba(0, 0, 0, 0.0);
+    border:none;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+ 
+}
+
+/*Transitionn Animations for NewPost*/
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all 2.0s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
 }
