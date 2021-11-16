@@ -8,6 +8,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
+import { FirebaseService } from './services/firebase.service';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -15,7 +17,8 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     NavbarComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,7 @@ import { LoginComponent } from './login/login.component';
     AngularFireModule.initializeApp(environment.firebase)
 
   ],
-  providers: [],
+  providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
