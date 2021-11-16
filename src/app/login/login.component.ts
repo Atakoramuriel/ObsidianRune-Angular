@@ -29,7 +29,16 @@ export class LoginComponent implements OnInit {
 
     //Log In
     async SignIn(email:string, password:string){
-      return this.firebaseService.signIn(email, password);
+      alert("Signed In Reached");
+      if(email.length != 0 && password.length != 0){
+        alert("Email: " + email.length
+        )
+        alert("If Statement Reached")
+        return this.firebaseService.signIn(email, password);
+      }else{
+        this.errorMsg = "Fill in Both Email and Password"
+      }
+      
 
 
     }
