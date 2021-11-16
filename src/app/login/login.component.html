@@ -1,11 +1,16 @@
 <div id="login" >
     <div id="imageSet">
-     <div class="row hide-on-med-and-down center" id="Rui">
+     <div 
+        *ngIf="state" 
+        [@Push]="{ value: '', params: { duration: 50 } }" [@bounceOutOnLeave]
+        class="row hide-on-med-and-down center" id="Rui">
        <!---Animation for the Logo Coming in-->
-        <img src="assets/Ruimel.png" v-if="show"  class="Rui" style="width:10%;">         
-   </div>
+        <img src="assets/Ruimel.png"
+         (click)="toggleState()"
+         class="Rui" style="width:10%;">         
+     </div>
    <div class="row hide-on-large-only center" id="Logo">
-         <img src="assets/Ruimel.png" v-if="show"  class="Rui2" style="width:10%;">        
+         <img src="assets/Ruimel.png"  class="Rui2" style="width:10%;">        
    </div>
     </div>
 
@@ -53,10 +58,11 @@
         <div class="col s12 m12">
      <div class="eternal">
         <ul id="eternalList" class="center">
-            <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li> <li><h2 id="glowText"> الليل ، اليوم ، اللانهاية ، الأبدية ، الاتصال ، الوقت ، الموسيقى الهادئة ، حماية ، الحب</h2></li>
-            <li><h2 id="glowtext">夜、日、無限、永遠、接続、時間、夜想曲、守る、愛</h2></li>
-            <li><h2 id="glowtext">Ημέρα Νύχτας Άπειρη Αιώνια Σύνδεση Χρόνος  Προστατεύστε την Αγάπη</h2></li>
-            <li><h2 id="glowtext">夜，天，,无限，永恒，连接，时间，夜曲，保护，爱</h2></li>
+            <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li> 
+            <li><h2 id="glowText2"> الليل ، اليوم ، اللانهاية ، الأبدية ، الاتصال ، الوقت ، الموسيقى الهادئة ، حماية ، الحب</h2></li>
+            <li><h2 id="glowText3">夜、日、無限、永遠、接続、時間、夜想曲、守る、愛</h2></li>
+            <li><h2 id="glowText4">Ημέρα Νύχτας Άπειρη Αιώνια Σύνδεση Χρόνος  Προστατεύστε την Αγάπη</h2></li>
+            <li><h2 id="glowText5">夜，天，,无限，永恒，连接，时间，夜曲，保护，爱</h2></li>
         </ul>
     </div>
 </div>

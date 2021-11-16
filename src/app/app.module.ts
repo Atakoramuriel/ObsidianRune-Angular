@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 import { LoginComponent } from './login/login.component';
 import { FirebaseService } from './services/firebase.service';
 import { HomeComponent } from './home/home.component';
-
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 
 
 @NgModule({
@@ -23,6 +23,7 @@ import { HomeComponent } from './home/home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase)
 
   ],

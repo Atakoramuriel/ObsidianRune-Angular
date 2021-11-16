@@ -25,9 +25,52 @@
     font-family: 'Parisienne'
 }
 
+/* For animations */
 #glowText{
-    font-family: 'Parisienne'
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: relative;
 }
+#glowText2{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example2;
+    animation-duration: 50s;
+    position: relative;
+}
+#glowText3{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: relative;
+}
+#glowText4{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example2;
+    animation-duration: 50s;
+    position: relative;
+}
+#glowText5{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: relative;
+}
+@keyframes example {
+    0%   { left:0%; top:0px;}
+    100%  {left:200%; top:0px;}
+  }
+
+  @keyframes example2 {
+    0%   { right:0%; top:0px;}
+    100%  {right:200%; top:0px;}
+  }
+
 
 #login{
     padding-top:0%;
@@ -57,7 +100,8 @@ h3
     z-index: -1;
     top: 10%;
     left:1%;
-    width:100%;
+    
+    /* width:100%; */
 }
 
 
