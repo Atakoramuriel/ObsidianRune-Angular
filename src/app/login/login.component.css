@@ -32,6 +32,16 @@
     animation-name: example;
     animation-duration: 50s;
     position: relative;
+    animation-iteration-count: 3;
+}
+#glowTextLag{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: absolute;
+    left: -1000px;
+    overflow: hidden;
 }
 #glowText2{
     font-family: 'Parisienne';
@@ -39,6 +49,8 @@
     animation-name: example2;
     animation-duration: 50s;
     position: relative;
+    animation-iteration-count: 3;
+
 }
 #glowText3{
     font-family: 'Parisienne';
@@ -46,6 +58,8 @@
     animation-name: example;
     animation-duration: 50s;
     position: relative;
+    animation-iteration-count: 3;
+
 }
 #glowText4{
     font-family: 'Parisienne';
@@ -53,6 +67,8 @@
     animation-name: example2;
     animation-duration: 50s;
     position: relative;
+    animation-iteration-count: 3;
+
 }
 #glowText5{
     font-family: 'Parisienne';
@@ -60,15 +76,20 @@
     animation-name: example;
     animation-duration: 50s;
     position: relative;
+    animation-iteration-count: 3;
+
 }
 @keyframes example {
-    0%   { left:0%; top:0px;}
-    100%  {left:200%; top:0px;}
+    0%   {left:0%; top:0px;}
+    50%  {left:50%; top:0px;}
+    100% {left:0%; top: 0px;}
   }
 
   @keyframes example2 {
     0%   { right:0%; top:0px;}
-    100%  {right:200%; top:0px;}
+    50%   {right:50%; top:0px;}
+    100%   { right:0%; top:0px;}
+
   }
 
 

@@ -6,7 +6,8 @@
         class="row hide-on-med-and-down center" id="Rui">
        <!---Animation for the Logo Coming in-->
         <img src="assets/Ruimel.png"
-         (click)="toggleState()"
+        [@bounceIn]="animationState"
+        (click)="animate()"
          class="Rui" style="width:10%;">         
      </div>
    <div class="row hide-on-large-only center" id="Logo">
@@ -58,7 +59,7 @@
         <div class="col s12 m12">
      <div class="eternal">
         <ul id="eternalList" class="center">
-            <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li> 
+            <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li>             
             <li><h2 id="glowText2"> الليل ، اليوم ، اللانهاية ، الأبدية ، الاتصال ، الوقت ، الموسيقى الهادئة ، حماية ، الحب</h2></li>
             <li><h2 id="glowText3">夜、日、無限、永遠、接続、時間、夜想曲、守る、愛</h2></li>
             <li><h2 id="glowText4">Ημέρα Νύχτας Άπειρη Αιώνια Σύνδεση Χρόνος  Προστατεύστε την Αγάπη</h2></li>
