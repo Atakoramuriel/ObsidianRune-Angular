@@ -21,34 +21,83 @@
          <div class="center">
              <h5 class="stitle"><i>A Palace of Poetry</i></h5>
 
-                    <div class="row">
-                        <div class="container">
-                            <div class="col s12 m6 offset-m3">
-                                   <div class="login card-panel  white-text z-depth-5" style="border-radius: 20%; background-color:#171A23;">
-                                <h3 class="white-text" id="loginTxt">Login</h3>
-                                <h6 class="red-text" id="ErrorMsg">{{errorMsg}}</h6>
-                                <div>
-                                    <div class="input-field ">
-                                            <input type="email" id="password" class="white-text" #email>
-                                            <label for="email" class="white-text">Email</label>
-                                        </div><br>
-                                        <div class="input-field">
-                                            <input type="password" id="password" class="white-text" #password>
-                                            <label for="password" class="white-text">Password</label>
-                                        </div>&nbsp;
-                                          <span class="white-text"><i>By using Obsidian Rune you agree to the <b class="blue-text"><i><a to="/terms/conditions">Terms and Conditions.</a></i></b></i></span><br><br>
 
-                                        <button (click)="SignIn(email.value,password.value)" class="btn btn-large black darken-3 white-text pulse" style="border-radius: 50%; padding-bottom:10%;">Login</button>
-                                </div>
-                            </div>
+             <!-- Section for Login Form  -->
+             <div id="loginSection"  *ngIf="loginSet"> 
+                <div class="row">
+                    <div class="container">
+                        <div class="col s12 m6 offset-m3">
+                               <div class="login card-panel  white-text z-depth-5" style="border-radius: 20%; background-color:#171A23;">
+                            <h3 class="white-text" id="loginTxt">Login</h3>
+                            <h6 class="red-text" id="ErrorMsg">{{errorMsg}}</h6>
+                            <div>
+                                <div class="input-field ">
+                                        <input type="email" id="password" class="white-text" #email>
+                                        <label for="email" class="white-text">Email</label>
+                                    </div><br>
+                                    <div class="input-field">
+                                        <input type="password" id="password" class="white-text" #password>
+                                        <label for="password" class="white-text">Password</label>
+                                    </div>&nbsp;
+                                      <span class="white-text"><i>By using Obsidian Rune you agree to the <b class="blue-text"><i><a to="/terms/conditions">Terms and Conditions.</a></i></b></i></span><br><br>
+
+                                    <button (click)="SignIn(email.value,password.value)" class="btn btn-large black darken-3 white-text pulse" style="border-radius: 50%; padding-bottom:10%;">Login</button>
                             </div>
                         </div>
+                        </div>
                     </div>
+                    
+                </div>
 
                 <div class="row">
                     <h6 class="white-text"><i>Don't have an account?</i></h6>
-                    <h6 class="blue-text"><div to="/SignUp/new"><i>Create an account</i></div></h6>
+                    <h6
+                    (click)="loginSet=!loginSet; registerSet=!registerSet" 
+                    class="blue-text" 
+                    id="registrationRedirect" ><div ><i>Create an account</i></div></h6>
                 </div>
+             </div>
+
+             <!-- Section for Registration -->
+             <div id="signUpSection" *ngIf="registerSet">
+                <div class="row">
+                    <div class="container">
+                        <div class="col s12 m6 offset-m3">
+                               <div class="login card-panel  white-text z-depth-5" style="border-radius: 20%; background-color:#171A23;">
+                            <h3 class="white-text" id="loginTxt">Create Account</h3>
+                            <h6 class="red-text" id="ErrorMsg">{{newErrorMsg}}</h6>
+                            <div>
+                                <div class="input-field ">
+                                        <input type="email" id="password" class="white-text" #newEmail>
+                                        <label for="email" class="white-text">Email</label>
+                                    </div><br>
+                                    <div class="input-field">
+                                        <input type="password" id="password" class="white-text" #newPassword>
+                                        <label for="password" class="white-text">Password</label>
+                                    </div>&nbsp;
+                                    <div class="input-field">
+                                        <input type="password" id="password" class="white-text" #confirmPassword>
+                                        <label for="password" class="white-text">Confirm Password</label>
+                                    </div>&nbsp; <br>
+                                      <span class="white-text"><i>By using Obsidian Rune you agree to the <b class="blue-text"><i><a to="/terms/conditions">Terms and Conditions.</a></i></b></i></span><br><br>
+
+                                    <button (click)="SignUp(newEmail.value,newPassword.value,confirmPassword.value)" class="btn btn-large black darken-3 white-text pulse" style="border-radius: 50%; padding-bottom:10%;">Submit</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    
+                </div>
+
+            <div class="row">
+                <h6 class="white-text"><i>Already have an account?</i></h6>
+                <h6 
+                (click)="loginSet=!loginSet; registerSet=!registerSet" 
+                class="blue-text" 
+                id="loginRedirect"><div ><i>Log into account</i></div></h6>
+            </div>
+             </div>
+
     </div>
 
     <!-- New Background Row -->

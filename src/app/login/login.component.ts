@@ -6,6 +6,7 @@ import {
 
 } from 'angular-animations';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -13,32 +14,42 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrls: ['./login.component.css'],
   animations: [
     bounceInAnimation(),
-    
-   
   ]
 })
 export class LoginComponent implements OnInit {
-  isLoggedIn = false;
+  //Starting variables
+    isLoggedIn = false;
+    loginSet: boolean = true;
+    registerSet: boolean = false;
 
-  constructor(public firebaseService: FirebaseService){}
+  constructor(public firebaseService: FirebaseService, private router: Router){}
 
   //ErrorMsg
   errorMsg: String = "";
+  newErrorMsg: String = "";
   state = false
   ngOnInit(): void {
-    //set Error Message to empty
+    //set Error Messages to empty
     this.errorMsg = "";
+    this.newErrorMsg = "";
+
+    //Set login to true
+    this.loginSet = true;
 
     //Run animation 
     this.toggleState();
     
-    
-
     //Check to see if logged in 
-    if(localStorage.getItem("user")!== null){
-      // this.isLoggedIn = true;
+    if(this.firebaseService.checkAuth == null)
+    {
+      //User is signed in
+      this.isLoggedIn = true;
+      this.router.navigateByUrl('');
+
     }else{
-      // this.isLoggedIn = false;
+      //User is not Signed in 
+      this.isLoggedIn = false;
+
     }
   }
   
@@ -46,16 +57,28 @@ export class LoginComponent implements OnInit {
     //Animation of Logo
     animation = 'bounceIn';
   
-    //Log In
+    //Log Into account
     async SignIn(email:string, password:string){
-      alert("Signed In Reached");
+     
       if(email.length != 0 && password.length != 0){
-        alert("Email: " + email.length
-        )
-        alert("If Statement Reached")
-        return this.firebaseService.signIn(email, password);
+        this.firebaseService.signIn(email, password)
+        .catch(error =>{ 
+          this.errorMsg = error
+        });
       }else{
-        this.errorMsg = "Fill in Both Email and Password"
+        this.errorMsg = "Fill in Both Email and Password";
+      }
+    }
+
+    //Create new account
+    async SignUp(email: string, password:string, confirmPassword:string){
+      if(password == confirmPassword){
+        //Passwords match, continue
+         this.firebaseService.createUser(email,password)
+     
+      }else{
+        //Change error message to show passwords do not match 
+        this.newErrorMsg = "Passwords do not match";
       }
     }
 

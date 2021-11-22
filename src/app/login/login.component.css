@@ -112,6 +112,20 @@ h3
 {
     color:#7082B6;
 }
+
+
+/* For redirects on bottom of page */
+#loginRedirect:hover{
+    cursor: pointer;
+    color: white;
+}
+
+#registrationRedirect{
+    cursor: pointer;
+    color: white;
+}
+
+
 /*Background Beauty*/
 .eternal{
      /*color:rgba(69, 77, 106, 0.7); */

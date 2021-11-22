@@ -11,6 +11,14 @@ import { LoginComponent } from './login/login.component';
 import { FirebaseService } from './services/firebase.service';
 import { HomeComponent } from './home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
+import {RouterModule, Routes} from '@angular/router';
+
+
+const appRoutes: Routes = [
+  {path: '', component: HomeComponent},
+  {path: 'Login', component: LoginComponent},
+
+]
 
 
 @NgModule({
@@ -24,6 +32,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    RouterModule.forRoot(appRoutes),
+
     AngularFireModule.initializeApp(environment.firebase)
 
   ],
