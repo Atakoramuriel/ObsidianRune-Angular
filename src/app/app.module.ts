@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 // import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {RouterModule, Routes} from '@angular/router';
 
 
+
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'Login', component: LoginComponent},
@@ -27,6 +28,9 @@ const appRoutes: Routes = [
     NavbarComponent,
     LoginComponent,
     HomeComponent
+  ],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
   ],
   imports: [
     BrowserModule,

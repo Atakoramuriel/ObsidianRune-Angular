@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Allura|Dancing+Script|Parisienne&display=swap');
+
+
 /*temp*/
 #dropdown1{
     position: absolute;
@@ -152,7 +155,6 @@
 }
 /*Test the Send Message*/
 
-@import url('https://fonts.googleapis.com/css?family=Allura|Dancing+Script|Parisienne&display=swap');
 /*Imports End*/
 #postBtn{
     background-color: rgb(0, 98, 209);
@@ -498,7 +500,7 @@ h4{
 /*End of the CSS for the messages*/
 
 #rTitle{
-    color:rgb(202, 144, 58);
+    color:#ca903a;
     font-family:'Times New Roman', Times, serif
 }
 #rnTitle{
@@ -512,12 +514,64 @@ h4{
     font-family:serif
 }
 
+
+
+
+
 #closeBtn{
     background-color:rgba(0, 0, 0, 0.0);
     border:none;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
  
 }
+
+
+/* Angular CSS Start */
+
+/* For start menu items */
+#startMenuBtn{
+    font-size: 35px;
+    padding-right: 7px;
+}
+
+#startMenuBtn:hover{
+    color: coral;
+    cursor: pointer;
+}
+
+
+
+
+/* For active menu items */
+#activeMenuIcon{
+    padding-right:30px;
+    font-size: 35px;
+}
+
+#activeMenuIcon:hover{
+    cursor: pointer;
+    color: coral;
+}
+
+
+
+
+
+.activeMenuBtn{
+    padding-right: 15px;
+    width: 50%;
+    font-size: 175%;
+    font-family:'Times New Roman', Times, serif
+}
+
+.activeMenuBtn:hover{
+    cursor: pointer;
+    color: coral;
+}
+
+
+
+
 
 /*Transitionn Animations for NewPost*/
 /* Enter and leave animations can use different */

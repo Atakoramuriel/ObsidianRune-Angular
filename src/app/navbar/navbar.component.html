@@ -13,30 +13,115 @@
                            </div>
                                <a href="#" v-on:click="sidebar" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons white-text">menu</i></a>
                            <ul class="right hide-on-med-and-down" style="padding-right:05%;">
-                           <li>
-                               <div to="/" style="padding-right: 25%;">
-                                <h5>Home</h5>
-                               </div>
-                           </li>
-                           <li>
-                               <div style="padding-right: 10%;" v-bind:to="{name: 'profile', params: {userid: userid}}">
-                                <h5 v-on:click="loadFriends();">Profile</h5>
-                               </div>
-                           </li>
-                           <li>
-                               <div to="" style="padding-right: 10%;">
-                                <h5 v-on:click="loadFriends();">Notifications</h5>
-                               </div>
-                           </li>
-                           <li>
-                               <div to="" style="padding-right: 10%;">
-                                <h5 v-on:click="loadFriends();">Messages</h5>
-                               </div>
-                           </li>
-                           <li>
-                                   <i v-on:click="signout" class="tiny material-icons red-text">cancel</i>
-                           </li>
-                           
+                                <!-- Main Options for Menu -->
+                                    <div class="startMenu" *ngIf="mainMenu">
+                                        <li>
+                                            <div  style="padding-right: 25%;">
+                                                <i 
+                                                (click)="toggleMenu('Home')"
+                                                id="startMenuBtn"
+                                                class="large material-icons">home</i>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <i 
+                                            (click)="toggleMenu('Profile')"
+                                            id="startMenuBtn"
+                                            class="large material-icons">account_circle</i>
+                                        </li>
+                                        <li>
+                                            <i 
+                                            (click)="toggleMenu('Messages')"
+                                            id="startMenuBtn"
+                                            class="large material-icons">email</i>
+                                        </li>
+                                        <li>
+                                            <i 
+                                            (click)="toggleMenu('Notifications')"
+                                            id="startMenuBtn"
+                                            class="large material-icons">chat_bubble</i>
+                                        </li>
+                                        <li>
+                                            <i 
+                                            (click)="toggleMenu('Legacy')"
+                                            id="startMenuBtn"
+                                            class="large material-icons">brightness_2</i>
+                                        </li>
+                                        <li>
+                                            <i 
+                                            (click)="toggleMenu('Settings')"
+                                            id="startMenuBtn"
+                                            class="large material-icons">settings</i>
+                                        </li>
+
+                                    </div>
+
+                                <!-- Active Menu once option is selected -->
+                                    <!-- When home button is selected -->
+                                        <div class="activeMenu" *ngIf="activeMenu">
+                                            <li><i
+                                                (click)="toggleMenu('Home')"
+                                                class="material-icons" id="activeMenuIcon">home</i></li>
+                                            <li><h5 class="activeMenuBtn">Dashboard</h5></li>
+                                            <li><h5 class="activeMenuBtn">New_Post</h5></li>
+                                            <li><h5 class="activeMenuBtn">New_Write</h5></li>
+                                            <li><h5 class="activeMenuBtn">New_NFT</h5></li>
+                                        </div>
+
+                                    <!-- When Profile Button is selected -->
+                                    <div class="activeMenu" *ngIf="profileMenu">
+                                        <li><i
+                                            (click)="toggleMenu('Profile')"
+                                            class="material-icons" id="activeMenuIcon">account_circle</i></li>
+                                        <li><h5 class="activeMenuBtn">View_Profile</h5></li>
+                                        <li><h5 class="activeMenuBtn">Edit_Profile</h5></li>
+                                        <li><h5 class="activeMenuBtn">View_Legacies</h5></li>
+                                        <li><h5 class="activeMenuBtn">View_Saved</h5></li>
+                                    </div>
+
+                                    <!-- When Notification Button is selected -->
+                                        <div class="activeMenu" *ngIf="legacyMenu">
+                                            <li><i
+                                                (click)="toggleMenu('Legacy')"
+                                                class="material-icons" id="activeMenuIcon">brightness_2</i></li>
+                                            <li><h5 class="activeMenuBtn">New_Legacy</h5></li>
+                                            <li><h5 class="activeMenuBtn">View_Legacies</h5></li>
+                                            <li><h5 class="activeMenuBtn">Saved_Legacies</h5></li>
+                                            <li><h5 class="activeMenuBtn">Delete</h5></li>
+                                        </div>
+
+                                    <!-- When Message Button is selected -->
+                                    <div class="activeMenu" *ngIf="messageMenu">
+                                        <li><i
+                                            (click)="toggleMenu('Messages')"
+                                            class="material-icons" id="activeMenuIcon">email</i></li>
+                                        <li><h5 class="activeMenuBtn">New_Message</h5></li>
+                                        <li><h5 class="activeMenuBtn">View_Messages</h5></li>
+                                        <li><h5 class="activeMenuBtn">Saved_Messages</h5></li>
+                                        <li><h5 class="activeMenuBtn">Delete</h5></li>
+                                    </div>
+
+                                     <!-- When Notification Button is selected -->
+                                     <div class="activeMenu" *ngIf="notificationMenu">
+                                        <li><i
+                                            (click)="toggleMenu('Notifications')"
+                                            class="material-icons" id="activeMenuIcon">chat_bubble</i></li>
+                                        <li><h5 class="activeMenuBtn">New_Notifcations</h5></li>
+                                        <li><h5 class="activeMenuBtn">All_Notifcations</h5></li>
+                                        <li><h5 class="activeMenuBtn">Friend_Requests</h5></li>
+                                    </div>
+
+                                       <!-- When Settings Button is selected -->
+                                       <div class="activeMenu" *ngIf="settingsMenu">
+                                        <li><i
+                                            (click)="toggleMenu('Settings')"
+                                            class="material-icons" id="activeMenuIcon">settings</i></li>
+                                        <li><h5 class="activeMenuBtn">Main_Settings</h5></li>
+                                        <li><h5 class="activeMenuBtn">Profile_Settings</h5></li>
+                                        <li><h5 class="activeMenuBtn">Privacy_Settings</h5></li>
+                                        <li><h5 class="activeMenuBtn">Log_Out</h5></li>
+                                    </div>
+                         
                            </ul>
                        </div>
 
