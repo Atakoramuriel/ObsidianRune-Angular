@@ -12,8 +12,8 @@ export class NavbarComponent implements OnInit {
   Auth:boolean = false;
 
   //For sub home menu
-  mainMenu:boolean = true;
-  activeMenu:boolean = false;
+  mainMenu:boolean = false;
+  activeMenu:boolean = true;
   profileMenu:boolean = false;
   legacyMenu:boolean = false;
   messageMenu:boolean = false;

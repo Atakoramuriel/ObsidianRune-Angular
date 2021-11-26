@@ -1,8 +1,15 @@
 <div class="row">
     <app-navbar></app-navbar>
+
+<!-- Area for the logo to rest -->
+    <div class="banner center">
+        <img src="../../assets/Ruimel.png"  class="RuiLogo hide-on-med-and-down">
+            <h1 class="white-text hide-on-small-only" v-if="!show"  id="bannerTitle" style="position:relative; top:0px; z-index:8;"><i>A Palace of Poetry</i></h1>  
+            <h5 class="white-text hide-on-med-and-up" v-if="!show"  id="bannerTitle2" style="position:relative; z-index:8;"><i>A Palace of Poetry</i></h5><br><br>
+
+    </div>
+
     <!-- The Concept is 'Multiple Rows' -->
-
-
     <div class="row" id="sections">
 
     <!-- Main Row for whats new  -->
@@ -10,11 +17,24 @@
         <!-- Notifications -->
         <!-- Featured posts from users -->
         <!-- People saved as favorites -->
-        <div class="row" id="main">
+        <div class="row " id="main">
             <h5 class="white-text">Main Row</h5>
-            <div class="col 12">
-     
+            <div
+             class="box">
+             <div 
+             id="testCard"
+             class="card"
+             *ngFor="let card of testList; let i = index;">
+                <!-- <p class="white-text">{{card}}</p> -->
+                 <div class="card" id="userLegacy">
+                     <h4 class="legacyTitle">{{card.title}}</h4>
+                     <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                     <img src="{{card.image}}" class="" id="legacyImg">
+                     <i class="material-icons " id="legacyOptions">more_vert</i>
+                 </div>    
+              </div>
             </div>
+          
  
         </div>
     
@@ -27,6 +47,21 @@
             <!-- Timeline of recent posts from all friends -->
             <div class="row" id="main">
                 <h5 class="white-text">Recent Posts</h5>
+                <div
+                class="box">
+                <div 
+                id="testCard"
+                class="card"
+                *ngFor="let card of testList; let i = index;">
+                   <!-- <p class="white-text">{{card}}</p> -->
+                    <div class="card" id="userLegacy">
+                        <h4 class="legacyTitle">{{card.title}}</h4>
+                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                        <img src="{{card.image}}" class="" id="legacyImg">
+                        <i class="material-icons " id="legacyOptions">more_vert</i>
+                    </div>    
+                 </div>
+               </div>
             </div>
     
         <!-- Divider -->
@@ -38,6 +73,21 @@
     <!-- Timeline of recent posts from all friends -->
     <div class="row" id="main">
         <h5 class="white-text">Legacy Posts</h5>
+        <div
+        class="box">
+        <div 
+        id="testCard"
+        class="card"
+        *ngFor="let card of testList; let i = index;">
+           <!-- <p class="white-text">{{card}}</p> -->
+            <div class="card" id="userLegacy">
+                <h4 class="legacyTitle">{{card.title}}</h4>
+                <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                <img src="{{card.image}}" class="" id="legacyImg">
+                <i class="material-icons " id="legacyOptions">more_vert</i>
+            </div>    
+         </div>
+       </div>
     </div>
     
        <!-- Divider -->
