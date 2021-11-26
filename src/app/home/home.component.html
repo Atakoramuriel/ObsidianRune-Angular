@@ -1,13 +1,28 @@
 <div class="row">
     <app-navbar></app-navbar>
-
 <!-- Area for the logo to rest -->
+<div class="center" id="liveBanner">
+    <h1 class="white-text hide-on-small-only"  id="bannerTitle"><i>A Palace of Poetry</i></h1>  
     <div class="banner center">
         <img src="../../assets/Ruimel.png"  class="RuiLogo hide-on-med-and-down">
-            <h1 class="white-text hide-on-small-only" v-if="!show"  id="bannerTitle" style="position:relative; top:0px; z-index:8;"><i>A Palace of Poetry</i></h1>  
-            <h5 class="white-text hide-on-med-and-up" v-if="!show"  id="bannerTitle2" style="position:relative; z-index:8;"><i>A Palace of Poetry</i></h5><br><br>
-
     </div>
+</div>
+<div class="center" id="livePhotoBanner">
+    <div class="row">
+        <div class="col l4 m4" id="img">
+            <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FCCF733DE-0488-49E1-B128-95350491A843.jpeg?alt=media&token=ad602b29-0866-4796-9d3d-bc66ac99c262" id="bannerImg" alt="">
+        </div>
+        <div class="col l4 m4" id="img">
+            <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_0132.jpg?alt=media&token=7f967075-407b-47fe-b717-8289fbefae05" id="bannerImg" alt="">
+
+        </div>
+        <div class="col l4 m4" id="img">
+            <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_4533.jpg?alt=media&token=778bd24d-85d3-4fa9-afbd-746ca36b545b" id="bannerImg" alt="">
+
+        </div>
+    </div>
+</div>
+
 
     <!-- The Concept is 'Multiple Rows' -->
     <div class="row" id="sections">
@@ -18,7 +33,7 @@
         <!-- Featured posts from users -->
         <!-- People saved as favorites -->
         <div class="row " id="main">
-            <h4 class="white-text" id="menuTitle">Main</h4>
+            <h4  id="menuTitle">Main</h4>
             <div
              class="box">
              <div 
@@ -46,9 +61,9 @@
         <!-- Recent Posts -->
             <!-- Timeline of recent posts from all friends -->
             <div class="row" id="main">
-                <h4 class="white-text" id="menuTitle">Recent Posts</h4>
+                <h4  id="menuTitle">Recent Posts</h4>
                 <div
-                class="box">
+                class="box2">
                 <div 
                 id="testCard"
                 class="card"
@@ -72,7 +87,7 @@
     <!-- Recent Writings (Legacy and more) -->
     <!-- Timeline of recent posts from all friends -->
     <div class="row" id="main">
-        <h4 class="white-text" id="menuTitle">Legacy Posts</h4>
+        <h4  id="menuTitle">Legacy Posts</h4>
         <div
         class="box">
         <div 
@@ -99,19 +114,20 @@
     <!-- Recent Writings (Legacy and more) -->
     <!-- Timeline of recent posts from all friends -->
     <div class="row" id="main">
-        <h4 class="white-text" id="menuTitle">Writings</h4>
+        <h4 id="menuTitle">Writings</h4>
         <div
-        class="box">
+        class="box2">
         <div 
         id="testCard"
         class="card"
         *ngFor="let card of WritingList; let i = index;">
            <!-- <p class="white-text">{{card}}</p> -->
-            <div class="card" id="userLegacy">
-                <h4 class="legacyTitle">{{card.title}}</h4>
+            <div class="card" id="userWriting">
+                <h5 class="writingTitle">{{card.title}}</h5>
                 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                <img src="{{card.image}}" class="" id="legacyImg">
-                <i class="material-icons " id="legacyOptions">more_vert</i>
+                <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
+                <div  id="legacyTxt">{{card.sample}}</div>
+                <i class="material-icons " id="writingOptions">more_vert</i>
             </div>    
          </div>
        </div>
@@ -126,13 +142,13 @@
     <!-- Recent Writings (Legacy and more) -->
     <!-- Timeline of recent posts from all friends -->
     <div class="row" id="main">
-        <h4 class="white-text" id="menuTitle">NFT Images</h4>
+        <h4 id="menuTitle">NFTs ( Coming Soon )</h4>
         <div
         class="box">
         <div 
         id="testCard"
         class="card"
-        *ngFor="let card of testList; let i = index;">
+        *ngFor="let card of NFT; let i = index;">
            <!-- <p class="white-text">{{card}}</p> -->
             <div class="card" id="userLegacy">
                 <h4 class="legacyTitle">{{card.title}}</h4>
