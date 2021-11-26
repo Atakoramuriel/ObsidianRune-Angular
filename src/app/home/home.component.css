@@ -1,3 +1,5 @@
+
+
 #main{
 width: 100%;
 }
@@ -16,6 +18,15 @@ width: 100%;
 
 #bannerTitle{
     font-family:'Allura', cursive;
+    position: absolute;
+    top: 0%;
+}
+
+
+/* For the menu title */
+#menuTitle{
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 1%;
 }
 
 /* Start of the Menu Cards  */
@@ -23,6 +34,7 @@ width: 100%;
     width: 32%;
     display: inline-block;
     padding-left: 0%;
+    border: none;
     background-color: #00000000;
     padding: 1%;
 }
@@ -44,6 +56,8 @@ width: 100%;
     height:200px;
     width: 400px;
     border: solid black 1px;
+    display: inline-block;
+
 }
 
 #userLegacy:hover{
@@ -51,14 +65,15 @@ width: 100%;
     border-radius:15px;
     height:200px;
     cursor: pointer;
-    border:solid black 2px;
+    border:solid rgb(255, 123, 0) 2px;
 }
 
 .legacyTitle{
     color:rgb(245, 245, 245);
     text-shadow: 5px 5px #000000;
     font-family:'Times New Roman', Times, serif;
-    font-size: 350%;
+    /* font-size: 350%; */
+    font-size: max(3vw, 3px);    
     position:absolute;
     right:10%;
     bottom:5%;
@@ -71,6 +86,24 @@ width: 100%;
     height: 100%;
     border-radius: 15px;
   }
+
+  #legacyOptions{
+    position:absolute;
+    right: 0%;
+    top:0%;
+    font-size: 250%;
+    z-index: 5;
+    color:white;
+}
+#legacyOptions:hover{
+    position:absolute;
+    right:0%;
+    top:0%;
+    font-size: 350%;
+    z-index: 5;
+    color: coral;
+    cursor: pointer;
+}
 
 ul#menu li {
     display: inline;

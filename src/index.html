@@ -29,6 +29,25 @@
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+  /* Works on Firefox */
+* {
+  scrollbar-width: 18px;/*thin;*/
+  scrollbar-color: skyblue #0000000e;
+}
+*::-webkit-scrollbar {
+  width: 18px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #0000000a; 
+  border: none;      /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 136, 0, 0.089);    /* color of the scroll thumb */
+  border-radius: 10px;       /* roundness of the scroll thumb */
+ /* border: 1px solid #000066;  *//* creates padding around scroll thumb */
+}
     </style>
 </head>
 
