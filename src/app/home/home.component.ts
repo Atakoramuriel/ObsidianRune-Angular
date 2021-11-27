@@ -37,23 +37,23 @@ export class HomeComponent implements OnInit {
   //For recent Post Row
   RecentPost = [
     {
-      title: 'Nightmare Flame',
+      title: 'New Post',
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FA2CB3D73-7042-44EB-8076-0F22AD72A934.jpeg?alt=media&token=b57bc02a-fcea-46ed-be73-cc1f64a65db6"
     },
     {
-      title: 'Crisis Lore',
+      title: 'Legacy',
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FE499D577-C397-4BAD-BABC-B2FAE698F08E.jpeg?alt=media&token=8e0a4d85-4768-40a4-8079-03c269a52cef"
     },
     {
-      title: 'Familia o',
+      title: 'Forum',
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2F83D7885A-9D9C-4D02-8257-8B38744FA835.jpeg?alt=media&token=71e3b24f-46a9-4817-a186-a3e983e656d5"
     },
     {
-      title: 'Flight',
+      title: 'Messages',
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FCCF733DE-0488-49E1-B128-95350491A843.jpeg?alt=media&token=ad602b29-0866-4796-9d3d-bc66ac99c262"
     },
     {
-      title: 'Dias Rojo',
+      title: 'Notifications',
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_4533.jpg?alt=media&token=778bd24d-85d3-4fa9-afbd-746ca36b545b"
     }
  
@@ -88,7 +88,10 @@ export class HomeComponent implements OnInit {
       You show me trust 
       You show me things 
       That I should forever lust. 
-      Thank you. `
+      Thank you. `,
+      username: "Nocturna",
+      date: "November 2021",
+      profileImg: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/RuiLogo.png?alt=media&token=2a00ea98-57ac-45ee-9da9-008127c19d2a"
       
       
     },
@@ -116,7 +119,9 @@ export class HomeComponent implements OnInit {
         Of a new love that wasn’t spoken
                     But a production 
           Of a love, breathless and open.   
-          Love you 🦋💜`
+          Love you 🦋💜`,
+      username: "Nocturna",
+      date: "November 2021"
     },
     {
       title: 'Smile',
@@ -134,7 +139,11 @@ export class HomeComponent implements OnInit {
         Into my heart and resume 
         To make my heart leap 
         And groom 
-        My love for him. 💜🦋`
+        My love for him. 💜🦋`,
+      username: "Nocturna",
+      date: "November 2021",
+      profileImg: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/RuiLogo.png?alt=media&token=2a00ea98-57ac-45ee-9da9-008127c19d2a"
+
     },
     {
       title: 'Touch',
@@ -146,7 +155,11 @@ export class HomeComponent implements OnInit {
       Your smell to which I chase 
       I crave you beyond the base 
       Of life itself for which I face 
-      I love you `
+      I love you `,
+      username: "Nocturna",
+      date: "November 2021",
+      profileImg: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/RuiLogo.png?alt=media&token=2a00ea98-57ac-45ee-9da9-008127c19d2a"
+
     },
     {
       title: 'Rings',
@@ -165,7 +178,11 @@ export class HomeComponent implements OnInit {
           To sting 
           And it becomes late 
           As he hands her his black ring 
-          That hold so much weight. `
+          That hold so much weight. `,
+      username: "Nocturna",
+      date: "November 2021",
+      profileImg: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/RuiLogo.png?alt=media&token=2a00ea98-57ac-45ee-9da9-008127c19d2a"
+
     }
  
   ];

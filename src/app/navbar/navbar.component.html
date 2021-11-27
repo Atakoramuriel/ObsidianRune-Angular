@@ -11,12 +11,17 @@
                             <div to="/" class="hide-on-med-and-up">
                                    <a href="#!" class="brand-logo center" id="MobileTitle"> Obsidian<i class="material-icons right" style="rotation:180deg;">brightness_2</i>Rune</a>
                            </div>
+
+
+
+                          
+                           
                                <a href="#" v-on:click="sidebar" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons white-text">menu</i></a>
                            <ul class="right hide-on-med-and-down" style="padding-right:05%;">
                                 <!-- Main Options for Menu -->
                                     <div class="startMenu" *ngIf="mainMenu">
                                         <li>
-                                            <div  style="padding-right: 25%;">
+                                            <div >
                                                 <i 
                                                 (click)="toggleMenu('Home')"
                                                 id="startMenuBtn"
@@ -28,6 +33,12 @@
                                             (click)="toggleMenu('Profile')"
                                             id="startMenuBtn"
                                             class="large material-icons">account_circle</i>
+                                        </li>
+                                        <li>
+                                            <i 
+                                            (click)="toggleMenu('Search')"
+                                            id="startMenuBtn"
+                                            class="large material-icons">search</i>
                                         </li>
                                         <li>
                                             <i 
@@ -77,6 +88,20 @@
                                         <li><h5 class="activeMenuBtn">Edit_Profile</h5></li>
                                         <li><h5 class="activeMenuBtn">View_Legacies</h5></li>
                                         <li><h5 class="activeMenuBtn">View_Saved</h5></li>
+                                    </div>
+                                    <!-- When Search Button is selected -->
+                                    <div class="activeMenu" *ngIf="searchMenu">
+                                        <li><i
+                                            (click)="toggleMenu('Search')"
+                                            class="material-icons" id="activeMenuIcon">account_circle</i></li>
+                                        <li>
+                                            <input 
+                                                 id="searchTxt" 
+                                                 placeholder="Search Obsidian. . ."
+                                                 type="text" 
+                                                 class="validate white-text" #searchTxt>
+                                        </li>
+                   
                                     </div>
 
                                     <!-- When Notification Button is selected -->

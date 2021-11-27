@@ -66,7 +66,7 @@ width: 100%;
 #sections{
     position: absolute;
     width: 100%;
-    top: 25%;
+    top: 29%;
 }
 
 
@@ -165,11 +165,28 @@ width: 100%;
     z-index: 3;
 }
 
+#wprofileImg{
+    width: 15%;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    
+}
+
+#writtenUser{
+    position:absolute;
+    left: 15%;
+    bottom:0%;
+    font-size: 120%;
+    z-index: 5;
+    color:white;
+}
 #writingOptions{
     position:absolute;
-    right: 0%;
+    right: 1%;
     bottom:0%;
-    font-size: 250%;
+    font-size: 90%;
     z-index: 5;
     color:white;
 }

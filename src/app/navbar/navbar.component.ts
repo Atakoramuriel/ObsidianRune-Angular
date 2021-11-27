@@ -12,9 +12,10 @@ export class NavbarComponent implements OnInit {
   Auth:boolean = false;
 
   //For sub home menu
-  mainMenu:boolean = false;
-  activeMenu:boolean = true;
+  mainMenu:boolean = true;
+  activeMenu:boolean = false;
   profileMenu:boolean = false;
+  searchMenu:boolean = false;
   legacyMenu:boolean = false;
   messageMenu:boolean = false;
   notificationMenu:boolean = false;
@@ -53,6 +54,11 @@ export class NavbarComponent implements OnInit {
             this.activeMenu=!this.activeMenu;
             
 
+          break;
+        case "Search":
+            //Show the searchbar
+            this.mainMenu=!this.mainMenu;
+            this.searchMenu=!this.searchMenu;
           break;
         case "Profile":
           //Show Profile Options
