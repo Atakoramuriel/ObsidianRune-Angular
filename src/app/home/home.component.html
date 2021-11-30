@@ -17,16 +17,16 @@
             <div class="col l4 m4" id="imgLeft">
                 <img 
                 class=""
-                [src]="imgLeft" id="bannerImg" alt="">
+                [src]="imgLeft" id="bannerImgLeft" alt="">
             </div>
             <div class="col l4 m4" id="imgCenter">
-                <img [src]="imgCenter" id="bannerImg" alt="">
+                <img [src]="imgCenter" id="bannerImgCenter" alt="">
 
             </div>
             <div class="col l4 m4" id="imgRight">
                 <img 
                 class=""
-                [src]="imgRight" id="bannerImg" alt="">
+                [src]="imgRight" id="bannerImgRight" alt="">
 
             </div>
         </div>
@@ -51,13 +51,40 @@
              <div 
              id="testCard"
              class="card"
-             *ngFor="let card of RecentPost; let i = index;">
+             *ngFor="let card of menuItems; let i = index;">
                 <!-- <p class="white-text">{{card}}</p> -->
-                 <div class="card" id="userLegacy">
+                 <div class="card" id="MainCard">
                      <h4 class="legacyTitle">{{card.title}}</h4>
                      <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                     <img src="{{card.image}}" class="" id="legacyImg">
+                     <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
+                     <i class="material-icons" id="MenuIcon">{{card.icon}}</i>
                      <i class="material-icons " id="legacyOptions">more_vert</i>
+                 </div>    
+              </div>
+            </div>
+          
+ 
+        </div>
+
+        <!-- Area for Active users -->
+            <!-- See what they posted
+            Message them  -->
+
+        <div class="row " id="main">
+            <h4  id="activeTitle">Active users</h4>
+            <div
+             class="box2">
+             <div 
+             id="testCard"
+             class="card"
+             *ngFor="let card of activeUsers; let i = index;">
+                <!-- <p class="white-text">{{card}}</p> -->
+                 <div class="card" id="activeUserCard">
+                     <h5 class="legacyTitle">{{card.username}}</h5>
+                     <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                     <img src="{{card.image}}" class="" id="legacyImg">
+                  
+                     <!-- <i class="material-icons " id="legacyOptions">more_vert</i> -->
                  </div>    
               </div>
             </div>
@@ -69,13 +96,14 @@
         <div class="row container">
             <hr>
         </div>
+
     
         <!-- Recent Posts -->
             <!-- Timeline of recent posts from all friends -->
             <div class="row" id="main">
                 <h4  id="menuTitle">Recent Posts</h4>
                 <div
-                class="box2">
+                class="box">
                 <div 
                 id="testCard"
                 class="card"
@@ -101,7 +129,7 @@
     <div class="row" id="main">
         <h4  id="menuTitle">Legacy Posts</h4>
         <div
-        class="box">
+        class="box2">
         <div 
         id="testCard"
         class="card"
@@ -128,7 +156,7 @@
     <div class="row" id="main">
         <h4 id="menuTitle">Writings</h4>
         <div
-        class="box2">
+        class="box">
         <div 
         id="testCard"
         class="card"
@@ -158,7 +186,7 @@
     <div class="row" id="main">
         <h4 id="menuTitle">NFTs ( Coming Soon )</h4>
         <div
-        class="box">
+        class="box2">
         <div 
         id="testCard"
         class="card"

@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
   ];
 
 
+
   //Test for array
   testList = [
     {
@@ -64,27 +65,57 @@ export class HomeComponent implements OnInit {
   ];
 
   //For recent Post Row
-  RecentPost = [
+  menuItems = [
     {
       title: 'New Post',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FA2CB3D73-7042-44EB-8076-0F22AD72A934.jpeg?alt=media&token=b57bc02a-fcea-46ed-be73-cc1f64a65db6"
-    },
+      icon: "create"
+      },
     {
       title: 'Legacy',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FE499D577-C397-4BAD-BABC-B2FAE698F08E.jpeg?alt=media&token=8e0a4d85-4768-40a4-8079-03c269a52cef"
+      icon: "collections"
     },
     {
       title: 'Forum',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2F83D7885A-9D9C-4D02-8257-8B38744FA835.jpeg?alt=media&token=71e3b24f-46a9-4817-a186-a3e983e656d5"
+      icon: "chat"
     },
     {
       title: 'Messages',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FCCF733DE-0488-49E1-B128-95350491A843.jpeg?alt=media&token=ad602b29-0866-4796-9d3d-bc66ac99c262"
+      icon: "email"
     },
     {
       title: 'Notifications',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_4533.jpg?alt=media&token=778bd24d-85d3-4fa9-afbd-746ca36b545b"
+      icon: "insert_comment"
     }
+ 
+  ];
+
+  activeUsers = [
+    {
+      username: 'Veritas',
+      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FA2CB3D73-7042-44EB-8076-0F22AD72A934.jpeg?alt=media&token=b57bc02a-fcea-46ed-be73-cc1f64a65db6"
+      },
+    {
+      username: 'Gehenna',
+      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FA0F36188-5CF2-4363-A318-47738A38CB7B.jpeg?alt=media&token=2f806254-6039-4a37-a1f3-177f908c69e5"
+      },
+    {
+      username: 'Valia',
+      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=acd7aa64-b4f0-45e4-9b36-03dcd2b8145b"
+      },
+    {
+      username: 'Autumn',
+      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2F2b67925f-7dff-4070-8ded-15665d3a7ca9.png?alt=media&token=cc56daca-c78a-4e97-9617-469cfeb6a489"
+      },
+    {
+      username: 'Maze',
+      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_0384.PNG?alt=media&token=5cca5a81-32a5-40bc-a652-b603f6a063d6"
+      },
+    {
+      username: 'Jade',
+      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2F148D895E-1BD6-4FE1-AA76-9E45ED9D8DD4.jpeg?alt=media&token=3e7eec27-3430-4962-af96-2546835a6442"
+      },
+ 
+  
  
   ];
 
@@ -270,9 +301,9 @@ export class HomeComponent implements OnInit {
 
   shuffleImg(){
     //shuffle images 
-    var index =  Math.floor(Math.random() * 3);
-    var index2 = Math.floor(Math.random() * 3);
-    var index3 = Math.floor(Math.random() * 3);
+    var index =  Math.floor(Math.random() * 19);
+    var index2 = (Math.floor(Math.random() * 19));
+    var index3 = Math.floor(Math.random() * 19);
 
     //Array for images
     var imgPool = [
@@ -295,16 +326,22 @@ export class HomeComponent implements OnInit {
       "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FB1BF8558-3D05-46E1-830B-627CD82B5A78.jpeg?alt=media&token=a286c12d-5f26-4f71-a720-c83f3a55ad40",
       "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FA%26A.png?alt=media&token=68e4c8e2-a92d-47ba-ae99-090daa4303f5",
       "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FD27BD2CD-1334-4F27-AA66-DCCA45A93166_1_105_c.jpeg?alt=media&token=317823c2-e15d-4b3b-b6e9-293b0871028f",
-      "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FΕλεύθερη%20σκέψη.PNG?alt=media&token=8eeab48b-e3d0-42fd-bff8-d0f06482e96f"
     ];
 
 
-    //Update the images every so often 
-    console.log("Updating")
-    this.imgLeft = imgPool[index];
-    this.imgCenter = imgPool[index2];
-    this.imgRight = imgPool[index3];
-    console.log("Finished Updating")
+    // //Handle the animations
+    // ( document.getElementById("bannerImgLeft") as HTMLImageElement).style.animation = "rightSlide 3s";
+    // ( document.getElementById("bannerImgCenter") as HTMLImageElement).style.animation = imgPool[index2];
+    // ( document.getElementById("bannerImgRight") as HTMLImageElement).style.animation = imgPool[index3];
+
+    //Now handle updating the images
+      ( document.getElementById("bannerImgLeft") as HTMLImageElement).src = imgPool[index];
+      ( document.getElementById("bannerImgCenter") as HTMLImageElement).src = imgPool[index2];
+      ( document.getElementById("bannerImgRight") as HTMLImageElement).src = imgPool[index3];
+
+
+
+
     
   }
 
