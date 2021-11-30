@@ -22,8 +22,20 @@ width: 100%;
 }
 
 /* For Live photo banner */
-#img{
+#imgCenter{
     height: 225px;
+}
+#imgLeft{
+    height: 225px;
+    position: relative;
+    animation: rightSlide 3s;
+    animation-direction: normal;
+}
+#imgRight{
+    height: 225px;
+    position: relative;
+    animation: slide 3s;
+    animation-direction: normal;
 }
 
 
@@ -171,15 +183,17 @@ width: 100%;
     position: absolute;
     bottom: 0%;
     left: 0%;
+    opacity: 0.4;
+    z-index: 1;
     
 }
 
 #writtenUser{
     position:absolute;
-    left: 15%;
+    left: 16%;
     bottom:0%;
     font-size: 120%;
-    z-index: 5;
+    z-index: 2;
     color:white;
 }
 #writingOptions{
@@ -225,6 +239,8 @@ width: 100%;
       padding-right: 5%;
       height: 100px;
       max-height: 50px;
+      position: absolute;
+      z-index: 4;
       color: rgba(255, 255, 255, 0.418);
   }
 

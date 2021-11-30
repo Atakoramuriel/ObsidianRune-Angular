@@ -33,7 +33,6 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-
   //For recent Post Row
   RecentPost = [
     {
@@ -58,6 +57,8 @@ export class HomeComponent implements OnInit {
     }
  
   ];
+
+  //For writing list
   WritingList = [
     {
       title: 'Thank you',
@@ -186,6 +187,8 @@ export class HomeComponent implements OnInit {
     }
  
   ];
+
+  //For NFT Info
   NFT = [
     {
       title: 'Img',
@@ -219,6 +222,10 @@ export class HomeComponent implements OnInit {
  
   ];
 
+  //For sample images
+  imgPrev: String = "";
+  imgPrev2: String = "";
+  imgPrev3: String = "";
 
   constructor() { 
    
@@ -226,6 +233,10 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  shuffleImg(){
+    //shuffle images 
   }
 
 }

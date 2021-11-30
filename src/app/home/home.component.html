@@ -1,27 +1,39 @@
 <div class="row">
     <app-navbar></app-navbar>
+
+<!-- The complete top banner div -->
+<div id="topBanner" class="">
 <!-- Area for the logo to rest -->
-<div class="center" id="liveBanner">
-    <h1 class="white-text hide-on-small-only"  id="bannerTitle"><i>A Palace of Poetry</i></h1>  
-    <div class="banner center">
-        <img src="../../assets/Ruimel.png"  class="RuiLogo hide-on-med-and-down">
-    </div>
-</div>
-<div class="center" id="livePhotoBanner">
-    <div class="row">
-        <div class="col l4 m4" id="img">
-            <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FCCF733DE-0488-49E1-B128-95350491A843.jpeg?alt=media&token=ad602b29-0866-4796-9d3d-bc66ac99c262" id="bannerImg" alt="">
-        </div>
-        <div class="col l4 m4" id="img">
-            <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_0132.jpg?alt=media&token=7f967075-407b-47fe-b717-8289fbefae05" id="bannerImg" alt="">
-
-        </div>
-        <div class="col l4 m4" id="img">
-            <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_4533.jpg?alt=media&token=778bd24d-85d3-4fa9-afbd-746ca36b545b" id="bannerImg" alt="">
-
+    <div class="center" id="liveBanner">
+        <h1 class="white-text hide-on-small-only"  id="bannerTitle"><i>A Palace of Poetry</i></h1>  
+        <div class="banner center ">
+            <img src="../../assets/Ruimel.png"  class="RuiLogo hide-on-med-and-down">
         </div>
     </div>
+
+<!-- These are the three images -->
+    <div class="center" id="livePhotoBanner">
+        <div class="row">
+            <div class="col l4 m4" id="imgLeft">
+                <img 
+                class=""
+                src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FCCF733DE-0488-49E1-B128-95350491A843.jpeg?alt=media&token=ad602b29-0866-4796-9d3d-bc66ac99c262" id="bannerImg" alt="">
+            </div>
+            <div class="col l4 m4" id="imgCenter">
+                <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_0132.jpg?alt=media&token=7f967075-407b-47fe-b717-8289fbefae05" id="bannerImg" alt="">
+
+            </div>
+            <div class="col l4 m4" id="imgRight">
+                <img 
+                class=""
+                src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_4533.jpg?alt=media&token=778bd24d-85d3-4fa9-afbd-746ca36b545b" id="bannerImg" alt="">
+
+            </div>
+        </div>
+    </div>
 </div>
+
+
 
 
     <!-- The Concept is 'Multiple Rows' -->
@@ -128,7 +140,7 @@
                 <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
                 <div  id="legacyTxt">{{card.sample}}</div>
                 <img src="../../assets/Ruimel.png" id="wprofileImg" alt="">
-                <p id="writtenUser">{{card.username}}</p>
+                <p id="writtenUser"><i>{{card.username}}</i></p>
                 <p  id="writingOptions">{{card.date}}</p>
             </div>    
          </div>

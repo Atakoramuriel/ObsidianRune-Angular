@@ -196,6 +196,7 @@ h4{
  padding-top: 1px;
  font-size: 275%;
  padding-left: 2%;
+ color: rgb(253, 147, 47);
 }
 
 
@@ -546,6 +547,7 @@ h4{
 #startMenuBtn{
     font-size: 35px;
     padding-right: 20px;
+    color: rgb(115, 152, 255);;
 }
 
 #startMenuBtn:hover{
@@ -568,6 +570,8 @@ h4{
 #activeMenuIcon{
     padding-right:35px;
     font-size: 35px;
+    color: rgb(184, 184, 255);;
+
 }
 
 #activeMenuIcon:hover{
