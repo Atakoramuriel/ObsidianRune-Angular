@@ -15,6 +15,7 @@ export class FirebaseService {
   //Get username
 
 
+
   //CheckUserStatus
   async checkAuth(){
     if(this.firebaseAuth.currentUser == null){
