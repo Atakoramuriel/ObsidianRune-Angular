@@ -14,7 +14,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations'
 import {RouterModule, Routes} from '@angular/router';
 
 // import {AngularFirestoreModule} from 'angularfire2/firestore';
-
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -38,8 +38,9 @@ const appRoutes: Routes = [
     AppRoutingModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
-
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
     
 
   ],

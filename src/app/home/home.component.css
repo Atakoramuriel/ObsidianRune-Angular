@@ -158,8 +158,8 @@ width: 100%;
 #MainCard{
     background-color:rgb(3, 4, 36);
     border-radius:15px;
-    height:150px;
-    width: 400px;
+    height:100px;
+    width: 275px;
     border: solid rgb(40, 97, 255) 1px;
     display: inline-block;
 
@@ -168,7 +168,7 @@ width: 100%;
 #MainCard:hover{
     background-color:rgb(41, 4, 8);
     border-radius:15px;
-    height:150px;
+    height:100px;
     cursor: pointer;
     border:solid rgb(255, 123, 0) 2px;
 }
@@ -354,10 +354,11 @@ width: 100%;
     left: 5%;
     top:5%;
     font-size: 500%;
-    z-index: 5;
+    z-index: 1;
+    background-color: rgba(80, 131, 199, 0.479);
     color:rgb(255, 167, 67);
     opacity: 0.8;
-    padding: 5%;
+    padding: 3%;
     border-radius: 50px;
 }
 

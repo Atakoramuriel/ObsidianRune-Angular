@@ -91,11 +91,11 @@ export class HomeComponent implements OnInit {
       },
     {
       title: 'Legacy',
-      icon: "collections"
+      icon: "book"
     },
     {
       title: 'Forum',
-      icon: "chat"
+      icon: "forum"
     },
     {
       title: 'Messages',
