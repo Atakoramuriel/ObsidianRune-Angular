@@ -18,14 +18,15 @@ export class FirebaseService {
 
   //CheckUserStatus
   async checkAuth(){
+    alert("Called Service to CheckAuth")
     if(this.firebaseAuth.currentUser == null){
       //Signed out redirect to login page
-      alert(this.firebaseAuth.currentUser)
+      alert("Empty ->" +this.firebaseAuth.currentUser)
       return false;
 
     }else{
       //All is well. . .
-      alert(this.firebaseAuth.currentUser)
+      alert("Signed In ->" + this.firebaseAuth.currentUser)
       return true
     }
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PostsService } from '../services/posts.service';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-home',
@@ -37,8 +38,6 @@ export class HomeComponent implements OnInit {
     "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FD27BD2CD-1334-4F27-AA66-DCCA45A93166_1_105_c.jpeg?alt=media&token=317823c2-e15d-4b3b-b6e9-293b0871028f",
     "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FΕλεύθερη%20σκέψη.PNG?alt=media&token=8eeab48b-e3d0-42fd-bff8-d0f06482e96f"
   ];
-
-
 
   //Test for array
   testList = [
@@ -307,12 +306,23 @@ export class HomeComponent implements OnInit {
   imgPrev2: String = "";
   imgPrev3: String = "";
 
-  constructor() { 
-   
+
+  //Constructor 
+  constructor(
+    private ps: PostsService
+    ) { 
+
   }
 
   ngOnInit(): void {
     setInterval(this.shuffleImg, 7000);
+
+    //Fetch the user posts
+    // this.firebaseService.checkAuth();
+    this.ps.getUserPosts()
+
+
+
   }
 
 
