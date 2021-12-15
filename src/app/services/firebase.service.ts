@@ -21,12 +21,10 @@ export class FirebaseService {
     alert("Called Service to CheckAuth")
     if(this.firebaseAuth.currentUser == null){
       //Signed out redirect to login page
-      alert("Empty ->" +this.firebaseAuth.currentUser)
       return false;
 
     }else{
       //All is well. . .
-      alert("Signed In ->" + this.firebaseAuth.currentUser)
       return true
     }
   }

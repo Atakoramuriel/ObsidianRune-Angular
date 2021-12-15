@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from '../environments/environment';
+
 import { LoginComponent } from './login/login.component';
 import { FirebaseService } from './services/firebase.service';
 import { HomeComponent } from './home/home.component';
@@ -13,25 +12,26 @@ import {RouterModule, Routes} from '@angular/router';
 import { PostsComponent } from './components/posts/posts.component';
 import {PostsService} from './services/posts.service'
 
-//OPEN
-import { provideFirebaseApp, initializeApp } 
-from '@angular/fire/app';
-import { getAuth, provideAuth } 
-from '@angular/fire/auth';
-import { getFirestore, provideFirestore } 
-from '@angular/fire/firestore';
-import { getStorage, provideStorage } 
-from '@angular/fire/storage';
-import { getAnalytics, provideAnalytics } 
-from '@angular/fire/analytics';
+// Firebase services + enviorment module
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+
+import { environment } from '../environments/environment';
+import { FormsModule } from '@angular/forms';
+
+//Test
+
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
 
 
 
-const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'Login', component: LoginComponent},
+// const appRoutes: Routes = [
+//   {path: '', component: HomeComponent},
+//   {path: 'Login', component: LoginComponent},
 
-]
+// ]
 
 
 @NgModule({
@@ -49,17 +49,17 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    // RouterModule.forRoot(appRoutes),
 
-
-    //Import Firebase functionality
     AngularFireModule.initializeApp(environment.firebase),
-    
-    //Open
-    provideFirestore(() => getFirestore()),
-    provideAuth(() => getAuth()),
-    provideStorage(() => getStorage()),
-    provideAnalytics(() => getAnalytics()),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+   
+    //PrimeNG
+    DialogModule,
+    ButtonModule
+ 
 
   ],
   providers: [FirebaseService, PostsService],

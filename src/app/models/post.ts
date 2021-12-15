@@ -8,7 +8,7 @@ export interface Post {
     date?:string;
     numLikes?:string;
     numComments?:string;
-    postImg?:string;
-    timestamp?:string;
+    postImg?:any;
+    timestamp?:any;
     username?: string;
   };

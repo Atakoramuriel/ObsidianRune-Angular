@@ -199,8 +199,8 @@ width: 100%;
 #userPosts{
     background-color:rgb(3, 4, 36);
     border-radius:15px;
-    height:400px;
-    width: 400px;
+    height:300px;
+    width: 300px;
     border: solid black 1px;
     display: inline-block;
 
@@ -209,7 +209,8 @@ width: 100%;
 #userPosts:hover{
     background-color:rgb(41, 4, 8);
     border-radius:15px;
-    height:400px;
+    height:350px;
+    width: 350px;
     cursor: pointer;
     border:solid rgb(255, 123, 0) 2px;
 }
@@ -304,7 +305,7 @@ width: 100%;
     text-shadow: 5px 5px #000000;
     font-family:'Times New Roman', Times, serif;
     /* font-size: 350%; */
-    font-size: max(3vw, 3px);    
+    font-size: max(2vw, 2px);    
     position:absolute;
     left:10%;
     top:0%;
@@ -374,8 +375,8 @@ width: 100%;
 #userPostOptions:hover{
     position:absolute;
     right:0%;
-    bottom:0%;
-    font-size: 350%;
+    bottom:5%;
+    font-size: 250%;
     z-index: 5;
     color: coral;
     cursor: pointer;
@@ -419,7 +420,7 @@ width: 100%;
     position:absolute;
     right:0%;
     top:0%;
-    font-size: 350%;
+    font-size: 250%;
     z-index: 5;
     color: coral;
     cursor: pointer;
@@ -428,3 +429,24 @@ width: 100%;
 ul#menu li {
     display: inline;
   }
+
+
+#modal{
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+#modal1{
+    background-color: rgb(17, 17, 138);
+    border: solid rgb(40, 40, 165) 1px;
+    width: 100%;
+    height: 100%;
+}

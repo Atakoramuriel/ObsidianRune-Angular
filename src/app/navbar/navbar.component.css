@@ -547,11 +547,11 @@ h4{
 #startMenuBtn{
     font-size: 35px;
     padding-right: 20px;
-    color: rgb(115, 152, 255);;
+    color: rgb(223, 135, 54);
 }
 
 #startMenuBtn:hover{
-    color: coral;
+    color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
@@ -570,7 +570,7 @@ h4{
 #activeMenuIcon{
     padding-right:35px;
     font-size: 35px;
-    color: rgb(184, 184, 255);;
+    color: rgb(223, 135, 54);
 
 }
 

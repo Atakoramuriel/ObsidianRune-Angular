@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from './services/firebase.service';
+import { AuthService } from './services/auth.service';
+import { PrimeNGConfig } from 'primeng/api';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,22 +12,40 @@ export class AppComponent implements OnInit{
   title = 'ObsidianRune';
   isLoggedIn = false;
 
+  //Test
+  post:any = "";
+  postTitle: string = "";
+  postTxt: string = "";
+
+
+
   //Handle Constructor
-  constructor(public firebaseService : FirebaseService){}
+  constructor(
+    private primengConfig: PrimeNGConfig,
+    public firebaseService : FirebaseService,
+    public AuthService: AuthService){}
 
   //Initialize
   ngOnInit(){
-    //Check to see if logged in 
-    if(localStorage.getItem("user")!== null){
-      // alert("Has User")
-      // this.isLoggedIn = true;
-    }else{
-      // alert("No User")
-      // this.isLoggedIn = false;
-    }
+    this.primengConfig.ripple = true;
+    //Get Posts
+    this.AuthService.getPosts().subscribe(data => {
+      this.post = data.map(e => {
+          const pulledData =  {
+            id: e.payload.doc.id,
+            title: e.payload.doc.data()
+          };
+          
+      })
+      console.log(this.post)
+    });
+
   }
 
   //Functions
+
+
+
 
   //Log In
   async onSignIn(email:string, password:string){
