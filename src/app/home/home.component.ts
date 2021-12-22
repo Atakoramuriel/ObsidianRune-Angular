@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { AuthService } from '../services/auth.service';
 import { Post } from '../models/post';
 import * as $ from 'jquery'
+import { User } from '../models/user';
 
 
 @Component({
@@ -325,7 +326,18 @@ imagePool: [string] = [""];
   display: boolean = false;
 
 
-  
+  //For image displays
+  displayImgModal: boolean = false;
+  imgModal: String = "";
+  preSelection: boolean = false;
+
+  //Modal variables 
+    modalPostTitle: String = "";
+    modalPostTxt: String = "";
+    modalPostDate: String = "";
+    modalPostImage: String = "";
+    modalPostUser: string = "";
+    modalPostUserProfileImg: String = "";
 
 
   //Constructor 
@@ -338,7 +350,7 @@ imagePool: [string] = [""];
   ngOnInit(): void {
 
     //Update the banner images
-    setInterval(this.shuffleImg, 7000);
+    // setInterval(this.shuffleImg, 7000);
     
     
     
@@ -356,6 +368,9 @@ imagePool: [string] = [""];
     this.postColB.splice(0,1);
     this.postColC.splice(0,1);
 
+    //TempID Needed to get likes
+
+
     this.AuthService.getPosts().subscribe(data => {
        data.map(e => {
         //Const Data e.payload.doc.data() as Type needed to avoid error of object unknown
@@ -365,7 +380,10 @@ imagePool: [string] = [""];
           title: data.title as string,
           text: data.text as string,
           image: ((data.postImg != "")  ? data.postImg as string : "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d"),
-          numLikes: data.numLikes as string
+          numLikes: ((data.NumLikes != null) ? data.NumLikes as string : "0"),
+          numComments: ((data.NumComments != null) ? data.NumComments as string : "0"),
+          userKey: data.userkey as string,
+          date: data.date as string,
         };
         
         //Randomly add posts to different rows
@@ -380,12 +398,30 @@ imagePool: [string] = [""];
         //Add images to image pool 
         this.imagePool.push(dataUpload['image']);
 
+        
+         //Get Likes 
+        this.AuthService.getLikes(dataUpload['id'])
 
       })
     })
 
+   
 
   }
+
+  loadUserInfo(userInfo: any){
+      var userKey = userInfo['userKey']
+      this.AuthService.getUserInfo(userKey).then(data => {
+        const userData = data.data() as User;
+        console.log(" __ Data Below __");
+        console.log(userData.displayName);
+        this.modalPostUser = userData.displayName as string;
+        this.modalPostUserProfileImg = userData.photoURL as string;
+
+      })
+  }
+
+
 
   showDialog() {
     this.display = true;
@@ -404,13 +440,6 @@ imagePool: [string] = [""];
     var index2 = (Math.floor(Math.random() * 19) + 1);
     var index3 = (Math.floor(Math.random() * 19) + 1);
 
-    //Array for images
-    console.log("Index 1"+  index);
-    console.log("Index 2"+  index2);
-    console.log("Index 3"+  index3);
-
-
-
     // //Handle the animations
     // ( document.getElementById("bannerImgLeft") as HTMLImageElement).style.animation = "rightSlide 3s";
     // ( document.getElementById("bannerImgCenter") as HTMLImageElement).style.animation = imgPool[index2];
@@ -421,24 +450,80 @@ imagePool: [string] = [""];
       ( document.getElementById("bannerImgLeft") as HTMLImageElement).src = this.imagePool[index];
       ( document.getElementById("bannerImgCenter") as HTMLImageElement).src = this.imagePool[index2];
       ( document.getElementById("bannerImgRight") as HTMLImageElement).src = this.imagePool[index3];
-
-      console.log("1" + this.imagePool[index])
-      console.log("2" + this.imagePool[index2])
-      console.log("3" + this.imagePool[index3])
-    
      
-
-
-    
   }
 
 
   //For modal display
   displayModal: boolean =false;
 
-  showModalDialog(){
+  showModalDialog(card:any){
+    console.log(card)
+    //Update the modal 
+      //Modal variables 
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage = card['image']
+     
+
     //Display the modal
     this.displayModal=true;
+
+    // console.log(card)
+    this.loadUserInfo(card)
+  }
+
+  closeModalDialogue(){
+    //Close the modal
+    // this.displayModal = false;
+    if(this.preSelection){
+      this.preSelection = false;
+    }else{
+      // alert("Close Modal");
+      this.displayModal=false
+
+    }
   }
  
+  //Modal functions
+      // modal image function display 
+      displayModalImg(){
+        this.displayImgModal= true;
+      }
+      
+      //Show the image Modal
+      setImageModal(){
+        this.displayModalImg();
+        this.imgModal = "";
+        this.imgModal = this.modalPostImage
+        // console.log("Image Value: " + image);
+        // console.log("ImgModal: " + this.imgModal)
+        this.preSelection=true
+      }
+
+      //Hide the image modal
+      closeImgModal(){
+        this.displayImgModal=false
+      }
+
+
+  //Test redirections
+  goProfile(){
+    alert("Going to Profile Page")
+    this.preSelection=true;
+  }
+
+  likeModalPost(){
+    alert("Liked Post")
+    this.preSelection=true
+  }
+
+  commentPost(){
+    alert("Comment Post")
+    this.preSelection=true
+  }
+
+
+
 }

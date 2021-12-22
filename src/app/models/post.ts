@@ -6,8 +6,8 @@ export interface Post {
     text?:string;
     userkey?:string;
     date?:string;
-    numLikes?:string;
-    numComments?:string;
+    NumLikes?:string;
+    NumComments?:string;
     postImg?:any;
     timestamp?:any;
     username?: string;
