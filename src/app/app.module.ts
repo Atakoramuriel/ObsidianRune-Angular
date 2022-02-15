@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
+import { DiscoverComponent } from './discover/discover.component';
 
 
 
@@ -40,7 +41,8 @@ import { ButtonModule } from 'primeng/button';
     NavbarComponent,
     LoginComponent,
     HomeComponent,
-    PostsComponent
+    PostsComponent,
+    DiscoverComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

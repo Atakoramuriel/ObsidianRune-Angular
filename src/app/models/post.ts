@@ -11,4 +11,6 @@ export interface Post {
     postImg?:any;
     timestamp?:any;
     username?: string;
+    type?: String;
+    postImgs?: any;
   };

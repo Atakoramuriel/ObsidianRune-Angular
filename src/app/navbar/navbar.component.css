@@ -93,7 +93,7 @@
 /*End of the CSS for the messages*/
 
 #fTitle{
-    color:rgb(202, 144, 58);
+    color:rgb(255, 255, 255);
     font-family:'Times New Roman', Times, serif
 }
 #friendName{
@@ -196,7 +196,7 @@ h4{
  padding-top: 1px;
  font-size: 275%;
  padding-left: 2%;
- color: rgb(253, 147, 47);
+ color: rgb(255, 255, 255);
 }
 
 
@@ -547,7 +547,7 @@ h4{
 #startMenuBtn{
     font-size: 35px;
     padding-right: 20px;
-    color: rgb(223, 135, 54);
+    color: rgb(255, 255, 255);
 }
 
 #startMenuBtn:hover{
@@ -570,7 +570,7 @@ h4{
 #activeMenuIcon{
     padding-right:35px;
     font-size: 35px;
-    color: rgb(223, 135, 54);
+    color: rgb(255, 255, 255);
 
 }
 

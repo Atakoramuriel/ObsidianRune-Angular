@@ -286,6 +286,9 @@ export class HomeComponent implements OnInit {
  
   ];
 
+//Counter for the recent posts
+recentCount = 0;
+
 post = [
   {
     id: "",
@@ -313,6 +316,48 @@ postColC = [
     numLikes: ""
   }
 ]
+
+
+//Creation of different Buckets
+
+recentPosts = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: ""
+  }
+]; //Recent Posts
+
+recentImgs =[
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: ""
+  }
+]; //Recent Images 
+
+recentCollages = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: ""
+  }
+]; //Recent Image Collages 
+
+recentWritings = [  {
+  id: "",
+  title: "",
+  text: "",
+  image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+  numLikes: ""
+}]; //Recent writing prompts
+
 
 imagePool: [string] = [""];
 
@@ -363,7 +408,14 @@ imagePool: [string] = [""];
 
 //Test
   loadPosts(){
+
+    
+
 //Load the post into the array
+    this.recentPosts.splice(0,1);
+    this.recentCollages.splice(0,1);
+    this.recentImgs.splice(0,1);
+    this.recentWritings.splice(0,1);
     this.post.splice(0,1);
     this.postColB.splice(0,1);
     this.postColC.splice(0,1);
@@ -384,16 +436,41 @@ imagePool: [string] = [""];
           numComments: ((data.NumComments != null) ? data.NumComments as string : "0"),
           userKey: data.userkey as string,
           date: data.date as string,
+          type: data.type as String,
+          postImgs: data.postImgs as Array<String>
         };
         
-        //Randomly add posts to different rows
-        if(this.post.length < 30){
-            this.post.push(dataUpload)
-        }else if(this.postColB.length < 30){
-            this.postColB.push(dataUpload)
-        }else if(this.postColC.length < 30){
-            this.postColC.push(dataUpload)
+
+        //Add the first twenty to recent posts
+        if(this.recentCount <= 15){
+          this.recentPosts.push(dataUpload);
+          this.recentCount = this.recentCount + 1;
+         
         }
+        
+        //Add all single images to section 
+        if(dataUpload['image'] != "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d"){
+          this.recentImgs.push(dataUpload)
+        }
+
+        //Add all of the image collages 
+        if(dataUpload['type'] == "Images"){
+          this.recentCollages.push(dataUpload);
+        }
+
+        if(this.recentCount > 15){
+       
+       //Randomly add posts to different rows
+            if(this.post.length < 30){
+              this.post.push(dataUpload)
+          }else if(this.postColB.length < 30){
+              this.postColB.push(dataUpload)
+          }else if(this.postColC.length < 30){
+              this.postColC.push(dataUpload)
+          }
+        }
+ 
+        console.log(this.recentCount);
 
         //Add images to image pool 
         this.imagePool.push(dataUpload['image']);
@@ -401,6 +478,8 @@ imagePool: [string] = [""];
         
          //Get Likes 
         this.AuthService.getLikes(dataUpload['id'])
+        
+   
 
       })
     })

@@ -26,6 +26,7 @@
     "get-google-fonts": "^1.2.2",
     "jquery": "^3.6.0",
     "materialize-css": "^1.0.0",
+    "primeflex": "^3.1.2",
     "primeicons": "^5.0.0",
     "primeng": "^13.0.2",
     "rxfire": "^6.0.0",
