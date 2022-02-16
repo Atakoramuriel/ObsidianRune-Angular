@@ -6,6 +6,7 @@ import { AuthService } from '../services/auth.service';
 import { Post } from '../models/post';
 import * as $ from 'jquery'
 import { User } from '../models/user';
+import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 
 
 @Component({
@@ -346,7 +347,8 @@ recentCollages = [
     title: "",
     text: "",
     image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
-    numLikes: ""
+    numLikes: "",
+    postImgs: [],
   }
 ]; //Recent Image Collages 
 
@@ -437,7 +439,7 @@ imagePool: [string] = [""];
           userKey: data.userkey as string,
           date: data.date as string,
           type: data.type as String,
-          postImgs: data.postImgs as Array<String>
+          postImgs: data.postImgs as any
         };
         
 
@@ -455,7 +457,9 @@ imagePool: [string] = [""];
 
         //Add all of the image collages 
         if(dataUpload['type'] == "Images"){
+          console.log("Array Value");
           this.recentCollages.push(dataUpload);
+          console.log(this.recentCollages);
         }
 
         if(this.recentCount > 15){

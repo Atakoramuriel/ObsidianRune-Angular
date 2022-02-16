@@ -177,10 +177,14 @@
                                     id="userCollagePosts">
                                         <h4 class="userPostTitle">{{card.title}}</h4>
                                         <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <img src="{{card.image}}" class="postImg">
-                                        <i class="material-icons hide" id="userPostOptions">more_vert</i>
+                                        <div
+                                            *ngFor="let collageImg of card?.postImgs; let j = index;"
+                                        >
+                                            <img src="{{collageImg}}" class="postCollageImg{{j}} z-depth-5">
+                                        </div>
+                                        <!-- <i class="material-icons hide" id="userPostOptions">more_vert</i>
                                         <i class="material-icons " id="userPostFav">favorite_border</i>
-                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5>
+                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5> -->
                                     </div>    
                                 </div>
                             </div>
