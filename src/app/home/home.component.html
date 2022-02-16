@@ -190,23 +190,33 @@
                             </div>
                             </div>
                             <div class="row" id="main">
+                                <h4  id="menuTitle">Recent Writings</h4>
                                 <div
                                 class="box2">
                                 <div 
-                                id="testCard"
+                                id="WritingCard"
                                 class="card"
-                                *ngFor="let card of postColB; let i = index;">
+                                *ngFor="let card of recentWritings; let i = index;">
                                 <!-- <p class="white-text">{{card}}</p> -->
                                     <div 
                                     (click)="showModalDialog(card)"
                                     class="card" 
-                                    id="userPosts">
-                                        <h4 class="userPostTitle">{{card.title}}</h4>
+                                    id="userWritingPosts">
+                                    <div class="card" id="userLongWriting">
+                                        <h5 class="writingTitle">{{card.title}}</h5>
                                         <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <img src="{{card.image}}" class="postImg">
-                                        <i class="material-icons hide" id="userPostOptions">more_vert</i>
-                                        <i class="material-icons " id="userPostFav">favorite_border</i>
-                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5>
+                                        <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
+                                        <div  id="writingTxt">{{card.text}}</div>
+                                        <img src="../../assets/Ruimel.png" id="wprofileImg" alt="">
+                                        <!-- <p id="writtenUser"><i>{{card.username}}</i></p>
+                                        <p  id="writingOptions">{{card.date}}</p> -->
+                                    </div> 
+                                        <!-- <h4 class="userPostTitle">{{card.title}}</h4> -->
+                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                        <!-- <img src="{{card.image}}" class="postImg"> -->
+                                        <!-- <i class="material-icons hide" id="userPostOptions">more_vert</i> -->
+                                        <!-- <i class="material-icons " id="userPostFav">favorite_border</i> -->
+                                        <!-- <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5> -->
                                     </div>    
                                 </div>
                             </div>

@@ -357,7 +357,8 @@ recentWritings = [  {
   title: "",
   text: "",
   image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
-  numLikes: ""
+  numLikes: "",
+
 }]; //Recent writing prompts
 
 
@@ -408,6 +409,8 @@ imagePool: [string] = [""];
 
 
 
+
+  
 //Test
   loadPosts(){
 
@@ -460,6 +463,11 @@ imagePool: [string] = [""];
           console.log("Array Value");
           this.recentCollages.push(dataUpload);
           console.log(this.recentCollages);
+        }
+
+        if(this.countWords(dataUpload['text']) > 99){
+          
+          this.recentWritings.push(dataUpload);
         }
 
         if(this.recentCount > 15){
@@ -539,6 +547,12 @@ imagePool: [string] = [""];
 
   //For modal display
   displayModal: boolean =false;
+  countWords(str: any) {
+    str = str.replace(/(^\s*)|(\s*$)/gi,"");
+    str = str.replace(/[ ]{2,}/gi," ");
+    str = str.replace(/\n /,"\n");
+    return str.split(' ').length;
+    }
 
   showModalDialog(card:any){
     console.log(card)
@@ -607,6 +621,6 @@ imagePool: [string] = [""];
     this.preSelection=true
   }
 
-
+  
 
 }
