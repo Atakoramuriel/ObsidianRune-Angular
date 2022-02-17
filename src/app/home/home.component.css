@@ -197,6 +197,15 @@ width: 100%;
     display: inline-block;
 
 }
+#userRecentPosts{
+    background-color:rgba(3, 4, 36, 0);
+    border-radius:15px;
+    padding-left: 20%;
+    height:500px;
+    width: 700px;
+    display: inline-block;
+
+}
 #userCollagePosts{
     background-color:rgb(3, 4, 36);
     border-radius:15px;
@@ -252,6 +261,8 @@ width: 100%;
     padding: 5%;
     border: solid rgb(146, 179, 255) 2px;
     display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #userWriting:hover{
@@ -305,11 +316,11 @@ width: 100%;
 
 #writtenUser{
     position:absolute;
-    left: 16%;
-    bottom:0%;
-    font-size: 120%;
+    left: 5%;
+    top:-5%;
+    font-size: 30px;
     z-index: 2;
-    color:white;
+    color:rgb(189, 125, 45)
 }
 #writingOptions{
     position:absolute;
@@ -419,6 +430,12 @@ l
     height: 100%;
     border-radius: 15px;
   }
+#recentImg{
+    object-fit:cover;
+    width: 100%;
+    height: 30%;
+    border-radius: 15px;
+  }
 
 #legacyTxt{
       text-overflow: ellipsis;
@@ -430,12 +447,12 @@ l
       z-index: 4;
       color: rgba(255, 255, 255, 0.418);
   }
+
+
 #writingTxt{
       text-overflow: ellipsis;
       padding-left: 5%;
       padding-right: 5%;
-      height: 100px;
-      max-height: 50px;
       position: absolute;
       z-index: 4;
       color: rgba(255, 255, 255, 0.418);

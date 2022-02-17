@@ -327,7 +327,9 @@ recentPosts = [
     title: "",
     text: "",
     image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
-    numLikes: ""
+    numLikes: "",
+    username: "",
+    date: ""
   }
 ]; //Recent Posts
 
@@ -358,7 +360,8 @@ recentWritings = [  {
   text: "",
   image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
   numLikes: "",
-
+  date: "",
+  username:""
 }]; //Recent writing prompts
 
 
@@ -387,6 +390,8 @@ imagePool: [string] = [""];
     modalPostUser: string = "";
     modalPostUserProfileImg: String = "";
 
+  //tempUser? 
+    tempUsername: String = "";
 
   //Constructor 
   constructor(
@@ -432,6 +437,8 @@ imagePool: [string] = [""];
        data.map(e => {
         //Const Data e.payload.doc.data() as Type needed to avoid error of object unknown
         const data = e.payload.doc.data() as Post
+
+        //Set up the data in an object
         const dataUpload = {
           id: e.payload.doc.id,
           title: data.title as string,
@@ -442,8 +449,14 @@ imagePool: [string] = [""];
           userKey: data.userkey as string,
           date: data.date as string,
           type: data.type as String,
-          postImgs: data.postImgs as any
+          postImgs: data.postImgs as any,
+          username: data.username as string
         };
+
+        //Test the getuser info function 
+        var userBox = this.getUser(data.userkey as String);
+        console.log("User Box");
+        console.log(userBox);
         
 
         //Add the first twenty to recent posts
@@ -466,7 +479,7 @@ imagePool: [string] = [""];
         }
 
         if(this.countWords(dataUpload['text']) > 99){
-          
+          var short_description = dataUpload['text'].split(' ').slice(100).join(' ');
           this.recentWritings.push(dataUpload);
         }
 
@@ -501,17 +514,26 @@ imagePool: [string] = [""];
   }
 
   loadUserInfo(userInfo: any){
+
       var userKey = userInfo['userKey']
       this.AuthService.getUserInfo(userKey).then(data => {
         const userData = data.data() as User;
-        console.log(" __ Data Below __");
-        console.log(userData.displayName);
         this.modalPostUser = userData.displayName as string;
         this.modalPostUserProfileImg = userData.photoURL as string;
 
       })
   }
 
+  getUser(userKey: String){
+    this.AuthService.getUserInfo(userKey as string).then(data => {
+        
+      const userData = data.data() as User;
+      this.tempUsername = userData as string;
+    })
+    console.log(this.tempUsername);
+    return this.tempUsername as string;
+
+  }
 
 
   showDialog() {
