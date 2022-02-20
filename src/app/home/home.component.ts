@@ -7,6 +7,8 @@ import { Post } from '../models/post';
 import * as $ from 'jquery'
 import { User } from '../models/user';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+import { Legacy } from '../models/Legacy';
+import { Aevum } from '../models/Aevum';
 
 
 @Component({
@@ -48,24 +50,61 @@ export class HomeComponent implements OnInit {
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2F1.7.png?alt=media&token=4dba1cb9-8899-421e-87f7-48c3679bfb8a"
     }
   ];
-  //Test for array
+  
+  //More Arrays
+  aevumList = [
+    {
+      id: "",
+      title: "",
+      text: "",
+      timestamp: "",
+      cover: "",
+      status: ""
+    }
+  ]
+  aevumActiveList = [
+    {
+      id: "",
+      title: "",
+      text: "",
+      timestamp: "",
+      cover: "",
+      status: ""
+    }
+  ]
+
+  aevumUpcomingList = [
+    {
+      id: "",
+      title: "",
+      text: "",
+      timestamp: "",
+      cover: "",
+      status: ""
+    }
+  ]
+  aevumClosedList = [
+    {
+      id: "",
+      title: "",
+      text: "",
+      timestamp: "",
+      cover: "",
+      status: ""
+    }
+  ]
+
   legacyList = [
     {
-      title: 'Obsidian',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_0132.jpg?alt=media&token=7f967075-407b-47fe-b717-8289fbefae05"
+      title: '',
+      cover: "",
+      desc: "",
+      privacy: "",
+      type: "",
+      updated: "",
+      author: "",
+
     },
-    {
-      title: 'Midnight Sun',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FA0F36188-5CF2-4363-A318-47738A38CB7B.jpeg?alt=media&token=2f806254-6039-4a37-a1f3-177f908c69e5"
-    },
-    {
-      title: 'Blood Sun',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FC15A5317-C143-4303-BD42-4899D48AB54F.jpeg?alt=media&token=8b0dca04-f269-48ef-8756-17997ec2235d"
-    },
-    {
-      title: 'Memory',
-      image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FIMG_4533.jpg?alt=media&token=778bd24d-85d3-4fa9-afbd-746ca36b545b"
-    }
   ];
 
   //For recent Post Row
@@ -387,6 +426,7 @@ imagePool: [string] = [""];
     modalPostTxt: String = "";
     modalPostDate: String = "";
     modalPostImage: String = "";
+    modalPostImages = [];
     modalPostUser: string = "";
     modalPostUserProfileImg: String = "";
 
@@ -407,16 +447,91 @@ imagePool: [string] = [""];
     
     
     
+    //Load the aevum collection items
+    this.loadAevum();
+
     //Load the posts 
     this.loadPosts();
+    
+    //load the legacies
+    this.loadLegacies();
+
+  }
+
+  //Load in the Aevum collections
+  loadAevum(){
+    //Remove first unneeded element
+    this.aevumList.splice(0,1);
+    this.aevumActiveList.splice(0,1);
+    this.aevumUpcomingList.splice(0,1);
+    this.aevumClosedList.splice(0,1);
+
+    //Get the aevum elements 
+    this.AuthService.getAevum().subscribe(data => {
+      data.map(e => {
+        const data = e.payload.doc.data() as Aevum
+
+        //Creation of data object
+        const dataUpload = {
+          id: e.payload.doc.id,
+          title: data.title as string,
+          cover: data.cover as string,
+          timestamp: data.timestamp as string,
+          status: data.status as string, 
+          text: data.text as string
+        };
+
+        if(dataUpload['status'] == "Active"){
+          this.aevumActiveList.push(dataUpload);
+        }
+        else if(dataUpload['status'] == "upcoming"){
+          this.aevumUpcomingList.push(dataUpload);
+        }else{
+          this.aevumClosedList.push(dataUpload)
+        }
+        // this.aevumList.push(dataUpload);
+
+      })
+    })
+
+  }
+
+  //Load in the user Legacies
+  loadLegacies(){
+    //Remove the empty legacy sample in array, idk why its needed
+    this.legacyList.splice(0,1);
+
+    //use the authservice to get the legacies
+    this.AuthService.getLegacies().subscribe(data => {
+      data.map(e => {
+
+        const data = e.payload.doc.data() as Legacy
+  
+        //Set up the data object
+            //Set up the data in an object
+            const dataUpload = {
+              id: e.payload.doc.id,
+              title: data.title as string,
+              desc: data.desc as string,
+              cover: ((data.cover != "")  ? data.cover as string : "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d"),
+              author: data.author as string,
+              timestamp: data.timestamp as string,
+              type: data.type as string,
+              privacy: data.privacy as string,
+              updated: data.updated as string,
+            };
+
+        //add legacies to array
+        this.legacyList.push(dataUpload);
+
+      })
+    })
 
   }
 
 
-
-
   
-//Test
+//Working loadPosts MEthod
   loadPosts(){
 
     
@@ -437,7 +552,7 @@ imagePool: [string] = [""];
        data.map(e => {
         //Const Data e.payload.doc.data() as Type needed to avoid error of object unknown
         const data = e.payload.doc.data() as Post
-
+   
         //Set up the data in an object
         const dataUpload = {
           id: e.payload.doc.id,
@@ -455,8 +570,7 @@ imagePool: [string] = [""];
 
         //Test the getuser info function 
         var userBox = this.getUser(data.userkey as String);
-        console.log("User Box");
-        console.log(userBox);
+      
         
 
         //Add the first twenty to recent posts
@@ -473,9 +587,9 @@ imagePool: [string] = [""];
 
         //Add all of the image collages 
         if(dataUpload['type'] == "Images"){
-          console.log("Array Value");
+
           this.recentCollages.push(dataUpload);
-          console.log(this.recentCollages);
+
         }
 
         if(this.countWords(dataUpload['text']) > 99){
@@ -495,7 +609,7 @@ imagePool: [string] = [""];
           }
         }
  
-        console.log(this.recentCount);
+     
 
         //Add images to image pool 
         this.imagePool.push(dataUpload['image']);
@@ -530,7 +644,7 @@ imagePool: [string] = [""];
       const userData = data.data() as User;
       this.tempUsername = userData as string;
     })
-    console.log(this.tempUsername);
+   
     return this.tempUsername as string;
 
   }
@@ -577,13 +691,14 @@ imagePool: [string] = [""];
     }
 
   showModalDialog(card:any){
-    console.log(card)
+  
     //Update the modal 
       //Modal variables 
         this.modalPostTitle = card['title']
         this.modalPostTxt = card['text']
         this.modalPostDate = card['date']
-        this.modalPostImage = card['image']
+        this.modalPostImage =  (card['type'] != "Images") ? card['image'] : ""
+        this.modalPostImages =  (card['type'] == "Images") ? card['postImgs'] :  card['postImgs']
      
 
     //Display the modal
@@ -616,6 +731,14 @@ imagePool: [string] = [""];
         this.displayModalImg();
         this.imgModal = "";
         this.imgModal = this.modalPostImage
+        // console.log("Image Value: " + image);
+        // console.log("ImgModal: " + this.imgModal)
+        this.preSelection=true
+      }
+      setCollageImageModal(image: String){
+        this.displayModalImg();
+        this.imgModal = "";
+        this.imgModal = image
         // console.log("Image Value: " + image);
         // console.log("ImgModal: " + this.imgModal)
         this.preSelection=true

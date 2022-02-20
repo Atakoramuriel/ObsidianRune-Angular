@@ -76,10 +76,19 @@
                                                 (click)="preSelection=true"
                                                 class="modal-content">
                                                     <h4 class="modalTitle">{{modalPostTitle}}</h4>
+                                                    <br><br>
                                                     <img 
                                                     (click)="setImageModal()"
                                                     src="{{modalPostImage}}" 
                                                     id="postedImg" alt="">
+                                                    <div
+                                                    class="center"
+                                                    *ngFor="let collageImg of modalPostImages; let j = index;"
+                                                     >
+                                                    <img src="{{collageImg}}" 
+                                                    (click)="setCollageImageModal(collageImg)"
+                                                    class="postModalCollageImg{{j}} z-depth-5" >
+                                                </div>
                                                     <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>
                                                 </div>
                                                 <div 
@@ -112,6 +121,79 @@
                         </div>
                 
                     
+
+        <!-- Start of the Aevum if there are any active -->
+
+        <div class="row" id="main">
+            <h4  id="aevumTitle">Aevum Posts</h4>
+            <div
+            class="box2">
+            <div 
+            id="testCardAevum"
+            class="card"
+            *ngFor="let card of aevumActiveList; let i = index;">
+            <!-- <p class="white-text">{{card}}</p> -->
+                    <div class="space">
+                        <div class="card" id="aevumItem">
+                            <h4 class="legacyTitle">{{card.title}}</h4>
+                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                            <img src="{{card.cover}}" class="" id="legacyImg">
+                        </div>                        
+                    </div>  
+                    </div>
+                </div>
+        </div>
+        <div class="row" id="main">
+            <h4  id="menuTitle">Upcoming Aevum</h4>
+            <div
+            class="box2">
+            <div 
+            id="testCardAevum"
+            class="card"
+            *ngFor="let card of aevumUpcomingList; let i = index;">
+            <!-- <p class="white-text">{{card}}</p> -->
+                    <div class="space">
+                        <div class="card" id="userLegacy">
+                            <h4 class="legacyTitle">{{card.title}}</h4>
+                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                            <img src="{{card.cover}}" class="" id="legacyImg">
+                        </div>
+                        
+                    </div>  
+                    </div>
+                </div>
+        </div>
+
+
+
+                    <!-- Divider -->
+                    <div class="row container">
+                        <hr>
+                    </div>
+                    
+                        <!-- Timeline of recent posts from all friends -->
+                            <div class="row" id="main">
+                            <h4  id="menuTitle">Legacy Posts</h4>
+                            <div
+                            class="box2">
+                            <div 
+                            id="testCard"
+                            class="card"
+                            *ngFor="let card of legacyList; let i = index;">
+                            <!-- <p class="white-text">{{card}}</p> -->
+                            <div class="space">
+                            
+                                <div class="card" id="userLegacy">
+                                    <h4 class="legacyTitle">{{card.title}}</h4>
+                                    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                    <img src="{{card.cover}}" class="" id="legacyImg">
+                                </div>
+                                
+                            </div>  
+                            </div>
+                        </div>
+                        </div>
+                        
                         <!-- Recent Posts -->
                             <!-- Timeline of recent posts from all friends -->
                             <div class="row" id="main">
@@ -123,25 +205,34 @@
                                 class="card"
                                 *ngFor="let card of recentPosts; let i = index;">
                                 <!-- <p class="white-text">{{card}}</p> -->
-                                <div 
-                                (click)="showModalDialog(card)"
-                                class="card" 
-                                id="userRecentPosts">
-                                <div class="card" id="userLongWriting">
-                                    <h5 class="writingTitle">{{card.title}}</h5>
-                                    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                    <img src="{{card.image}}" class="" id="recentImg">
-                                 
-                                        <div  id="writingTxt">{{card.text}}</div>
-                                   
-                                        <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
-                                    <p id="writtenUser"><i>{{card.username}}</i></p>
-                                    <p  id="writingOptions">{{card.date}}</p> 
-                                    </div> 
-                                </div>   
+                                        <div 
+                                        (click)="showModalDialog(card)"
+                                        class="card" 
+                                        id="userRecentPosts2">
+                                        <div class="card" id="userLongWriting2">
+                                            <br>
+                                            <h5 class="writingTitle">{{card.title}}</h5>
+                                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                            <div class="center">
+                                                <img
+                                                *ngIf="card.image != 'https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d'" 
+                                                src="{{card.image}}" class="" id="recentImg">
+                                            </div>
+                                            <div id="containedTxt">
+                                                <div  id="writingTxt2">{{card.text}}</div>
+                                            </div>
+                                                <br>
+                                                <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
+                                            <p id="writtenUser2"><i>{{card.username}}</i></p>
+                                            <p  id="writingOptions">{{card.date}}</p> 
+                                            </div> 
+                                        </div>   
                                 </div>
                             </div>
                             </div>
+
+      
+                    
                             <!-- Timeline of recent Image posts from all friends -->
                             <div class="row" id="main">
                                 <h4  id="menuTitle">Recent Images</h4>
@@ -175,7 +266,8 @@
                                 id="collageCard"
                                 class="card"
                                 *ngFor="let card of recentCollages; let i = index;">
-                                <!-- <p class="white-text">{{card}}</p> -->
+                                
+                                <div class="spacing">
                                     <div 
                                     (click)="showModalDialog(card);"
                                     class="card" 
@@ -185,12 +277,14 @@
                                         <div
                                             *ngFor="let collageImg of card?.postImgs; let j = index;"
                                         >
-                                            <img src="{{collageImg}}" class="postCollageImg{{j}} z-depth-5">
+                                            <img src="{{collageImg}}" class="postCollageImg{{j}} z-depth-5" id="selectedCollage">
                                         </div>
                                         <!-- <i class="material-icons hide" id="userPostOptions">more_vert</i>
                                         <i class="material-icons " id="userPostFav">favorite_border</i>
                                         <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5> -->
-                                    </div>    
+                                    </div>  
+                                </div>
+                               
                                 </div>
                             </div>
                             </div>
@@ -213,7 +307,6 @@
                                         <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
                                      
                                             <div  id="writingTxt">{{card.text}}</div>
-                                       
                                             <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
                                         <p id="writtenUser"><i>{{card.username}}</i></p>
                                         <p  id="writingOptions">{{card.date}}</p> 
@@ -278,36 +371,11 @@
                             <hr>
                         </div>
                     
-                    <!-- Recent Writings (Legacy and more) -->
-                    <!-- Timeline of recent posts from all friends -->
-                    <div class="row" id="main">
-                        <h4  id="menuTitle">Legacy Posts</h4>
-                        <div
-                        class="box2">
-                        <div 
-                        id="testCard"
-                        class="card"
-                        *ngFor="let card of legacyList; let i = index;">
-                        <!-- <p class="white-text">{{card}}</p> -->
-                            <div class="card" id="userLegacy">
-                                <h4 class="legacyTitle">{{card.title}}</h4>
-                                <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                <img src="{{card.image}}" class="" id="legacyImg">
-                                <i class="material-icons " id="legacyOptions">more_vert</i>
-                            </div>    
-                        </div>
-                    </div>
-                    </div>
-                    
-                    <!-- Divider -->
-                    <div class="row container">
-                            <hr>
-                        </div>
-                    
+
                     
                     <!-- Recent Writings (Legacy and more) -->
                     <!-- Timeline of recent posts from all friends -->
-                    <div class="row" id="main">
+                    <div class="row hide" id="main">
                         <h4 id="menuTitle">Writings</h4>
                         <div
                         class="box">
@@ -328,16 +396,11 @@
                         </div>
                     </div>
                     </div>
-                    
-                    <!-- Divider -->
-                    <div class="row container">
-                        <hr>
-                    </div>
-                    
+        
                     
                     <!-- Recent Writings (Legacy and more) -->
                     <!-- Timeline of recent posts from all friends -->
-                    <div class="row" id="main">
+                    <div class="row hide" id="main">
                         <h4 id="menuTitle">NFTs ( Coming Soon )</h4>
                         <div
                         class="box2">

@@ -20,6 +20,16 @@ export class AuthService {
     return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
   }
 
+  getLegacies(){
+    return this.fireService.collection("Legacy", ref => ref.orderBy('updated','desc')).snapshotChanges();
+  }
+
+  getAevum(){
+    return this.fireService.collection("Aevum", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
+  }
+
+
+
   //Get Likes 
   getLikes(postID: string){
     return this.fireService.collection("posts").doc(postID).collection("Likes").get();
