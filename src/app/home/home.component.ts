@@ -393,6 +393,17 @@ recentCollages = [
   }
 ]; //Recent Image Collages 
 
+recentStoryboards = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: "",
+    postImgs: [],
+  }
+]; //Recent Image Collages 
+
 recentWritings = [  {
   id: "",
   title: "",
@@ -539,6 +550,7 @@ imagePool: [string] = [""];
 //Load the post into the array
     this.recentPosts.splice(0,1);
     this.recentCollages.splice(0,1);
+    this.recentStoryboards.splice(0,1);
     this.recentImgs.splice(0,1);
     this.recentWritings.splice(0,1);
     this.post.splice(0,1);
@@ -589,6 +601,11 @@ imagePool: [string] = [""];
         if(dataUpload['type'] == "Images"){
 
           this.recentCollages.push(dataUpload);
+
+        }
+        if(dataUpload['type'] == "Storyboard"){
+
+          this.recentStoryboards.push(dataUpload);
 
         }
 
@@ -693,12 +710,22 @@ imagePool: [string] = [""];
   showModalDialog(card:any){
   
     //Update the modal 
-      //Modal variables 
+      //Modal variables
+      if(card['type'] == "Images" || card['type'] == "standard"){
         this.modalPostTitle = card['title']
         this.modalPostTxt = card['text']
         this.modalPostDate = card['date']
         this.modalPostImage =  (card['type'] != "Images") ? card['image'] : ""
         this.modalPostImages =  (card['type'] == "Images") ? card['postImgs'] :  card['postImgs']
+      }
+      else if(card['type'] == "Storyboard" ){
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  ""
+        this.modalPostImages =  card['postImgs'] 
+      }
+ 
      
 
     //Display the modal
