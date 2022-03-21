@@ -1,0 +1,74 @@
+<!-- Nav Bar -->
+<app-navbar></app-navbar>
+
+<!-- Sub navBar -->
+<div class="row black" id="subNav">
+    <div class="container">
+        <div class="col s12 m8 l8 offset-m2 offset-l2">
+            <br>
+            <input 
+              id="title"
+              placeholder="Title your work . . ." 
+              type="text" 
+              class="validate">
+        </div>
+
+    </div>
+</div>
+
+<!-- Area for writing below -->
+<div class="row" id="startMsgRow">
+    <div class="center">
+        <div class="container">
+            <div *ngIf='writtenPassage == "" ' class="col s12">
+                <div class="center">
+                    <h3 class="center" id="startMsg"><i>{{startMsg}}</i></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- writing Section -->
+<div class="row" id="textRow">
+    <div class="center">
+        <div class="container">
+                        <!-- Area for the writing passage -->
+                        <div class="col s12">
+                            <div class="center">
+                                <div class="input-field col s12">
+                                    <textarea
+                                     [(ngModel)]="writtenPassage"
+                                     placeholder="Start Here . . ."
+                                     id="writtenPassage" 
+                                     class="materialize-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Area for floatin action button -->
+<div class="" id="menuBtn">
+        <h6 class="white-text">MENU &nbsp;&nbsp;<i class="material-icons" >dehaze</i></h6>
+</div>
+
+
+<!-- Sub Menu buttons -->
+<div class="subMenu">
+    <ul>
+        <li *ngFor="let btn of subMenu; let i = index;"> 
+            <!-- Area for button -->
+            <div 
+             (click)="menuCall(btn.param)"
+             class="center"
+             id="subMenuBtn">
+                <h5><i>{{btn.name}}</i> &nbsp;<i class="material-icons" id="subMenuBtnIcon">{{btn.icon}}</i></h5>
+            </div> <br>
+        </li> <br>
+
+    </ul>
+</div>
+

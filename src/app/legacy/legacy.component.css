@@ -1,0 +1,82 @@
+
+/* This is the image in the background */
+#coverImg{
+    width: 25%;
+}
+
+/* This is the Title */
+.parallaxHeader{
+    position: absolute;
+    top: 50%;
+    text-align: left;
+    padding-left: 15%;
+    z-index: 2;
+    color: rgb(196, 143, 0);
+    text-shadow: 2px 2px #000000;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+/* Section background Color */
+#section{
+    background-color: rgba(255, 0, 0, 0)
+}
+
+
+.header{
+    color: rgb(196, 143, 0);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Set the size of the profile image  */
+#authorProfileImg{
+    width: 5%;
+    border-radius: 50%;
+    float: left;
+    vertical-align: middle;
+    position: absolute;
+    top: 65%;
+    left: 15%;
+    text-align: left;
+}
+
+#authorTxt{
+    font-size: 175%;
+    float: left;
+    vertical-align: baseline;
+    padding-left: 1%;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 65%;
+    left: 15%;
+    text-align: left;
+}
+
+#subtitle{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* For the overall collection */
+.collection-item{
+    background-color: #181f3d;
+}
+.collection-item:hover{
+    background-color: #212a55;
+    cursor: pointer;
+}
+
+#userOptions{
+    color: white;
+}
+#userOptions:hover{
+    color: rgb(250, 133, 0);
+    cursor: pointer;
+    font-size: 40px;
+}
+
+/* For each Entry In list */
+.title{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: rgb(214, 144, 15);
+}

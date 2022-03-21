@@ -117,13 +117,23 @@ width: 100%;
     padding: 0%;
 }
 #collageCard{
-    width: 30%;
+    width: 400px;
     display: inline-block;
-    padding-left: 10%;
-    border: none;
+
     background-color: #00000000;
     padding: 1%;
 }
+
+.mobileBox{
+    overflow: scroll;
+    flex-direction: column;
+    display: flex;
+    position: relative;
+    animation: slide 3.5s;
+    animation-direction:normal;
+    padding-left: 5%;
+}
+
 .box{
     overflow: scroll;
     flex-direction: row;
@@ -131,8 +141,8 @@ width: 100%;
     position: relative;
     animation: slide 3.5s;
     animation-direction: normal;
-}
 
+}
 
 .box2{
     overflow: scroll;
@@ -240,30 +250,22 @@ width: 100%;
 }
 
 
-.spacing{
-    background-color:rgba(3, 4, 36, 0);
-    border-radius:15px;
-    height:250px;
-    width: 400px;
-}
 
 #userCollagePosts{
- width: 95%;
- height: 95%;
- padding: 5;
-  
-    display: inline-block;
-   
-
+height:400px;
+width: 150px;
+ display: inline-block; 
+ background-color: #00000000;
 }
 #userCollagePosts:hover{
     background-color:rgb(3, 4, 36);
     border-radius:15px;
-    height:275px;
-    width: 425px;
-    border: solid rgb(255, 102, 0) 1px;
+    height:400px;
+    width: 150px;
     display: inline-block;
     cursor: pointer;
+    background-color: #00000000;
+
 
 }
 
@@ -298,6 +300,34 @@ width: 100%;
     background-color:rgb(3, 4, 36);
     border-radius:15px;
     height:200px;
+    /* width: 425px; */
+    width: 100%;
+    border: solid black 1px;
+    display: inline-block;
+}
+#userImgRecent{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 400px;
+    border: solid black 1px;
+    display: inline-block;
+}
+#userImgRecent:hover{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 400px;
+    border: solid rgb(241, 158, 32) 1px;
+    display: inline-block;
+    cursor: pointer;
+}
+#userModalLegacy{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:500px;
     /* width: 425px; */
     width: 100%;
     border: solid black 1px;
@@ -344,11 +374,33 @@ width: 100%;
     text-overflow: ellipsis;
 }
 
-#userLongWriting2{
+#userLongWriting0{
     background-color:rgb(18, 20, 26);
+    border-radius:0px;
+    height: 500px;
+    width: 100%;
+    padding: 5%;
+    border: solid rgb(146, 179, 255) 1px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#userLongWriting0:hover{
+    cursor: pointer;
+    background-color:rgb(24, 27, 36);
     border-radius:0px;
     min-height:50%;
     max-height: 100%;
+    width: 100%;
+    padding: 5%;
+    border: solid rgb(212, 149, 32) 1px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#userLongWriting2{
+    background-color:rgb(18, 20, 26);
+    border-radius:0px;
     width: 100%;
     padding: 5%;
     border: solid rgb(146, 179, 255) 1px;
@@ -482,12 +534,18 @@ l
     height: 100%;
     border-radius: 15px;
   }
+  .postImg{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
 
 
 
   .postCollageImg0{
     object-fit: cover;
-    width: 100%;
+    width: 350px;
     height: 150px;
     border-radius: 15px;
     position: absolute;
@@ -501,7 +559,7 @@ l
     top: 25%;
     z-index: 3;
     object-fit: cover;
-    width: 100%;
+    width: 350px;
     height: 150px;
     border-radius: 15px;
     box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.507);
@@ -512,7 +570,7 @@ l
     top: 45%;
     z-index: 2;
     object-fit: cover;
-    width: 100%;
+    width: 350px;
     height: 150px;
     border-radius: 15px;
     box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.507);
@@ -523,7 +581,7 @@ l
     top: 60%;
     z-index: 1;
     object-fit: cover;
-    width: 100%;
+    width: 350px;
     height: 150px;
     border-radius: 15px;
     box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.507);
@@ -541,6 +599,17 @@ l
     bottom:5%;
     z-index: 3;
 }
+.recentImgTitle{
+    color:rgb(245, 245, 245);
+    text-shadow: 5px 5px #000000;
+    font-family:'Times New Roman', Times, serif;
+    /* font-size: 350%; */
+    font-size: max(2vw, 2px);    
+    position:absolute;
+    right:10%;
+    bottom:5%;
+    z-index: 3;
+}
 
 #legacyImg{
     object-fit:cover;
@@ -548,6 +617,26 @@ l
     height: 100%;
     border-radius: 15px;
   }
+#recentImg{
+    object-fit:cover;
+    width: 200px;
+    height: 100px;
+    border-radius: 15px;
+  }
+#recentImg2{
+    object-fit:cover;
+    width: 250px;
+    height: 200px;
+    border-radius: 15px;
+  }
+#legacyModalImg2{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+
 #recentImg{
     object-fit:cover;
     width: 70%;
@@ -691,15 +780,48 @@ ul#menu li {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+#legacyModal{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    padding-bottom: 15%;
+    left: 0;
+    top: 7%;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#legacyModalImg{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    width: 15%;
+}
 
 
 /* Modal styling */
 #modal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+
     background-color:#161A23;
     border: solid #535D80 2px;
     width: 100%;
     height: 100%;
     padding: 1%;
+}
+
+#legacyModal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#121627;
+    border-radius: 20px;
+    border: solid rgb(223, 153, 23) 1px;
+    width: 100%;
+    height: 100%;
+    padding: 00.5%;
+    padding-top: 0%;
+    padding-bottom: 10%;
 }
 
 
@@ -733,6 +855,7 @@ ul#menu li {
 }
 
 #modalDisplay{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
     position: fixed; /* Stay in place */
     z-index: 11; /* Sit on top */
     padding-top: 100px; /* Location of the box */
@@ -751,6 +874,10 @@ ul#menu li {
 
 .modalTitle{
     color: rgb(139, 161, 226);
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+.modalLegacyTitle{
+    color: rgb(204, 150, 32);
     font-family:Georgia, 'Times New Roman', Times, serif
 }
 
@@ -943,4 +1070,19 @@ ul#menu li {
     border: solid rgb(204, 132, 37) 2px;
     box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.507);
 
+  }
+
+  @keyframes slideInFromBelow {
+    0% {
+      transform: translateY(100%);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+
+  /* For Heart Icon */
+  #favoriteIcon:hover{
+    cursor: pointer;
   }

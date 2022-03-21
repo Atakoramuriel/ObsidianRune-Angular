@@ -1,0 +1,78 @@
+<!-- Area for the NavBar -->
+<app-navbar></app-navbar>
+
+<!-- Area for the Legacy Page -->
+ <div class="parallax-container">
+    <div class="parallax">
+        <h2 class="parallaxHeader">{{title}}</h2>
+        <img 
+        id="coverImg"
+        src="{{cover}}">
+              <!-- Additional Spacing Require -->
+              <div class="row">
+                <!-- <img 
+                id="authorProfileImg"
+                src="https://obsidianrune.com/static/img/Ruimel.da20829.png" 
+                alt="profileImg"> -->
+                <p id="authorTxt" ><i>{{author}}</i></p>
+            </div>
+    </div>
+
+  </div>
+  <div class="section black white-text">
+    <div class="row container">
+  
+
+      <!-- <h2 class="header">{{title}}</h2> -->
+      <div class="row">
+          <div class="container">
+              <div class="center">
+                <h5 class="white-text text-darken-3 darken-3"><i>{{desc}}</i></h5>
+              </div>
+          </div>
+      </div>
+    </div>
+
+       <!-- SubMenu displying information -->
+       <div class="row center">
+           <div class="container">
+                <div class="row container">
+                    <div class="col s4">
+                        <h4 id="subtitle">Entries {{Entries}} </h4>
+                    </div>
+                    <div class="col s4">
+                        <h4 id="subtitle">Likes {{Likes}} </h4>
+                    </div>
+                    <div class="col s4">
+                        <h4 id="subtitle">Readers {{Readers}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        
+        <!-- Place Entries Below -->
+        <div class="row">
+            <div class="container">
+                <div
+                *ngFor="let entry of publicEntries; let i = index;">
+                    <ul class="collection">
+                        <li class="collection-item avatar">
+                          <span class="title"><h4>{{entry.title}}</h4></span>
+                          <h5><i>{{entry.previewTxt}}</i></h5>
+                          <p class="blue-grey-text text-lighten-3">{{entry.date}}</p>
+                          <a
+                           href="#!" class="secondary-content"><i class="small material-icons" id="userOptions">more_vert</i></a>
+                        </li>
+                      </ul>
+                </div>
+            </div>
+        </div>
+
+  </div>
+
+
+  <style>
+      #time{
+          width: 4px;
+      }
+  </style>

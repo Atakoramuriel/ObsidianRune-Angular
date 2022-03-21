@@ -1,19 +1,41 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ActivatedRoute, ParamMap } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DiscoverComponent } from './discover/discover.component';
-// const routes: Routes = [
-//   { path: '', redirectTo: '/login', pathMatch: 'full'},
-//   { path: 'login', component: LoginComponent}
-// ];
+import { LegacyComponent } from './legacy/legacy.component';
+import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
+import { AuthGuard } from './services/auth.gaurd';
+import { WritingComponent } from './writing/writing.component';
+
 
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'Login', component: LoginComponent},
-  {path: 'Discover', component: DiscoverComponent}
-
+  {
+    path: '', 
+    component: HomeComponent, 
+    canActivate: [AuthGuard],
+    },
+  {
+    path: 'Login',
+    component: LoginComponent,
+    canActivate: [SecureInnerPagesGuard],
+    },
+  {
+    path: 'Discover',
+    component: DiscoverComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Legacy',
+    component: LegacyComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'newWriting',
+    component: WritingComponent,
+    canActivate: [AuthGuard]
+  },
 ]
 
 
@@ -22,4 +44,7 @@ const appRoutes: Routes = [
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  
+
+}

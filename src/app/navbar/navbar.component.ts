@@ -1,6 +1,7 @@
+
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
-
+import {Router} from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -22,13 +23,38 @@ export class NavbarComponent implements OnInit {
   settingsMenu:boolean = false;
 
 
-  constructor(public firebaseService: FirebaseService) {
+  constructor(
+    public firebaseService: FirebaseService,
+    public router: Router) {
     let notes: String[];
    }
 
   ngOnInit(): void {
     let notes: String[];
     this.checkAuth();
+  }
+
+  redirect(path: string){
+    switch(path){
+      case 'Dashboard': {
+        this.router.navigate(['']);
+        break;
+      }
+      case 'Profile': {
+        this.router.navigate(['']);
+        break;
+      }
+      case 'newWriting': {
+        this.router.navigate(['newWriting']);
+        break;
+      }
+
+    }
+  }
+
+  async logout(){
+    this.firebaseService.signOut();
+    location.reload();
   }
 
   //Check authentication

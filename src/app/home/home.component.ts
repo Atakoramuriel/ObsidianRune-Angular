@@ -9,13 +9,16 @@ import { User } from '../models/user';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { Legacy } from '../models/Legacy';
 import { Aevum } from '../models/Aevum';
-
+import * as M from 'materialize-css';
+import { Timestamp } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
 
   //Banner images
@@ -360,6 +363,7 @@ postColC = [
 
 //Creation of different Buckets
 
+//Recent Posts
 recentPosts = [
   {
     id: "",
@@ -370,7 +374,54 @@ recentPosts = [
     username: "",
     date: ""
   }
-]; //Recent Posts
+]; 
+
+mobilePosts = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: "",
+    username: "",
+    date: ""
+  }
+];
+
+//Regular Posts
+regularPosts = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: "",
+    username: "",
+    date: ""
+  }
+]; 
+regularPostsB = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: "",
+    username: "",
+    date: ""
+  }
+]; 
+regularPostsC = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: "",
+    username: "",
+    date: ""
+  }
+]; 
 
 recentImgs =[
   {
@@ -378,7 +429,9 @@ recentImgs =[
     title: "",
     text: "",
     image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
-    numLikes: ""
+    numLikes: "",
+    username: "",
+    date: ""
   }
 ]; //Recent Images 
 
@@ -440,23 +493,60 @@ imagePool: [string] = [""];
     modalPostImages = [];
     modalPostUser: string = "";
     modalPostUserProfileImg: String = "";
+    modalPostAuthor: string ="";
+    modalPostID: string = "";
+    modalPostLikes: string= "0";
+    modalPostComments: string = "0";
+    modalPostLiked: boolean = false;
+    modalPostUnLiked: boolean = false;
+    modalPostSaved: boolean = false;
+    
+  //Test
+  count: string= "";
+
 
   //tempUser? 
     tempUsername: String = "";
 
+  //Current user ID
+   currentUserID: string = "";
+   userData: any;
+
+  //Create List
+  likesList: string[] = [];
+  savedList: string[] = [];
+
+
   //Constructor 
   constructor(
-  public AuthService: AuthService
+  public AuthService: AuthService,
+  private userService: FirebaseService,
+  private firebaseAuth: AngularFireAuth
     ) { 
+      this.firebaseAuth.authState.subscribe((user) =>{
+        if(user){
+          this.userData = user;
+          
+          localStorage.setItem('userData', JSON.stringify(this.userData));
+          JSON.parse(localStorage.getItem('userData')!);
+        }else {
+          localStorage.setItem('userData','null');
+          JSON.parse(localStorage.removeItem('userData')!);
+        }
 
+      })
   }
 
   ngOnInit(): void {
-
+    console.log(this.currentUserID)
     //Update the banner images
     // setInterval(this.shuffleImg, 7000);
-    
-    
+    $(document).ready(function(){
+      $('.parallax').parallax();
+      });
+
+    //Check User Status
+    this.checkAuthStatus()
     
     //Load the aevum collection items
     this.loadAevum();
@@ -467,6 +557,13 @@ imagePool: [string] = [""];
     //load the legacies
     this.loadLegacies();
 
+
+
+  }
+
+  //Check user status
+  checkAuthStatus(){
+    this.userService.authStatus()
   }
 
   //Load in the Aevum collections
@@ -533,20 +630,148 @@ imagePool: [string] = [""];
             };
 
         //add legacies to array
-        this.legacyList.push(dataUpload);
+        if(dataUpload['privacy'] == "public"){
+          this.legacyList.push(dataUpload);
 
+        }
+       
       })
     })
-
   }
 
+  showModalDialog(card:any){
+  //Reset the Modal Variables
+    this.modalPostLiked = false;
+    this.modalPostSaved = false;
+    //Empty out array values
+    this.likesList = [];
+    this.savedList = [];
 
+        //Get total likes for legacy id 
+        //From list of likes see if the current user is hidden amonst list 
+        this.AuthService.getLikes(card['id']).subscribe(data => {
+          //Creation of data struction 
+          data.map(e => {
+            const data = e.payload.doc.id;
+            this.likesList.push(data);
+          })
+          
+          //Check to see if username is included     
+            if(this.likesList.includes(this.userData['uid'])){
+              this.modalPostLiked = true;
+            }else{
+              this.modalPostLiked = false;
+            }
+      })
+
+    //Get the value of the likes 
+      this.AuthService.getLikesCount(card['id']).subscribe(data => {
+        
+        this.modalPostLikes = data.size as unknown as string;
+      })
+
+    //Update the modal 
+      //Modal variables
+      if(card['type'] == "Images" || card['type'] == "standard"){
+        this.modalPostID = card['id'];
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  (card['type'] != "Images") ? card['image'] : ""
+        this.modalPostImages =  (card['type'] == "Images") ? card['postImgs'] :  card['postImgs']
+   
+      }
+      else if(card['type'] == "Storyboard" ){
+        this.modalPostID = card['id'];
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  ""
+        this.modalPostImages =  card['postImgs'] 
+      }
+ 
+     
+
+    //Display the modal
+    this.displayModal=true;
+
+    // console.log(card)
+    this.loadUserInfo(card)
+  }
+
+  
+  closeModalDialogue(){
+    //Close the modal
+    // this.displayModal = false;
+    if(this.preSelection){
+      this.preSelection = false;
+    }else{
+      // alert("Close Modal");
+      this.displayModal=false
+    }
+  }
+ 
+  showLegacyModal(card:any){
+    //Reset the Modal Variables
+    this.modalPostLiked = false;
+    this.modalPostSaved = false;
+    this.likesList = [];
+    this.savedList = [];
+
+    //Update the modal 
+      //Set Modal variables
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['desc']
+        this.modalPostDate = card['updated']
+        this.modalPostImage = card['cover']
+        this.modalPostID = card['id']
+     
+      
+    //Get total likes for legacy id 
+        //From list of likes see if the current user is hidden amonst list 
+        this.AuthService.getLegacyLikes(this.modalPostID).subscribe(data => {
+            //Creation of data struction 
+            data.map(e => {
+              const data = e.payload.doc.id;
+              this.likesList.push(data);
+            })
+            
+            //Check to see if username is included     
+              if(this.likesList.includes(this.userData['uid'])){
+                this.modalPostLiked = true;
+              }else{
+                this.modalPostLiked = false;
+              }
+        })
+
+        //Check to see if saved already
+          this.AuthService.getLegacySaves(this.modalPostID,this.userData['uid']).subscribe(data => {
+            data.map(e => {
+              const data = e.payload.doc.id;
+              this.savedList.push(data)
+              console.log(this.savedList)
+            })
+
+              //Confirm if the username is included
+              if(this.savedList.includes(this.modalPostID)){
+                this.modalPostSaved = true;
+              }else{
+                this.modalPostSaved = false;
+              }
+
+          })
+
+
+    //Display the modal
+    this.displayLegacyModal=true;
+
+    // console.log(card)
+    this.loadUserInfo(card)
+  }
   
 //Working loadPosts MEthod
   loadPosts(){
-
     
-
 //Load the post into the array
     this.recentPosts.splice(0,1);
     this.recentCollages.splice(0,1);
@@ -566,11 +791,24 @@ imagePool: [string] = [""];
         const data = e.payload.doc.data() as Post
    
         //Set up the data in an object
+        const mobileUpload = {
+          id: e.payload.doc.id,
+          title: data.title as string,
+          text: data.text as string,
+          image: ((data.postImg != "")  ? data.postImg as string : ""),
+          numLikes: ((data.NumLikes != null) ? data.NumLikes as string : "0"),
+          numComments: ((data.NumComments != null) ? data.NumComments as string : "0"),
+          userKey: data.userkey as string,
+          date: data.date as string,
+          type: data.type as String,
+          postImgs: data.postImgs as any,
+          username: data.username as string
+        };
         const dataUpload = {
           id: e.payload.doc.id,
           title: data.title as string,
           text: data.text as string,
-          image: ((data.postImg != "")  ? data.postImg as string : "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d"),
+          image: ((data.postImg != "")  ? data.postImg as string : ""),
           numLikes: ((data.NumLikes != null) ? data.NumLikes as string : "0"),
           numComments: ((data.NumComments != null) ? data.NumComments as string : "0"),
           userKey: data.userkey as string,
@@ -583,38 +821,24 @@ imagePool: [string] = [""];
         //Test the getuser info function 
         var userBox = this.getUser(data.userkey as String);
       
-        
+        //Add all posts to mobile posts 
+        this.mobilePosts.push(mobileUpload);
 
-        //Add the first twenty to recent posts
-        if(this.recentCount <= 15){
+          //Add all single images to section 
+        if(dataUpload['image'] != ""  && dataUpload['type'] == "standard"){
+          this.recentImgs.push(dataUpload)
+        }else  if(this.recentCount <= 15 && dataUpload['type'] == "standard" && this.countWords(dataUpload['text']) < 99){
           this.recentPosts.push(dataUpload);
           this.recentCount = this.recentCount + 1;
          
-        }
-        
-        //Add all single images to section 
-        if(dataUpload['image'] != "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d"){
-          this.recentImgs.push(dataUpload)
-        }
-
-        //Add all of the image collages 
-        if(dataUpload['type'] == "Images"){
+        }else if(dataUpload['type'] == "Images" || dataUpload['type'] == "Storyboard"){
 
           this.recentCollages.push(dataUpload);
 
-        }
-        if(dataUpload['type'] == "Storyboard"){
-
-          this.recentStoryboards.push(dataUpload);
-
-        }
-
-        if(this.countWords(dataUpload['text']) > 99){
+        }else  if(this.countWords(dataUpload['text']) > 99 ||dataUpload['type'] == "Writing"){
           var short_description = dataUpload['text'].split(' ').slice(100).join(' ');
           this.recentWritings.push(dataUpload);
-        }
-
-        if(this.recentCount > 15){
+        }else  if(this.recentCount > 15){
        
        //Randomly add posts to different rows
             if(this.post.length < 30){
@@ -655,6 +879,12 @@ imagePool: [string] = [""];
       })
   }
 
+  reRoute(id?: string ){
+    //Reroute to the legacy page 
+    console.log("ID: " + id);
+
+  }
+
   getUser(userKey: String){
     this.AuthService.getUserInfo(userKey as string).then(data => {
         
@@ -667,13 +897,51 @@ imagePool: [string] = [""];
   }
 
 
+
+
   showDialog() {
     this.display = true;
  }
+
+ //Get regular post Likes
+  getLikesNum(postID: string){
+      return this.AuthService.getLikesCount(postID);
+  }
  
 //Like Post
-  likePost(){
+  likeLegacyPost(legacyID: string){
+    const userID = JSON.parse(localStorage.getItem('userData')!);
+    this.AuthService.likeLegacyPost(legacyID ,userID.uid);
+  }
 
+  unlikeLegacyPost(legacyID: string){
+    this.AuthService.unLikeLegacyPost(legacyID, this.userData['uid']);
+  }
+
+//Save Post
+  saveLegacy(legacyID: string){
+    this.AuthService.saveLegacyPost(legacyID, this.userData['uid']);
+  }
+
+  unSaveLegacy(legacyID: string){
+    this.AuthService.unSaveLegacyPost(legacyID, this.userData['uid']);
+  }
+
+  //Add Like to legacy tally
+  addLegacyLike(legacyID: string){
+    this.AuthService.addLegacyLike(legacyID, this.userData['uid']);
+  }
+
+  removeLegacyLike(legacyID: string, ){
+    this.AuthService.removeLegacyLike(legacyID, this.userData['uid']);
+  }
+  //Add Like to legacy tally
+  addLegacyReader(legacyID: string){
+    this.AuthService.addLegacyFollower(legacyID, this.userData['uid']);
+  }
+
+  removeLegacyReader(legacyID: string){
+    this.AuthService.removeLegacyFollower(legacyID, this.userData['uid']);
   }
 
 
@@ -700,6 +968,7 @@ imagePool: [string] = [""];
 
   //For modal display
   displayModal: boolean =false;
+  displayLegacyModal: boolean = false;
   countWords(str: any) {
     str = str.replace(/(^\s*)|(\s*$)/gi,"");
     str = str.replace(/[ ]{2,}/gi," ");
@@ -707,43 +976,17 @@ imagePool: [string] = [""];
     return str.split(' ').length;
     }
 
-  showModalDialog(card:any){
   
-    //Update the modal 
-      //Modal variables
-      if(card['type'] == "Images" || card['type'] == "standard"){
-        this.modalPostTitle = card['title']
-        this.modalPostTxt = card['text']
-        this.modalPostDate = card['date']
-        this.modalPostImage =  (card['type'] != "Images") ? card['image'] : ""
-        this.modalPostImages =  (card['type'] == "Images") ? card['postImgs'] :  card['postImgs']
-      }
-      else if(card['type'] == "Storyboard" ){
-        this.modalPostTitle = card['title']
-        this.modalPostTxt = card['text']
-        this.modalPostDate = card['date']
-        this.modalPostImage =  ""
-        this.modalPostImages =  card['postImgs'] 
-      }
- 
-     
 
-    //Display the modal
-    this.displayModal=true;
-
-    // console.log(card)
-    this.loadUserInfo(card)
-  }
-
-  closeModalDialogue(){
+  
+  closeLegacyModal(){
     //Close the modal
     // this.displayModal = false;
     if(this.preSelection){
       this.preSelection = false;
     }else{
       // alert("Close Modal");
-      this.displayModal=false
-
+      this.displayLegacyModal=false
     }
   }
  
@@ -783,9 +1026,19 @@ imagePool: [string] = [""];
     this.preSelection=true;
   }
 
-  likeModalPost(){
-    alert("Liked Post")
-    this.preSelection=true
+  likeModalPost(postID: string){
+    this.AuthService.likePost(postID, this.userData['uid']);
+    var temp: number =+this.modalPostLikes;
+    var newVal = temp + 1;
+    this.modalPostLikes = newVal as unknown as string;
+  }
+  unLikeModalPost(postID: string){
+    this.AuthService.unLikePost(postID, this.userData['uid']);
+    var temp: number =+this.modalPostLikes;
+    if(temp != 0){
+      var newVal = temp - 1;
+      this.modalPostLikes = newVal as unknown as string;
+    }
   }
 
   commentPost(){

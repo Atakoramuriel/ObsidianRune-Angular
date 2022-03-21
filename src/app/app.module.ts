@@ -25,14 +25,12 @@ import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { DiscoverComponent } from './discover/discover.component';
+import { LegacyComponent } from './legacy/legacy.component';
 
-
-
-// const appRoutes: Routes = [
-//   {path: '', component: HomeComponent},
-//   {path: 'Login', component: LoginComponent},
-
-// ]
+//Gaurds to be put in place
+import { AuthGuard } from './services/auth.gaurd';
+import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
+import { WritingComponent } from './writing/writing.component';
 
 
 @NgModule({
@@ -42,7 +40,9 @@ import { DiscoverComponent } from './discover/discover.component';
     LoginComponent,
     HomeComponent,
     PostsComponent,
-    DiscoverComponent
+    DiscoverComponent,
+    LegacyComponent,
+    WritingComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
@@ -64,7 +64,7 @@ import { DiscoverComponent } from './discover/discover.component';
  
 
   ],
-  providers: [FirebaseService, PostsService],
+  providers: [FirebaseService, PostsService, AuthGuard,SecureInnerPagesGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

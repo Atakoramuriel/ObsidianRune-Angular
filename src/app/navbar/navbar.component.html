@@ -73,9 +73,11 @@
                                             <li><i
                                                 (click)="toggleMenu('Home')"
                                                 class="material-icons" id="activeMenuIcon">home</i></li>
-                                            <li><h5 class="activeMenuBtn">Dashboard</h5></li>
+                                            <li><h5 
+                                                (click)="redirect('Dashboard')"
+                                                class="activeMenuBtn">Dashboard</h5></li>
                                             <li><h5 class="activeMenuBtn">New_Post</h5></li>
-                                            <li><h5 class="activeMenuBtn">New_Write</h5></li>
+                                            <li><h5 (click)="redirect('newWriting')" class="activeMenuBtn">New_Write</h5></li>
                                             <li><h5 class="activeMenuBtn">New_NFT</h5></li>
                                         </div>
 
@@ -144,7 +146,11 @@
                                         <li><h5 class="activeMenuBtn">Main_Settings</h5></li>
                                         <li><h5 class="activeMenuBtn">Profile_Settings</h5></li>
                                         <li><h5 class="activeMenuBtn">Privacy_Settings</h5></li>
-                                        <li><h5 class="activeMenuBtn">Log_Out</h5></li>
+                                        <li>
+                                            <h5 
+                                            (click)="logout()"
+                                            class="activeMenuBtn">Log_Out</h5>
+                                        </li>
                                     </div>
                          
                            </ul>

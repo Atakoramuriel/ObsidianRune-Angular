@@ -48,6 +48,17 @@ export class FirebaseService {
     })
   }
 
+  //GetAuth status 
+  async authStatus(){
+    this.firebaseAuth.onAuthStateChanged(user => {
+       if(user != null){
+         return true 
+       }else{
+         return false
+       }
+    })
+  }
+
    //Handle The Sign in 
    async createUser(email: string, password: string)
    {

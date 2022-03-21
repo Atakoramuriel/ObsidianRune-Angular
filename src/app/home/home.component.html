@@ -23,10 +23,7 @@
                 
                         <!-- Area for Active users -->
                             <!-- See what they posted
-                            Message them  -->
-
-                
-                
+                            Message them  -->                
                             <!-- Main Row for whats new  -->
                         <!-- Messages from ObsidianRune Team or others-->
                         <!-- Notifications -->
@@ -55,7 +52,7 @@
                         <!-- TEST -->
                         <!-- Modal Structure -->
                 
-                        <!-- Post Modal -->
+                        <!--Regular Post Modal -->
                         <div class="row" *ngIf="displayModal">
                             <div class="container" >
                                 <div class="center">
@@ -94,7 +91,31 @@
                                                 <div 
                                                 (click)="preSelection=true"
                                                 class="modal-footer">
-                                                    <h6 class="extra left"><span class="white-text"><i class="material-icons red-text" (click)="likeModalPost()">favorite_border</i> 0 &nbsp; <i class="material-icons" (click)="commentPost()" id="chatBubble" v-on:click="fetchComments(post.id)">chat_bubble_outline</i> 0 </span></h6>
+                                                    <h6 class="extra left">
+                                                        <span class="white-text">
+                                                            <i 
+                                                            id="favoriteIcon"
+                                                            *ngIf="modalPostLiked==false;"
+                                                            class="material-icons red-text" 
+                                                            (click)="likeModalPost(modalPostID); modalPostLiked = true">
+                                                            favorite_border
+                                                            </i>
+                                                            <i 
+                                                            id="favoriteIcon"
+                                                            *ngIf="modalPostLiked==true;"
+                                                            class="material-icons red-text" 
+                                                            (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
+                                                            favorite
+                                                            </i>
+
+                                                             {{modalPostLikes}} &nbsp;
+                                                         <i 
+                                                           class="material-icons" 
+                                                           (click)="commentPost()" 
+                                                           id="chatBubble" 
+                                                           >chat_bubble_outline</i> {{modalPostComments}}
+                                                         </span>
+                                                    </h6>
                                                     <h6 class="right" id="postDate">{{modalPostDate}}</h6><br>                                
                                                 </div>
                                         </div>
@@ -105,7 +126,95 @@
                 
                             </div>
                         </div>  
+
+                        <!--Legacy Modal -->
+                        <div class="row" *ngIf="displayLegacyModal">
+                            <div class="container" >
+                                <div class="center">
+                                    <div 
+                                    (click)="closeLegacyModal();" 
+                                    id="legacyModal">
+                                        <div class="col m8 l8 s12 offset-l2 offset-m2">
+                                            <div id="legacyModal1">
+                                                <div 
+                                                (click)="preSelection=true"
+                                                class="modal-content">
+
+                                                <!-- This is the image card below -->
+                                                    <div
+                                                    class="card"
+                                                    id="userModalLegacy">
+                                                    <img src="{{modalPostImage}}" class="" id="legacyModalImg2">
+                                                    <h3 class="modalLegacyTitle">{{modalPostTitle}}</h3>
+                                                    <div class="container">
+                                                        <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>   
+                                                        <h6 class="white-text">{{modalPostUser}}</h6>        
+                                                        <div class="row">
+                                                            <div class="container">
+                                                                <hr class="solid">
+                                                            </div>
+                                                            <div class="container">
+                                                                <div class="hide-on-med-and-down">
+                                                                <div class="col s4">
+                                                                    <!-- Button to appear if user has not liked post -->
+                                                                    <div 
+                                                                    *ngIf="modalPostLiked == false"
+                                                                    (click)="modalPostLiked =true; likeLegacyPost(modalPostID); addLegacyLike(modalPostID)"
+                                                                    class="btn btn-large red darken-4">
+                                                                    <i class="material-icons">favorite_border</i>
+                                                                    </div>
+                                                                    <!-- Button to appear if user has liked post -->
+                                                                    <div 
+                                                                    *ngIf="modalPostLiked == true"
+                                                                    (click)="modalPostLiked=false; unlikeLegacyPost(modalPostID); removeLegacyLike(modalPostID)"                                                                
+                                                                    class="btn btn-large red darken-4">
+                                                                    <i class="material-icons">favorite</i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col s4">
+                                                                    <div 
+                                                                    [routerLink]="['/Legacy']"
+                                                                    [queryParams]="{id: modalPostID}"
+                                                                    class="btn btn-large blue darken-4">
+                                                                    <i class="material-icons">book</i>
+                                                                    View
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col s4">
+                                                                    <div 
+                                                                    *ngIf="modalPostSaved == false"
+                                                                    (click)="modalPostSaved = true; saveLegacy(modalPostID); addLegacyReader(modalPostID);"
+                                                                    class="btn btn-large blue-grey darken-4">
+                                                                    <i class="material-icons">bookmark_border</i>
+                                                                    
+                                                                    </div>
+                                                                    <div 
+                                                                    *ngIf="modalPostSaved == true"
+                                                                    (click)="modalPostSaved = false; unSaveLegacy(modalPostID); removeLegacyReader(modalPostID); "
+                                                                    class="btn btn-large blue-grey darken-4">
+                                                                    <i class="material-icons">bookmark</i>
+                                                                    </div>
+                                                                </div>                                                                                                                                    
+                                                            </div>
+                                                            </div>   
+                                                            <br>                                                     
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                            
+                                        </div>
+                                        </div>
                 
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>  
+                
+
+
+
                             <!-- Image Post Modal -->
                             <!---Start of the image modal section---->
                         <div 
@@ -128,11 +237,11 @@
             <h4  id="aevumTitle">Aevum Posts</h4>
             <div
             class="box2">
-            <div 
-            id="testCardAevum"
-            class="card"
-            *ngFor="let card of aevumActiveList; let i = index;">
-            <!-- <p class="white-text">{{card}}</p> -->
+                <div 
+                id="testCardAevum"
+                class="card"
+                *ngFor="let card of aevumActiveList; let i = index;">
+                     <!-- <p class="white-text">{{card}}</p> -->
                     <div class="space">
                         <div class="card" id="aevumItem">
                             <h4 class="legacyTitle">{{card.title}}</h4>
@@ -140,29 +249,10 @@
                             <img src="{{card.cover}}" class="" id="legacyImg">
                         </div>                        
                     </div>  
-                    </div>
                 </div>
+            </div>
         </div>
-        <div class="row" id="main">
-            <h4  id="menuTitle">Upcoming Aevum</h4>
-            <div
-            class="box2">
-            <div 
-            id="testCardAevum"
-            class="card"
-            *ngFor="let card of aevumUpcomingList; let i = index;">
-            <!-- <p class="white-text">{{card}}</p> -->
-                    <div class="space">
-                        <div class="card" id="userLegacy">
-                            <h4 class="legacyTitle">{{card.title}}</h4>
-                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                            <img src="{{card.cover}}" class="" id="legacyImg">
-                        </div>
-                        
-                    </div>  
-                    </div>
-                </div>
-        </div>
+ 
 
                     <!-- Divider -->
                     <div class="row container">
@@ -174,24 +264,25 @@
                             <h4  id="menuTitle">Legacy Posts</h4>
                             <div
                             class="box2">
-                            <div 
-                            id="testCard"
-                            class="card"
-                            *ngFor="let card of legacyList; let i = index;">
-                            <!-- <p class="white-text">{{card}}</p> -->
-                            <div class="space">
-                            
-                                <div class="card" id="userLegacy">
-                                    <h4 class="legacyTitle">{{card.title}}</h4>
-                                    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                    <img src="{{card.cover}}" class="" id="legacyImg">
+                                <div 
+                                id="testCardAevum"
+                                class="card"
+                                (click)="showLegacyModal(card)"
+                                *ngFor="let card of legacyList; let i = index;">
+                                     <!-- <p class="white-text">{{card}}</p> -->
+                                    <div class="space">
+                                        <div class="card" id="aevumItem">
+                                            <h4 class="legacyTitle">{{card.title}}</h4>
+                                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                            <img src="{{card.cover}}" class="" id="legacyImg">
+                                        </div>                        
+                                    </div>  
                                 </div>
-                                
-                            </div>  
                             </div>
                         </div>
-                        </div>
-                        
+
+            <!-- Computer and Tablet only -->
+            <div class="hide-on-small-only">
                         <!-- Recent Posts -->
                             <!-- Timeline of recent posts from all friends -->
                             <div class="row" id="main">
@@ -229,63 +320,86 @@
                             </div>
                             </div>
 
-      
-                    
-                            <!-- Timeline of recent Image posts from all friends -->
+                        <div class="row" id="main">
+                            <h4  id="menuTitle">Recent Image Posts</h4>
+                            <div
+                            class="box2">
+                            <div 
+                            id="testCard"
+                            class="card"
+                            *ngFor="let card of recentImgs; let i = index;">
+                            <!-- <p class="white-text">{{card}}</p> -->
+                                    <div 
+                                    (click)="showModalDialog(card)"
+                                    class="card" 
+                                    id="userRecentPosts2">
+                                    <div class="card" id="userLongWriting0">
+                                        <br>
+                                        <h5 class="writingTitle">{{card.title}}</h5>
+                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                        <div class="center">
+                                            <img
+                                            *ngIf="card.image != 'https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d'" 
+                                            src="{{card.image}}" class="" id="recentImg2">
+                                        </div>
+                                        <div id="containedTxt">
+                                            <div  id="writingTxt2">{{card.text}}</div>
+                                        </div>
+                                            <br>
+                                            <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
+                                        <p id="writtenUser2"><i>{{card.username}}</i></p>
+                                        <p  id="writingOptions">{{card.date}}</p> 
+                                        </div> 
+                                    </div>   
+                            </div>
+                            <div 
+                            id="testCard"
+                            class="card"
+                            *ngFor="let card of recentImgs; let i = index;">
+                            <!-- <p class="white-text">{{card}}</p> -->
+                                <div class="space">
+                                    <div
+                                    (click)="showModalDialog(card);"
+                                    class="card"
+                                    id="userImgRecent">
+                                    <img src="{{card.image}}" class="" id="legacyImg">
+                                        <h4 class="recentImgTitle">{{card.title}}</h4>
+                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                    </div>
+                                    
+                                </div>  
+                            </div>
+                           </div>
+                        </div>
+                            <!-- Area for Recent Long Writings -->
                             <div class="row" id="main">
-                                <h4  id="menuTitle">Recent Images</h4>
+                                <h4  id="menuTitle">Recent Writings</h4>
                                 <div
-                                class="box">
+                                class="box2">
                                 <div 
-                                id="testCard"
+                                id="WritingCard"
                                 class="card"
-                                *ngFor="let card of recentImgs; let i = index;">
+                                *ngFor="let card of recentWritings; let i = index;">
                                 <!-- <p class="white-text">{{card}}</p> -->
                                     <div 
-                                    (click)="showModalDialog(card);"
+                                    (click)="showModalDialog(card)"
                                     class="card" 
-                                    id="userPosts">
-                                        <h4 class="userPostTitle">{{card.title}}</h4>
+                                    id="userWritingPosts">
+                                    <div class="card" id="userLongWriting">
+                                        <h5 class="writingTitle">{{card.title}}</h5>
                                         <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <img src="{{card.image}}" class="postImg">
-                                        <i class="material-icons hide" id="userPostOptions">more_vert</i>
-                                        <i class="material-icons " id="userPostFav">favorite_border</i>
-                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5>
+                                        <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
+                                        
+                                            <div  id="writingTxt">{{card.text}}</div>
+                                            <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
+                                        <p id="writtenUser"><i>{{card.username}}</i></p>
+                                        <p  id="writingOptions">{{card.date}}</p> 
+                                        </div> 
                                     </div>    
                                 </div>
                             </div>
                             </div>
-                            <!-- Timeline of recent Collages posts from all friends -->
-                            <div class="row" id="main">
-                                <h4  id="menuTitle">Recent Storyboards</h4>
-                                <div
-                                class="box">
-                                <div 
-                                id="collageCard"
-                                class="card"
-                                *ngFor="let card of recentStoryboards; let i = index;">
-                                
-                                <div class="spacing">
-                                    <div 
-                                    (click)="showModalDialog(card);"
-                                    class="card" 
-                                    id="userCollagePosts">
-                                        <h4 class="userPostTitle">{{card.title}}</h4>
-                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <div
-                                            *ngFor="let collageImg of card?.postImgs; let j = index;"
-                                        >
-                                            <img src="{{collageImg}}" class="postCollageImg{{j}} z-depth-5" id="selectedCollage">
-                                        </div>
-                                        <!-- <i class="material-icons hide" id="userPostOptions">more_vert</i>
-                                        <i class="material-icons " id="userPostFav">favorite_border</i>
-                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5> -->
-                                    </div>  
-                                </div>
-                               
-                                </div>
-                            </div>
-                            </div>
+
                             <!-- Timeline of recent Collages posts from all friends -->
                             <div class="row" id="main">
                                 <h4  id="menuTitle">Recent Collages</h4>
@@ -317,143 +431,86 @@
                                 </div>
                             </div>
                             </div>
-
-
-
-                            <div class="row" id="main">
-                                <h4  id="menuTitle">Recent Writings</h4>
-                                <div
-                                class="box2">
-                                <div 
-                                id="WritingCard"
-                                class="card"
-                                *ngFor="let card of recentWritings; let i = index;">
-                                <!-- <p class="white-text">{{card}}</p> -->
-                                    <div 
-                                    (click)="showModalDialog(card)"
-                                    class="card" 
-                                    id="userWritingPosts">
-                                    <div class="card" id="userLongWriting">
-                                        <h5 class="writingTitle">{{card.title}}</h5>
-                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
-                                     
-                                            <div  id="writingTxt">{{card.text}}</div>
-                                            <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
-                                        <p id="writtenUser"><i>{{card.username}}</i></p>
-                                        <p  id="writingOptions">{{card.date}}</p> 
-                                        </div> 
-                                    </div>    
-                                </div>
-                            </div>
-                            </div>
-                            <div class="row" id="main">
-                                <div
-                                class="box">
-                                <div 
-                                id="testCard"
-                                class="card"
-                                *ngFor="let card of postColC; let i = index;">
-                                <!-- <p class="white-text">{{card}}</p> -->
-                                    <div 
-                                    (click)="showModalDialog(card)"
-                                    class="card" 
-                                    id="userPosts">
-                                        <h4 class="userPostTitle">{{card.title}}</h4>
-                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <img src="{{card.image}}" class="postImg">
-                                        <i class="material-icons hide" id="userPostOptions">more_vert</i>
-                                        <i class="material-icons " id="userPostFav">favorite_border</i>
-                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5>
-                                    </div>    
-                                </div>
-                            </div>
-                            </div>
                     
                         <!-- Divider -->
                         <div class="row hide container">
                             <hr>
                         </div>
                     
-                        <!-- Recent Posts -->
-                            <!-- Timeline of recent posts from all friends -->
-                            <div class="row hide" id="main">
-                                <h4  id="menuTitle">Recent Posts</h4>
-                                <div
-                                class="box2">
-                                <div 
-                                id="testCard"
-                                class="card"
-                                *ngFor="let card of testList; let i = index;">
-                                <!-- <p class="white-text">{{card}}</p> -->
-                                    <div class="card" id="userPosts">
-                                        <h4 class="userPostTitle">{{card.title}}</h4>
-                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <img src="{{card.image}}" class="postImg">
-                                        <i class="material-icons " id="userPostOptions">more_vert</i>
-                                        <i class="material-icons " id="userPostFav">favorite</i>
-                                        <h5 class="white-text" id="userLikes">10</h5>
-                                    </div>    
-                                </div>
-                            </div>
-                            </div>
-                    
-                        <!-- Divider -->
-                        <div class="row container">
-                            <hr>
-                        </div>
-                    
-
-                    
-                    <!-- Recent Writings (Legacy and more) -->
-                    <!-- Timeline of recent posts from all friends -->
-                    <div class="row hide" id="main">
-                        <h4 id="menuTitle">Writings</h4>
                         <div
                         class="box">
                         <div 
                         id="testCard"
                         class="card"
-                        *ngFor="let card of WritingList; let i = index;">
+                        *ngFor="let card of recentPosts; let i = index;">
                         <!-- <p class="white-text">{{card}}</p> -->
-                            <div class="card" id="userWriting">
-                                <h5 class="writingTitle">{{card.title}}</h5>
-                                <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                <!-- <img src="{{card.image}}" class="" id="legacyImg"> -->
-                                <div  id="legacyTxt">{{card.sample}}</div>
-                                <img src="../../assets/Ruimel.png" id="wprofileImg" alt="">
-                                <p id="writtenUser"><i>{{card.username}}</i></p>
-                                <p  id="writingOptions">{{card.date}}</p>
-                            </div>    
+                                <div 
+                                (click)="showModalDialog(card)"
+                                class="card" 
+                                id="userRecentPosts2">
+                                <div class="card" id="userLongWriting2">
+                                    <br>
+                                    <h5 class="writingTitle">{{card.title}}</h5>
+                                    <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                                    <div class="center">
+                                        <img
+                                        *ngIf="card.image != 'https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d'" 
+                                        src="{{card.image}}" class="" id="recentImg">
+                                    </div>
+                                    <div id="containedTxt">
+                                        <div  id="writingTxt2">{{card.text}}</div>
+                                    </div>
+                                        <br>
+                                        <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
+                                    <p id="writtenUser2"><i>{{card.username}}</i></p>
+                                    <p  id="writingOptions">{{card.date}}</p> 
+                                    </div> 
+                                </div>   
                         </div>
-                    </div>
-                    </div>
-        
+                    </div>                  
+            </div>
                     
-                    <!-- Recent Writings (Legacy and more) -->
-                    <!-- Timeline of recent posts from all friends -->
-                    <div class="row hide" id="main">
-                        <h4 id="menuTitle">NFTs ( Coming Soon )</h4>
-                        <div
-                        class="box2">
+            <!-- Divider -->
+            <div class="row container">
+                <hr>
+            </div>
+            
+            <!-- Mobile Posts -->
+            <div class="row hide-on-med-and-up">
+                <div
+                class="mobileBox">
+                <div 
+                id="testCard"
+                class="card"
+                *ngFor="let card of recentPosts; let i = index;">
+                <!-- <p class="white-text">{{card}}</p> -->
                         <div 
-                        id="testCard"
-                        class="card"
-                        *ngFor="let card of NFT; let i = index;">
-                        <!-- <p class="white-text">{{card}}</p> -->
-                            <div class="card modal-trigger"  data-target="modal1" id="userLegacy" href="#modal1">
-                                <h4 class="legacyTitle">{{card.title}}</h4>
-                                <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                <img src="{{card.image}}" class="" id="legacyImg">
-                                <i class="material-icons " id="legacyOptions">more_vert</i>
-                            </div>    
-                        </div>
-                    </div>
-                    </div>
-                
-                
-                    
-                    </div>
+                        (click)="showModalDialog(card)"
+                        class="card" 
+                        id="userRecentPosts2">
+                        <div class="card" id="userLongWriting2">
+                            <br>
+                            <h5 class="writingTitle">{{card.title}}</h5>
+                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                            <div class="center">
+                                <img
+                                *ngIf="card.image != 'https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d'" 
+                                src="{{card.image}}" class="" id="recentImg">
+                            </div>
+                            <div id="containedTxt">
+                                <div  id="writingTxt2">{{card.text}}</div>
+                            </div>
+                                <br>
+                                <!-- <img src="../../assets/Ruimel.png" id="wprofileImg" alt=""> -->
+                            <p id="writtenUser2"><i>{{card.username}}</i></p>
+                            <p  id="writingOptions">{{card.date}}</p> 
+                            </div> 
+                        </div>   
+                </div>
+                </div> 
+            </div>
+        
+            </div>
                 
 
 <!-- End of Tablet/UI -->

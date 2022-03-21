@@ -1,0 +1,168 @@
+/* Title of the new writing */
+#title{
+    color: rgb(211, 145, 22);
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 15px;
+}
+
+/* Save Button in topNav */
+#saveBtn{
+    color: rgb(211, 145, 22);
+    font-size: 30px;
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+
+/* Area for start message row */
+#startMsgRow{
+    position: fixed;
+    top: 350px;
+    width: 100%;
+}
+
+/* Font for start Message */
+#startMsg{
+    color: rgba(147, 171, 238, 0.068);
+    font-family:'Allura', cursive;
+    cursor:auto;
+
+}
+
+#title{
+    background-color: rgb(27, 27, 27);
+    border: solid rgb(27, 27, 27) 2px;
+    border-radius: 15px;
+}
+
+#writtenPassage{
+    color: rgba(126, 140, 212, 0.89);
+    white-space: pre-wrap;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30px;
+    height: 650px;
+    max-height: 650px;
+    margin:0 auto;
+    background-color: rgba(0, 0, 0, 0.123);
+    overflow: scroll;
+}
+
+#textRow{
+    position: fixed;
+    top: 15%;
+    width: 100%;
+}
+
+
+/* Placeholder  */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(126, 140, 212);
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(126, 140, 212);
+  }
+
+
+  /* Submission Button */
+  #submitBtn{
+      background-color: rgb(228, 142, 36);
+  }
+
+
+
+#menuBtn{
+    background-color:rgb(15, 19, 29);
+    border: solid rgb(65, 75, 109) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#menuBtn:hover{
+    cursor: pointer;
+    background-color:rgb(28, 35, 53);
+    border: solid rgb(79, 91, 133) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    padding-left: 30px;
+    padding-right:30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#subMenuBtn{
+    background-color:rgb(15, 19, 29);
+    border: solid rgb(65, 75, 109) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#subMenuBtn:hover{
+    cursor: pointer;
+    background-color:rgb(28, 35, 53);
+    border: solid rgb(79, 91, 133) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 30px;
+    padding-right:30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Area for subMenu */
+.subMenu{
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+}
+
+/* Submenu button icon */
+#subMenuBtnIcon{
+    font-size: 30px;
+}
+
+  /* For animations */
+  @-webkit-keyframes slideIn {
+    0% {
+      transform: translateX(-900px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @-moz-keyframes slideIn {
+    0% {
+      transform: translateX(-900px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-900px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
