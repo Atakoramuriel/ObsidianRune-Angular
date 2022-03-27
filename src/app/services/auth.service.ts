@@ -4,6 +4,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {AngularFireAuth} from '@angular/fire/compat/auth'
 import { Router } from '@angular/router';
 import * as auth from 'firebase/auth';
+import { Post } from '../models/post';
+import { Writing } from '../models/Writing';
+import { timestamp } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +15,11 @@ export class AuthService {
 
 
   userData: any;
+
+  //More Variables
+    // Variable to store shortLink from api response
+    
+
   constructor(
     public fireService: AngularFirestore,
     public firebaseAuth: AngularFireAuth,
@@ -31,6 +39,8 @@ export class AuthService {
         }
       });
   }
+
+
   
     
    // Returns true when user is looged in and email is verified
@@ -61,13 +71,6 @@ export class AuthService {
       localStorage.removeItem('user');
       this.router.navigate(['Login']);
     });
-  }
-
-    
-
-  //New Post 
-  newPost(Post: unknown){
-    return this.fireService.collection("posts").add(Post);
   }
 
   
@@ -136,6 +139,93 @@ export class AuthService {
      })
   }
 
+  //officially upload post
+  newPost(data: Post, postID: string){
+    return this.fireService.collection("posts").doc(postID).set(data)
+    .then(()=>{
+      console.log("Post Successful");
+    })
+    .catch((error) => {
+        console.log("Post Err: " + error);
+    })
+  }
+
+  //Officially upload Legacy
+  newLegacy(data: Post){
+    return this.fireService.collection("Legacy").add(data)
+    .then(()=>{
+      console.log("New Legacy Post Successful");
+    })
+    .catch((error) => {
+        console.log("Post Err: " + error);
+    })
+  }
+  
+  //Save Writing Progress
+  saveWritingProgress(data: Writing, userKey: string, postID: string){
+
+    return this.fireService.collection('users').doc(userKey).collection("PendingWriting").doc(postID).set(data)
+    .then(() => {
+      console.log("Progress Saved")
+    })
+    .catch((error)=>{
+      console.log("Error Saving Writing Progress ->" + error);
+    })
+  }
+
+  deleteWritingProgress(userKey: string, postID: string)
+  {
+    return this.fireService.collection("users").doc(userKey).collection("PendingWriting").doc(postID).delete()
+    .then(()=>{
+      console.log("Successfully Deleted old saved writing progress");
+    })
+    .catch((error) => {
+      console.log("Unable to delete old Writing Saved in progress -> " + error);
+    })
+  }
+
+  fetchWritingProgress(userKey: string)
+  {
+    return this.fireService.collection("users").doc(userKey).collection("PendingWriting").snapshotChanges();
+  }
+
+
+  //Tag User 
+  tagUser(userKey: string, tagUserKey: string, postID: string){
+    return this.fireService.collection("users").doc(tagUserKey).collection("Tagged").doc(postID)
+    .set({
+      postID: postID,
+      type: "Writing",
+      from: userKey
+    });
+  }
+  
+
+  //Notify User
+  notifyUser(userKey: string ,destUserKey: string, postID: string)
+  {
+    return this.fireService.collection("users").doc(destUserKey).collection("Notifications").add({
+      type: "WRITING",
+      date: new Date(),
+      postID: postID,
+      userID: userKey,
+      timestamp: timestamp.toString
+    })
+  }
+
+  generateID() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i <= 25; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
+  }
+  
+  
+
+  //save and unsave legacy posts
   saveLegacyPost(legacyID: string, userID: string){
      return this.fireService.collection("users").doc(userID).collection("savedLegacys").doc(legacyID).set({
        'LegacyID':legacyID

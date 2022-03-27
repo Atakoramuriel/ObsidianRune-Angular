@@ -24,7 +24,7 @@
 
 /* Font for start Message */
 #startMsg{
-    color: rgba(147, 171, 238, 0.068);
+    color: rgba(147, 171, 238, 0.342);
     font-family:'Allura', cursive;
     cursor:auto;
 
@@ -98,10 +98,10 @@
     position: fixed;
     bottom: 10%;
     right: 5%;
-    padding-left: 30px;
-    padding-right:30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right:40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 #subMenuBtn{
     background-color:rgb(15, 19, 29);
@@ -120,7 +120,7 @@
     background-color:rgb(28, 35, 53);
     border: solid rgb(79, 91, 133) 2px;
     border-radius: 10px;
-    color: white;
+    color: rgb(107, 159, 255);
     font-size: 25px;
     font-family:'Times New Roman', Times, serif;
     padding-left: 30px;
@@ -129,11 +129,23 @@
     padding-bottom: 10px;
 }
 
+
+#mobileMenuBtn{
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: 2;
+}
+
 /* Area for subMenu */
 .subMenu{
     position: absolute;
     bottom: 20%;
     right: 5%;
+    -webkit-animation: slideIn 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slideIn 0.5s forwards;
+    animation-delay: 0s;
 }
 
 /* Submenu button icon */
@@ -144,7 +156,7 @@
   /* For animations */
   @-webkit-keyframes slideIn {
     0% {
-      transform: translateX(-900px);
+      transform: translateX(900px);
     }
     100% {
       transform: translateX(0);
@@ -152,7 +164,7 @@
   }
   @-moz-keyframes slideIn {
     0% {
-      transform: translateX(-900px);
+      transform: translateX(900px);
     }
     100% {
       transform: translateX(0);
@@ -160,9 +172,46 @@
   }
   @keyframes slideIn {
     0% {
-      transform: translateX(-900px);
+      transform: translateX(900px);
     }
     100% {
       transform: translateX(0);
     }
+  }
+
+
+  /* For side menu */
+  .prevMenu{
+      background-color: rgba(0, 0, 0, 0.356);
+      width: 20%;
+      height: 100%;
+      position: fixed;
+      top: 16%;
+      z-index: 2;
+  }
+
+  #closePrevBtn{
+      cursor: pointer;
+  }
+
+  #prevCard{
+      background-color: rgba(18, 18, 19, 0.582);
+      padding: 3px;
+  }
+  #prevCard:hover{
+      cursor: pointer;
+      background-color: rgba(99, 99, 102, 0.582);
+      padding: 3px;
+  }
+
+  #prevCardTitle{
+      color: rgb(173, 173, 173);
+      font-size: 20px;
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      padding-left: 15%;
+  }
+
+  .box{
+      height: 75%;
+      overflow: auto;
   }
