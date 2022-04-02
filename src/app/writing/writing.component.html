@@ -4,14 +4,41 @@
 <!-- Sub navBar -->
     <div class="row black" id="subNav">
         <div class="">
-            <div class="col s12 m4 ">
-                <br>
+            <div class="col m4">
+                <div class="row">
+                    <div class="col s2 offset-s1"> 
+                        <img src="{{userProfileImg}}" style="width: 80%;" alt="" class="circle"> 
+                    </div>
+                    <div class="col s6"> 
+                        <h6 class="username">{{username}}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m4">
                 <input 
                 [(ngModel)]="newTitle"
                 id="title"
                 placeholder="Title. . ." 
                 type="text" 
                 class="validate">
+            </div>
+            <div class="col m3 ">
+                <div class="row">
+                    <div class="col s1"></div>
+                    <div class="col s2">
+                        <h5 class="saveBtn" (click)="savedProgress=true; menuCall('SAVE')">Save</h5>
+                    </div>
+                    <div class="col s2">
+                        <h5 *ngIf="!savedProgress" class="saveBtn" style="color: rgb(61, 123, 255);"><i class="material-icons" style="font-size: 30px;">bookmark_border</i></h5> 
+                        <h5 *ngIf="savedProgress" class=" savedBtn"><i class="material-icons" style="font-size: 30px;">bookmark</i></h5> 
+                    </div>
+                    <div class="col s2">
+                        <h5 class="postBtn" (click)="displayPostMenu=!displayPostMenu;">Post</h5>
+                    </div>
+                    <div class="col s2">
+                        <h5 class=""><i class="material-icons " style="font-size: 30px; color: rgb(61, 123, 255);">send</i></h5> 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -70,6 +97,27 @@
             <!-- Area for button -->
             <div 
              (click)="menuCall(btn.param)"
+             class="center"
+             id="subMenuBtn">
+                <h5><i>{{btn.name}}</i> &nbsp;<i class="material-icons" id="subMenuBtnIcon">{{btn.icon}}</i></h5>
+            </div> <br>
+        </li> <br>
+
+    </ul>
+</div>
+<div 
+ *ngIf="displayPostMenu"
+ class="subMenu">
+ <div class="row">
+     <div class="">
+         <h5 class="" style="color: rgb(126, 140, 212);"><i>Select where to Post</i></h5>
+     </div>
+ </div>
+    <ul>
+        <li *ngFor="let btn of postMenu; let i = index;"> 
+            <!-- Area for button -->
+            <div 
+             (click)="postMenuCall(btn.param)"
              class="center"
              id="subMenuBtn">
                 <h5><i>{{btn.name}}</i> &nbsp;<i class="material-icons" id="subMenuBtnIcon">{{btn.icon}}</i></h5>

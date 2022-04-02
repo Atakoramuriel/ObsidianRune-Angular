@@ -59,6 +59,8 @@ export class WritingComponent implements OnInit {
   startMsg: string ="Begin writing to your heart's content"
   newTitle: string = "";
   writtenPassage: string= "";
+  imageCover:string = "";
+
 
 //Show Previous Menu
    prevWriting: boolean = false;
@@ -66,15 +68,27 @@ export class WritingComponent implements OnInit {
 
   // Submenu buttons
   displaySubMenu: boolean = false;
+  displayPostMenu: boolean = false;
   subMenu = [
-    {name: "Tag Users", icon: "account_circle", param: "TAG"},
-    {name: "Add Img Cover", icon: "add_a_photo", param: "IMG_COVER"},
+    // {name: "Tag Users", icon: "account_circle", param: "TAG"},
+    // {name: "Add Img Cover", icon: "add_a_photo", param: "IMG_COVER"},
     {name: "Save Progress", icon: "book", param: "SAVE"},
     {name: "Submit Post", icon: "send", param: "POST"},
     {name: "Delete Post", icon: "clear", param: "DELETE"},
   ]
+
+  postMenu = [
+    {name: "Legacy", icon: "book", param: "LEGACY"},
+    {name: "Obsidian Rune", icon: "brightness_2", param: "OBSIDIAN"},
+    // {name: "Cancel", icon: "close", param: "CANCEL"},
+    
+  ]
   tempID: string = "";
+  savedProgress: boolean = false;
   timeSaved: string = "";
+  timeStamp: string = new Date() as unknown as string;
+  username: string = "";
+  userProfileImg: string = "";
 
   //On Initialization
   ngOnInit(): void {
@@ -88,7 +102,8 @@ export class WritingComponent implements OnInit {
     var currentdate = new Date().toLocaleString();
   
     this.timeSaved = currentdate
-
+    this.username = this.userData['displayName'] as string;
+    this.userProfileImg = this.userData['photoURL'] as string;
   }
 
   //After initialization (Listener?)
@@ -151,7 +166,7 @@ export class WritingComponent implements OnInit {
   }
 
   //save the progress but not working 
-  saveProgress(){
+  savePost(){
     if(this.tempID == ""){
       this.tempID = this.AuthService.generateID();
       
@@ -160,6 +175,8 @@ export class WritingComponent implements OnInit {
         text: this.writtenPassage,
         userkey: this.userData['uid'],
         date: this.timeSaved,
+        type: this.getCount(this.writtenPassage) < 1000 ? "standard" : "Writing",
+        timestamp: this.timeStamp,
 
 
       } as Writing
@@ -178,7 +195,46 @@ export class WritingComponent implements OnInit {
     }
     // this.AuthService.saveWritingProgress()
   }
+  //save the progress but not working 
+  saveProgress(){
+    //only save the post if the title and text are not empty
+    if(this.validate()){
+      if(this.tempID == ""){
+        this.tempID = this.AuthService.generateID();
+        
+        const postData = {
+          title: this.newTitle,
+          text: this.writtenPassage,
+          userkey: this.userData['uid'],
+          date: this.timeSaved,
+  
+  
+        } as Writing
+        //Call to the Function 
+        this.AuthService.saveWritingProgress(postData, this.userData['uid'], this.tempID)
+      }else{
+        const postData = {
+          title: this.newTitle,
+          text: this.writtenPassage,
+          userkey: this.userData['uid'],
+          date: this.timeSaved,
+        
+        } as Writing
+        this.AuthService.saveWritingProgress(postData, this.userData['uid'], this.tempID)
+        M.toast({html: "Progress Saved"});
+      }
+    }
+ 
+    // this.AuthService.saveWritingProgress()
+  }
 
+  // Get the number of words in any string
+  getCount(value: string){
+    value = value.replace(/(^\s*)|(\s*$)/gi,"");
+    value = value.replace(/[ ]{2,}/gi," ");
+    value = value.replace(/\n /,"\n");
+    return value.split(' ').length;
+  }
   //Delete The writing progress
   deleteProgress(){
     if(this.tempID != ""){
@@ -204,7 +260,9 @@ export class WritingComponent implements OnInit {
         
         break;
       case "POST":
-        alert("Submit Post called");
+        this.displaySubMenu = false;
+        this.displayPostMenu = true;
+
         break;
       case "DELETE":
         //Clean up everything
@@ -213,6 +271,39 @@ export class WritingComponent implements OnInit {
         //Delete Pending
         this.deleteProgress()
         break;
+    }
+  }
+  //After post menu button clicked
+  postMenuCall(call: string){
+    switch(call)
+    {
+      case "LEGACY":
+        //bring up legacy list 
+        this.validate();
+        break;
+      case "OBSIDIAN":
+        //post to obsidian rune main
+        this.validate();
+      break;
+      case "CANCEL":
+        //bring up the prior menu 
+        this.displayPostMenu = false;
+        this.displaySubMenu = true;
+        
+        break;
+   
+    }
+  }
+
+  validate(){
+    if(this.newTitle == null || this.newTitle == ""){
+      alert("Must fill in Title");
+      return false;
+    }else if(this.writtenPassage == null || this.writtenPassage == ""){
+      alert("You have to write something before you post... ");
+      return false;
+    }else {
+      return true;
     }
   }
 

@@ -64,6 +64,7 @@
     color: rgb(126, 140, 212);
   }
 
+  
 
   /* Submission Button */
   #submitBtn{
@@ -189,6 +190,34 @@
       top: 16%;
       z-index: 2;
   }
+
+.username{
+    color: rgb(228, 142, 36);
+    font-size: 35px;
+    font-family:'allura', cursive;
+    position: absolute;
+    z-index: 2;
+}
+
+ .saveBtn{
+    color: white;
+ }
+ .postBtn{
+    color: white;
+ }
+ 
+ .saveBtn:hover{
+    cursor: pointer;
+    color: rgb(228, 142, 36);
+ }
+
+ .postBtn:hover{
+    cursor: pointer;
+    color: rgb(228, 142, 36);
+ }
+ .savedBtn{
+     color: rgb(61, 139, 255);
+ }
 
   #closePrevBtn{
       cursor: pointer;
