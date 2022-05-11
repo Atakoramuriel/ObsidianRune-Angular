@@ -604,9 +604,58 @@ h4{
     color: coral;
 }
 
+/* For the service menu */
+.serviceMenu{
+    position: fixed;
+    background-color: #0f0f12f1;
+    right: 5%;
+    bottom: 0%;
+    z-index: 3;
+    width: 20%;
 
+}
 
+#serviceList{
+    position: fixed;
+    top: 19%;
+    max-height: 600px;
+    overflow: auto;
+    animation: 1s ease-out 0s 1 slideInFromRight;
 
+}
+
+#serviceMenuBtn{
+    background-color: rgb(15, 19, 31);
+    border: solid rgb(126, 140, 212) 1px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#serviceMenuBtn:hover{
+    cursor: pointer;
+    background-color: rgb(15, 28, 71);
+    border: solid rgb(126, 140, 212) 1px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+/* For Service Card at the bottom right of obsidina  */
+.serviceCard{
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    z-index: 3;
+}
+
+#serviceBtn{
+    background-color: rgb(15, 19, 31);
+    border: solid rgb(126, 140, 212) 1px;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+   
+}
 
 /*Transitionn Animations for NewPost*/
 /* Enter and leave animations can use different */
@@ -622,3 +671,12 @@ h4{
   transform: translateX(10px);
   opacity: 0;
 }
+
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(200px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }

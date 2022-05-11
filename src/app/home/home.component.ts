@@ -12,6 +12,8 @@ import { Aevum } from '../models/Aevum';
 import * as M from 'materialize-css';
 import { Timestamp } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {ActivatedRoute, Params, Router} from '@angular/router'; // import router from angular router
+
 
 @Component({
   selector: 'app-home',
@@ -519,6 +521,7 @@ imagePool: [string] = [""];
 
   //Constructor 
   constructor(
+  private router: Router,
   public AuthService: AuthService,
   private userService: FirebaseService,
   private firebaseAuth: AngularFireAuth
@@ -632,7 +635,6 @@ imagePool: [string] = [""];
         //add legacies to array
         if(dataUpload['privacy'] == "public"){
           this.legacyList.push(dataUpload);
-
         }
        
       })
@@ -711,6 +713,18 @@ imagePool: [string] = [""];
     }
   }
  
+
+  navigateLegacy(card:any){
+    //Navigate forwarad to legacy page
+    const queryParams: Params = { id: card['id'] };
+    this.router.navigate(['/Legacy'],
+    {
+      queryParams: queryParams
+
+    });
+
+  }
+
   showLegacyModal(card:any){
     //Reset the Modal Variables
     this.modalPostLiked = false;

@@ -83,6 +83,9 @@ export class AuthService {
   getLegacies(){
     return this.fireService.collection("Legacy", ref => ref.orderBy('updated','desc')).snapshotChanges();
   }
+  getUserLegacies(userID: string){
+    return this.fireService.collection("Legacy",ref => ref.where("author","==",userID)).snapshotChanges();
+  }
 
   getAevum(){
     return this.fireService.collection("Aevum", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
@@ -141,7 +144,17 @@ export class AuthService {
 
   //officially upload post
   newPost(data: Post, postID: string){
-    return this.fireService.collection("posts").doc(postID).set(data)
+    return this.fireService.collection("posts").add(data)
+    .then(()=>{
+      console.log("Post Successful");
+    })
+    .catch((error) => {
+        console.log("Post Err: " + error);
+    })
+  }
+  //officially upload post
+  newLegacyPost(data: Post, legacyID: string){
+    return this.fireService.collection("Legacy").doc(legacyID).collection("posts").add(data)
     .then(()=>{
       console.log("Post Successful");
     })

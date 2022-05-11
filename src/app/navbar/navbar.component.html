@@ -182,7 +182,36 @@
        </div>
     <!--End of Div for Nav/SideNav-->
 
+       <!-- Fixed Menu of service buttons -->
+       <div 
+       *ngIf="serviceMenu"
+       class="serviceMenu">
+            <div id="serviceList">
+                <div
+                *ngFor="let card of serviceCards; let i = index;">
+                >
+                <div class="card" id="serviceMenuBtn">
+                    <div class="card-content white-text">
+                      <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>
+                      <div class="container"><hr class="solid"></div>
+                      <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                    </div>        
+                  </div>
+                </div>
+            </div>
+       </div>
 
+
+    <!-- Area for Fixed button at the bottom right of page -->
+    <div  
+    *ngIf="!serviceMenu"
+    class="serviceCard ">
+        <div 
+        (click)="serviceMenu=!serviceMenu;"
+        class="btn btn-large  pulse" id="serviceBtn">
+            POST  <i class="material-icons large right">send</i>
+        </div>
+    </div>
 
 
 

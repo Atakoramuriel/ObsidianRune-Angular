@@ -22,6 +22,34 @@ export class NavbarComponent implements OnInit {
   notificationMenu:boolean = false;
   settingsMenu:boolean = false;
 
+  serviceMenu:boolean = false;
+  serviceCards = [
+    {
+      title: "Standard Post",
+      desc: "Title and some text. Quick and to the point.",
+      icon: "create"
+    },
+    {
+      title: "Written Passage",
+      desc: "Write to your hearts content",
+      icon: "book"
+    },
+    {
+      title: "Image Collection",
+      desc: "Great for storyboards or collages",
+      icon: "image"
+    },
+    {
+      title: "Private Blog",
+      desc: "Collection of private thoughts or rants only to be viewed by you",
+      icon: "remove_red_eye"
+    },
+    {
+      title: "Cancel",
+      desc: "Close Post Menu",
+      icon: "cancel"
+    }
+  ]
 
   constructor(
     public firebaseService: FirebaseService,

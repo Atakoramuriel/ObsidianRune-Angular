@@ -13,9 +13,11 @@ import { PostsComponent } from './components/posts/posts.component';
 import {PostsService} from './services/posts.service'
 
 // Firebase services + enviorment module
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+// import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 
 import { environment } from '../environments/environment';
 import { FormsModule } from '@angular/forms';
@@ -53,7 +55,7 @@ import { WritingComponent } from './writing/writing.component';
     BrowserAnimationsModule,
     FormsModule,
     // RouterModule.forRoot(appRoutes),
-
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,

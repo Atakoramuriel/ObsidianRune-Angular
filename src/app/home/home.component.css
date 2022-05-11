@@ -343,8 +343,7 @@ width: 150px;
 }
 .space{
     padding-left: 5%;
-    padding-right: 5%;
-    
+    padding-right: 5%;   
 }
 
 
@@ -804,7 +803,6 @@ ul#menu li {
 /* Modal styling */
 #modal1{
     animation: 1s ease-out 0s 1 slideInFromBelow;
-
     background-color:#161A23;
     border: solid #535D80 2px;
     width: 100%;
@@ -1086,3 +1084,6 @@ ul#menu li {
   #favoriteIcon:hover{
     cursor: pointer;
   }
+
+
+

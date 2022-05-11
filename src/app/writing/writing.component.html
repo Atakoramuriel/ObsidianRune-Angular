@@ -2,12 +2,12 @@
 <app-navbar></app-navbar>
 
 <!-- Sub navBar -->
-    <div class="row black" id="subNav">
+    <div *ngIf="displayNavTool" class="row black" id="subNav">
         <div class="">
-            <div class="col m4">
+            <div class="col m3">
                 <div class="row">
                     <div class="col s2 offset-s1"> 
-                        <img src="{{userProfileImg}}" style="width: 80%;" alt="" class="circle"> 
+                        <img src="{{userProfileImg}}" style="width: 100%;" alt="" class="circle"> 
                     </div>
                     <div class="col s6"> 
                         <h6 class="username">{{username}}</h6>
@@ -22,9 +22,11 @@
                 type="text" 
                 class="validate">
             </div>
-            <div class="col m3 ">
-                <div class="row">
-                    <div class="col s1"></div>
+            <div class="col m3 offset-m1">
+                <div class="row ">
+                    <div class="">
+
+                   
                     <div class="col s2">
                         <h5 class="saveBtn" (click)="savedProgress=true; menuCall('SAVE')">Save</h5>
                     </div>
@@ -38,6 +40,13 @@
                     <div class="col s2">
                         <h5 class=""><i class="material-icons " style="font-size: 30px; color: rgb(61, 123, 255);">send</i></h5> 
                     </div>
+                    <div class="col s2">
+                        <h5 class="postBtn" (click)="menuCall('DELETE')">Delete</h5>
+                    </div>
+                    <div class="col s2">
+                     <h5 class="right"><i class="material-icons " style="font-size: 30px; color: rgb(61, 123, 255);">close</i></h5> 
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -81,7 +90,7 @@
 
 <!-- Area for floatin action button -->
 <div 
- (click)="displaySubMenu=!displaySubMenu;"
+ (click)="displayNavTool=!displayNavTool; adjustHeight();"
  class="hide-on-small-only"
  id="menuBtn">
         <h6 class="white-text">MENU &nbsp;&nbsp;<i class="material-icons" >dehaze</i></h6>
@@ -126,6 +135,181 @@
 
     </ul>
 </div>
+
+<!-- Area for the display of legacies -->
+<div 
+ *ngIf="displayLegacyList;"
+ class="subMenu">
+ <div class="row" *ngIf="legacyList.length == 0">
+     <div class="">
+         <h5 class="" style="color: rgb(126, 140, 212);"><i>{{legacyListTxt}}</i></h5>
+     </div>
+ </div>
+ <div
+ class="box2">
+     <div 
+     id="testCardAevum"
+     class="card"
+     *ngFor="let card of legacyList; let i = index;">
+         <div class="space">
+             <div 
+             (click)="saveLegacy(card.id)"
+             class="card" 
+             id="aevumItem">
+                 <h4 class="legacyTitle">{{card.title}}</h4>
+                 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                 <img src="{{card.cover}}" class="" id="legacyImg">
+             </div>                        
+         </div>  
+     </div>
+ </div>
+ <div
+ class="box2">
+     <div 
+     id="testCardAevum"
+     class="card">
+         <div class="space">
+             <div 
+             (click)="displayLegacyList=false; displayModal=true;"
+             class="card" 
+             id="aevumItem">
+                 <h5 class="legacyTitle">New Legacy?</h5>
+                 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                 <img src="https://obsidianrune.com/static/img/Ruimel.da20829.png" class="" id="legacyImg">
+             </div>                        
+         </div>  
+     </div>
+ </div>
+</div>
+
+
+<!-- POP UP MODAL TO CREATE NEW LEGACY -->
+<div class="row" *ngIf="displayModal">
+    <div class="center">
+        <div class="container">
+            <div id="modal" (click)="testClose();">
+                <div class="col s6 offset-s3">
+                    <div class="card" id="newLegacyCard">
+                        <div id="legacyModal1" (click)="displayModal=true;">
+                            <div 
+                            (click)="preSelection=true"
+                            class="modal-content">
+                            <!-- This is the image card below -->
+                                <div
+                                class="card"
+                                id="userModalLegacy">
+                                <!-- Area for Image Upload -->
+                                <div class="image-upload">
+                                    <label for="file-input" id="imgFileInput">
+                                        <span id="newLegacyHeaderTxt">Change Cover Image</span>
+                                        <img *ngIf="!imageUploaded" src="{{defaultImgCover}}" (change)="upload($event);" id="legacyModalImg2">  
+                                        <img *ngIf="imageUploaded" [src]="downloadLink" (change)="upload($event);" id="legacyModalImg2">  
+                                    </label>
+ 
+                                    <input id="file-input" (change)="upload($event);" accept="*.png.jpg" type="file">
+                                </div>
+                         
+                                <div class="container" style="padding-top: 2%;">
+                                    <h6 id="errHeader" *ngIf="showErrMsg"><i>Please Fill out all fields</i></h6>
+                                    <h6 id="subHeader" *ngIf="!showErrMsg"><i>Enter Legacy Info</i></h6>
+                                    <div class="container">
+                                        <hr class="solid">
+                                    </div>
+                                    <input 
+                                    maxlength="50"
+                                    [(ngModel)]="newLegacyTitle"
+                                    id="newLegacytitle"
+                                    placeholder="Enter New Legacy Title. . ." 
+                                    type="text" 
+                                    class="validate">
+                                    <textarea
+                                    maxlength="1000"
+                                    [(ngModel)]="newLegacyDescription"
+                                    placeholder="Enter Description. . ."
+                                    id="newLegacyDescription" 
+                                    class="materialize-textarea"></textarea>
+                                    
+                                    <!-- Additional Spacing Required -->
+                                    <br> <br>
+
+                                    <!-- Area for privacy Settings -->
+                                    <span id="privacySpan" (click)="swapPrivacy();"><i class="material-icons">remove_red_eye</i> &nbsp; <i>Legacy Privacy Settings: <b>{{privacy}}</b></i></span>
+
+                                    <!-- Additional Spacing Required -->
+                                    <br> <br>
+                                    <!-- Area for submit button -->
+                                    <button (click)="newLegacy();" class="btn btn-large" style="background-color: rgb(143, 92, 29);">Save Legacy<i class="material-icons white-text">&nbsp; send</i></button>
+
+                                </div>
+                                </div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <!-- //Temperarily hide in order to test -->
+                    <div class="card hide z-depth-5" id="newLegacyModal">
+                        <div class="card-content white-text">
+                            <!-- Area for the new title to be entered -->
+                                <div class="container">
+                                    <h4 id="newLegacyHeader"><b>New Legacy</b></h4>
+                                    <span class="card-title">  
+                                        <input 
+                                        maxlength="50"
+                                        [(ngModel)]="newLegacyTitle"
+                                        id="title"
+                                        placeholder="Enter New Legacy Title. . ." 
+                                        type="text" 
+                                        class="validate">
+                                    </span>
+                                </div>
+                            <!-- Area for entering Description -->
+                            <textarea
+                            maxlength="1000"
+                            [(ngModel)]="newLegacyDescription"
+                            placeholder="Enter Description. . ."
+                            id="newLegacyDescription" 
+                            class="materialize-textarea"></textarea>
+                          </div>
+
+                          <!-- Area for the two buttons -->
+                          <div class="row">
+                              <div class="container ">
+                                  <div class="col s6">
+                                    <div class="file-field input-field btn btn-large blue darken-4" id="fileBtn">
+                                        <button  id="btn"><h6 class="white-text left">&nbsp; Add Cover Img &nbsp;</h6><i id="photoBtn" class="small material-icons left white-text">add_a_photo</i></button>                            
+                                        <input type="file" (change)="upload($event)">
+                                    </div>
+                                  </div>
+                                  <div class="col s6">
+                                    <div class=" input-field btn btn-large blue darken-4" id="fileBtn">
+                                        <button  id="btn" (click)="swapPrivacy()"><h6 class="white-text left">&nbsp; Privacy Settings: {{privacy}} &nbsp;</h6></button>                                                            
+                                    </div>
+                                  </div>
+                                  <!-- <div class="col s6">
+                                      <button (click)="swapPrivacy()" class="btn btn-large" style="background-color: rgb(29, 59, 143);">Privacy Settings: {{privacy}}</button>
+                                  </div> -->
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="center">
+                                <div class="">
+                                    <button class="btn btn-large" style="background-color: rgb(143, 92, 29);">Save Legacy<i class="material-icons white-text">&nbsp; send</i></button>
+                                  </div>
+                              </div>
+                          </div>
+                          <!-- Additional Spacing Required -->
+                          <div class="row">
+                              <br>
+                          </div>
+                    </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
 <!-- Area for Side Nav of previously written works -->
 <div

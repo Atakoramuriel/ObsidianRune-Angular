@@ -35,6 +35,22 @@
     border: solid rgb(27, 27, 27) 2px;
     border-radius: 15px;
 }
+#newLegacytitle{
+    background-color: rgba(0, 0, 0, 0.418);
+    border: solid rgb(27, 27, 27) 2px;
+    color: rgba(211, 134, 35, 0.89);
+    font-size: 25px;
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+#legacyTitle{
+    background-color: rgba(0, 0, 0, 0.418);
+    border: solid rgb(27, 27, 27) 2px;
+    font-size: larger;
+    color: rgb(185, 133, 35);
+    font-family: 'Times New Roman', Times, serif;
+}
 
 #writtenPassage{
     color: rgba(126, 140, 212, 0.89);
@@ -130,12 +146,41 @@
     padding-bottom: 10px;
 }
 
+#subHeader{
+    color: rgb(228, 142, 36);
+    font-size: 30px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#errHeader{
+    color: rgb(228, 36, 46);
+    font-size: 30px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#privacySpan{
+    color: rgb(107, 159, 255);
+    font-size: 15px;
+}
+#privacySpan:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}
 
 #mobileMenuBtn{
     position: fixed;
     bottom: 100px;
     right: 50px;
     z-index: 2;
+}
+
+/* For top tool bar below obsidian nav */
+#subNav{
+    -webkit-animation: dropIn 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: dropIn 0.5s forwards;
+    animation-delay: 0s;
 }
 
 /* Area for subMenu */
@@ -179,6 +224,22 @@
       transform: translateX(0);
     }
   }
+  @keyframes dropIn {
+    0% {
+      transform: translatey(-200px);
+    }
+    100% {
+      transform: translatey(0);
+    }
+  }
+  @keyframes riseIn {
+    0% {
+      transform: translatey(800px);
+    }
+    100% {
+      transform: translatey(0);
+    }
+  }
 
 
   /* For side menu */
@@ -201,9 +262,11 @@
 
  .saveBtn{
     color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
  }
  .postBtn{
     color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
  }
  
  .saveBtn:hover{
@@ -243,4 +306,234 @@
   .box{
       height: 75%;
       overflow: auto;
+  }
+
+  /* Area for Legacy Post Cards Below */
+  #testCardAevum{
+    width: 100%;
+    min-width: 75%;
+    background-color: #00000000;
+}
+
+.space{
+    padding-left: 5%;
+    padding-right: 5%;   
+}
+
+#aevumItem{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:150px;
+    /* width: 425px; */
+    width: 300px;
+    border: solid white 1px;;
+    display: inline-block;
+}
+
+
+#aevumItem:hover{
+    background-color:rgb(41, 4, 8);
+    border-radius:15px;
+    height:150px;
+    cursor: pointer;
+    border:solid rgb(255, 123, 0) 2px;
+}
+
+.legacyTitle{
+    color:rgb(245, 245, 245);
+    text-shadow: 5px 5px #000000;
+    font-family:'Times New Roman', Times, serif;
+    /* font-size: 350%; */
+    font-size: max(3vw, 3px);    
+    position:absolute;
+    right:10%;
+    bottom:5%;
+    z-index: 3;
+}
+
+#legacyImg{
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+
+  #newLegacyModal{
+      background-color: rgb(12, 25, 51);
+      -webkit-animation: dropIn 0.5s forwards;
+      -webkit-animation-delay: 2s;
+      animation: dropIn 0.5s forwards;
+      animation-delay: 0s;
+  }
+
+  #newLegacyDescription{
+    color: rgba(211, 134, 35, 0.89);
+    white-space: pre-wrap;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 25px;
+    min-height: 200px;
+    height: 200px;
+    max-height: 200px;
+    margin:0 auto;
+    background-color: rgba(0, 0, 0, 0.418);
+    overflow: scroll;
+  }
+
+  #newLegacyHeader{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color: rgb(161, 117, 33);
+  }
+
+  #btn{
+      background-color:rgba(0, 0, 0, 0);
+      border: none;
+      width: 150px;
+  }
+
+  #btn:hover{
+      cursor: pointer;
+  }
+
+  #fileBtn{
+    border: none;
+  }
+
+
+  /* Upload File Card */
+  #legacyCard{
+      background-color: #515470;
+  }
+  
+
+  #newLegacyCard{
+      width: 100%;
+ 
+  }
+
+  .box{
+      border-radius: 10px;
+      overflow: hidden;
+  }
+
+  .card-reveal{
+      background-color: #352628;
+  }
+
+
+  .card-image{
+      border: solid white 1px;
+  }
+
+  #activator{
+      object-fit:cover;
+      max-height: 400px;
+  }
+
+
+  #modal{
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    padding-bottom: 15%;
+    left: 0;
+    top: 7%;
+    width: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+
+}
+
+
+/* Modal styling */
+#modal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#161A23;
+    border: solid #535D80 2px;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+}
+
+/* For Legacy Modal */
+#legacyModal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#121627;
+    border-radius: 20px;
+    border: solid rgb(223, 153, 23) 1px;
+    width: 100%;
+    height: 100%;
+    padding: 00.5%;
+    padding-top: 0%;
+    padding-bottom: 10%;
+}
+
+#legacyModal1:hover{
+    cursor: pointer;
+}
+
+#userModalLegacy{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 100%;
+    border: solid black 1px;
+    display: inline-block;
+}
+
+.modalLegacyTitle{
+    color: rgb(204, 150, 32);
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+#legacyModalImg2{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+  /* When the image is hovered over with the cursior */
+#legacyModalImg2:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+
+  /* The Text that appears over the New Legacy Cover Image */
+  #newLegacyHeaderTxt{      
+      cursor: pointer;
+      color: white;
+      font-size: 25px;
+      position: absolute;
+      top: 35%;
+      z-index: 3;
+  }
+
+  #imgFileInput{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 100%;
+    border: solid black 1px;
+    display: inline-block;
+  }
+
+  .image-upload>input {
+    display: none;
+  }
+
+  .modal-content{
+      background-color: #00000000;
+  }
+
+  .card{
+      background-color: #00000000;
   }
