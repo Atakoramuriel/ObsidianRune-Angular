@@ -93,8 +93,10 @@ width: 100%;
 
 
 #testCardAevum{
-    width: 35%;
-    min-width: 75;
+    width: 25%;
+    min-width: 25%;
+    max-width: 25%;
+
     display: inline-block;
     background-color: #00000000;
  
@@ -117,12 +119,39 @@ width: 100%;
     padding: 0%;
 }
 #collageCard{
-    width: 400px;
-    display: inline-block;
-
+    height:200px;
+    width: 500px;
+    border: none;
+    border-radius: 10px;
+    display: inline-block; 
     background-color: #00000000;
     padding: 1%;
 }
+
+#imageCard{
+    border-radius: 10px;
+    min-height: 175px;
+    height: 175px;
+    max-height: 175px;
+    background-color: #00000000;
+}
+#imageCard:hover{
+    cursor: pointer;
+    border: solid 2px orange;;
+    border-radius: 10px;
+    min-height: 175px;
+    height: 175px;
+    max-height: 175px;
+    background-color: #00000000;
+}
+
+#collageImg{
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+}
+
 
 .mobileBox{
     overflow: scroll;
@@ -143,8 +172,19 @@ width: 100%;
     animation-direction: normal;
 
 }
+.testbox{
+    padding-left: 5px;
+    overflow: scroll;
+    flex-direction: row;
+    display: flex;
+    position: relative;
+    animation: slide 3.5s;
+    animation-direction: normal;
+
+}
 
 .box2{
+    
     overflow: scroll;
     flex-direction: row;
     display: flex;
@@ -251,23 +291,8 @@ width: 100%;
 
 
 
-#userCollagePosts{
-height:400px;
-width: 150px;
- display: inline-block; 
- background-color: #00000000;
-}
-#userCollagePosts:hover{
-    background-color:rgb(3, 4, 36);
-    border-radius:15px;
-    height:400px;
-    width: 150px;
-    display: inline-block;
-    cursor: pointer;
-    background-color: #00000000;
 
 
-}
 
 #userPosts:hover{
     background-color:rgb(41, 4, 8);
@@ -281,7 +306,7 @@ width: 150px;
 #aevumItem{
     background-color:rgb(3, 4, 36);
     border-radius:15px;
-    height:200px;
+    height:150px;
     /* width: 425px; */
     width: 100%;
     border:solid rgb(255, 123, 0) 2px;
@@ -291,9 +316,9 @@ width: 150px;
 #aevumItem:hover{
     background-color:rgb(41, 4, 8);
     border-radius:15px;
-    height:225px;
+    height:150px;
     cursor: pointer;
-    border:solid rgb(255, 123, 0) 2px;
+    border:solid rgb(255, 38, 0) 2px;
 }
 /* //For legacy cards */
 #userLegacy{
@@ -345,6 +370,7 @@ width: 150px;
     padding-left: 5%;
     padding-right: 5%;   
 }
+
 
 
 
@@ -631,8 +657,8 @@ l
 #legacyModalImg2{
     animation: 1s ease-out 0s 1 slideInFromBelow;
     object-fit:cover;
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    max-height: 500px;
     border-radius: 15px;
   }
 
@@ -1078,7 +1104,6 @@ ul#menu li {
       transform: translateY(0);
     }
   }
-
 
   /* For Heart Icon */
   #favoriteIcon:hover{

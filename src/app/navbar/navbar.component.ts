@@ -27,27 +27,26 @@ export class NavbarComponent implements OnInit {
     {
       title: "Standard Post",
       desc: "Title and some text. Quick and to the point.",
-      icon: "create"
+      icon: "create",
+      action: "POST"
     },
     {
       title: "Written Passage",
       desc: "Write to your hearts content",
-      icon: "book"
+      icon: "book",
+      action: "WRITE"
     },
     {
       title: "Image Collection",
       desc: "Great for storyboards or collages",
-      icon: "image"
-    },
-    {
-      title: "Private Blog",
-      desc: "Collection of private thoughts or rants only to be viewed by you",
-      icon: "remove_red_eye"
+      icon: "image",
+      action: "IMAGE"
     },
     {
       title: "Cancel",
       desc: "Close Post Menu",
-      icon: "cancel"
+      icon: "cancel",
+      action:"CLOSE"
     }
   ]
 
@@ -79,6 +78,24 @@ export class NavbarComponent implements OnInit {
 
     }
   }
+
+  menuAction(action: string){
+    switch(action){
+      case "PRIVATE":
+        //user wants to do a private writing
+
+
+        break;
+      case "Close":
+        //hide the service menu
+        this.serviceMenu = false;
+        break;
+      default:
+        //Need to select option
+        break;
+    }
+  }
+
 
   async logout(){
     this.firebaseService.signOut();

@@ -1,14 +1,16 @@
 
 //For the format of regular posts
-export interface Aevum {
+export interface New {
     id?:string;
     title?:string;
     text?:string;
-    author?:string;
-    privacy?:string;
-    type?:string;
-    updated:string;
     timestamp?:any;
     cover?:string;
+    author?:string;
+    privacy?:string;
+    previewTxt?:string;
+    date?:string;
+    type?:string;
+    updated?:string;
     status?:string;
   };

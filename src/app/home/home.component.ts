@@ -519,6 +519,10 @@ imagePool: [string] = [""];
   savedList: string[] = [];
 
 
+  //Final Updated
+  finalNewArr: any[]= [];
+
+
   //Constructor 
   constructor(
   private router: Router,
@@ -541,7 +545,7 @@ imagePool: [string] = [""];
   }
 
   ngOnInit(): void {
-    console.log(this.currentUserID)
+    // console.log(this.currentUserID)
     //Update the banner images
     // setInterval(this.shuffleImg, 7000);
     $(document).ready(function(){
@@ -579,6 +583,9 @@ imagePool: [string] = [""];
 
     //Get the aevum elements 
     this.AuthService.getAevum().subscribe(data => {
+      this.aevumActiveList = [];
+      this.aevumUpcomingList = [];
+      this.aevumClosedList = [];
       data.map(e => {
         const data = e.payload.doc.data() as Aevum
 
@@ -594,6 +601,7 @@ imagePool: [string] = [""];
 
         if(dataUpload['status'] == "Active"){
           this.aevumActiveList.push(dataUpload);
+          this.finalNewArr.push(dataUpload);
         }
         else if(dataUpload['status'] == "upcoming"){
           this.aevumUpcomingList.push(dataUpload);
@@ -609,13 +617,14 @@ imagePool: [string] = [""];
 
   //Load in the user Legacies
   loadLegacies(){
+   
     //Remove the empty legacy sample in array, idk why its needed
     this.legacyList.splice(0,1);
 
     //use the authservice to get the legacies
     this.AuthService.getLegacies().subscribe(data => {
       data.map(e => {
-
+        this.legacyList = [];
         const data = e.payload.doc.data() as Legacy
   
         //Set up the data object
@@ -635,11 +644,15 @@ imagePool: [string] = [""];
         //add legacies to array
         if(dataUpload['privacy'] == "public"){
           this.legacyList.push(dataUpload);
+          this.finalNewArr.push(dataUpload);
         }
        
       })
     })
   }
+
+
+ 
 
   showModalDialog(card:any){
   //Reset the Modal Variables
@@ -763,7 +776,7 @@ imagePool: [string] = [""];
             data.map(e => {
               const data = e.payload.doc.id;
               this.savedList.push(data)
-              console.log(this.savedList)
+              // console.log(this.savedList)
             })
 
               //Confirm if the username is included
@@ -800,7 +813,8 @@ imagePool: [string] = [""];
 
 
     this.AuthService.getPosts().subscribe(data => {
-       data.map(e => {
+      this.recentCollages = [] 
+      data.map(e => {         
         //Const Data e.payload.doc.data() as Type needed to avoid error of object unknown
         const data = e.payload.doc.data() as Post
    
@@ -842,11 +856,12 @@ imagePool: [string] = [""];
         if(dataUpload['image'] != ""  && dataUpload['type'] == "standard"){
           this.recentImgs.push(dataUpload)
         }else  if(this.recentCount <= 15 && dataUpload['type'] == "standard" && this.countWords(dataUpload['text']) < 99){
+          
           this.recentPosts.push(dataUpload);
           this.recentCount = this.recentCount + 1;
          
         }else if(dataUpload['type'] == "Images" || dataUpload['type'] == "Storyboard"){
-
+          dataUpload['image'] = data.postImgs[0];
           this.recentCollages.push(dataUpload);
 
         }else  if(this.countWords(dataUpload['text']) > 99 ||dataUpload['type'] == "Writing"){
@@ -895,7 +910,7 @@ imagePool: [string] = [""];
 
   reRoute(id?: string ){
     //Reroute to the legacy page 
-    console.log("ID: " + id);
+    // console.log("ID: " + id);
 
   }
 

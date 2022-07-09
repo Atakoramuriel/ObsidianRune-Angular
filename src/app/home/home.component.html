@@ -234,6 +234,28 @@
         <!-- Start of the Aevum if there are any active -->
 
         <div class="row" id="main">
+            <h4  id="aevumTitle">New</h4>
+            <div
+            class="box2">
+                <div 
+                id="testCardAevum"
+                class="card"
+                *ngFor="let card of finalNewArr; let i = index;">
+                    <div class="space">
+                        <div 
+                         class="card" 
+                         (click)="showLegacyModal(card)"
+                         id="aevumItem">
+                            <h4 class="legacyTitle">{{card.title}}</h4>
+                            <img src="{{card.cover}}" class="" id="legacyImg">
+                        </div>                        
+                    </div>  
+                </div>
+            </div>
+        </div>
+
+        <!-- Hide the Aevum Posts -->
+        <!-- <div class="row" id="main">
             <h4  id="aevumTitle">Aevum Posts</h4>
             <div
             class="box2">
@@ -241,45 +263,41 @@
                 id="testCardAevum"
                 class="card"
                 *ngFor="let card of aevumActiveList; let i = index;">
-                     <!-- <p class="white-text">{{card}}</p> -->
                     <div class="space">
                         <div class="card" id="aevumItem">
                             <h4 class="legacyTitle">{{card.title}}</h4>
-                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
                             <img src="{{card.cover}}" class="" id="legacyImg">
                         </div>                        
                     </div>  
                 </div>
             </div>
-        </div>
+        </div> -->
  
 
-                    <!-- Divider -->
-                    <div class="row container">
-                        <hr>
-                    </div>
-                    
-                        <!-- Timeline of recent posts from all friends -->
-                            <div class="row" id="main">
+        <!-- Divider -->
+        <div class="row container">
+            <hr>
+        </div>
+    
+        <!-- Timeline of recent posts from all friends -->
+        <!-- <div class="row" id="main">
                             <h4  id="menuTitle">Legacy Posts</h4>
-                            <div
+                          <div
                             class="box2">
                                 <div 
                                 id="testCardAevum"
                                 class="card"                                
                                 (click)="navigateLegacy(card)"
                                 *ngFor="let card of legacyList; let i = index;">
-                                     <!-- <p class="white-text">{{card}}</p> -->
                                     <div class="space">
                                         <div class="card" id="aevumItem">
                                             <h4 class="legacyTitle">{{card.title}}</h4>
-                                            <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
                                             <img src="{{card.cover}}" class="" id="legacyImg">
                                         </div>                        
                                     </div>  
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
             <!-- Computer and Tablet only -->
             <div class="hide-on-small-only">
@@ -404,30 +422,21 @@
                             <div class="row" id="main">
                                 <h4  id="menuTitle">Recent Collages</h4>
                                 <div
-                                class="box">
+                                class="testbox">
                                 <div 
-                                id="collageCard"
-                                class="card"
-                                *ngFor="let card of recentCollages; let i = index;">
-                                
-                                <div class="spacing">
+                                    id="collageCard"                                
+                                    *ngFor="let card of recentCollages; let i = index;">       
                                     <div 
-                                    (click)="showModalDialog(card);"
-                                    class="card" 
-                                    id="userCollagePosts">
-                                        <h4 class="userPostTitle">{{card.title}}</h4>
-                                        <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                                        <div
-                                            *ngFor="let collageImg of card?.postImgs; let j = index;"
+                                        id="imageCard"
+                                        class="card"
+                                        (click)="showModalDialog(card);"
                                         >
-                                            <img src="{{collageImg}}" class="postCollageImg{{j}} z-depth-5" id="selectedCollage">
-                                        </div>
-                                        <!-- <i class="material-icons hide" id="userPostOptions">more_vert</i>
-                                        <i class="material-icons " id="userPostFav">favorite_border</i>
-                                        <h5 class="white-text" id="userLikes">{{card.numLikes}}</h5> -->
-                                    </div>  
-                                </div>
-                               
+                                        <h4 class="userPostTitle">{{card.title}}</h4>    
+                                        <img 
+                                          id="collageImg"
+                                          src="{{card.image}}"
+                                          alt="CollageImg">                            
+                                    </div>                                               
                                 </div>
                             </div>
                             </div>
