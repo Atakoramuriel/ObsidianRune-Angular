@@ -6,7 +6,8 @@
                <nav class="black nav-extended w3-animate-bottom" style="position:fixed; top: 0%;">
                        <div class="nav-wrapper" > 
                            <div to="/" class="hide-on-small-only">
-                                   <a href="#!" class="brand-logo left" id="title"> Obsidian<i class="material-icons right white-text" style="rotation:180deg;">brightness_2</i>Rune</a>
+                                   <a href="#!" *ngIf="showCreateBtn" (click)="showCreateBtn=!showCreateBtn" class="brand-logo left" id="title"> Obsidian<i class="material-icons right white-text" style="rotation:180deg;">brightness_2</i>Rune</a>
+                                   <a href="#!" *ngIf="!showCreateBtn" (click)="showCreateBtn=!showCreateBtn" class="brand-logo left" id="title"> Obsidian<i class="material-icons right orange-text" style="rotation:180deg; ">brightness_2</i>Rune</a>
                            </div>
                             <div to="/" class="hide-on-med-and-up">
                                    <a href="#!" class="brand-logo center" id="MobileTitle"> Obsidian<i class="material-icons right" style="rotation:180deg;">brightness_2</i>Rune</a>
@@ -76,9 +77,9 @@
                                             <li><h5 
                                                 (click)="redirect('Dashboard')"
                                                 class="activeMenuBtn">Dashboard</h5></li>
-                                            <li><h5 class="activeMenuBtn">New_Post</h5></li>
-                                            <li><h5 (click)="redirect('newWriting')" class="activeMenuBtn">New_Write</h5></li>
-                                            <li><h5 class="activeMenuBtn">New_NFT</h5></li>
+                                            <li><h5 class="activeMenuBtn">Post</h5></li>
+                                            <li><h5 (click)="redirect('newWriting')" class="activeMenuBtn">Anthology</h5></li>
+                                            
                                         </div>
 
                                     <!-- When Profile Button is selected -->
@@ -114,7 +115,7 @@
                                             <li><h5 class="activeMenuBtn">New_Legacy</h5></li>
                                             <li><h5 class="activeMenuBtn">View_Legacies</h5></li>
                                             <li><h5 class="activeMenuBtn">Saved_Legacies</h5></li>
-                                            <li><h5 class="activeMenuBtn">Delete</h5></li>
+                                            
                                         </div>
 
                                     <!-- When Message Button is selected -->
@@ -125,7 +126,7 @@
                                         <li><h5 class="activeMenuBtn">New_Message</h5></li>
                                         <li><h5 class="activeMenuBtn">View_Messages</h5></li>
                                         <li><h5 class="activeMenuBtn">Saved_Messages</h5></li>
-                                        <li><h5 class="activeMenuBtn">Delete</h5></li>
+                                        
                                     </div>
 
                                      <!-- When Notification Button is selected -->
@@ -189,8 +190,10 @@
             <div id="serviceList">
                 <div
                 *ngFor="let card of serviceCards; let i = index;">
-                >
-                <div class="card" id="serviceMenuBtn">
+                
+                <div
+                (click)="menuAction(card.action)"
+                class="card" id="serviceMenuBtn">
                     <div class="card-content white-text">
                       <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>
                       <div class="container"><hr class="solid"></div>
@@ -203,16 +206,93 @@
 
 
     <!-- Area for Fixed button at the bottom right of page -->
-    <div  
-    *ngIf="!serviceMenu"
-    class="serviceCard ">
-        <div 
-        (click)="serviceMenu=!serviceMenu;"
-        class="btn btn-large  pulse" id="serviceBtn">
-            POST  <i class="material-icons large right">send</i>
+    <div *ngIf="showCreateBtn"> 
+        <div  
+        *ngIf="!serviceMenu"
+        class="serviceCard ">
+            <div 
+            (click)="serviceMenu=!serviceMenu;"
+            class="btn btn-large  pulse" id="serviceBtn">
+                New  <i class="material-icons large right">send</i>
+            </div>
         </div>
     </div>
 
 
+    <!-- Area for new Post -->
+    <div class="row" >
+        <div class="container" >
+            <div class="center">
+                <div 
+                *ngIf="displayPostModal"
+                (click)="closePostModal();" 
+                id="modal">
+                    <div class="col m8 l8 s12 offset-l2 offset-m2">
+                        <div 
+                        (click)="preSelection=true"
+                        id="modal1">
+                            <div class="center" >
+                                <h3 id="newPostHeader">New Post</h3>
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m10 offset-m1">
+                                    <input 
+                                    [(ngModel)]="newTitle"
+                                    id="title"
+                                    placeholder="Title. . ." 
+                                    type="text" 
+                                    class="validate">
+                                </div>
+                            </div>                                                                      
+                            <div 
+                            (click)="preSelection=true"
+                            class="modal-content">                                                             
+                                <img                               
+                                src="{{modalPostImage}}" 
+                                id="postedImg" alt="">
+                            <!-- writing Section -->
+                                <!-- Area for the writing passage -->
+                                    <div class="center">
+                                        <div class="input-field col s12">
+                                            <textarea
+                                                [(ngModel)]="newText"
+                                                placeholder="What do you have to say. . ?"
+                                                id="writtenPassage" 
+                                                class="materialize-textarea"></textarea>
+                                        </div>
+                                    </div>                
+                                <div
+                                class="center"
+                                *ngFor="let collageImg of modalPostImages; let j = index;"
+                                 >
+                                <img 
+                                 src="{{collageImg}}"                                 
+                                 class="postModalCollageImg{{j}} z-depth-5">
+                            </div>                                
+                            </div>
+                            <div 
+                            (click)="preSelection=true"
+                            class="modal-footer">
+                                <div class="row">
+                                    <div class="col s3"></div>
+                                    <div class="col s2">
+                                        <div class=" btn btn-large blue darken-4"> <i class="material-icons">image</i> </div>
+                                    </div>
+                                    <div class="col s2">
+                                        <div 
+                                        (click)="savePost()"
+                                        class=" btn btn-large blue darken-4"> <b>Submit</b> </div>
+                                    </div>  
+
+                                </div>                                                                                            
+                            </div>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>  
 
 </div>

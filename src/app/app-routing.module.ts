@@ -7,13 +7,18 @@ import { LegacyComponent } from './legacy/legacy.component';
 import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
 import { AuthGuard } from './services/auth.gaurd';
 import { WritingComponent } from './writing/writing.component';
-
-
+import { ProfileComponent } from './profile/profile.component';
+import { ReadWritingComponent } from './read-writing/read-writing.component';
 
 const appRoutes: Routes = [
   {
     path: '', 
     component: HomeComponent, 
+    canActivate: [AuthGuard],
+    },
+  {
+    path: 'Profile', 
+    component: ProfileComponent, 
     canActivate: [AuthGuard],
     },
   {
@@ -34,6 +39,11 @@ const appRoutes: Routes = [
   {
     path: 'newWriting',
     component: WritingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'Reading',
+    component: ReadWritingComponent,
     canActivate: [AuthGuard]
   },
 ]

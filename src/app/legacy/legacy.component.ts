@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
 import { AuthService } from '../services/auth.service';
 import { LegacyPost } from '../models/LegacyPost';
@@ -14,6 +14,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 })
 export class LegacyComponent implements OnInit {
 
+  //refresh Rate 
+  alreadyLoaded: string = 'false';
+
   //LegacyID
   legacyID: string= "";
   currentUser: string = "";
@@ -23,8 +26,12 @@ export class LegacyComponent implements OnInit {
   updated: String = "";
   author: String = "";
   authorProfileImg: String = "";
-  cover: String = "";
+  preCover: string = "";
+  cover: string = "";
   mainImg: string = "";
+
+ //Prep
+ imageLoaded: boolean = false;
 
   //options
     readers: string = "";
@@ -98,11 +105,16 @@ export class LegacyComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+
     //Load the page information 
     this.loadLegacyInfo();
     this.loadLegacyPosts();
    
-   
+  
+  }
+
+  ngAfterViewInit() {
   }
 
   //This is that later function 
@@ -117,9 +129,14 @@ export class LegacyComponent implements OnInit {
             this.author = legacyData.author as string;
       }).then(() => {
           this.getUserInfo(this.author);
-
+          localStorage.setItem('refresh', 'true');
       })
+      this.alreadyLoaded = localStorage.getItem('refresh') as string;
+
   }
+
+
+  
 
   loadLegacyPosts(){
 
@@ -139,14 +156,13 @@ export class LegacyComponent implements OnInit {
             title: data.title as string,
             text: data.text as string,
             previewTxt: data.text?.split(' ').splice(0, 15).join(' ') as string,
-            cover: data.cover as string, 
+            cover: data.cover != "" ? data.cover as string : this.cover as string, 
             author: data.author as string, 
             date: data.date as string,
             timestamp: data.timestamp as string,
             privacy: data.privacy as string,
             type: data.type as string,
             updated: data.updated as string, 
-
           }
 
           //Push to all first
@@ -154,12 +170,12 @@ export class LegacyComponent implements OnInit {
 
           // push to public array
           if(dataUpload['privacy'] == "public"){
-            this.publicEntries.push(dataUpload);
+              this.publicEntries.push(dataUpload);
           }
 
           // push to private array
           if(dataUpload['privacy'] == "private"){
-            this.privateEntries.push(dataUpload);
+             this.privateEntries.push(dataUpload);
           }
           this.Entries = this.allEntries.length as unknown as string;
 
@@ -181,6 +197,16 @@ export class LegacyComponent implements OnInit {
       })
   }
 
+ //Navigate to the Read Page 
+  readChapter(card: any){
+    console.log(card);
+    // const queryParams: Params = { title: card['title'], text: card['text'], cover: card['cover'] }
+    const queryParams: Params = {id: card['id']}
+    this.router.navigate(['/Reading'],
+    {
+      queryParams: queryParams
+    });
 
+  }
 
 }

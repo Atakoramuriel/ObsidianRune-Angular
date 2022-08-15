@@ -33,6 +33,8 @@ import { LegacyComponent } from './legacy/legacy.component';
 import { AuthGuard } from './services/auth.gaurd';
 import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
 import { WritingComponent } from './writing/writing.component';
+import { ProfileComponent } from './profile/profile.component';
+import { ReadWritingComponent } from './read-writing/read-writing.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { WritingComponent } from './writing/writing.component';
     PostsComponent,
     DiscoverComponent,
     LegacyComponent,
-    WritingComponent
+    WritingComponent,
+    ProfileComponent,
+    ReadWritingComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -2,10 +2,13 @@
 <app-navbar></app-navbar>
 
 <!-- Area for the Legacy Page -->
- <div class="parallax-container">
+ <div 
+ 
+ class="parallax-container">
     <div class="parallax">
         <h2 class="parallaxHeader">{{title}}</h2>
         <img 
+       
         id="coverImg"
         src="{{cover}}">
               <!-- Additional Spacing Require -->
@@ -19,7 +22,7 @@
     </div>
 
   </div>
-  <div class="section black white-text">
+  <div class="section white-text">
     <div class="row container">
   
 
@@ -53,18 +56,25 @@
         <!-- Place Entries Below -->
         <div class="row">
             <div class="container">
-                <div
-                *ngFor="let entry of publicEntries; let i = index;">
-                    <ul class="collection">
-                        <li class="collection-item avatar">
-                          <span class="title"><h4>{{entry.title}}</h4></span>
-                          <h5><i>{{entry.previewTxt}}</i></h5>
-                          <p class="blue-grey-text text-lighten-3">{{entry.date}}</p>
-                          <a
-                           href="#!" class="secondary-content"><i class="small material-icons" id="userOptions">more_vert</i></a>
-                        </li>
-                      </ul>
-                </div>
+                <div class="box2">
+                    <div
+                    id="testCardAevum"
+                    class="card"        
+                    *ngFor="let entry of publicEntries; let i = index;">
+                    <div class="space">
+                        <!-- This is the Card -->
+                        <div
+                         (click)="readChapter(entry.id)"
+                         id="aevumItem"
+                         class="card">
+                         <span class="cardTitle">{{entry.title}}</span>
+                         <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>
+                         <img src="{{entry.cover}}" class="" id="bookCoverImg">
+                        </div>
+                    </div>
+    
+                    </div>
+                </div>          
             </div>
         </div>
 

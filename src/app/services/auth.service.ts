@@ -80,6 +80,9 @@ export class AuthService {
     return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
   }
 
+  getAllLegacyPosts(){
+    return this.fireService.collection("Legacy", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
+  }
   getLegacies(){
     return this.fireService.collection("Legacy", ref => ref.orderBy('updated','desc')).snapshotChanges();
   }

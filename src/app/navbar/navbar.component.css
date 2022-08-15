@@ -192,11 +192,18 @@ h4{
 }
 
 #title{
+background-color: rgba(0, 0, 0, 0.123);
  font-family:'Allura', cursive;
  padding-top: 1px;
  font-size: 275%;
  padding-left: 2%;
- color: rgb(255, 255, 255);
+ color: rgb(138, 98, 23);
+}
+
+#newPostHeader{
+    font-family:'Times New Roman', Times, serif;
+    font-size: 300%;
+    color: #C2934A;
 }
 
 
@@ -604,11 +611,108 @@ h4{
     color: coral;
 }
 
+/* For modal content */
+#writtenPassage{
+    color: rgba(126, 140, 212, 0.89);
+    white-space: pre-wrap;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30px;
+    min-height: 300px;
+    height: 350px;
+    max-height: 350px;
+    margin:0 auto;
+    background-color: rgba(0, 0, 0, 0.123);
+    overflow: scroll;
+}
+
+#modal{
+    
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    padding-bottom: 15%;
+    left: 0;
+    top: 7%;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+.modal-content{
+    position: relative;
+    text-align: center;
+}
+
+#modalImg{
+    min-width: 50%;
+    max-width: 75%;
+}
+
+#modalDisplay{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    position: fixed; /* Stay in place */
+    z-index: 11; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-footer{
+    padding: 2%;
+}
+
+.modalTitle{
+    color: rgb(139, 161, 226);
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+#postedImg{
+    width:40%;
+ }
+#postedImg:hover{
+    width:40%;
+    cursor: pointer;
+ }
+ #userInfo{
+    position: absolute;
+}
+
+#modalUser{
+    color:rgb(202, 144, 58);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 250%;
+    padding-left: 10px;
+}
+
+/* For modal Profile Image */
+#modalProfileImg{
+    width: 5%;
+    border-radius: 50%;
+    
+}
+
+ #modal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#161A23;
+    border: solid #535D80 2px;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+}
+/* End of Modal Content */
+
 /* For the service menu */
 .serviceMenu{
     position: fixed;
     background-color: #0f0f12f1;
-    right: 5%;
+    left: 3%;
     bottom: 0%;
     z-index: 10;
     width: 20%;
@@ -618,9 +722,9 @@ h4{
 #serviceList{
     position: fixed;
     top: 19%;
-    max-height: 600px;
+    max-height: 700px;
     overflow: auto;
-    animation: 1s ease-out 0s 1 slideInFromRight;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
 
 }
 
@@ -644,7 +748,7 @@ h4{
 .serviceCard{
     position: fixed;
     bottom: 10%;
-    right: 5%;
+    left: 5%;
     z-index: 10;
 }
 
@@ -675,6 +779,14 @@ h4{
 @keyframes slideInFromRight {
     0% {
       transform: translateX(200px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-200px);
     }
     100% {
       transform: translateX(0);

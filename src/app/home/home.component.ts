@@ -32,6 +32,11 @@ export class HomeComponent implements OnInit {
   imgPool: String[] | any;
   
 
+  //Flags for display 
+  newAevum: boolean = false;
+  displayLegacyList: boolean = false;
+
+
   //Test for array
   testList = [
     {
@@ -55,6 +60,7 @@ export class HomeComponent implements OnInit {
       image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2F1.7.png?alt=media&token=4dba1cb9-8899-421e-87f7-48c3679bfb8a"
     }
   ];
+  
   
   //More Arrays
   aevumList = [
@@ -602,11 +608,14 @@ imagePool: [string] = [""];
         if(dataUpload['status'] == "Active"){
           this.aevumActiveList.push(dataUpload);
           this.finalNewArr.push(dataUpload);
+          this.newAevum = true;
         }
         else if(dataUpload['status'] == "upcoming"){
           this.aevumUpcomingList.push(dataUpload);
+          this.newAevum = true;
         }else{
-          this.aevumClosedList.push(dataUpload)
+          this.aevumClosedList.push(dataUpload);
+          this.newAevum = true;
         }
         // this.aevumList.push(dataUpload);
 
@@ -617,16 +626,17 @@ imagePool: [string] = [""];
 
   //Load in the user Legacies
   loadLegacies(){
-   
+ 
     //Remove the empty legacy sample in array, idk why its needed
     this.legacyList.splice(0,1);
 
     //use the authservice to get the legacies
     this.AuthService.getLegacies().subscribe(data => {
+  
       data.map(e => {
         this.legacyList = [];
         const data = e.payload.doc.data() as Legacy
-  
+ 
         //Set up the data object
             //Set up the data in an object
             const dataUpload = {
@@ -640,17 +650,66 @@ imagePool: [string] = [""];
               privacy: data.privacy as string,
               updated: data.updated as string,
             };
-
+ 
         //add legacies to array
-        if(dataUpload['privacy'] == "public"){
+        if(dataUpload['privacy'] == "public"){  
           this.legacyList.push(dataUpload);
           this.finalNewArr.push(dataUpload);
         }
        
       })
     })
+
+    if(this.legacyList.length == 0){
+     
+      this.loadAllLegacy()
+    }else{
+     
+      this.displayLegacyList = true;
+    }
+
+
   }
 
+  loadAllLegacy(){
+
+    //Remove the empty legacy sample in array, idk why its needed
+    this.legacyList.splice(0,1);
+
+    //use the authservice to get the legacies
+    this.AuthService.getAllLegacyPosts().subscribe(data => {
+  
+      data.map(e => {
+        this.legacyList = [];
+        const data = e.payload.doc.data() as Legacy
+ 
+        //Set up the data object
+            //Set up the data in an object
+            const dataUpload = {
+              id: e.payload.doc.id,
+              title: data.title as string,
+              desc: data.desc as string,
+              cover: ((data.cover != "")  ? data.cover as string : "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2F%CE%95%CE%BB%CE%B5%CF%85%CC%81%CE%B8%CE%B5%CF%81%CE%B7%20%CF%83%CE%BA%CE%B5%CC%81%CF%88%CE%B7.PNG?alt=media&token=1ddf6078-d29a-4532-ab6a-026c6cd6f35d"),
+              author: data.author as string,
+              timestamp: data.timestamp as string,
+              type: data.type as string,
+              privacy: data.privacy as string,
+              updated: data.updated as string,
+            };
+ 
+        //add legacies to array
+        if(dataUpload['privacy'] == "public"){  
+          this.legacyList.push(dataUpload);
+          this.finalNewArr.push(dataUpload);
+        }
+       
+      })
+    })
+
+    if(this.legacyList.length > 0){
+      this.displayLegacyList = true; 
+    }
+  }
 
  
 
@@ -1071,7 +1130,7 @@ imagePool: [string] = [""];
   }
 
   commentPost(){
-    alert("Comment Post")
+    // alert("Comment Post")
     this.preSelection=true
   }
 

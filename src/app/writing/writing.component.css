@@ -177,6 +177,8 @@
 
 /* For top tool bar below obsidian nav */
 #subNav{
+    position: absolute;
+    top: 7%;
     -webkit-animation: dropIn 0.5s forwards;
     -webkit-animation-delay: 2s;
     animation: dropIn 0.5s forwards;

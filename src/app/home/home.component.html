@@ -233,7 +233,7 @@
 
         <!-- Start of the Aevum if there are any active -->
 
-        <div class="row" id="main">
+        <div class="row" id="main" *ngIf="newAevum">
             <h4  id="aevumTitle">New</h4>
             <div
             class="box2">
@@ -280,24 +280,27 @@
         </div>
     
         <!-- Timeline of recent posts from all friends -->
-        <!-- <div class="row" id="main">
-                            <h4  id="menuTitle">Legacy Posts</h4>
-                          <div
-                            class="box2">
-                                <div 
-                                id="testCardAevum"
-                                class="card"                                
-                                (click)="navigateLegacy(card)"
-                                *ngFor="let card of legacyList; let i = index;">
-                                    <div class="space">
-                                        <div class="card" id="aevumItem">
-                                            <h4 class="legacyTitle">{{card.title}}</h4>
-                                            <img src="{{card.cover}}" class="" id="legacyImg">
-                                        </div>                        
-                                    </div>  
-                                </div>
-                            </div>
-                        </div> -->
+        <div 
+
+         class="row" 
+         id="main">
+        <h4  id="menuTitle">Legacy Posts</h4>
+        <div
+        class="box2">
+            <div 
+            id="testCardAevum"
+            class="card"                                
+            (click)="navigateLegacy(card)"
+            *ngFor="let card of legacyList; let i = index;">
+                <div class="space">
+                    <div class="card" id="aevumItem">
+                        <h4 class="legacyTitle">{{card.title}}</h4>
+                        <img src="{{card.cover}}" class="" id="legacyImg">
+                    </div>                        
+                </div>  
+            </div>
+        </div>
+    </div>
 
             <!-- Computer and Tablet only -->
             <div class="hide-on-small-only">

@@ -346,11 +346,12 @@ privacy: string = "public";
 
   }
 
-  newLegacy(){
 
-    if(this.newTitle.length == 0 || this.newLegacyDescription.length == 0){
+  //In the event that a new legacy needs to be created completed
+  newLegacy(){
+    if(this.newLegacyTitle.length == 0 || this.newLegacyDescription.length == 0){
         this.showErrMsg = true;
-    }else if(this.newTitle == "" || this.newLegacyDescription == ""){
+    }else if(this.newLegacyTitle == "" || this.newLegacyDescription == ""){
       this.showErrMsg = true
     }else{
     //Creation of the data object
@@ -359,10 +360,10 @@ privacy: string = "public";
       cover: this.imageUploaded== true ? this.downloadLink as unknown as string : this.defaultImgCover,
       date: this.timeSaved,
       privacy: this.privacy,
-      desc: this.writtenPassage,
+      desc: this.newLegacyDescription,
       timestamp: this.timeStamp,
-      title: this.newTitle,
-      type: "Writing"
+      title: this.newLegacyTitle,
+      type: "Legacy"
     }
 
     //Call to Action
@@ -374,13 +375,14 @@ privacy: string = "public";
     //hide the modal
     this.displayModal = false;
     this.cleanList()
-    this.displayLegacyList = true;
+    this.displayLegacyList = false;
     }
   }
 
   cleanList(){
     this.legacyList.splice(0,1);
     this.legacyList = [];
+    this.loadLegacyPosts();
   }
 
 
@@ -409,6 +411,7 @@ privacy: string = "public";
       })
 
   }
+
   //save the progress but not working 
   saveProgress(){
     //only save the post if the title and text are not empty
