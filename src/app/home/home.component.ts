@@ -672,7 +672,7 @@ imagePool: [string] = [""];
   }
 
   loadAllLegacy(){
-
+  
     //Remove the empty legacy sample in array, idk why its needed
     this.legacyList.splice(0,1);
 
@@ -680,7 +680,7 @@ imagePool: [string] = [""];
     this.AuthService.getAllLegacyPosts().subscribe(data => {
   
       data.map(e => {
-        this.legacyList = [];
+        // this.legacyList = [];
         const data = e.payload.doc.data() as Legacy
  
         //Set up the data object
@@ -706,9 +706,7 @@ imagePool: [string] = [""];
       })
     })
 
-    if(this.legacyList.length > 0){
-      this.displayLegacyList = true; 
-    }
+    
   }
 
  
@@ -791,8 +789,20 @@ imagePool: [string] = [""];
     const queryParams: Params = { id: card['id'] };
     this.router.navigate(['/Legacy'],
     {
-      queryParams: queryParams
+      queryParams: queryParams,
+      queryParamsHandling: 'merge', 
+    });
 
+  }
+
+  navigateChapter(card:any){    
+    console.log("CARDID: " + card['id']);
+    //Navigate forwarad to legacy page
+    const queryParams: Params = { id: card['id'] };
+    this.router.navigate(['/Reading'],
+    {
+      queryParams: queryParams,
+      queryParamsHandling: 'merge', 
     });
 
   }

@@ -8,6 +8,9 @@ import { LegacyPost } from '../models/LegacyPost';
 import { Legacy } from '../models/Legacy';
 import { User } from '../models/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Location } from '@angular/common';
+import { ChapterService } from '../services/chapter.service';
+
 
 @Component({
   selector: 'app-read-writing',
@@ -15,6 +18,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   styleUrls: ['./read-writing.component.css']
 })
 export class ReadWritingComponent implements OnInit {
+
+
+  chapterData: any;
 
   //Variables
   chapterID: string = "";
@@ -30,20 +36,29 @@ export class ReadWritingComponent implements OnInit {
     private router: Router,
     private activatedroute: ActivatedRoute,
     public AuthService: AuthService,
-    public firebaseAuth: AngularFireAuth
+    public firebaseAuth: AngularFireAuth,
+    private location:Location,
+    private chapterService: ChapterService
+
   ) { 
-    this.activatedroute.queryParams.subscribe(data => {
-      // console.log(data)
-      //Set the id for the function later
-      this.chapterID = data['id'];
-      // this.title = data['title'] as string;
-      // this.text = data['text']
-      // this.coverImg = data['cover']
-  })
+    if(this.chapterData == null){
+      console.log("Storing Data")
+      localStorage.setItem('chapterData',JSON.stringify(this.chapterService.chapter));
+      this.chapterData = JSON.parse(localStorage.getItem('chapterData')!);  
+    }else{
+      
+    }
+  
   }
 
-  ngOnInit(): void {
-    this.loadInfo();
+  ngOnInit(): void{
+    console.log("Mission Accomplished")
+    console.log(this.chapterData)
+    // console.log(this.chapterService.chapter['title'])
+    // this.chapterData = this.chapterService.chapter;
+
+    this.title = this.chapterData['title'];
+    this.text = this.chapterData['text'];
   }
 
   loadInfo(){

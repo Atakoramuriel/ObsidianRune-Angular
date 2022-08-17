@@ -6,7 +6,8 @@ import { LegacyPost } from '../models/LegacyPost';
 import { Legacy } from '../models/Legacy';
 import { User } from '../models/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
+import { URLSearchParams } from 'url';
+import { ChapterService } from '../services/chapter.service';
 @Component({
   selector: 'app-legacy',
   templateUrl: './legacy.component.html',
@@ -90,26 +91,36 @@ export class LegacyComponent implements OnInit {
     }
   ];
     
+  loadedData: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private activatedroute: ActivatedRoute,
     public AuthService: AuthService,
-    public firebaseAuth: AngularFireAuth
+    public firebaseAuth: AngularFireAuth,
+    private chapterService: ChapterService
   ) { 
     this.activatedroute.queryParams.subscribe(data => {
+      console.log("LegacyID: " + data['id']);
         //Set the id for the function later
         this.legacyID = data['id'];
     })
   }
 
   ngOnInit(): void {
+ 
+    if(!this.loadedData){
+      //Load the page information 
+      this.loadLegacyInfo();
+      this.loadLegacyPosts();
+      this.loadedData = true;
 
+  
+    }
+  
+  
 
-    //Load the page information 
-    this.loadLegacyInfo();
-    this.loadLegacyPosts();
    
   
   }
@@ -182,31 +193,35 @@ export class LegacyComponent implements OnInit {
       })
     })
 
-    console.log("__ CON __")
-    console.log(this.publicEntries)
+    // console.log("__ CON __")
+    // console.log(this.publicEntries)
   }
 
   //Get user info
   getUserInfo(userkey: String){
       this.AuthService.getUserInfo(userkey as string).then(data => {
         const userData = data.data() as User;
-        console.log(data.data())
+        // console.log(data.data())
         this.author = userData.displayName as string;
         this.authorProfileImg = userData.photoURL as string;
         
       })
   }
 
+
+
  //Navigate to the Read Page 
   readChapter(card: any){
-    console.log(card);
-    // const queryParams: Params = { title: card['title'], text: card['text'], cover: card['cover'] }
-    const queryParams: Params = {id: card['id']}
-    this.router.navigate(['/Reading'],
-    {
-      queryParams: queryParams
-    });
+   
+  //  console.log(card);
+   
+   const chapter = card;
 
+   this.chapterService.setChapter(chapter);
+  this.router.navigate(['/Reading']);
+    
   }
+
+ 
 
 }

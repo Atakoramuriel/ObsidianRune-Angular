@@ -62,9 +62,9 @@
                     class="card"        
                     *ngFor="let entry of publicEntries; let i = index;">
                     <div class="space">
-                        <!-- This is the Card -->
-                        <div
-                         (click)="readChapter(entry.id)"
+                        <!-- This is the Card -->                     
+                        <div      
+                         (click)="readChapter(entry)"
                          id="aevumItem"
                          class="card">
                          <span class="cardTitle">{{entry.title}}</span>
