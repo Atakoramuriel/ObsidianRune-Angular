@@ -15,10 +15,42 @@ import { ChapterService } from '../services/chapter.service';
 @Component({
   selector: 'app-read-writing',
   templateUrl: './read-writing.component.html',
+  animations: [
+
+  ],
   styleUrls: ['./read-writing.component.css']
 })
 export class ReadWritingComponent implements OnInit {
 
+  //Starting Variables
+  showMenuBtn: boolean = false;
+  serviceMenu: boolean = true;
+  serviceCards = [
+    {
+      title: "Like",
+      desc: "Title and some text. Quick and to the point.",
+      icon: "create",
+      action: "favorite_border"
+    },
+    {
+      title: "Theme",
+      desc: "Change page theme",
+      icon: "book",
+      action: "WRITE"
+    },
+    {
+      title: "Bookmark",
+      desc: "Save to read later",
+      icon: "book",
+      action:"SAVE"
+    },
+    {
+      title: "Return",
+      desc: "Return to Legacy",
+      icon: "cancel",
+      action:"CLOSE"
+    }
+  ]
 
   chapterData: any;
 
@@ -41,28 +73,55 @@ export class ReadWritingComponent implements OnInit {
     private chapterService: ChapterService
 
   ) { 
-    if(this.chapterData == null){
-      console.log("Storing Data")
-      localStorage.setItem('chapterData',JSON.stringify(this.chapterService.chapter));
-      this.chapterData = JSON.parse(localStorage.getItem('chapterData')!);  
-    }else{
-      
-    }
+   
   
   }
 
   ngOnInit(): void{
-    console.log("Mission Accomplished")
-    console.log(this.chapterData)
+    //Start 
+    const dataValue = sessionStorage.getItem('chapterData');
+    if(dataValue){
+    
+
+      this.chapterData = JSON.parse(sessionStorage.getItem('chapterData')!);  
+      this.text = this.chapterData['text'];
+      this.coverImg = this.chapterData['cover']
+      this.title = this.chapterData['title'];
+    }
+
+
     // console.log(this.chapterService.chapter['title'])
-    // this.chapterData = this.chapterService.chapter;
+    this.chapterData = this.chapterService.chapter;
+    this.text = this.chapterData['text'];
+    this.coverImg = this.chapterData['cover']
 
     this.title = this.chapterData['title'];
-    this.text = this.chapterData['text'];
+
+  
   }
 
-  loadInfo(){
-  alert(this.chapterID);
+  menuAction(action: string){
+    
+    switch(action){
+      case "POST":
+        this.serviceMenu = false;
+          break;
+      case "WRITE":
+        this.serviceMenu = false;
+
+        break;
+      case "IMAGE":
+        //user wants to upload several images
+          
+        break;
+      case "CLOSE":
+        //hide the service menu
+        this.serviceMenu = false;
+        break;
+      default:
+        //Need to select option
+        break;
+    }
   }
 
 }

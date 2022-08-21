@@ -548,15 +548,14 @@ imagePool: [string] = [""];
         }
 
       })
+      
   }
 
   ngOnInit(): void {
     // console.log(this.currentUserID)
     //Update the banner images
     // setInterval(this.shuffleImg, 7000);
-    $(document).ready(function(){
-      $('.parallax').parallax();
-      });
+   
 
     //Check User Status
     this.checkAuthStatus()

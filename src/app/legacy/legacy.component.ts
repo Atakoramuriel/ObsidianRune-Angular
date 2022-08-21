@@ -110,6 +110,12 @@ export class LegacyComponent implements OnInit {
 
   ngOnInit(): void {
  
+    const chapterData = sessionStorage.getItem('chatperData');
+    if(chapterData){
+      sessionStorage.removeItem('chapterData');
+    }
+
+
     if(!this.loadedData){
       //Load the page information 
       this.loadLegacyInfo();
@@ -120,7 +126,9 @@ export class LegacyComponent implements OnInit {
     }
   
   
-
+    $(document).ready(function(){
+      $('.parallax').parallax();
+      });
    
   
   }
@@ -213,11 +221,24 @@ export class LegacyComponent implements OnInit {
  //Navigate to the Read Page 
   readChapter(card: any){
    
+    const chapter = card;
   //  console.log(card);
    
-   const chapter = card;
+  const dataValue = sessionStorage.getItem('chapterData');
+  if(dataValue){
+    //Remove Data
+    console.log("Cleaning chapter Data")
+    sessionStorage.removeItem('chapterData');
 
-   this.chapterService.setChapter(chapter);
+    console.log("Cleaning chapter from Service")
+    this.chapterService.cleanChapter();
+
+    console.log("Storing new chapter");
+    sessionStorage.setItem('chapterData',JSON.stringify(chapter));
+  }
+
+
+  this.chapterService.setChapter(chapter);
   this.router.navigate(['/Reading']);
     
   }

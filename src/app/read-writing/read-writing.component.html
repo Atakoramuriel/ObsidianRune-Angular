@@ -1,9 +1,77 @@
-<!-- Desktop Display -->
-<div class="center">
-    <div class="col s12 m12">
-        <div class="white-text">
-            <h1>title : {{title}}</h1>
-            <h4>{{text}}</h4>
+
+<!-- Desktop -->
+<div 
+(click)="serviceMenu=!serviceMenu"
+class="hide-on-med-and-down">
+    <img src="{{coverImg}}" alt="cover" id="coverImg">
+    <!-- Desktop Display -->
+    <div class="center white-text">
+            <div class="page">
+                <div class="row">
+                    <!-- Additional Spacing Required -->
+                      
+                    <div class="col l10 offset-l1" id="page">
+                        <textarea
+                        disabled
+                        [value]="title + text"                             
+                        id="writtenPassage" 
+                        class="materialize-textarea">               
+                        </textarea>
+                    </div>
+                </div>      
+            </div>                      
+    </div>
+</div>
+
+<!-- Tablet/Phone -->
+<div class="hide-on-large-only">
+    <img src="{{coverImg}}" alt="cover" id="coverImgMed">
+    <!-- Desktop Display -->
+    <div class="center white-text">
+        <div class="col s8 m8 offset-s2 offset-m2">
+    
+            <textarea
+            disabled
+            [value]="title + text"                             
+            id="writtenPassage" 
+            class="materialize-textarea">               
+            </textarea>
+                    
         </div>
     </div>
 </div>
+
+
+<!-- Menu Button -->
+<div *ngIf="showMenuBtn"> 
+    <div  
+    *ngIf="!serviceMenu"
+    class="serviceCard ">
+        <div 
+        (click)="serviceMenu=!serviceMenu;"
+        class="btn btn-large  pulse" id="serviceBtn">
+            Menu  <i class="material-icons large right">send</i>
+        </div>
+    </div>
+</div>
+
+<!-- Service Buttons -->
+    <div 
+    *ngIf="serviceMenu"
+    class="serviceMenu">
+        <div id="serviceList">
+            <div
+            *ngFor="let card of serviceCards; let i = index;">
+            
+            <div
+            (click)="menuAction(card.action)"
+            class="card" id="serviceMenuBtn">
+                <div class="card-content white-text">
+                <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>
+                <div class="container"><hr class="solid"></div>
+                <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                </div>        
+            </div>
+            </div>
+        </div>
+    </div>
