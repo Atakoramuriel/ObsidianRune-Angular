@@ -102,7 +102,7 @@ export class LegacyComponent implements OnInit {
     private chapterService: ChapterService
   ) { 
     this.activatedroute.queryParams.subscribe(data => {
-      console.log("LegacyID: " + data['id']);
+      
         //Set the id for the function later
         this.legacyID = data['id'];
     })
@@ -112,7 +112,10 @@ export class LegacyComponent implements OnInit {
  
     const chapterData = sessionStorage.getItem('chatperData');
     if(chapterData){
+      console.log("Chapter Data Already Reloaded");
       sessionStorage.removeItem('chapterData');
+    }else{
+      console.log("No Chapter data to remove from Legacy");
     }
 
 
@@ -233,13 +236,17 @@ export class LegacyComponent implements OnInit {
     console.log("Cleaning chapter from Service")
     this.chapterService.cleanChapter();
 
+
+  }else{
+    console.log("No Data to report");
+    this.chapterService.setChapter(chapter);
     console.log("Storing new chapter");
     sessionStorage.setItem('chapterData',JSON.stringify(chapter));
+    this.router.navigate(['/Reading']);
   }
 
-
-  this.chapterService.setChapter(chapter);
-  this.router.navigate(['/Reading']);
+  
+  
     
   }
 
