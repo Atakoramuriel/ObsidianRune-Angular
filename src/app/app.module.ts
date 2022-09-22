@@ -35,6 +35,7 @@ import { SecureInnerPagesGuard } from './shared/secure-inner-pages.guard';
 import { WritingComponent } from './writing/writing.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ReadWritingComponent } from './read-writing/read-writing.component';
+import { EditLegacyComponent } from './edit-legacy/edit-legacy.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { ReadWritingComponent } from './read-writing/read-writing.component';
     LegacyComponent,
     WritingComponent,
     ProfileComponent,
-    ReadWritingComponent
+    ReadWritingComponent,
+    EditLegacyComponent
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

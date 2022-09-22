@@ -9,4 +9,5 @@ export interface Legacy {
     timestamp?:any;
     type?: string;
     updated?: string;
+    legacyID?:string;
   };

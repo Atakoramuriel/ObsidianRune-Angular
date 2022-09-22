@@ -4,7 +4,6 @@
 <!-- Default Author Theme -->
 <div 
  *ngIf="authorTheme"
-(click)="serviceMenu=!serviceMenu; themeMenu=false;"
 class="hide-on-med-and-down">
     <img src="{{coverImg}}" alt="cover" id="coverImg">
     <!-- Desktop Display -->
@@ -16,7 +15,7 @@ class="hide-on-med-and-down">
                     <div class="col l10 offset-l1" id="page">
                         <textarea
                         disabled
-                        [value]="title + text"                             
+                        [value]="title + '\n' + text"                             
                         id="writtenPassage" 
                         class="materialize-textarea">               
                         </textarea>
@@ -29,7 +28,6 @@ class="hide-on-med-and-down">
 <!-- Dark Theme -->
 <div 
  *ngIf="DarkTheme"
-(click)="serviceMenu=!serviceMenu; themeMenu=false;"
 class="hide-on-med-and-down">    
     <!-- Desktop Display -->
     <div class="center white-text">
@@ -53,7 +51,6 @@ class="hide-on-med-and-down">
 <!-- Light Theme -->
 <div 
  *ngIf="LightTheme"
-(click)="serviceMenu=!serviceMenu; themeMenu=false;"
 class="white hide-on-med-and-down">    
     <!-- Desktop Display -->
     <div class="center black-text">
@@ -77,7 +74,6 @@ class="white hide-on-med-and-down">
 <!-- Cream Theme -->
 <div 
  *ngIf="CreamTheme"
-(click)="serviceMenu=!serviceMenu; themeMenu=false;"
 class="hide-on-med-and-down"
 style="background-color: rgb(236, 195, 147);">    
     <!-- Desktop Display -->
@@ -101,34 +97,132 @@ style="background-color: rgb(236, 195, 147);">
 
 
 
-<!-- Tablet/Phone -->
-<div class="hide-on-large-only">
+<!-- Tablet/Phone Author Theme -->
+<div 
+*ngIf="authorTheme"
+class="hide-on-large-only">
     <img src="{{coverImg}}" alt="cover" id="coverImgMed">
     <!-- Desktop Display -->
     <div class="center white-text">
-        <div class="col s8 m8 offset-s2 offset-m2">
+        <div class="container">
+            <div class="col s8 m8 offset-s2 offset-m2">
     
-            <textarea
-            disabled
-            [value]="title + text"                             
-            id="writtenPassage" 
-            class="materialize-textarea">               
-            </textarea>
-                    
+                <textarea
+                disabled
+                [value]="title + text"                             
+                id="mobileWrittenPassage" 
+                class="materialize-textarea">               
+                </textarea>
+                        
+            </div>
         </div>
     </div>
 </div>
 
 
-<!-- Menu Button -->
-<div *ngIf="showMenuBtn"> 
-    <div  
-    *ngIf="!serviceMenu"
-    class="serviceCard ">
-        <div 
-        (click)="serviceMenu=!serviceMenu;"
-        class="btn btn-large  pulse" id="serviceBtn">
-            Menu  <i class="material-icons large right">send</i>
+<!-- Tablet/Phone Dark Theme -->
+<div 
+*ngIf="DarkTheme"
+class="black hide-on-large-only">
+    
+    <!-- Desktop Display -->
+    <div class="center white-text">
+        <div class="container">
+            <div class="col s8 m8 offset-s2 offset-m2">
+    
+                <textarea
+                disabled
+                [value]="title + text"                             
+                id="mobileWrittenPassageDark" 
+                class="materialize-textarea">               
+                </textarea>
+                        
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Tablet/Phone Light Theme -->
+<div 
+*ngIf="LightTheme"
+class="white hide-on-large-only">
+    
+    <!-- Desktop Display -->
+    <div class="center white-text">
+        <div class="container">
+            <div class="col s8 m8 offset-s2 offset-m2">
+    
+                <textarea
+                disabled
+                [value]="title + text"                             
+                id="mobileWrittenPassageLight" 
+                class="materialize-textarea">               
+                </textarea>
+                        
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Tablet/Phone Cream Theme -->
+<div 
+*ngIf="CreamTheme"
+class="hide-on-large-only"
+style="background-color: rgb(209, 158, 92);">
+    
+    <!-- Desktop Display -->
+    <div class="center white-text">
+        <div class="container">
+            <div class="col s8 m8 offset-s2 offset-m2">
+    
+                <textarea
+                disabled
+                [value]="title + text"                             
+                id="mobileWrittenPassageCream" 
+                class="materialize-textarea">               
+                </textarea>
+                        
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Hidden Click Area for Left and Right Menu -->
+
+<!-- Start with left menu -->
+<div 
+(click)="serviceMenu=!serviceMenu; themeMenu=false;"
+class="leftMenu">
+</div>
+
+<!-- Start with right menu -->
+<div 
+*ngIf="author"
+(click)="authorMenu=!authorMenu; privacyMenu=false; "
+class="rightMenu">
+</div>
+
+
+<!-- Service Buttons for Author-->
+<div     
+*ngIf="authorMenu"
+class="serviceMenuAuthor">
+    <div id="serviceAuthorList">
+        <div
+        *ngFor="let card of serviceAuthorCards; let i = index;">            
+        <div
+        (click)="authorMenuAction(card.action)"
+        class="card" id="serviceMenuAuthorBtn">
+            <div class="card-content white-text">
+            <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+            <p style="font-size: small;"><i>{{card.desc}}</i></p>
+            </div>        
+        </div>
+        <br>
         </div>
     </div>
 </div>
@@ -154,7 +248,8 @@ style="background-color: rgb(236, 195, 147);">
     </div>
 
 
-    <!-- Theme Buttons -->    <div     
+    <!-- Theme Buttons -->   
+     <div     
     *ngIf="themeMenu"
     class="serviceMenu">
         <div id="serviceList">
@@ -172,3 +267,43 @@ style="background-color: rgb(236, 195, 147);">
             </div>
         </div>
     </div>
+
+    <!-- Privacy Buttons -->    
+    <div     
+    *ngIf="privacyMenu"
+    class="serviceMenuAuthor">
+        <div id="serviceAuthorList">
+            <div
+            *ngFor="let card of authorPrivacyCards; let i = index;">            
+            <div
+            (click)="privacyAction(card.action)"
+            class="card" id="serviceMenuAuthorBtn">
+                <div class="card-content white-text">
+                <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+                <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                </div>        
+            </div>
+            <br>
+            </div>
+        </div>
+    </div>
+
+        <!-- Deletion Buttons -->    
+        <div     
+        *ngIf="deletionMenu"
+        class="serviceMenuAuthor">
+            <div id="serviceAuthorList">
+                <div
+                *ngFor="let card of deletionCards; let i = index;">            
+                <div
+                (click)="deletionMenuAction(card.action)"
+                class="card" id="serviceMenuAuthorBtn">
+                    <div class="card-content white-text">
+                    <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+                    <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                    </div>        
+                </div>
+                <br>
+                </div>
+            </div>
+        </div>

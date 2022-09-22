@@ -9,6 +9,8 @@ import { AuthGuard } from './services/auth.gaurd';
 import { WritingComponent } from './writing/writing.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ReadWritingComponent } from './read-writing/read-writing.component';
+import { EditLegacyComponent } from './edit-legacy/edit-legacy.component';
+
 
 const appRoutes: Routes = [
   {
@@ -39,6 +41,11 @@ const appRoutes: Routes = [
   {
     path: 'newWriting',
     component: WritingComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'editLegacyChapter',
+    component: EditLegacyComponent,
     canActivate: [AuthGuard]
   },
   {

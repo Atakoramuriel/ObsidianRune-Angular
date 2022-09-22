@@ -1,44 +1,158 @@
 <!-- Area for the NavBar -->
 <app-navbar></app-navbar>
 
-<!-- Area for the Legacy Page -->
- <div 
- 
- class="parallax-container">
-    <div class="parallax">
-        <h2 class="parallaxHeader">{{title}}</h2>
-        <img 
-       
-        id="coverImg"
-        src="{{cover}}">
-              <!-- Additional Spacing Require -->
-              <div class="row">
-                <!-- <img 
-                id="authorProfileImg"
-                src="https://obsidianrune.com/static/img/Ruimel.da20829.png" 
-                alt="profileImg"> -->
-                <p id="authorTxt" ><i>{{author}}</i></p>
-            </div>
-    </div>
 
-  </div>
-  <div class="section white-text">
-    <div class="row container">
-  
+<!-- Area for the Legacy Page Desktop -->
+<div class="hide-on-med-only hide-on-small-only">
 
-      <!-- <h2 class="header">{{title}}</h2> -->
-      <div class="row">
-          <div class="container">
+    <div  
+    class="parallax-container">
+       <div class="parallax">
+           <h1 class="parallaxHeader" id="legacyTitle"><u>{{title}}</u></h1>
+           <img        
+           id="coverImg"
+           src="{{cover}}">
+
+       </div>
+   
+     </div>
+   
+     <!-- This section is the entirety of the bottom -->
+     <div class="section white-text">
+
+    <!-- SubMenu displying information -->
+        <!-- For everyone who isnt the author -->
+    <!-- <div 
+    *ngIf="isAuthor"
+     class="row center black">
+        <div class="container">
+                <div class="row container">
+                    <div class="col s4">                        
+                        <h4 id="subtitle">Entries {{Entries}} </h4>
+                    </div>
+                    <div class="col s4">
+                        <h4 id="subtitle">Likes {{Likes}} </h4>
+                    </div>
+                    <div class="col s4">
+                        <h4 id="subtitle">Readers {{Readers}}</h4>
+                    </div>
+                </div>
+        </div>
+    </div>   -->
+    
+<!-- For the author box-->
+    <div 
+    *ngIf="!isAuthor"
+     class="row black">
+        <div style="padding-left: 5%;">
+            <!-- Start of the authors info box -->
+          <div class="authorBox">
               <div class="center">
-                <h5 class="white-text text-darken-3 darken-3"><i>{{desc}}</i></h5>
-              </div>
-          </div>
-      </div>
-    </div>
+                <img  id="authorProfileImg" src="{{authorProfileImg}}" alt="authorProfileImg">
+                <h4 class="authorNameDesk">{{author}}</h4>
+                <!-- Additional Space Required -->
+                <div class="row">
+                    <div class="container"><hr class="solid"></div>
+                </div>
 
-       <!-- SubMenu displying information -->
-       <div class="row center">
-           <div class="container">
+                <!-- Additional Info about the legacy Page -->
+                <div class="container">
+                    <h5 id="legacyDesc">Entries: {{Entries}}</h5>
+                    <h5 id="legacyDesc">Likes: {{Likes}}</h5>
+                    <h5 id="legacyDesc">Readers: {{Readers}}</h5>
+
+                    <!-- Additional Spacing Required -->
+                    <div class="row"><br></div>
+                    <!-- Special Button For Author -->
+                    <div
+                     *ngIf="isAuthor"
+                     (click)="editLegacy()"
+                     class="btn-large" 
+                     id="editBtn">Edit</div>
+                </div>
+              </div>
+          </div>               
+        </div>
+    </div>  
+
+
+    <!-- Area for description  -->
+       <div class="row container">
+         <div class="row">
+             <div class="col s9 offset-s3">
+                 <div class="center">
+                   <h4 class="white-text text-darken-3 darken-3" id="legacyDesc"><i>{{desc}}</i></h4>
+                 </div>
+             </div>
+         </div>
+       </div>
+           
+            <div class="row">
+                <div class="col s3 offset-s3">
+                    <!-- Type of posting -->
+                     <div style="padding-left: 5%;">
+                        <h3 class="bannerTxt"><b>Entries</b></h3>
+                        <hr class="solid">
+                    </div>
+                </div>
+            </div>
+           <!-- Place Entries Below -->
+           <div class="row">
+               <div class="col s9 offset-s3">
+                   <div class="box2">
+                       <div
+                       id="testCardAevum"
+                       class="card"        
+                       *ngFor="let entry of publicEntries; let i = index;">
+                       <div class="space">
+                           <!-- This is the Card -->                     
+                           <div      
+                            (click)="readChapter(entry)"
+                            id="aevumItem"
+                            class="card">
+                            <span class="cardTitle">{{entry.title}}</span>
+                            <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>
+                            <img src="{{entry.cover}}" class="" id="bookCoverImg">
+                           </div>
+                       </div>
+       
+                       </div>
+                   </div>          
+               </div>
+           </div>  
+           
+           
+
+     </div>   
+</div>
+
+<!-- Area for the Legacy Page Tablet-->
+<div class="hide-on-large-only hide-on-small-only">
+
+    <div  
+    class="parallax-container">
+       <div class="parallax">
+           <h2 class="parallaxHeader"><u>{{title}}</u></h2>
+           <img        
+           id="coverImg"
+           src="{{cover}}">
+                 <!-- Additional Spacing Require -->
+               <div class="row">           
+                   <p id="authorTxt" ><i>{{author}}</i></p>
+               </div>
+       </div>
+   
+     </div>
+   
+     <!-- This section is the entirety of the bottom -->
+     <div class="section white-text">
+
+    <!-- SubMenu displying information -->
+        <!-- For everyone who isnt the author -->
+    <div 
+    *ngIf="isAuthor"
+     class="row center black">
+        <div class="container">
                 <div class="row container">
                     <div class="col s4">
                         <h4 id="subtitle">Entries {{Entries}} </h4>
@@ -50,36 +164,78 @@
                         <h4 id="subtitle">Readers {{Readers}}</h4>
                     </div>
                 </div>
-            </div>
-        </div>    
-        
-        <!-- Place Entries Below -->
-        <div class="row">
-            <div class="container">
-                <div class="box2">
-                    <div
-                    id="testCardAevum"
-                    class="card"        
-                    *ngFor="let entry of publicEntries; let i = index;">
-                    <div class="space">
-                        <!-- This is the Card -->                     
-                        <div      
-                         (click)="readChapter(entry)"
-                         id="aevumItem"
-                         class="card">
-                         <span class="cardTitle">{{entry.title}}</span>
-                         <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>
-                         <img src="{{entry.cover}}" class="" id="bookCoverImg">
-                        </div>
-                    </div>
-    
-                    </div>
-                </div>          
-            </div>
         </div>
+    </div>  
+    
+<!-- For the author -->
+    <div 
+    *ngIf="!isAuthor"
+     class="row center black">
+        <div class="container">
+                <div class="row container">
+                    <div class="col s4">
+                        <h4 id="subtitle">Entries {{Entries}} </h4>
+                    </div>
+                    <div class="col s4">
+                        <h4 id="subtitle">Likes {{Likes}} </h4>
+                    </div>
+                    <div class="col s4">
+                        <h4 id="subtitle">Readers {{Readers}}</h4>
+                    </div>
+                </div>                
+        </div>
+    </div>  
 
-  </div>
+    <!-- Additional Spacing Required -->
+    <div class="row">
+        <br>
+    </div>
 
+    <!-- Additional Spacing Required -->
+       <div class="row container">
+         <div class="row">
+             <div class="">
+                 <div class="center">
+                   <h4 class="white-text text-darken-3 darken-3"><i>{{desc}}</i></h4>
+                 </div>
+             </div>
+         </div>
+       </div>
+   
+
+           
+           <!-- Place Entries Below -->
+           <div class="row">
+               <div class="container">
+                   <div class="box2">
+                       <div
+                       id="testCardAevum"
+                       class="card"        
+                       *ngFor="let entry of publicEntries; let i = index;">
+                       <div class="space">
+                           <!-- This is the Card -->                     
+                           <div      
+                            (click)="readChapter(entry)"
+                            id="aevumItem"
+                            class="card">
+                            <span class="cardTitle">{{entry.title}}</span>
+                            <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>
+                            <img src="{{entry.cover}}" class="" id="bookCoverImg">
+                           </div>
+                       </div>
+       
+                       </div>
+                   </div>          
+               </div>
+           </div>
+   
+     </div>
+   
+   
+</div>
+
+
+<!-- Area for the Legacy Page Mobile -->
 
   <style>
       #time{

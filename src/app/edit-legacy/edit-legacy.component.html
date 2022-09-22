@@ -1,0 +1,62 @@
+<!-- Area for the NavBar -->
+<app-navbar></app-navbar>
+
+<!-- Area for the Legacy Page Desktop-->
+<div class="hide-on-med-and-down">
+
+    <div  
+    class="parallax-container">
+       <div class="parallax">
+           <h2 class="parallaxHeader">{{title}}</h2>
+           <img        
+           id="coverImg"
+           src="{{cover}}">
+                 <!-- Additional Spacing Require -->
+               <div class="row">           
+                   <p id="authorTxt" ><i>{{author}}</i></p>
+               </div>
+       </div>
+   
+     </div>
+   
+     <!-- This section is the entirety of the bottom -->
+     <div class="section white-text">
+       <div class="row container">
+         <div class="row">
+             <div class="container">
+                 <div class="center">
+                   <h5 class="white-text text-darken-3 darken-3"><i>{{desc}}</i></h5>
+                 </div>
+             </div>
+         </div>
+       </div>
+   
+          <!-- SubMenu displying information -->
+          <div class="row center">
+              <div class="container">
+                   <div class="row container">
+                       <div class="col s4">
+                           <h4 id="subtitle">Entries {{Entries}} </h4>
+                       </div>
+                       <div class="col s4">
+                           <h4 id="subtitle">Likes {{Likes}} </h4>
+                       </div>
+                       <div class="col s4">
+                           <h4 id="subtitle">Readers {{Readers}}</h4>
+                       </div>
+                   </div>
+               </div>
+           </div>    
+           
+
+   
+     </div>
+   
+   
+</div>
+
+  <style>
+      #time{
+          width: 4px;
+      }
+  </style>

@@ -73,6 +73,7 @@ export class WritingComponent implements OnInit {
     type: "",
     updated: "",
     author: "",
+    legacyID: ""
   },
  ];
 
@@ -337,6 +338,7 @@ privacy: string = "public";
         text: this.writtenPassage,
         timestamp: this.timeStamp,
         title: this.newTitle,
+        legacyID: legacyID
       }
       //Call to the Function 
       this.AuthService.newLegacyPost(postData, legacyID)
@@ -512,6 +514,7 @@ privacy: string = "public";
             type: data.type as string,
             privacy: data.privacy as string,
             updated: data.updated as string,
+            legacyID: data.legacyID as string
           };
           this.legacyList.push(legacyData);
       });

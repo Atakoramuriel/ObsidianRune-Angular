@@ -38,6 +38,10 @@ export class LegacyComponent implements OnInit {
     readers: string = "";
     likes: string ="";
 
+    //isAuthor
+    isAuthor: boolean = false;
+
+
   //Lgeacy Info Needed
   Entries: String = "0";
   Likes: String = "0";
@@ -92,7 +96,7 @@ export class LegacyComponent implements OnInit {
   ];
     
   loadedData: boolean = false;
-
+  count: number = 0;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -110,7 +114,7 @@ export class LegacyComponent implements OnInit {
 
   ngOnInit(): void {
  
-    const chapterData = sessionStorage.getItem('chatperData');
+    const chapterData = sessionStorage.getItem('chapterData');
     if(chapterData){
       console.log("Chapter Data Already Reloaded");
       sessionStorage.removeItem('chapterData');
@@ -120,11 +124,12 @@ export class LegacyComponent implements OnInit {
 
 
     if(!this.loadedData){
+      
       //Load the page information 
       this.loadLegacyInfo();
       this.loadLegacyPosts();
       this.loadedData = true;
-
+      this.count++;
   
     }
   
@@ -152,12 +157,18 @@ export class LegacyComponent implements OnInit {
       }).then(() => {
           this.getUserInfo(this.author);
           localStorage.setItem('refresh', 'true');
+          
       })
       this.alreadyLoaded = localStorage.getItem('refresh') as string;
 
   }
 
 
+  editLegacy(){
+    sessionStorage.setItem("chapterData", this.legacyID)
+    //Navigate Away 
+    this.router.navigate(['/editLegacyChapter']);
+  }
   
 
   loadLegacyPosts(){
@@ -224,18 +235,24 @@ export class LegacyComponent implements OnInit {
  //Navigate to the Read Page 
   readChapter(card: any){
    
-    const chapter = card;
-  //  console.log(card);
+    var chapter = card;
+    chapter["LegacyId"] = this.legacyID;
+    // console.log("INFORMATION BELOW")
+    console.log(card);
    
   const dataValue = sessionStorage.getItem('chapterData');
   if(dataValue){
     //Remove Data
-    console.log("Cleaning chapter Data")
-    sessionStorage.removeItem('chapterData');
+      console.log("Cleaning chapter Data")
+      sessionStorage.removeItem('chapterData');
 
-    console.log("Cleaning chapter from Service")
-    this.chapterService.cleanChapter();
+      console.log("Cleaning chapter from Service")
+      this.chapterService.cleanChapter();
 
+    //Now progress forward
+      this.chapterService.setChapter(chapter);
+      sessionStorage.setItem('chapterData',JSON.stringify(chapter));
+      this.router.navigate(['/Reading']);
 
   }else{
     console.log("No Data to report");

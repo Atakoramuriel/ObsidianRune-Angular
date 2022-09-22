@@ -12,9 +12,9 @@
     text-align: left;
     padding-left: 15%;
     z-index: 2;
-    color: rgb(255, 174, 0);
+    color: rgb(196, 143, 0);
     text-shadow: 2px 2px #000000;
-    font-family:'Times New Roman', Times, serif
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 
@@ -29,39 +29,17 @@
     font-family:Arial, Helvetica, sans-serif;
 }
 
-.authorBox{
-    background-color: rgb(11, 14, 24);
-    height: 65%;
-    width: 20%;
-    position: absolute;
-    top: 60%;
-    border-radius: 10px;
-}
-
-
 /* Set the size of the profile image  */
 #authorProfileImg{
-    width: 50%;
-    border-radius: 50%;        
+    width: 5%;
+    border-radius: 50%;
+    float: left;
+    vertical-align: middle;
+    position: absolute;
+    top: 65%;
+    left: 15%;
+    text-align: left;
 }
-
-
-.authorNameDesk{
-    font-family: 'Times New Roman', Times, serif;
-}
-
-#legacyDesc{
-    font-family: 'Times New Roman', Times, serif;
-}
-
-#editBtn{
-    background-color: rgb(0, 140, 255);
-}
-#editBtn:hover{
-    background-color: rgb(2, 58, 143);
-}
-
-
 
 #authorTxt{
     font-size: 175%;
@@ -77,7 +55,7 @@
 
 #subtitle{
     color: white;
-    font-family:Georgia, 'Times New Roman', Times, serif
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* For the overall collection */
@@ -94,13 +72,6 @@
 .section{
     background-color: rgba(0, 0, 0, 0.452);
 }
-
-.bannerTxt{
-    font-family: 'Times New Roman', Times, serif;
-    color: rgb(153, 197, 255);
-    
-}
-
 
 .box2{    
     overflow-x: scroll;   
