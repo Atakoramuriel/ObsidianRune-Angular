@@ -719,6 +719,11 @@ background-color: rgba(0, 0, 0, 0.123);
 
 }
 
+.sidenav:hover{
+    cursor: pointer;
+}
+
+
 #serviceList{
     position: fixed;
     top: 19%;

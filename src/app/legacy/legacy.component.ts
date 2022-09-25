@@ -8,6 +8,8 @@ import { User } from '../models/user';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { URLSearchParams } from 'url';
 import { ChapterService } from '../services/chapter.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs';
 @Component({
   selector: 'app-legacy',
   templateUrl: './legacy.component.html',
@@ -17,10 +19,12 @@ export class LegacyComponent implements OnInit {
 
   //refresh Rate 
   alreadyLoaded: string = 'false';
+  editMode: boolean = false;
 
   //LegacyID
   legacyID: string= "";
   currentUser: string = "";
+  currentUserID: string= "";
   //Starting Variables 
   title: String = "";
   desc: String = "";
@@ -42,11 +46,16 @@ export class LegacyComponent implements OnInit {
     isAuthor: boolean = false;
 
 
-  //Lgeacy Info Needed
+  //Legacy Info Needed
   Entries: String = "0";
   Likes: String = "0";
   Readers: String = "0";
   Contributers: String = "0";
+
+  //Deleted 
+  forDeletion: string[] = [];
+  FDL: number = 0;
+
 
   // For all entries
   allEntries = [
@@ -94,16 +103,50 @@ export class LegacyComponent implements OnInit {
       updated: "",
     }
   ];
+  preDeletedEntries = [
+    {
+      id: "",
+      title: "",
+      text: "",
+      previewTxt: "",
+      author: "",
+      privacy: "",
+      cover: "",
+      timestamp: "",
+      date: "",
+      type: "",
+      updated: "",
+    }
+  ];
     
   loadedData: boolean = false;
+
+  //For uploading Image 
+  filePath: string = "";
+  imageUploaded: boolean = false;
+  downloadLink: string = "";
+
+  defaultPostImgPath: string ="/N4Posts";
+  defaultLegacyImgPath: string ="/LegacyCovers";
+
+  
+  //For Error Messages
+  showErrMsg: boolean = false;
+
+
+  privacySetting : string = "";
+  isPublic: boolean = true;
+
   count: number = 0;
+  imageLink: any;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private activatedroute: ActivatedRoute,
     public AuthService: AuthService,
     public firebaseAuth: AngularFireAuth,
-    private chapterService: ChapterService
+    private chapterService: ChapterService,
+    private af: AngularFireStorage
   ) { 
     this.activatedroute.queryParams.subscribe(data => {
       
@@ -113,7 +156,12 @@ export class LegacyComponent implements OnInit {
   }
 
   ngOnInit(): void {
- 
+
+  }
+
+  ngAfterViewInit() {
+    const currentUser = JSON.parse(localStorage.getItem('userData') as string);
+    this.currentUserID = currentUser['uid'];
     const chapterData = sessionStorage.getItem('chapterData');
     if(chapterData){
       console.log("Chapter Data Already Reloaded");
@@ -127,12 +175,13 @@ export class LegacyComponent implements OnInit {
       
       //Load the page information 
       this.loadLegacyInfo();
-      this.loadLegacyPosts();
+      // this.loadLegacyPosts();
       this.loadedData = true;
       this.count++;
   
     }
   
+    this.preDeletedEntries.pop();
   
     $(document).ready(function(){
       $('.parallax').parallax();
@@ -141,7 +190,133 @@ export class LegacyComponent implements OnInit {
   
   }
 
-  ngAfterViewInit() {
+
+ followLegacy(chapterID: string){
+   this.AuthService.bookmarkLegacy(this.legacyID, this.currentUserID, chapterID).then(response => {
+      M.toast({html: "Successfully Bookmarked Legacy"})
+   }).catch(error => { 
+      
+   })
+ }
+
+
+  //For File uploads
+  upload($event: any){
+    // alert("Called")
+    //upload and get event
+    // console.log("Upload function Called. . .")
+
+    //get the file path 
+    this.filePath = $event.target.files[0];
+    var fileName = $event.target.files[0].name;
+    //Test console of firepath 
+    console.log(this.filePath);
+    console.log($event.target.files[0].name);
+
+    this.uploadFile(fileName);
+  }
+
+
+
+  uploadFile(fileName: string) {
+
+    //Test console output 
+    console.log("UploadFile Called. . .")
+
+    
+    //upload file 
+    console.log("Attempting upload to firebase ")
+
+    var fullPath = this.defaultLegacyImgPath + "/" + this.currentUserID + "/" + fileName;
+
+    //Place file within Firebase Storage
+    var uploadTask = this.af.upload(fullPath, this.filePath)
+
+    var fileRef = this.af.ref(fullPath);
+    
+    //Get the percentage of the upload progress
+    var uploadPercent = uploadTask.percentageChanges();
+    console.log("Uploading... ");
+    //Find out when download URL is available
+    uploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        this.imageLink = fileRef.getDownloadURL();
+        this.imageLink.subscribe((url: string) => {
+          this.downloadLink = url;
+        })
+        this.setImage();
+        this.imageUploaded = true;
+      })
+    )
+    .subscribe();
+  }
+
+  //Basic idea is... get the image from the cloud
+  setImage(){
+    alert(this.downloadLink)
+    alert(this.cover)
+      //Set the upload link to true
+      this.imageUploaded = true;
+      this.cover = this.downloadLink;
+      
+  }
+
+ 
+
+  addForDeletion(postID: string, entry: any, index: number){
+    //Add to predeletion 
+    this.preDeletedEntries.push(entry);
+
+    //Add to for Deletion final array 
+    this.forDeletion.push(postID);
+    this.FDL++;
+
+    //Remove from the current array 
+    this.publicEntries.splice(index,1);
+    
+  }
+
+  removeForDeletion(postID: string, entry: any, index: number){
+    //Add to Public Array again
+    this.publicEntries.push(entry);
+
+    //Remove from for Deletion
+    var tempID = this.forDeletion.indexOf(postID)
+    this.FDL--;
+    //Remove from the PreDeleted Series
+    this.forDeletion.splice(tempID,1);
+    this.preDeletedEntries.splice(tempID,1);    
+  }
+
+
+  deleteChapters(){
+      this.forDeletion.forEach(postID => {
+        alert("Deleting Story ==> " + postID)
+        this.AuthService.deleteLegacyChapter(this.legacyID, postID).then(response => {
+          M.toast({html: "Successfully Deleted"});
+        }).catch(error => {
+          M.toast({html: "Error Deleting Chapter: " + error});
+        })
+
+       
+    });
+  }
+
+  updateLegacy(){
+
+    const newData = {
+      cover: this.imageUploaded== true ? this.downloadLink as unknown as string : this.cover,
+      title : this.title,
+      desc : this.desc, 
+      privacy: this.privacySetting
+    }
+    this.AuthService.updateLegacy(this.legacyID, newData).then(()=>{
+      M.toast({html: "Legacy Updated"});
+      this.editMode = false;
+      location.reload();
+    }).catch((error)=> {
+      M.toast({html: "Error Saving : " + error});
+    })
   }
 
   //This is that later function 
@@ -154,13 +329,36 @@ export class LegacyComponent implements OnInit {
             this.desc = legacyData.desc as string;
             this.cover = legacyData.cover as string;
             this.author = legacyData.author as string;
+            this.privacySetting = legacyData.privacy as string; 
+            if(this.author == this.currentUserID){
+              // this.isAuthor = true;
+            }
+
+            if(this.privacySetting == "public"){
+              this.isPublic = true;
+            }else{
+              this.isPublic = false;
+            }
+
+
       }).then(() => {
           this.getUserInfo(this.author);
           localStorage.setItem('refresh', 'true');
+          this.loadLegacyPosts();
           
       })
       this.alreadyLoaded = localStorage.getItem('refresh') as string;
 
+  }
+
+  changePrivacy(){
+    if(this.isPublic){
+      this.privacySetting = "private"
+      this.isPublic = false;
+    }else{
+      this.privacySetting = "public",
+      this.isPublic = true;
+    }
   }
 
 
@@ -179,10 +377,13 @@ export class LegacyComponent implements OnInit {
       this.publicEntries.splice(0,1);
 
     this.AuthService.getLegacyPosts(this.legacyID).subscribe(data => {
+      this.publicEntries = [];
       data.map(e => {
           const data = e.payload.doc.data() as LegacyPost;
-
-
+         if( this.cover == "" ){
+           alert("NUL")
+         }
+     
           // Data to be pushed to array
           const dataUpload = {
             id: e.payload.doc.id,
@@ -210,7 +411,7 @@ export class LegacyComponent implements OnInit {
           if(dataUpload['privacy'] == "private"){
              this.privateEntries.push(dataUpload);
           }
-          this.Entries = this.allEntries.length as unknown as string;
+          this.Entries = this.publicEntries.length as unknown as string;
 
       })
     })

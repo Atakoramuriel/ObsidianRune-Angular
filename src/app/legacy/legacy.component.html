@@ -3,53 +3,36 @@
 
 
 <!-- Area for the Legacy Page Desktop -->
-<div class="hide-on-med-only hide-on-small-only">
-
-    <div  
+<div 
+class="hide-on-med-only hide-on-small-only">
+    
+    <div     
+    (click)="upload($event);"
+    id="editParallax"
     class="parallax-container">
        <div class="parallax">
-           <h1 class="parallaxHeader" id="legacyTitle"><u>{{title}}</u></h1>
-           <img        
-           id="coverImg"
-           src="{{cover}}">
-
+           <img                       
+           id="editCoverImg"
+           src="{{cover}}">    
+           <h1 *ngIf="!editMode" class="parallaxHeader" id="legacyTitle"><u>{{title}}</u></h1>                           
+           <h1 *ngIf="editMode" class="parallaxHeader" id="editLegacyTitleParallax"><u>Editing {{title}}</u></h1>  
        </div>
-   
      </div>
    
      <!-- This section is the entirety of the bottom -->
      <div class="section white-text">
 
-    <!-- SubMenu displying information -->
-        <!-- For everyone who isnt the author -->
-    <!-- <div 
-    *ngIf="isAuthor"
-     class="row center black">
-        <div class="container">
-                <div class="row container">
-                    <div class="col s4">                        
-                        <h4 id="subtitle">Entries {{Entries}} </h4>
-                    </div>
-                    <div class="col s4">
-                        <h4 id="subtitle">Likes {{Likes}} </h4>
-                    </div>
-                    <div class="col s4">
-                        <h4 id="subtitle">Readers {{Readers}}</h4>
-                    </div>
-                </div>
-        </div>
-    </div>   -->
-    
+
 <!-- For the author box-->
     <div 
-    *ngIf="!isAuthor"
+    *ngIf="isAuthor"
      class="row black">
         <div style="padding-left: 5%;">
             <!-- Start of the authors info box -->
           <div class="authorBox">
               <div class="center">
                 <img  id="authorProfileImg" src="{{authorProfileImg}}" alt="authorProfileImg">
-                <h4 class="authorNameDesk">{{author}}</h4>
+                <h4 class="authorNameDesk"><b>{{author}}</b></h4>
                 <!-- Additional Space Required -->
                 <div class="row">
                     <div class="container"><hr class="solid"></div>
@@ -61,23 +44,139 @@
                     <h5 id="legacyDesc">Likes: {{Likes}}</h5>
                     <h5 id="legacyDesc">Readers: {{Readers}}</h5>
 
-                    <!-- Additional Spacing Required -->
-                    <div class="row"><br></div>
-                    <!-- Special Button For Author -->
-                    <div
-                     *ngIf="isAuthor"
-                     (click)="editLegacy()"
-                     class="btn-large" 
-                     id="editBtn">Edit</div>
+
+                    <!-- ?For all buttons EDIT -->
+                    <div 
+                    *ngIf="editMode"
+                    class="regMenu">                    
+                        <!-- Additional Spacing Required -->
+                        <div class="row"><br></div>        
+                        <div
+                        *ngIf="isAuthor && editMode"
+                        (click)="updateLegacy()"
+                        class="btn-large" 
+                        id="authorMenuBtn">Save Changes</div>
+                        <div class="row"><br></div>        
+                        <div
+                        *ngIf="isAuthor && editMode"
+                        (click)="editMode=!editMode"
+                        class="btn-large" 
+                        id="authorMenuBtn">Cancel Editing</div>
+                        <div class="row"><br></div>        
+                        <div
+                        *ngIf="isAuthor && (editMode && FDL > 0)"
+                        (click)="deleteChapters()"
+                        class="btn-large red darken-3" 
+                        id="authorMenuBtn">Delete Selected</div>
+                    </div>
+                    <!-- ?For all buttons NONEDIT -->
+                    <div 
+                    *ngIf="!editMode"
+                    class="regMenu">                    
+                        <!-- Additional Spacing Required -->
+                        <div class="row"><br></div>
+                        <!-- Special Button For Author -->
+                        <div
+                        *ngIf="isAuthor"
+                        (click)="editLegacy()"
+                        class="btn-large" 
+                        id="authorMenuBtn">New Entry</div>
+                        
+                        <!-- Additional Spacing Required -->
+                        <div class="row"> <br> </div>
+
+                        <div
+                        *ngIf="isAuthor"
+                        (click)="editMode=!editMode"
+                        class="btn-large" 
+                        id="authorMenuBtn">Edit Legacy</div>
+                    </div>
                 </div>
               </div>
           </div>               
         </div>
     </div>  
 
+<!-- For the follower box-->
+<div 
+*ngIf="!isAuthor"
+ class="row black">
+    <div style="padding-left: 5%;">
+        <!-- Start of the authors info box -->
+      <div class="followerBox">
+          <div class="center">
+            <img  id="authorProfileImg" src="{{authorProfileImg}}" alt="authorProfileImg">
+            <h4 class="authorNameDesk"><b>{{author}}</b></h4>
+            <!-- Additional Space Required -->
+            <div class="row">
+                <div class="container"><hr class="solid"></div>
+            </div>
 
+            <!-- Additional Info about the legacy Page -->
+            <div class="container">
+                <h5 id="legacyDesc">Entries: {{Entries}}</h5>
+                <h5 id="legacyDesc">Likes: {{Likes}}</h5>
+                <h5 id="legacyDesc">Readers: {{Readers}}</h5>
+
+                <!-- Additional Spacing Required -->
+                <div class="row"><br></div>
+
+
+                  <!-- Buttons For Non Author -->
+                <div
+                *ngIf="!isAuthor"
+                
+                class="btn-large" 
+                id="followBtn">Follow</div>
+
+            </div>
+          </div>
+      </div>               
+    </div>
+</div> 
     <!-- Area for description  -->
-       <div class="row container">
+       <div 
+       *ngIf="editMode"
+       class="row container">
+         <div class="row">
+             <div class="col s9 offset-s3">
+                 <div class="center">
+                    <!-- This is the Cover Card  -->                     
+                    <div class="file-field input-field black">                   
+                        <div                              
+                        id="aevumItemDel"
+                        class="card">   
+                        <span class="card-title"><i class="material-icons">add_a_photo</i> Click to Change Cover</span>       
+                        <img *ngIf="!imageUploaded" src="{{cover}}" class="" id="editBookCoverImg">
+                        <img *ngIf="imageUploaded" [src]="downloadLink" class="" id="editBookCoverImg">
+                        </div>
+                        <input type="file" (change)="upload($event)">
+                    </div>
+                    <textarea
+                    [(ngModel)]="title"
+                    placeholder="Enter Title. . ."
+                    id="editlegacyTitle" 
+                    class="materialize-textarea"></textarea>
+                    <div class="row"><br></div>
+                    <textarea
+                    [(ngModel)]="desc"
+                    placeholder="Start Here . . ."
+                    id="editlegacyDesc" 
+                    class="materialize-textarea"></textarea>
+                    <div class="container">                    
+                    <h4>Current Privacy Setting : </h4>
+                        <div class="container">
+                            <div *ngIf="isPublic" (click)="changePrivacy()" id="publicBtn" class=""> <h5 id="fancyTxt">{{privacySetting}}</h5></div>
+                            <div *ngIf="!isPublic" (click)="changePrivacy()" id="privateBtn"> <h5 id="fancyTxt">{{privacySetting}}</h5></div>
+                        </div>
+                    </div>
+                 </div>
+             </div>
+         </div>
+       </div>
+       <div 
+       *ngIf="!editMode"
+       class="row container">
          <div class="row">
              <div class="col s9 offset-s3">
                  <div class="center">
@@ -87,40 +186,122 @@
          </div>
        </div>
            
+
+       <!-- Full Entries Here NONEDIT -->
+       <div *ngIf="!editMode" class="FullEntries">
             <div class="row">
                 <div class="col s3 offset-s3">
                     <!-- Type of posting -->
-                     <div style="padding-left: 5%;">
+                    <div style="padding-left: 5%;">
                         <h3 class="bannerTxt"><b>Entries</b></h3>
                         <hr class="solid">
                     </div>
                 </div>
             </div>
-           <!-- Place Entries Below -->
-           <div class="row">
-               <div class="col s9 offset-s3">
-                   <div class="box2">
-                       <div
-                       id="testCardAevum"
-                       class="card"        
-                       *ngFor="let entry of publicEntries; let i = index;">
-                       <div class="space">
-                           <!-- This is the Card -->                     
-                           <div      
+        <!-- Place Entries Below -->
+        <div class="row">
+            <div class="col s9 offset-s3">
+                <div class="box2">
+                    <div
+                    id="testCardAevum"
+                    class="card"        
+                    *ngFor="let entry of publicEntries; let i = index;">
+                    <div class="space">
+                        <!-- This is the Card -->                     
+                        <div      
                             (click)="readChapter(entry)"
                             id="aevumItem"
                             class="card">
                             <span class="cardTitle">{{entry.title}}</span>
                             <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>
                             <img src="{{entry.cover}}" class="" id="bookCoverImg">
-                           </div>
-                       </div>
-       
-                       </div>
-                   </div>          
-               </div>
-           </div>  
-           
+                        </div>
+                    </div>
+    
+                    </div>
+                </div>          
+            </div>
+        </div>         
+       </div>
+
+
+
+
+
+
+       <!-- To be Deleted Here EDITMODE-->
+       <div *ngIf="editMode && (forDeletion.length > 0)" class="FullEntries">
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <!-- Type of posting -->
+                    <div style="padding-left: 5%;">
+                        <h3 class="bannerTxt"><b>To Be Deleted</b></h3>
+                        <hr class="solid">
+                    </div>
+                </div>
+            </div>
+        <!-- Place Entries Below -->
+        <div class="row">
+            <div class="col s9 offset-s3">
+                <div class="box2">
+                    <div
+                    id="delCardAevum"
+                    class="card"        
+                    *ngFor="let entry of preDeletedEntries; let i = index;">
+                    <div class="space">
+                        <!-- This is the Card -->                     
+                        <div      
+                            (click)="removeForDeletion(entry.id, entry, i)"
+                            id="aevumItemDel"
+                            class="card">
+                            <span class="cardTitle">{{entry.title}}</span>                            
+                            <img src="{{entry.cover}}" class="" id="bookCoverImg">
+                        </div>
+                    </div>    
+                    </div>
+                </div>          
+            </div>
+        </div>         
+       </div>
+
+
+       <!-- Full Entries Here EDITMODE-->
+       <div *ngIf="editMode " class="FullEntries">
+            <div class="row">
+                <div class="col s6 offset-s3">
+                    <!-- Type of posting -->
+                    <div style="padding-left: 5%;">
+                        <h3 class="bannerTxt"><b>Click to Select for Deletion </b></h3>
+                        <hr class="solid">
+                    </div>
+                </div>
+            </div>
+        <!-- Place Entries Below -->
+        <div class="row">
+            <div class="col s9 offset-s3">
+                <div class="box2">
+                    <div
+                    id="testCardAevum"
+                    class="card"        
+                    *ngFor="let entry of publicEntries; let i = index;">
+                    <div class="space">
+                        <!-- This is the Card -->                     
+                        <div      
+                            (click)="addForDeletion(entry.id, entry, i)"
+                            id="aevumItemDel"
+                            class="card">
+                            <span class="cardTitle">{{entry.title}}</span>
+                            <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>
+                            <img src="{{entry.cover}}" class="" id="bookCoverImg">
+                        </div>
+                    </div>
+    
+                    </div>
+                </div>          
+            </div>
+        </div>         
+       </div>
+
            
 
      </div>   
@@ -209,14 +390,14 @@
                <div class="container">
                    <div class="box2">
                        <div
-                       id="testCardAevum"
+                       id="testCardAevumMed"
                        class="card"        
                        *ngFor="let entry of publicEntries; let i = index;">
                        <div class="space">
                            <!-- This is the Card -->                     
                            <div      
                             (click)="readChapter(entry)"
-                            id="aevumItem"
+                            id="aevumItemMed"
                             class="card">
                             <span class="cardTitle">{{entry.title}}</span>
                             <p id="cardFooter" class="blue-grey-text text-lighten-3">{{entry.date}}</p>

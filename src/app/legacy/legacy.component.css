@@ -1,8 +1,17 @@
 
 /* This is the image in the background */
+#editCoverImg{
+    width: 25%;
+    filter: brightness(35%);
+}
+#editCoverImg:hover{
+    cursor: pointer;
+    width: 25%;
+    filter: brightness(15%);
+}
 #coverImg{
     width: 25%;
-    filter: brightness(50%);
+    filter: brightness(55%);
 }
 
 /* This is the Title */
@@ -17,6 +26,30 @@
     font-family:'Times New Roman', Times, serif
 }
 
+#editLegacyTitle{
+    position: absolute;
+    top: 50%;
+    text-align: left;
+    padding-left: 15%;
+    z-index: 5;
+    color: rgb(255, 174, 0);
+    text-shadow: 2px 2px #000000;
+    font-family:'Times New Roman', Times, serif
+}
+#editLegacyTitleParallax{
+    position: absolute;
+    top: 50%;
+    text-align: left;
+    padding-left: 15%;
+    z-index: 5;
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px #000000;
+    font-family:'Times New Roman', Times, serif
+}
+
+#editParallax:hover{
+    cursor: pointer;
+}
 
 /* Section background Color */
 #section{
@@ -31,13 +64,22 @@
 
 .authorBox{
     background-color: rgb(11, 14, 24);
-    height: 65%;
+    height: 80%;
     width: 20%;
     position: absolute;
     top: 60%;
     border-radius: 10px;
 }
 
+
+.followerBox{
+    background-color: rgb(11, 14, 24);
+    height: 65%;
+    width: 20%;
+    position: absolute;
+    top: 60%;
+    border-radius: 10px;
+}
 
 /* Set the size of the profile image  */
 #authorProfileImg{
@@ -48,18 +90,32 @@
 
 .authorNameDesk{
     font-family: 'Times New Roman', Times, serif;
+    color: #ff9100;
 }
 
 #legacyDesc{
     font-family: 'Times New Roman', Times, serif;
 }
 
+#authorMenuBtn{
+    background-color: rgb(128, 87, 11);
+    width: 100%;
+}
+
 #editBtn{
-    background-color: rgb(0, 140, 255);
+    background-color: rgb(128, 87, 11);
 }
 #editBtn:hover{
+    background-color: rgb(255, 196, 0);
+}
+
+#followBtn{
+    background-color: rgb(0, 140, 255);
+}
+#followBtn:hover{
     background-color: rgb(2, 58, 143);
 }
+
 
 
 
@@ -161,7 +217,49 @@
     position: absolute;
     z-index: 1;
   }
+#editBookCoverImg{
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    z-index: 1;
+  }
+#editBookCoverImg:hover{
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    z-index: 1;
+    filter: brightness(35%);
+  }
 
+.card-title{
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    z-index: 5;
+}
+
+#delCardAevum{
+    
+    width: 35%;
+    min-width: 30%;
+    max-width: 40%;
+    height: 200px;
+    display: inline-block;
+    background-color: #00000000;
+ 
+}
+#testCardAevumMed{
+    
+    width: 60%;
+    min-width: 30%;
+    max-width: 50%;
+    height: 400px;
+    display: inline-block;
+    background-color: #00000000;
+ 
+}
 #testCardAevum{
     
     width: 35%;
@@ -171,6 +269,23 @@
     display: inline-block;
     background-color: #00000000;
  
+}
+#aevumItemMed{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 100%;
+    /* border:solid rgb(255, 123, 0) 2px; */
+    display: inline-block;
+}
+
+#aevumItemMed:hover{
+    background-color:rgb(41, 4, 8);
+    border-radius:15px;
+    height:200px;
+    cursor: pointer;
+    border:solid rgb(255, 38, 0) 2px;
 }
 #aevumItem{
     background-color:rgb(3, 4, 36);
@@ -189,6 +304,23 @@
     cursor: pointer;
     border:solid rgb(255, 38, 0) 2px;
 }
+#aevumItemDel{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 100%;
+    /* border:solid rgb(255, 123, 0) 2px; */
+    display: inline-block;
+}
+
+#aevumItemDel:hover{
+    background-color:rgb(41, 4, 8);
+    border-radius:15px;
+    height:200px;
+    cursor: pointer;
+    border:solid rgb(255, 38, 0) 2px;
+}
 
 .bookFrame{
     width: 35%;
@@ -199,6 +331,23 @@
     background-color: #00000000;
 }
 
+
+#editlegacyTitle{
+    color: rgb(66, 154, 255);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;    
+    background-color: #181818;
+    border-radius: 10px;
+    height: 50px;
+}
+#editlegacyDesc{
+    color: rgb(66, 132, 218);
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    height: 200px;
+    background-color: #181818;
+    border-radius: 10px;
+}
 
 #userOptions{
     color: white;
@@ -213,4 +362,35 @@
 .title{
     font-family:Georgia, 'Times New Roman', Times, serif;
     color: rgb(214, 144, 15);
+}
+
+#publicBtn{
+    background-color: rgb(0, 119, 255);
+    padding: 1%;
+    width: 100%;
+    border-radius: 10px;
+}
+#privateBtn{
+    background-color: rgb(255, 51, 0);
+    padding: 1%;
+    width: 100%;
+    border-radius: 10px;
+}
+#publicBtn:hover{
+    cursor: pointer;
+    background-color: rgb(89, 167, 255);
+    padding: 1%;
+    width: 100%;
+    border-radius: 10px;
+}
+#privateBtn:hover{
+    cursor: pointer;
+    background-color: rgb(255, 112, 77);
+    padding: 1%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#fancyTxt{
+    font-family: 'Times New Roman', Times, serif;
 }

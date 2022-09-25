@@ -17,7 +17,9 @@ import { Writing } from '../models/Writing';
 export class NavbarComponent implements OnInit {
 
   //Importante Variables
+  currentUser: string = "";
   curentUserID: string = "";
+  profileImg: string = "";
   userData: any;
 
   
@@ -117,7 +119,10 @@ export class NavbarComponent implements OnInit {
    }
 
   ngOnInit(): void {
- 
+    const currentUser = JSON.parse(localStorage.getItem('userData') as string);
+    this.curentUserID = currentUser['uid'];
+    this.profileImg = currentUser['photoURL'];
+
     let notes: String[];
     this.checkAuth();
 
@@ -130,6 +135,27 @@ export class NavbarComponent implements OnInit {
     // console.log(this.userData[''])
   
   }
+
+  redirectPage(path: string){
+    switch(path){
+      case "home":
+        this.router.navigate(['/'])
+      break;
+
+    }
+  }
+
+
+  //Get user info
+  getUserInfo(userkey: String){
+    this.AuthService.getUserInfo(userkey as string).then(data => {
+      const userData = data.data() as User;
+      // console.log(data.data())
+
+      
+    })
+}
+
 
   async loadUserInfo(){
 

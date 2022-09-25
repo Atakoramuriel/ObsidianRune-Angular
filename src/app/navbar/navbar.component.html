@@ -5,11 +5,11 @@
            <!---NavBar Start-->
                <nav class="black nav-extended w3-animate-bottom" style="position:fixed; top: 0%;">
                        <div class="nav-wrapper" > 
-                           <div to="/" class="hide-on-small-only">
+                           <div to="/" class="hide-on-med-and-down">
                                    <a href="#!" *ngIf="showCreateBtn" (click)="showCreateBtn=!showCreateBtn" class="brand-logo left" id="title"> Obsidian<i class="material-icons right white-text" style="rotation:180deg;">brightness_2</i>Rune</a>
                                    <a href="#!" *ngIf="!showCreateBtn" (click)="showCreateBtn=!showCreateBtn" class="brand-logo left" id="title"> Obsidian<i class="material-icons right orange-text" style="rotation:180deg; ">brightness_2</i>Rune</a>
                            </div>
-                            <div to="/" class="hide-on-med-and-up">
+                            <div to="/" class="hide-on-large-only">
                                    <a href="#!" class="brand-logo center" id="MobileTitle"> Obsidian<i class="material-icons right" style="rotation:180deg;">brightness_2</i>Rune</a>
                            </div>
 
@@ -160,28 +160,33 @@
                </nav>
            <!--End of Navbar--->
 
-               <!--Start of the side Nav Bar List items-->
-                   <ul  class="sidenav  center" id="mobile-demo" style="background-color:#000000;">
-                               <br>
-                               <li>
-                                   <img :src="profileImg" style="width:25%; border-radius:50%;">
-                               </li>
- 
-                              <li><div class="container"><hr></div></li>
-                               <li><div to="/"  class="white-text center" ><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Home</a></h4></div></li>
-                               <li><div class="container"><hr></div></li>
-                               <li><div to="/Messages"  class="white-text center"><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Messages</a></h4></div></li>                         
-                               <li><div class="container"><hr></div></li>
-                               <li><div to="/profile" class="white-text"><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Profile</a></h4></div></li>
-                               <li><div class="container"><hr></div></li>
-                               <li><div to="" class="white-text"><h4><a v-on:click="GetRuiNotes" class="sidenav-close white-text" href="#">Notifications</a></h4></div></li>
-                               <li><div class="container"><hr></div></li>
-                               <li v-if="SignedIn"><h4 v-on:click="signout" class="red-text" style="border: none; background-color:#000000;"><a href="#" style="color:red;">Sign Out</a></h4></li>
-                               <li><a v-on:click="sidebar" class="sidenav-close white-text" href="#">X</a></li><br>
-                   </ul>
-               <!--End of the side Nav Bar List items-->
+
        </div>
     <!--End of Div for Nav/SideNav-->
+
+
+
+               <!--Start of the side Nav Bar List items-->
+               <ul  class="sidenav  center" id="mobile-demo" style="background-color:#000000;">
+                <br>
+                <li>
+                    <img src="{{profileImg}}" style="width:25%; border-radius:50%;">
+                </li>
+
+               <li><div class="container"><hr></div></li>
+                <li><div class="white-text center" ><h4><div (click)="redirectPage('home')" class="sidenav-close white-text">Home</div></h4></div></li>
+                <li><div class="container"><hr></div></li>
+                <li><div to="/Messages"  class="white-text center"><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Messages</a></h4></div></li>                         
+                <li><div class="container"><hr></div></li>
+                <li><div to="/profile" class="white-text"><h4><a v-on:click="sidebar" class="sidenav-close white-text" href="#">Profile</a></h4></div></li>
+                <li><div class="container"><hr></div></li>
+                <li><div to="" class="white-text"><h4><a v-on:click="GetRuiNotes" class="sidenav-close white-text" href="#">Notifications</a></h4></div></li>
+                <li><div class="container"><hr></div></li>
+                <li v-if="SignedIn"><h4 v-on:click="signout" class="red-text" style="border: none; background-color:#000000;"><a href="#" style="color:red;">Sign Out</a></h4></li>
+                <li><a v-on:click="sidebar" class="sidenav-close white-text" href="#">X</a></li><br>
+    </ul>
+<!--End of the side Nav Bar List items-->
+
 
        <!-- Fixed Menu of service buttons -->
        <div 

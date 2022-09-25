@@ -103,6 +103,8 @@ export class AuthService {
     return this.fireService.collection("Legacy").doc(legacyID).ref.get();
   }
 
+  
+
   getLegacyPosts(legacyID: string){
     return this.fireService.collection("Legacy").doc(legacyID).collection("posts").snapshotChanges();
 
@@ -152,11 +154,15 @@ export class AuthService {
      })
   }
 
-
+  loadBookmark(userKey: string, legacyID: string, chapterID: string){
+    return this.fireService.collection("users").doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).get();
+  }
  //Save Writing Progress
- bookmarkLegacy(data: Post, legacyID:string, userKey: string, chapterID: string){
+ bookmarkLegacy(legacyID:string, userKey: string, chapterID: string){
 
-  return this.fireService.collection('users').doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).set(data)
+  return this.fireService.collection('users').doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).set({
+    chapterID: chapterID
+  })
   .then(() => {
     console.log("Saved Chapter")
   })
@@ -166,7 +172,7 @@ export class AuthService {
 }
 
 //Save Writing Progress
-unBookmarkLegacy(data: Post, legacyID:string, userKey: string, chapterID: string){
+unBookmarkLegacy(legacyID:string, userKey: string, chapterID: string){
 
   return this.fireService.collection('users').doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).delete()
   .then(() => {
@@ -312,8 +318,8 @@ unBookmarkLegacy(data: Post, legacyID:string, userKey: string, chapterID: string
    })
  }
 
- updateLegacy(LegacyID: string, data: Legacy){
-  return this.fireService.collection("Legacy").doc(LegacyID).set(data);
+ updateLegacy(LegacyID: string, data: any){
+  return this.fireService.collection("Legacy").doc(LegacyID).update(data);
 }
 
 updateLegacyPrivacy(LegacyID: string, chapterID: string, privacy: string){
