@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FirebaseService } from '../services/firebase.service';
 import { AuthService } from '../services/auth.service';
@@ -20,6 +20,7 @@ export class LegacyComponent implements OnInit {
   //refresh Rate 
   alreadyLoaded: string = 'false';
   editMode: boolean = false;
+  newEntryMenu: boolean = false;
 
   //LegacyID
   legacyID: string= "";
@@ -44,6 +45,7 @@ export class LegacyComponent implements OnInit {
 
     //isAuthor
     isAuthor: boolean = false;
+    isFollowing: boolean = false;
 
 
   //Legacy Info Needed
@@ -52,7 +54,13 @@ export class LegacyComponent implements OnInit {
   Readers: String = "0";
   Contributers: String = "0";
 
+
+  //If there are no entries 
+  hasEntries: boolean = false;
+
+
   //Deleted 
+  collectedIDs: string[] = [];
   forDeletion: string[] = [];
   FDL: number = 0;
 
@@ -118,6 +126,8 @@ export class LegacyComponent implements OnInit {
       updated: "",
     }
   ];
+
+  legacyBookmarks: any = [];
     
   loadedData: boolean = false;
 
@@ -175,6 +185,7 @@ export class LegacyComponent implements OnInit {
       
       //Load the page information 
       this.loadLegacyInfo();
+      this.loadBookmarkedLegacies();
       // this.loadLegacyPosts();
       this.loadedData = true;
       this.count++;
@@ -190,14 +201,59 @@ export class LegacyComponent implements OnInit {
   
   }
 
+  deleteLegacy(){
+    let text = "Are you sure you want to delete the " + this.title + " legacy \n";
+    if(confirm(text)){
+      console.log("Deleting Legacy");
+      //Delete the Legacy chapters 
 
- followLegacy(chapterID: string){
-   this.AuthService.bookmarkLegacy(this.legacyID, this.currentUserID, chapterID).then(response => {
+      if(this.collectedIDs.length > 0){
+          //Delete the legacy 
+          this.collectedIDs.forEach(chapter => {
+              console.log("Deleting Chapter Prior to Legacy Deletion: " + chapter);
+              this.forDeletion.push(chapter);
+          });
+          this.deleteChapters();
+      }
+      this.AuthService.deleteLegacy(this.legacyID).then(()=>{
+        console.log("Legacy Deleted");
+        M.toast({html: "Successfully Deleted Legacy"})
+        this.router.navigate(['/']);
+      })
+    }
+  }
+
+
+ addReader(legacyID: string, userkey: string){
+   this.AuthService.addLegacySubscriber(legacyID, userkey).then(() => {})
+   
+ }
+
+ removeReader(legacyID: string, userKey: string){
+   this.AuthService.removeLegacySubscriber(legacyID,userKey).then(()=>{})
+ }
+
+ followLegacy(){
+   this.AuthService.bookmarkLegacy(this.legacyID, this.currentUserID).then(response => {
       M.toast({html: "Successfully Bookmarked Legacy"})
+      this.isFollowing = true;
+      this.addReader(this.legacyID, this.currentUserID);
    }).catch(error => { 
-      
+    M.toast({html: "Error saving legacy - " + error})
    })
  }
+
+ 
+ unFollowLegacy(){
+   this.AuthService.unBookmarkLegacy(this.legacyID, this.currentUserID).then(response => {
+     M.toast({html: "Unfollowed Legacy"})
+     this.isFollowing = false;
+     this.removeReader(this.legacyID, this.currentUserID);
+   }).catch(error => { 
+      M.toast({html: "Error unfollowing: " + error})
+   })
+ }
+
 
 
   //For File uploads
@@ -319,6 +375,31 @@ export class LegacyComponent implements OnInit {
     })
   }
 
+
+  loadBookmarkedLegacies(){
+    this.AuthService.loadBookmarkedLegacies(this.currentUserID).subscribe(data => {
+      this.legacyBookmarks = []
+      data.map(e => { 
+        const data = e.payload.doc.data() as Legacy
+        const legacy = {
+          id: e.payload.doc.id,
+          title: data.title as string, 
+          cover: data.cover as string, 
+          author: data.author as string, 
+          legacyID: data.legacyID as string, 
+          privacy: data.privacy as string
+        }
+        this.legacyBookmarks.push(legacy);
+
+
+      })
+    })
+    if(this.legacyBookmarks.includes(this.legacyID)){
+        alert("FOLLOWING")
+        this.isFollowing = true;
+    }
+  }
+
   //This is that later function 
   loadLegacyInfo(){
    
@@ -331,7 +412,7 @@ export class LegacyComponent implements OnInit {
             this.author = legacyData.author as string;
             this.privacySetting = legacyData.privacy as string; 
             if(this.author == this.currentUserID){
-              // this.isAuthor = true;
+              this.isAuthor = true;
             }
 
             if(this.privacySetting == "public"){
@@ -361,6 +442,10 @@ export class LegacyComponent implements OnInit {
     }
   }
 
+  NewLegacyEntry(){
+    //Display menu option 
+
+  }
 
   editLegacy(){
     sessionStorage.setItem("chapterData", this.legacyID)
@@ -380,9 +465,7 @@ export class LegacyComponent implements OnInit {
       this.publicEntries = [];
       data.map(e => {
           const data = e.payload.doc.data() as LegacyPost;
-         if( this.cover == "" ){
-           alert("NUL")
-         }
+ 
      
           // Data to be pushed to array
           const dataUpload = {
@@ -399,12 +482,16 @@ export class LegacyComponent implements OnInit {
             updated: data.updated as string, 
           }
 
+          //Add legacy ID to bucket in case of full deletion 
+          this.collectedIDs.push(e.payload.doc.id);
+
           //Push to all first
           this.allEntries.push(dataUpload);
 
           // push to public array
           if(dataUpload['privacy'] == "public"){
               this.publicEntries.push(dataUpload);
+              this.hasEntries = true;
           }
 
           // push to private array
@@ -412,7 +499,7 @@ export class LegacyComponent implements OnInit {
              this.privateEntries.push(dataUpload);
           }
           this.Entries = this.publicEntries.length as unknown as string;
-
+          
       })
     })
 

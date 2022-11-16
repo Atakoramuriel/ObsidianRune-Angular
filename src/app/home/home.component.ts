@@ -882,6 +882,10 @@ imagePool: [string] = [""];
 
     this.AuthService.getPosts().subscribe(data => {
       this.recentCollages = [] 
+      this.recentPosts = []
+      this.recentStoryboards = []
+      this.recentImgs = []
+      this.recentWritings = []
       data.map(e => {         
         //Const Data e.payload.doc.data() as Type needed to avoid error of object unknown
         const data = e.payload.doc.data() as Post

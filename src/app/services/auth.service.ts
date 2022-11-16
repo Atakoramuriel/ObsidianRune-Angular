@@ -154,13 +154,25 @@ export class AuthService {
      })
   }
 
-  loadBookmark(userKey: string, legacyID: string, chapterID: string){
-    return this.fireService.collection("users").doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).get();
+  loadBookmarkedChapters(userKey: string, legacyID: string, chapterID: string){
+    return this.fireService.collection("users").doc(userKey).collection("SavedLegacyChapters").doc(legacyID).collection("posts").doc(chapterID).snapshotChanges()
   }
- //Save Writing Progress
- bookmarkLegacy(legacyID:string, userKey: string, chapterID: string){
 
-  return this.fireService.collection('users').doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).set({
+  addLegacySubscriber(legacyID: string, userKey: string){
+    return this.fireService.collection("Legacy").doc(legacyID).collection("followers").doc(userKey).set({
+      userkey: userKey
+    })
+
+  }
+
+  removeLegacySubscriber(legacyID: string, userKey: string){
+    return this.fireService.collection("Legacy").doc(legacyID).collection("followers").doc(userKey).delete();
+  }
+
+ //Save Writing Progress
+ bookmarkLegacyChapter(legacyID:string, userKey: string, chapterID: string){
+
+  return this.fireService.collection('users').doc(userKey).collection("SavedLegacyChapters").doc(legacyID).collection("posts").doc(chapterID).set({
     chapterID: chapterID
   })
   .then(() => {
@@ -172,9 +184,9 @@ export class AuthService {
 }
 
 //Save Writing Progress
-unBookmarkLegacy(legacyID:string, userKey: string, chapterID: string){
+unBookmarkLegacyChapter(legacyID:string, userKey: string, chapterID: string){
 
-  return this.fireService.collection('users').doc(userKey).collection("SavedLegacies").doc(legacyID).collection("posts").doc(chapterID).delete()
+  return this.fireService.collection('users').doc(userKey).collection("SavedLegacyChapters").doc(legacyID).collection("posts").doc(chapterID).delete()
   .then(() => {
     console.log("Chapter unBookmarked")
   })
@@ -183,6 +195,28 @@ unBookmarkLegacy(legacyID:string, userKey: string, chapterID: string){
   })
 }
 
+
+ bookmarkLegacy(legacyID: string, userKey: string){
+   return this.fireService.collection('users').doc(userKey).collection("savedLegacies").doc(legacyID).set({
+     legacyID: legacyID
+   }).then(()=>{
+     M.toast({html: "Legacy Bookmarked"});
+   }).catch((error)=> {
+     M.toast({html: "Error Saving Legacy: " + error});
+   })
+ }
+
+ unBookmarkLegacy(legacyID: string, userKey: string){
+   return this.fireService.collection('users').doc(userKey).collection("savedLegacies").doc(legacyID).delete().then(()=>{
+     M.toast({html: "Legacy removed from bookmarks"});
+   }).catch((error)=> {
+     M.toast({html: "Error Saving Legacy: " + error});
+   })
+ }
+
+ loadBookmarkedLegacies(userID: string){
+  return this.fireService.collection("users").doc(userID).collection("SavedLegacies").snapshotChanges()
+}
 
   //officially upload post
   newPost(data: Post, postID: string){

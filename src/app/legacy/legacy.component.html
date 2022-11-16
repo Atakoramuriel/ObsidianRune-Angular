@@ -48,9 +48,7 @@ class="hide-on-med-only hide-on-small-only">
                     <!-- ?For all buttons EDIT -->
                     <div 
                     *ngIf="editMode"
-                    class="regMenu">                    
-                        <!-- Additional Spacing Required -->
-                        <div class="row"><br></div>        
+                    class="regMenu">                                            
                         <div
                         *ngIf="isAuthor && editMode"
                         (click)="updateLegacy()"
@@ -62,7 +60,13 @@ class="hide-on-med-only hide-on-small-only">
                         (click)="editMode=!editMode"
                         class="btn-large" 
                         id="authorMenuBtn">Cancel Editing</div>
-                        <div class="row"><br></div>        
+                        <div class="row"><br></div>     
+                        <div
+                        *ngIf="isAuthor && editMode"
+                        (click)="deleteLegacy()"
+                        class="btn-large" 
+                        id="authorMenuDeleteBtn">Delete Legacy</div>
+                        <div class="row"><br></div>     
                         <div
                         *ngIf="isAuthor && (editMode && FDL > 0)"
                         (click)="deleteChapters()"
@@ -124,10 +128,15 @@ class="hide-on-med-only hide-on-small-only">
 
                   <!-- Buttons For Non Author -->
                 <div
-                *ngIf="!isAuthor"
-                
+                *ngIf="!isAuthor && !isFollowing"   
+                (click)="followLegacy()"             
                 class="btn-large" 
                 id="followBtn">Follow</div>
+                <div
+                *ngIf="!isAuthor && isFollowing"   
+                (click)="unFollowLegacy()"             
+                class="btn-large" 
+                id="followBtn">Unfollow</div>
 
             </div>
           </div>
@@ -198,8 +207,18 @@ class="hide-on-med-only hide-on-small-only">
                     </div>
                 </div>
             </div>
+
+        <!-- In the event that there were no entries -->
+        <div class="row" *ngIf="!hasEntries">
+            <div class="col s9 offset-s4">
+                <div class="">
+                    <h3 class="white-text" id="legacyDesc"><i>No Entries as of yet. . . </i></h3> <br>
+                </div>
+                <div style="padding-bottom: 25%;"></div>
+            </div>
+        </div>
         <!-- Place Entries Below -->
-        <div class="row">
+        <div class="row" *ngIf="hasEntries">
             <div class="col s9 offset-s3">
                 <div class="box2">
                     <div
@@ -266,7 +285,7 @@ class="hide-on-med-only hide-on-small-only">
 
 
        <!-- Full Entries Here EDITMODE-->
-       <div *ngIf="editMode " class="FullEntries">
+       <div *ngIf="editMode && hasEntries" class="FullEntries">
             <div class="row">
                 <div class="col s6 offset-s3">
                     <!-- Type of posting -->
