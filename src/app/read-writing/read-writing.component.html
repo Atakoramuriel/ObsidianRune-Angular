@@ -1,22 +1,211 @@
 
 <!-- Desktop -->
 
-<!-- Default Author Theme -->
+<div *ngIf="!editingWork">
+    <!-- Default Author Theme -->
+    <div 
+    *ngIf="authorTheme"
+    class="hide-on-med-and-down">
+        <img src="{{coverImg}}" alt="cover" id="coverImg">
+        <!-- Desktop Display -->
+        <div class="center white-text">
+                <div class="page">
+                    <div class="row">
+                        <!-- Additional Spacing Required -->
+                        
+                        <div class="col l10 offset-l1" id="page">
+                            <textarea
+                            disabled
+                            [value]="title + '\n' + text"                             
+                            id="writtenPassage" 
+                            class="materialize-textarea">               
+                            </textarea>
+                        </div>
+                    </div>      
+                </div>                      
+        </div>
+    </div>
+
+    <!-- Dark Theme -->
+    <div 
+    *ngIf="DarkTheme"
+    class="hide-on-med-and-down">    
+        <!-- Desktop Display -->
+        <div class="center white-text">
+                <div class="page">
+                    <div class="row">
+                        <!-- Additional Spacing Required -->
+                        
+                        <div class="col l10 offset-l1" id="page">
+                            <textarea
+                            disabled
+                            [value]="title + text"                             
+                            id="writtenPassage" 
+                            class="materialize-textarea">               
+                            </textarea>
+                        </div>
+                    </div>      
+                </div>                      
+        </div>
+    </div>
+
+    <!-- Light Theme -->
+    <div 
+    *ngIf="LightTheme"
+    class="white hide-on-med-and-down">    
+        <!-- Desktop Display -->
+        <div class="center black-text">
+                <div class="page">
+                    <div class="row">
+                        <!-- Additional Spacing Required -->
+                        
+                        <div class="col l10 offset-l1" id="page">
+                            <textarea
+                            disabled
+                            [value]="title + text"                             
+                            id="lightWrittenPassage" 
+                            class="materialize-textarea">               
+                            </textarea>
+                        </div>
+                    </div>      
+                </div>                      
+        </div>
+    </div>
+
+    <!-- Cream Theme -->
+    <div 
+    *ngIf="CreamTheme"
+    class="hide-on-med-and-down"
+    style="background-color: rgb(236, 195, 147);">    
+        <!-- Desktop Display -->
+        <div class="center black-text">
+                <div class="page">
+                    <div class="row">
+                        <!-- Additional Spacing Required -->
+                        
+                        <div class="col l10 offset-l1" id="page">
+                            <textarea
+                            disabled
+                            [value]="title + text"                             
+                            id="creamWrittenPassage" 
+                            class="materialize-textarea">               
+                            </textarea>
+                        </div>
+                    </div>      
+                </div>                      
+        </div>
+    </div>
+
+
+
+    <!-- Tablet/Phone Author Theme -->
+    <div 
+    *ngIf="authorTheme"
+    class="hide-on-large-only">
+        <img src="{{coverImg}}" alt="cover" id="coverImgMed">
+        <!-- Desktop Display -->
+        <div class="center white-text">
+            <div class="container">
+                <div class="col s8 m8 offset-s2 offset-m2">
+        
+                    <textarea
+                    disabled
+                    [value]="title + text"                             
+                    id="mobileWrittenPassage" 
+                    class="materialize-textarea">               
+                    </textarea>
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tablet/Phone Dark Theme -->
+    <div 
+    *ngIf="DarkTheme"
+    class="black hide-on-large-only">
+        
+        <!-- Desktop Display -->
+        <div class="center white-text">
+            <div class="container">
+                <div class="col s8 m8 offset-s2 offset-m2">
+        
+                    <textarea
+                    disabled
+                    [value]="title + text"                             
+                    id="mobileWrittenPassageDark" 
+                    class="materialize-textarea">               
+                    </textarea>
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tablet/Phone Light Theme -->
+    <div 
+    *ngIf="LightTheme"
+    class="white hide-on-large-only">
+        
+        <!-- Desktop Display -->
+        <div class="center white-text">
+            <div class="container">
+                <div class="col s8 m8 offset-s2 offset-m2">
+        
+                    <textarea
+                    disabled
+                    [value]="title + text"                             
+                    id="mobileWrittenPassageLight" 
+                    class="materialize-textarea">               
+                    </textarea>
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Tablet/Phone Cream Theme -->
+    <div 
+    *ngIf="CreamTheme"
+    class="hide-on-large-only"
+    style="background-color: rgb(209, 158, 92);">
+        
+        <!-- Desktop Display -->
+        <div class="center white-text">
+            <div class="container">
+                <div class="col s8 m8 offset-s2 offset-m2">
+        
+                    <textarea
+                    disabled
+                    [value]="title + text"                             
+                    id="mobileWrittenPassageCream" 
+                    class="materialize-textarea">               
+                    </textarea>
+                            
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Start of Area for Editing Writing (Desktop)-->
 <div 
- *ngIf="authorTheme"
+ *ngIf="authorTheme && editingWork"
 class="hide-on-med-and-down">
     <img src="{{coverImg}}" alt="cover" id="coverImg">
     <!-- Desktop Display -->
     <div class="center white-text">
             <div class="page">
                 <div class="row">
-                    <!-- Additional Spacing Required -->
-                      
+                    <!-- Additional Spacing Required -->                      
                     <div class="col l10 offset-l1" id="page">
                         <textarea
-                        disabled
                         [value]="title + '\n' + text"                             
-                        id="writtenPassage" 
+                        id="writtenPassageEdit" 
                         class="materialize-textarea">               
                         </textarea>
                     </div>
@@ -24,171 +213,7 @@ class="hide-on-med-and-down">
             </div>                      
     </div>
 </div>
-
-<!-- Dark Theme -->
-<div 
- *ngIf="DarkTheme"
-class="hide-on-med-and-down">    
-    <!-- Desktop Display -->
-    <div class="center white-text">
-            <div class="page">
-                <div class="row">
-                    <!-- Additional Spacing Required -->
-                      
-                    <div class="col l10 offset-l1" id="page">
-                        <textarea
-                        disabled
-                        [value]="title + text"                             
-                        id="writtenPassage" 
-                        class="materialize-textarea">               
-                        </textarea>
-                    </div>
-                </div>      
-            </div>                      
-    </div>
-</div>
-
-<!-- Light Theme -->
-<div 
- *ngIf="LightTheme"
-class="white hide-on-med-and-down">    
-    <!-- Desktop Display -->
-    <div class="center black-text">
-            <div class="page">
-                <div class="row">
-                    <!-- Additional Spacing Required -->
-                      
-                    <div class="col l10 offset-l1" id="page">
-                        <textarea
-                        disabled
-                        [value]="title + text"                             
-                        id="lightWrittenPassage" 
-                        class="materialize-textarea">               
-                        </textarea>
-                    </div>
-                </div>      
-            </div>                      
-    </div>
-</div>
-
-<!-- Cream Theme -->
-<div 
- *ngIf="CreamTheme"
-class="hide-on-med-and-down"
-style="background-color: rgb(236, 195, 147);">    
-    <!-- Desktop Display -->
-    <div class="center black-text">
-            <div class="page">
-                <div class="row">
-                    <!-- Additional Spacing Required -->
-                      
-                    <div class="col l10 offset-l1" id="page">
-                        <textarea
-                        disabled
-                        [value]="title + text"                             
-                        id="creamWrittenPassage" 
-                        class="materialize-textarea">               
-                        </textarea>
-                    </div>
-                </div>      
-            </div>                      
-    </div>
-</div>
-
-
-
-<!-- Tablet/Phone Author Theme -->
-<div 
-*ngIf="authorTheme"
-class="hide-on-large-only">
-    <img src="{{coverImg}}" alt="cover" id="coverImgMed">
-    <!-- Desktop Display -->
-    <div class="center white-text">
-        <div class="container">
-            <div class="col s8 m8 offset-s2 offset-m2">
-    
-                <textarea
-                disabled
-                [value]="title + text"                             
-                id="mobileWrittenPassage" 
-                class="materialize-textarea">               
-                </textarea>
-                        
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Tablet/Phone Dark Theme -->
-<div 
-*ngIf="DarkTheme"
-class="black hide-on-large-only">
-    
-    <!-- Desktop Display -->
-    <div class="center white-text">
-        <div class="container">
-            <div class="col s8 m8 offset-s2 offset-m2">
-    
-                <textarea
-                disabled
-                [value]="title + text"                             
-                id="mobileWrittenPassageDark" 
-                class="materialize-textarea">               
-                </textarea>
-                        
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Tablet/Phone Light Theme -->
-<div 
-*ngIf="LightTheme"
-class="white hide-on-large-only">
-    
-    <!-- Desktop Display -->
-    <div class="center white-text">
-        <div class="container">
-            <div class="col s8 m8 offset-s2 offset-m2">
-    
-                <textarea
-                disabled
-                [value]="title + text"                             
-                id="mobileWrittenPassageLight" 
-                class="materialize-textarea">               
-                </textarea>
-                        
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Tablet/Phone Cream Theme -->
-<div 
-*ngIf="CreamTheme"
-class="hide-on-large-only"
-style="background-color: rgb(209, 158, 92);">
-    
-    <!-- Desktop Display -->
-    <div class="center white-text">
-        <div class="container">
-            <div class="col s8 m8 offset-s2 offset-m2">
-    
-                <textarea
-                disabled
-                [value]="title + text"                             
-                id="mobileWrittenPassageCream" 
-                class="materialize-textarea">               
-                </textarea>
-                        
-            </div>
-        </div>
-    </div>
-</div>
-
+<!-- End of Area for editing writing -->
 
 
 <!-- Hidden Click Area for Left and Right Menu -->
@@ -307,3 +332,5 @@ class="serviceMenuAuthor">
                 </div>
             </div>
         </div>
+
+

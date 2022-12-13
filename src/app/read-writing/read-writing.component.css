@@ -34,6 +34,21 @@
     margin:0 auto;
 }
 
+
+#writtenPassageEdit{
+  color: rgba(255, 255, 255, 0.89);
+  white-space: pre-wrap;
+  font-family:'Courier New', Courier, monospace;
+  font-size: 35px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+  background-color: rgba(0, 0, 0, 0.493);
+  padding: 10px;
+}
+
 #lightWrittenPassage{
   color: rgba(0, 0, 0, 1);
   white-space: pre-wrap;

@@ -30,6 +30,7 @@ export class ReadWritingComponent implements OnInit {
   authorMenu: boolean = false;
   privacyMenu: boolean = false;
   deletionMenu: boolean = false;
+  editingWork: boolean = false;
   currentPrivacy: string = ""; //This will update
 
   serviceAuthorCards = [
@@ -291,11 +292,8 @@ export class ReadWritingComponent implements OnInit {
   authorMenuAction(action: string){    
     switch(action){
       case "EDIT":
-        //Prep Data 
-        sessionStorage.setItem("chapterData", this.dataValue)
-        //Navigate Away 
-        this.router.navigate(['/editLegacyChapter']);
-
+       this.editingWork = true;
+       
         this.authorMenu = false;
         this.privacyMenu=false;
           break;
