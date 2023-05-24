@@ -173,6 +173,7 @@ export class LegacyComponent implements OnInit {
     const currentUser = JSON.parse(localStorage.getItem('userData') as string);
     this.currentUserID = currentUser['uid'];
     const chapterData = sessionStorage.getItem('chapterData');
+    const returnValue = sessionStorage.getItem('returnValue');
     if(chapterData){
       console.log("Chapter Data Already Reloaded");
       sessionStorage.removeItem('chapterData');
@@ -549,9 +550,6 @@ export class LegacyComponent implements OnInit {
     sessionStorage.setItem('chapterData',JSON.stringify(chapter));
     this.router.navigate(['/Reading']);
   }
-
-  
-  
     
   }
 

@@ -1,1 +1,105 @@
 <app-navbar></app-navbar>
+
+<!-- Desktop -->
+<div class="hide-on-small-only">
+    <!-- Area for the top banner -->
+    <div id="topBanner" class="">
+        <!-- Area for the logo to rest -->
+            <div class="center" id="liveBanner">
+                <h1 class="white-text hide-on-small-only"  id="bannerTitle"><i>Discover Obsidian</i></h1>  
+                <div class="banner center ">
+                    <img src="../../assets/Ruimel.png"  class="RuiLogo hide-on-small-only">
+                </div>
+            </div>
+
+            <!-- Needed for the background color behind the logo -->
+                <div class="center" id="livePhotoBanner">
+                    <div class="row">
+                    </div>
+                </div>
+    </div>   
+
+    <!-- Additional Spacing Required -->
+    <div class="row" id="topPadding">
+        <br>
+    </div>
+
+    <!-- Aevum Row (Stories Written/ Game Chapters)-->
+    <div 
+    class="row" 
+    id="main">
+        <h4  id="menuTitle"> &nbsp; Aevum Collections</h4>
+        <div
+        class="box2">
+            <div 
+            id="testCardAevum"
+            class="card"                                
+            
+            *ngFor="let card of AevumMenuList; let i = index;">
+                <div class="space">
+                    <div class="card" id="aevumItem">
+                        <h4 class="legacyTitle">{{card.title}}</h4>
+                        <img src="{{card.cover}}" class="" id="legacyImg">
+                    </div>                        
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Spacing Required -->
+    <div class="row">
+        <br>
+    </div>
+
+
+    <div 
+    class="row" 
+    id="main">
+        <h4  id="menuTitle"> &nbsp;  Posts</h4>
+        <div
+        class="box2">
+            <div 
+            id="testCardAevum"
+            class="card"                                
+            
+            *ngFor="let card of AevumMenuList; let i = index;">
+                <div class="space">
+                    <div class="card" id="aevumItem">
+                        <h4 class="legacyTitle">{{card.title}}</h4>
+                        <img src="{{card.cover}}" class="" id="legacyImg">
+                    </div>                        
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Spacing Required -->
+    <div class="row">
+        <br>
+    </div>
+
+<!-- End of Desktop -->
+</div>
+
+
+<!-- Tablet -->
+
+
+
+<!-- SmartPhone -->
+
+<!-- Background Area -->
+   <!--Beginning of background Beauty Eternal-->
+   <div class="row">
+    <div class="col s12 m12 s12">
+        <div class="eternal">
+            <ul id="eternalList" class="center">
+                <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li>             
+                <li><h2 id="glowText2"> الليل ، اليوم ، اللانهاية ، الأبدية ، الاتصال ، الوقت ، الموسيقى الهادئة ، حماية ، الحب</h2></li>
+                <li><h2 id="glowText3">夜、日、無限、永遠、接続、時間、夜想曲、守る、愛</h2></li>
+                <li><h2 id="glowText4">Ημέρα Νύχτας Άπειρη Αιώνια Σύνδεση Χρόνος  Προστατεύστε την Αγάπη</h2></li>
+                <li><h2 id="glowText5">夜，天，,无限，永恒，连接，时间，夜曲，保护，爱</h2></li>
+            </ul>
+        </div>
+    </div>
+</div>

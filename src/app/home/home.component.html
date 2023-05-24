@@ -230,6 +230,82 @@
                         </div>
                 
                     
+                        <!-- This is for the display of the writing Modal -->
+                           <!--Regular Post Modal -->
+                           <div class="row" *ngIf="displayWritingModal">
+                            <div class="container" >
+                                <div class="center">
+                                    <div 
+                                    (click)="closeModalDialogue();" 
+                                    id="writingModal">
+                                        <div class="col m8 l8 s12 offset-l2 offset-m2">
+                                            <div id="WritingModal1">
+                                                <div 
+                                                    (click)="goProfile()"
+                                                    id="userInfo">
+                                                    <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileImg" alt="">
+                                                    <h5 class="left" id="modalUser">{{modalPostUser}}</h5>
+                                                </div>
+                                                
+                                                <br><br>
+                                                <div 
+                                                (click)="preSelection=true"
+                                                class="modal-content">
+                                                    <h4 class="modalTitle">{{modalPostTitle}}</h4>
+                                                    <br><br>
+                                                    <img 
+                                                    (click)="setImageModal()"
+                                                    src="{{modalPostImage}}" 
+                                                    id="postedImg" alt="">
+                                                    <div
+                                                    class="center"
+                                                    *ngFor="let collageImg of modalPostImages; let j = index;"
+                                                     >
+                                                    <img src="{{collageImg}}" 
+                                                    (click)="setCollageImageModal(collageImg)"
+                                                    class="postModalCollageImg{{j}} z-depth-5" >
+                                                </div>
+                                                    <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>
+                                                </div>
+                                                <div 
+                                                (click)="preSelection=true"
+                                                class="modal-footer">
+                                                    <h6 class="extra left">
+                                                        <span class="white-text">
+                                                            <i 
+                                                            id="favoriteIcon"
+                                                            *ngIf="modalPostLiked==false;"
+                                                            class="material-icons red-text" 
+                                                            (click)="likeModalPost(modalPostID); modalPostLiked = true">
+                                                            favorite_border
+                                                            </i>
+                                                            <i 
+                                                            id="favoriteIcon"
+                                                            *ngIf="modalPostLiked==true;"
+                                                            class="material-icons red-text" 
+                                                            (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
+                                                            favorite
+                                                            </i>
+
+                                                             {{modalPostLikes}} &nbsp;
+                                                         <i 
+                                                           class="material-icons" 
+                                                           (click)="commentPost()" 
+                                                           id="chatBubble" 
+                                                           >chat_bubble_outline</i> {{modalPostComments}}
+                                                         </span>
+                                                    </h6>
+                                                    <h6 class="right" id="postDate">{{modalPostDate}}</h6><br>                                
+                                                </div>
+                                        </div>
+                                        </div>
+                
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>  
+
 
         <!-- Start of the Aevum if there are any active -->
 
@@ -280,8 +356,7 @@
         </div>
     
         <!-- Timeline of recent posts from all friends -->
-        <div 
-
+    <div 
          class="row" 
          id="main">
         <h4  id="menuTitle">Legacy Posts</h4>
@@ -319,7 +394,7 @@
                                         (click)="showModalDialog(card)"
                                         class="card" 
                                         id="userRecentPosts2">
-                                        <div class="card" id="userLongWriting2">
+                                        <div class="card" id="userLongWriting">
                                             <br>
                                             <h5 class="writingTitle">{{card.title}}</h5>
                                             <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
@@ -394,7 +469,7 @@
                         </div>
                             <!-- Area for Recent Long Writings -->
                             <div class="row" id="main">
-                                <h4  id="menuTitle">Recent Writings</h4>
+                                <h4  id="menuTitle">Recent Writings ~</h4>
                                 <div
                                 class="box2">
                                 <div 
@@ -422,7 +497,7 @@
                             </div>
 
                             <!-- Timeline of recent Collages posts from all friends -->
-                            <div class="row" id="main">
+                            <div class="row hide" id="main">
                                 <h4  id="menuTitle">Recent Collages</h4>
                                 <div
                                 class="testbox">
@@ -448,9 +523,9 @@
                         <div class="row hide container">
                             <hr>
                         </div>
-                    
+                        <!-- This is a row of the original posts  -->
                         <div
-                        class="box">
+                        class="box hide">
                         <div 
                         id="testCard"
                         class="card"
@@ -479,7 +554,7 @@
                                     </div> 
                                 </div>   
                         </div>
-                    </div>                  
+                        </div>                  
             </div>
                     
             <!-- Divider -->
@@ -522,25 +597,25 @@
                 </div> 
             </div>
         
-            </div>
+                    </div>
                 
 
 <!-- End of Tablet/UI -->
  
 
     <!--Beginning of background Beauty Eternal-->
-    <div class="row">
-        <div class="col s12 m12 s12">
-     <div class="eternal">
-        <ul id="eternalList" class="center">
-            <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li>             
-            <li><h2 id="glowText2"> الليل ، اليوم ، اللانهاية ، الأبدية ، الاتصال ، الوقت ، الموسيقى الهادئة ، حماية ، الحب</h2></li>
-            <li><h2 id="glowText3">夜、日、無限、永遠、接続、時間、夜想曲、守る、愛</h2></li>
-            <li><h2 id="glowText4">Ημέρα Νύχτας Άπειρη Αιώνια Σύνδεση Χρόνος  Προστατεύστε την Αγάπη</h2></li>
-            <li><h2 id="glowText5">夜，天，,无限，永恒，连接，时间，夜曲，保护，爱</h2></li>
-        </ul>
-    </div>
-</div>
+        <div class="row">
+            <div class="col s12 m12 s12">
+                <div class="eternal">
+                    <ul id="eternalList" class="center">
+                        <li><h2 id="glowText">Night Day Infinity Eternal Connect Time Nocturne Protect Love</h2></li>             
+                        <li><h2 id="glowText2"> الليل ، اليوم ، اللانهاية ، الأبدية ، الاتصال ، الوقت ، الموسيقى الهادئة ، حماية ، الحب</h2></li>
+                        <li><h2 id="glowText3">夜、日、無限、永遠、接続、時間、夜想曲、守る、愛</h2></li>
+                        <li><h2 id="glowText4">Ημέρα Νύχτας Άπειρη Αιώνια Σύνδεση Χρόνος  Προστατεύστε την Αγάπη</h2></li>
+                        <li><h2 id="glowText5">夜，天，,无限，永恒，连接，时间，夜曲，保护，爱</h2></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
 </div>

@@ -7,6 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DiscoverComponent implements OnInit {
 
+
+
+  AevumMenuList = [
+    {
+      title: '',
+      cover: "",
+      desc: "",
+      action: ""
+
+    },
+  ];
+
+
   constructor() { }
 
   ngOnInit(): void {

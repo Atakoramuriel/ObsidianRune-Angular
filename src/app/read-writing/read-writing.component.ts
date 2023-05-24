@@ -166,6 +166,7 @@ export class ReadWritingComponent implements OnInit {
 
   userData: any;
   dataValue: any;
+  returnValue: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -193,8 +194,10 @@ export class ReadWritingComponent implements OnInit {
 
 
     this.dataValue = sessionStorage.getItem('chapterData');
+    this.returnValue = sessionStorage.getItem('returnValue');
 
     if(this.dataValue){    
+      // alert("AQUI")
       // console.log("DValue: below");
       // console.log(this.dataValue); //Returns full data
 
@@ -234,6 +237,9 @@ export class ReadWritingComponent implements OnInit {
 
 
   navigateLegacy(legacyID: string){
+
+  
+
     //Navigate forwarad to legacy page
     const queryParams: Params = { id: legacyID };
     this.router.navigate(['/Legacy'],
@@ -399,7 +405,7 @@ export class ReadWritingComponent implements OnInit {
           this.authorTheme=true;
           this.DarkTheme=false;
           this.LightTheme=false;
-          this.CreamTheme = true;
+          this.CreamTheme = false;
           this.serviceMenu=false;
           this.themeMenu=false;
           this.authorMenu=false;

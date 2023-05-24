@@ -1,0 +1,153 @@
+
+/* Banner at the top */
+
+/* Area for live banner and other banner elements */
+#liveBanner{
+    height: 225px;
+    position: absolute;
+    top: 7.5%;
+    width: 100%;
+    z-index: 3;
+ 
+
+}
+#livePhotoBanner{
+    height: 175px;
+    position: absolute;
+    background-color: rgb(19, 21, 27);
+    top: 7.5%;
+    width: 100%;
+    z-index: -3;
+}
+
+
+.banner{
+    position: absolute;
+    top: 0%;
+    width: 100%;
+}
+
+.horizontal-mat-list-item {
+    float: right;
+    display: list-item;
+    }
+
+
+
+/* For lanes */
+
+
+/* //For legacy cards */
+/* For the menu title */
+#topPadding{
+    padding-bottom: 10%;
+}
+#menuTitle{
+    font-family: 'Times New Roman', Times, serif;
+    padding-left: 1%;
+    color: rgb(196, 220, 255);
+}
+.box2{    
+    overflow: scroll;
+    flex-direction: row;
+    display: flex;
+    position: relative;
+    animation: rightSlide 3.5s;
+    animation-direction: normal;
+}
+/* For the header */
+.RuiLogo{
+    width:8%;
+    border-radius:50%;
+ 
+    z-index: -1;
+}
+
+#bannerTitle{
+    font-family:'Allura', cursive;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    z-index: 3;
+}
+
+
+/*Background Beauty*/
+.eternal{
+    /*color:rgba(69, 77, 106, 0.7); */
+   color:rgba(51, 57, 78, 0.7);
+   font-family: 'Parisienne';
+   position: fixed;
+   z-index: -1;
+   top: 20%;
+   left:1%;
+   width:100%;
+}
+
+/* For animations */
+#glowText{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: relative;
+    animation-iteration-count: infinite;
+}
+#glowTextLag{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: absolute;
+    left: -1000px;
+    overflow: hidden;
+}
+#glowText2{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example2;
+    animation-duration: 50s;
+    position: relative;
+    animation-iteration-count: infinite;
+
+}
+#glowText3{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: relative;
+    animation-iteration-count: infinite;
+
+}
+#glowText4{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example2;
+    animation-duration: 50s;
+    position: relative;
+    animation-iteration-count: infinite;
+
+}
+#glowText5{
+    font-family: 'Parisienne';
+    animation-direction:normal;
+    animation-name: example;
+    animation-duration: 50s;
+    position: relative;
+    animation-iteration-count: infinite;
+
+}
+@keyframes example {
+    0%   {left:0%; top:0px;}
+    50%  {left:50%; top:0px;}
+    100% {left:0%; top: 0px;}
+  }
+
+  @keyframes example2 {
+    0%   { right:0%; top:0px;}
+    50%   {right:50%; top:0px;}
+    100%   { right:0%; top:0px;}
+
+  }
+

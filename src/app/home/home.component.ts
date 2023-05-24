@@ -13,7 +13,7 @@ import * as M from 'materialize-css';
 import { Timestamp } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {ActivatedRoute, Params, Router} from '@angular/router'; // import router from angular router
-
+import { ChapterService } from '../services/chapter.service';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +35,10 @@ export class HomeComponent implements OnInit {
   //Flags for display 
   newAevum: boolean = false;
   displayLegacyList: boolean = false;
+
+  //Hold
+   //LegacyID
+   legacyID: string= "";
 
 
   //Test for array
@@ -490,6 +494,7 @@ imagePool: [string] = [""];
 
   //For image displays
   displayImgModal: boolean = false;
+  displayWritingModal: boolean = false;
   imgModal: String = "";
   preSelection: boolean = false;
 
@@ -534,7 +539,8 @@ imagePool: [string] = [""];
   private router: Router,
   public AuthService: AuthService,
   private userService: FirebaseService,
-  private firebaseAuth: AngularFireAuth
+  private firebaseAuth: AngularFireAuth,
+  private chapterService: ChapterService,
     ) { 
       this.firebaseAuth.authState.subscribe((user) =>{
         if(user){
@@ -718,6 +724,9 @@ imagePool: [string] = [""];
     this.likesList = [];
     this.savedList = [];
 
+    console.log("CARD INFO")
+    console.log(card);
+
         //Get total likes for legacy id 
         //From list of likes see if the current user is hidden amonst list 
         this.AuthService.getLikes(card['id']).subscribe(data => {
@@ -743,13 +752,15 @@ imagePool: [string] = [""];
 
     //Update the modal 
       //Modal variables
-      if(card['type'] == "Images" || card['type'] == "standard"){
+      if(card['type'] == "Images" || card['type'] == "standard" || card['image'] != ""){
         this.modalPostID = card['id'];
         this.modalPostTitle = card['title']
         this.modalPostTxt = card['text']
         this.modalPostDate = card['date']
         this.modalPostImage =  (card['type'] != "Images") ? card['image'] : ""
         this.modalPostImages =  (card['type'] == "Images") ? card['postImgs'] :  card['postImgs']
+          //Display the modal
+    this.displayModal=true;
    
       }
       else if(card['type'] == "Storyboard" ){
@@ -759,12 +770,23 @@ imagePool: [string] = [""];
         this.modalPostDate = card['date']
         this.modalPostImage =  ""
         this.modalPostImages =  card['postImgs'] 
+          //Display the modal
+    this.displayModal=true;
+      }
+      else if(card['type'] == "Writing" ){
+        
+        this.modalPostID = card['id'];
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  ""
+        this.modalPostImages =  card['postImgs'] 
+        this.displayWritingModal = true;
       }
  
      
 
-    //Display the modal
-    this.displayModal=true;
+  
 
     // console.log(card)
     this.loadUserInfo(card)
@@ -779,6 +801,7 @@ imagePool: [string] = [""];
     }else{
       // alert("Close Modal");
       this.displayModal=false
+      this.displayWritingModal=false;
     }
   }
  
@@ -925,8 +948,13 @@ imagePool: [string] = [""];
         this.mobilePosts.push(mobileUpload);
 
           //Add all single images to section 
-        if(dataUpload['image'] != ""  && dataUpload['type'] == "standard"){
+        if(dataUpload['image'] != ""  && (dataUpload['type'] == "standard" || dataUpload['type'] == null)){
           this.recentImgs.push(dataUpload)
+        }else  if(this.recentCount <= 15 && dataUpload['image'] == "" &&dataUpload['type'] == null && this.countWords(dataUpload['text']) < 99){
+          
+          this.recentPosts.push(dataUpload);
+          this.recentCount = this.recentCount + 1;
+         
         }else  if(this.recentCount <= 15 && dataUpload['type'] == "standard" && this.countWords(dataUpload['text']) < 99){
           
           this.recentPosts.push(dataUpload);
@@ -985,6 +1013,46 @@ imagePool: [string] = [""];
     // console.log("ID: " + id);
 
   }
+
+
+ //Navigate to the Read Page 
+ readChapter(card: any){
+   
+  var chapter = card;
+  chapter["LegacyId"] = this.legacyID;
+  // console.log("INFORMATION BELOW")
+  console.log(card);
+ 
+const dataValue = sessionStorage.getItem('chapterData');
+
+
+
+
+if(dataValue){
+  //Remove Data
+    console.log("Cleaning chapter Data")
+    sessionStorage.removeItem('chapterData');
+
+    console.log("Cleaning chapter from Service")
+    this.chapterService.cleanChapter();
+
+  //Now progress forward
+    this.chapterService.setChapter(chapter);
+    sessionStorage.setItem('chapterData',JSON.stringify(chapter));
+    sessionStorage.setItem('returnValue', "Home")
+    this.router.navigate(['/Reading']);
+
+}else{
+  console.log("No Data to report");
+  this.chapterService.setChapter(chapter);
+  console.log("Storing new chapter");
+  sessionStorage.setItem('chapterData',JSON.stringify(chapter));
+  sessionStorage.setItem('returnValue', "Home")
+  this.router.navigate(['/Reading']);
+}
+  
+}
+
 
   getUser(userKey: String){
     this.AuthService.getUserInfo(userKey as string).then(data => {
@@ -1097,6 +1165,11 @@ imagePool: [string] = [""];
         this.displayImgModal= true;
       }
       
+          // modal image function display 
+          displayModalWriting(){
+            this.displayWritingModal= true;
+          }
+
       //Show the image Modal
       setImageModal(){
         this.displayModalImg();
@@ -1120,6 +1193,9 @@ imagePool: [string] = [""];
         this.displayImgModal=false
       }
 
+      closeWritingModal(){
+        this.displayWritingModal=false;
+      }
 
   //Test redirections
   goProfile(){
