@@ -797,3 +797,51 @@ background-color: rgba(0, 0, 0, 0.123);
       transform: translateX(0);
     }
   }
+
+
+
+
+  /* New Addition for messages */
+.messageList{
+    position: absolute;
+    right: 0%;
+    border: solid red 2px;
+    min-height: 30%;
+    height: 90%;
+    max-height: 90%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    z-index: 10;
+}
+
+  #testCardAevum{
+
+    background-color: #00000000;
+}
+
+
+
+#aevumItem{
+    background-color:rgb(0, 0, 0);
+    border-radius:15px;
+    height:150px;
+    /* width: 425px; */
+    width: 300px;
+    border: solid white 1px;;
+    display: inline-block;
+    overflow-x: hidden;
+}
+
+
+#aevumItem:hover{
+    background-color:rgba(41, 4, 8, 0.397);
+    border-radius:15px;
+    height:150px;
+    cursor: pointer;
+    border:solid rgb(255, 123, 0) 2px;
+}
+
+.messageTxt{
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}

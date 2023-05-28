@@ -1,7 +1,6 @@
 <div id="Nav"  ref="TOPNAV" *ngIf="Auth">
     <!--Start of Div for Nav/SideNav-->  
        <div  class="navbar-fixed">
-
            <!---NavBar Start-->
                <nav class="black nav-extended w3-animate-bottom" style="position:fixed; top: 0%;">
                        <div class="nav-wrapper" > 
@@ -159,8 +158,6 @@
 
                </nav>
            <!--End of Navbar--->
-
-
        </div>
     <!--End of Div for Nav/SideNav-->
 
@@ -299,5 +296,36 @@
 
         </div>
     </div>  
+
+
+
+
+    <!-- This is the Big Update  -->
+
+
+    <!-- Messages  -->
+  <div class="messageList">
+    <div 
+    id="testCardAevum"
+    class="card"
+    *ngFor="let card of newMessageList; let i = index;">
+        <div class="space">
+            <div                     
+            class="card" 
+            id="aevumItem">
+                <h4 class="legacyTitle">{{card.id}}</h4>
+                <h5 class="messageTxt">{{card.message}}</h5>
+                <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
+                <!-- <img src="{{card.cover}}" class="" id="legacyImg"> -->
+            </div>                        
+        </div>  
+    </div>
+
+  </div>
+
+
+
+
+
 
 </div>

@@ -8,6 +8,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { User } from 'firebase/auth';
 import { Writing } from '../models/Writing';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-navbar',
@@ -90,6 +91,20 @@ export class NavbarComponent implements OnInit {
     }
   ]
 
+ //In case user wants to post to legacy instead of OR
+ newMessageList = [
+  {
+    id: "",
+    message: '',
+    messageID: '',
+    timestamp: '',
+    toUserKey: ''
+  },
+ ];
+
+ newMessageTxt: string = "";
+
+
   constructor(
     public firebaseService: FirebaseService,
     public router: Router,
@@ -133,8 +148,52 @@ export class NavbarComponent implements OnInit {
     // this.modalPostUser = this.userData['displayName'];
     // this.modalPostUserProfileImg = this.userData['photoURL']
     // console.log(this.userData[''])
+    this.loadNewMessages();
+  }
+
+
+  cleanList(){
+    this.newMessageList.splice(0,1);
+    this.newMessageList = [];
+    this.loadNewMessages();
+  }
+
+  loadNewMessages(){
+    this.newMessageList.splice(0,1);
+    this.AuthService.getUserNewMessages(this.curentUserID).subscribe(data => {
+      this.newMessageList = [];
+      data.map(e => {
+        const data = e.payload.doc.data();
+
+
+        // id: "",
+        // message: '',
+        // messageID: '',
+        // timestamp: '',
+        // toUserKey: ''
+
+        //Set up 
+
+        
+
+        const messageData = {
+          id: e.payload.doc.id,
+          fromUserKey: data['fromUserKey'],
+          message: data['message'],
+          messageID: data['messageID'],
+          timestamp: data['timestamp'],
+          toUserKey: data['toUserKey']
+        };
+
+        this.getUserInfo(messageData.id);
+
+        this.newMessageList.push(messageData);
+      });
+    });
   
   }
+
+
 
   redirectPage(path: string){
     switch(path){
@@ -150,12 +209,38 @@ export class NavbarComponent implements OnInit {
   getUserInfo(userkey: String){
     this.AuthService.getUserInfo(userkey as string).then(data => {
       const userData = data.data() as User;
-      // console.log(data.data())
+      console.log(data.data())
 
       
     })
 }
 
+reduceMessage(messageTxt: string){
+  //Reduce the size of a message to a limited amount of Characters 
+  
+  //first import the message 
+  
+  
+      //console.log(messageTxt)
+      var newString = String(messageTxt);
+      var end = "..."
+  
+  //Get the size of a String
+      if(messageTxt.length > 50){
+                  //Then Grab section message 
+                          var finalString = String(newString.substring(0,50))
+                          //console.log(finalString)
+  
+                  //Add... 
+                  var endString = finalString.concat(end)
+              
+                  //Now return the string 
+                  return String(endString)
+      }else{
+          return String(messageTxt)
+      }
+  
+  }
 
   async loadUserInfo(){
 

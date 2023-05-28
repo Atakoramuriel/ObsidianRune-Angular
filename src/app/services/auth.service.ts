@@ -95,6 +95,10 @@ export class AuthService {
     return this.fireService.collection("Legacy",ref => ref.where("author","==",userID)).snapshotChanges();
   }
 
+  getUserNewMessages(userID: string){
+    return this.fireService.collection("NewMessage").doc(userID).collection("NewMessage", ref => ref.orderBy("timestamp",'desc')).snapshotChanges();
+  }
+
   getAevum(){
     return this.fireService.collection("Aevum", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
   }
@@ -433,8 +437,29 @@ updateLegacyPrivacy(LegacyID: string, chapterID: string, privacy: string){
 
   getUserInfo(userKey: string){
     return this.fireService.collection("users").doc(userKey).ref.get();
-
   }
+
+  getUsername(userKey: string) {
+    const data = this.fireService.collection("users").doc(userKey).ref.get();
+
+    
+    
+  }
+
+  collection(fromUserID: string){
+            
+    var FromUserName
+    
+    //Get the usernames in order to display the messages  
+    return this.fireService.collection("users").doc(fromUserID).ref.get();
+    
+  
+
+}
+
+
+
+
 
 
 

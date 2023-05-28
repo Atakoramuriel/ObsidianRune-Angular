@@ -805,10 +805,10 @@ ul#menu li {
 #writingModal{
     position: fixed; /* Stay in place */
     z-index: 10; /* Sit on top */
-    padding-top: 10px; /* Location of the box */
+    padding-top: 0px; /* Location of the box */
     padding-bottom: 15%;
     left: 0;
-    top: 7%;
+    top: 3%;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
@@ -877,15 +877,62 @@ ul#menu li {
     padding-left: 10px;
 }
 
+#modalUserName{
+    color:rgb(202, 144, 58);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 250%;
+    padding-left: 10px;
+}
+
 /* For modal Profile Image */
+#modalProfileImg0{
+    position: absolute;
+    top: 5%;
+    left: 2%;
+    width: 10%;
+    border-radius: 50%;
+    z-index: 1;
+    
+}
+
+#modalUser0{
+    color:rgb(202, 144, 58);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 250%;
+    padding-left: 10px;
+    position: relative;
+    z-index: 3;
+    left: 12%;
+}
+
 #modalProfileImg{
+    position: absolute;
+    top: 5%;
     width: 5%;
+    border-radius: 50%;
+    z-index: 1;
+    
+}
+
+#modalProfileImgNew{
+    width: 15%;
     border-radius: 50%;
     
 }
 
 #userInfo{
-    position: absolute;
+    position: relative;
+    padding-top: 0%;
+    left: 0%;
+    top: 0%;
+}
+
+
+#userInfoModal{
+    position: left;
+    padding-top: 5%;
+    
+
 }
 
 .modal-content{

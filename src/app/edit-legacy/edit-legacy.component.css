@@ -1,0 +1,855 @@
+.container{
+    padding: 2%;
+    padding-bottom: 5%;
+    
+}
+
+#coverImg{
+    background-size: cover;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    z-index: -1;
+    filter:  blur(9px) brightness(65%);
+}
+
+.serviceCard{
+    position: fixed;
+    bottom: 10%;
+    left: 5%;
+    z-index: 10;
+}
+
+
+#writtenPassage{
+    color: rgba(255, 255, 255, 0.89);
+    white-space: pre-wrap;
+    font-family:serif;
+    font-size: 35px;
+    padding-bottom: 30%;
+    overflow: auto;
+    height: 850px;
+    max-height: 850px;
+    margin:0 auto;
+}
+
+
+#writtenPassageEdit{
+  color: rgba(255, 255, 255, 0.89);
+  white-space: pre-wrap;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 35px;
+  padding-bottom: 30%;
+  overflow: auto;
+  min-height: 90%;
+  height: 100%;
+  max-height: 100%;
+  margin:0 auto;
+  background-color: rgba(0, 0, 0, 0.493);
+  padding: 10px;
+}
+
+#lightWrittenPassage{
+  color: rgba(0, 0, 0, 1);
+  white-space: pre-wrap;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 35px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+}
+
+
+#creamWrittenPassage{
+  color: rgb(31, 17, 0);
+  white-space: pre-wrap;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 35px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+}
+
+
+#mobileWrittenPassage{
+  color: rgb(255, 255, 255);
+  white-space: pre-wrap;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 25px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+}
+
+
+#mobileWrittenPassageDark{
+  color: rgb(255, 255, 255);
+  white-space: pre-wrap;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+}
+
+#mobileWrittenPassageLight{
+  color: rgb(0, 0, 0);
+  white-space: pre-wrap;
+  font-family:'Times New Roman', Times, serif;
+  font-size: 25px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+}
+
+#mobileWrittenPassageCream{
+  color: rgb(26, 15, 3);
+  white-space: pre-wrap;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 25px;
+  padding-bottom: 30%;
+  overflow: auto;
+  height: 850px;
+  max-height: 850px;
+  margin:0 auto;
+}
+
+#page{
+ position: relative;
+ padding-top: 3%;
+ height: 800px;;  
+}
+
+#coverImgMed{
+    background-size:cover;
+    background-repeat:repeat;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    filter:  blur(10px) brightness(50%);
+}
+
+#text{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+* For the service menu */
+.serviceMenu{
+    position: fixed;
+    background-color: #0f0f12f1;
+    left: 30%;
+    bottom: 0%;
+    z-index: 10;
+    width: 20%;
+    padding-left: 5%;
+
+}
+
+.serviceMenuAuthor{
+  position: fixed;
+  background-color: #0f0f12f1;
+  right: 30%;
+  bottom: 0%;
+  z-index: 10;
+  width: 20%;
+  padding-left: 5%;
+
+}
+
+#serviceList{
+    position: fixed;
+    top: 19%;
+    left: 3%;
+    max-height: 700px;
+    overflow: auto;
+    animation: 0.5s ease-out 0s 1 slideInFromLeft;
+
+}
+
+#serviceAuthorList{
+  position: fixed;
+  top: 19%;
+  right: 3%;
+  max-height: 700px;
+  overflow: auto;
+  animation: 0.5s ease-out 0s 1 slideInFromRight;
+
+}
+
+
+#serviceMenuAuthorBtn{
+  background-color: rgba(17, 15, 31, 0.63);
+  border: solid rgb(255, 153, 0) 1px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#serviceMenuAuthorBtn:hover{
+  cursor: pointer;
+  background-color: rgb(71, 45, 15);
+  border: solid rgb(255, 145, 0) 1px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+#serviceMenuBtn{
+    background-color: rgba(15, 19, 31, 0.63);
+    border: solid rgb(102, 100, 255) 3px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+#serviceMenuBtn:hover{
+    cursor: pointer;
+    background-color: rgb(15, 28, 71);
+    border: solid rgb(126, 140, 212) 1px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+
+/* For Service Card at the bottom right of obsidina  */
+.serviceCard{
+    position: fixed;
+    bottom: 10%;
+    left: 5%;
+    z-index: 10;
+}
+
+.serviceAuthorCard{
+  position: fixed;
+  bottom: 10%;
+  left: 5%;
+  z-index: 10;
+}
+
+#serviceBtn{
+    background-color: rgb(15, 19, 31);
+    border: solid rgb(126, 140, 212) 1px;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+   
+}
+
+
+
+
+
+
+/* New Area for left and Right Menu */
+.leftMenu{
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 25%;;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.rightMenu{
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  width: 25%;;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+
+
+
+/*Transitionn Animations for NewPost*/
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all 2.0s ease;
+}
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(200px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+@keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-200px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
+
+
+  /* Title of the new writing */
+#title{
+    color: rgb(211, 145, 22);
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 15px;
+}
+
+/* Save Button in topNav */
+#saveBtn{
+    color: rgb(211, 145, 22);
+    font-size: 30px;
+    padding-top: 30px;
+    padding-left: 10px;
+}
+
+
+/* Area for start message row */
+#startMsgRow{
+    position: fixed;
+    top: 350px;
+    width: 100%;
+}
+
+/* Font for start Message */
+#startMsg{
+    color: rgba(147, 171, 238, 0.342);
+    font-family:'Allura', cursive;
+    cursor:auto;
+
+}
+
+#title{
+    background-color: rgb(27, 27, 27);
+    border: solid rgb(27, 27, 27) 2px;
+    border-radius: 15px;
+}
+#newLegacytitle{
+    background-color: rgba(0, 0, 0, 0.418);
+    border: solid rgb(27, 27, 27) 2px;
+    color: rgba(211, 134, 35, 0.89);
+    font-size: 25px;
+    border: none;
+    font-family: 'Times New Roman', Times, serif;
+
+}
+#legacyTitle{
+    background-color: rgba(0, 0, 0, 0.418);
+    border: solid rgb(27, 27, 27) 2px;
+    font-size: larger;
+    color: rgb(185, 133, 35);
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#writtenPassage{
+    color: rgba(126, 140, 212, 0.89);
+    white-space: pre-wrap;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 30px;
+    height: 650px;
+    max-height: 650px;
+    margin:0 auto;
+    background-color: rgba(0, 0, 0, 0.123);
+    overflow: scroll;
+}
+
+#textRow{
+    position: fixed;
+    top: 15%;
+    width: 100%;
+}
+
+
+/* Placeholder  */
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(126, 140, 212);
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: rgb(126, 140, 212);
+  }
+
+  
+
+  /* Submission Button */
+  #submitBtn{
+      background-color: rgb(228, 142, 36);
+  }
+
+
+
+#menuBtn{
+    background-color:rgb(15, 19, 29);
+    border: solid rgb(65, 75, 109) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    padding-left: 35px;
+    padding-right: 35px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+#menuBtn:hover{
+    cursor: pointer;
+    background-color:rgb(28, 35, 53);
+    border: solid rgb(79, 91, 133) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    padding-left: 40px;
+    padding-right:40px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#subMenuBtn{
+    background-color:rgb(15, 19, 29);
+    border: solid rgb(65, 75, 109) 2px;
+    border-radius: 10px;
+    color: white;
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#subMenuBtn:hover{
+    cursor: pointer;
+    background-color:rgb(28, 35, 53);
+    border: solid rgb(79, 91, 133) 2px;
+    border-radius: 10px;
+    color: rgb(107, 159, 255);
+    font-size: 25px;
+    font-family:'Times New Roman', Times, serif;
+    padding-left: 30px;
+    padding-right:30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#subHeader{
+    color: rgb(228, 142, 36);
+    font-size: 30px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#errHeader{
+    color: rgb(228, 36, 46);
+    font-size: 30px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#privacySpan{
+    color: rgb(107, 159, 255);
+    font-size: 15px;
+}
+#privacySpan:hover{
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+}
+
+#mobileMenuBtn{
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    z-index: 2;
+}
+
+/* For top tool bar below obsidian nav */
+#subNav{
+    position: absolute;
+    top: 5%;
+    width: 100%;
+    -webkit-animation: dropIn 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: dropIn 0.5s forwards;
+    animation-delay: 0s;
+    z-index: 5;
+}
+
+/* Area for subMenu */
+.subMenu{
+    position: absolute;
+    bottom: 20%;
+    right: 5%;
+    -webkit-animation: slideIn 0.5s forwards;
+    -webkit-animation-delay: 2s;
+    animation: slideIn 0.5s forwards;
+    animation-delay: 0s;
+}
+
+/* Submenu button icon */
+#subMenuBtnIcon{
+    font-size: 30px;
+}
+
+  /* For animations */
+  @-webkit-keyframes slideIn {
+    0% {
+      transform: translateX(900px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @-moz-keyframes slideIn {
+    0% {
+      transform: translateX(900px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideIn {
+    0% {
+      transform: translateX(900px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes dropIn {
+    0% {
+      transform: translatey(-200px);
+    }
+    100% {
+      transform: translatey(0);
+    }
+  }
+  @keyframes riseIn {
+    0% {
+      transform: translatey(800px);
+    }
+    100% {
+      transform: translatey(0);
+    }
+  }
+
+
+  /* For side menu */
+  .prevMenu{
+      background-color: rgba(0, 0, 0, 0.356);
+      width: 20%;
+      height: 100%;
+      position: fixed;
+      top: 16%;
+      z-index: 2;
+  }
+
+.username{
+    color: rgb(228, 142, 36);
+    font-size: 35px;
+    font-family:'allura', cursive;
+    position: absolute;
+    z-index: 2;
+}
+
+ .saveBtn{
+    color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ }
+ .postBtn{
+    color: white;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ }
+ 
+ .saveBtn:hover{
+    cursor: pointer;
+    color: rgb(228, 142, 36);
+ }
+
+ .postBtn:hover{
+    cursor: pointer;
+    color: rgb(228, 142, 36);
+ }
+ .savedBtn{
+     color: rgb(61, 139, 255);
+ }
+
+  #closePrevBtn{
+      cursor: pointer;
+  }
+
+  #prevCard{
+      background-color: rgba(18, 18, 19, 0.582);
+      padding: 3px;
+  }
+  #prevCard:hover{
+      cursor: pointer;
+      background-color: rgba(99, 99, 102, 0.582);
+      padding: 3px;
+  }
+
+  #prevCardTitle{
+      color: rgb(173, 173, 173);
+      font-size: 20px;
+      font-family:Georgia, 'Times New Roman', Times, serif;
+      padding-left: 15%;
+  }
+
+  .box{
+      height: 75%;
+      overflow: auto;
+  }
+
+  /* Area for Legacy Post Cards Below */
+  #testCardAevum{
+    width: 100%;
+    min-width: 75%;
+    background-color: #00000000;
+}
+
+.space{
+    padding-left: 5%;
+    padding-right: 5%;   
+}
+
+#aevumItem{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:150px;
+    /* width: 425px; */
+    width: 300px;
+    border: solid white 1px;;
+    display: inline-block;
+}
+
+
+#aevumItem:hover{
+    background-color:rgb(41, 4, 8);
+    border-radius:15px;
+    height:150px;
+    cursor: pointer;
+    border:solid rgb(255, 123, 0) 2px;
+}
+
+.legacyTitle{
+    color:rgb(245, 245, 245);
+    text-shadow: 5px 5px #000000;
+    font-family:'Times New Roman', Times, serif;
+    /* font-size: 350%; */
+    font-size: max(3vw, 3px);    
+    position:absolute;
+    right:10%;
+    bottom:5%;
+    z-index: 3;
+}
+
+#legacyImg{
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+
+  #newLegacyModal{
+      background-color: rgb(12, 25, 51);
+      -webkit-animation: dropIn 0.5s forwards;
+      -webkit-animation-delay: 2s;
+      animation: dropIn 0.5s forwards;
+      animation-delay: 0s;
+  }
+
+  #newLegacyDescription{
+    color: rgba(211, 134, 35, 0.89);
+    white-space: pre-wrap;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 25px;
+    min-height: 200px;
+    height: 200px;
+    max-height: 200px;
+    margin:0 auto;
+    background-color: rgba(0, 0, 0, 0.418);
+    overflow: scroll;
+  }
+
+  #newLegacyHeader{
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      color: rgb(161, 117, 33);
+  }
+
+  #btn{
+      background-color:rgba(0, 0, 0, 0);
+      border: none;
+      width: 150px;
+  }
+
+  #btn:hover{
+      cursor: pointer;
+  }
+
+  #fileBtn{
+    border: none;
+  }
+
+
+  /* Upload File Card */
+  #legacyCard{
+      background-color: #515470;
+  }
+  
+
+  #newLegacyCard{
+      width: 100%;
+ 
+  }
+
+  .box{
+      border-radius: 10px;
+      overflow: hidden;
+  }
+
+  .card-reveal{
+      background-color: #352628;
+  }
+
+
+  .card-image{
+      border: solid white 1px;
+  }
+
+  #activator{
+      object-fit:cover;
+      max-height: 400px;
+  }
+
+
+  #modal{
+    position: fixed; /* Stay in place */
+    z-index: 10; /* Sit on top */
+    padding-top: 10px; /* Location of the box */
+    padding-bottom: 15%;
+    left: 0;
+    top: 7%;
+    width: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+
+}
+
+
+/* Modal styling */
+#modal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#161A23;
+    border: solid #535D80 2px;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+}
+
+/* For Legacy Modal */
+#legacyModal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#121627;
+    border-radius: 20px;
+    border: solid rgb(223, 153, 23) 1px;
+    width: 100%;
+    height: 100%;
+    padding: 00.5%;
+    padding-top: 0%;
+    padding-bottom: 10%;
+}
+
+#legacyModal1:hover{
+    cursor: pointer;
+}
+
+#userModalLegacy{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 100%;
+    border: solid black 1px;
+    display: inline-block;
+}
+
+.modalLegacyTitle{
+    color: rgb(204, 150, 32);
+    font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+#legacyModalImg2{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+  /* When the image is hovered over with the cursior */
+#legacyModalImg2:hover{
+    cursor: pointer;
+    filter: grayscale(100%);
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    object-fit:cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+  }
+
+  /* The Text that appears over the New Legacy Cover Image */
+  #newLegacyHeaderTxt{      
+      cursor: pointer;
+      color: white;
+      font-size: 25px;
+      position: absolute;
+      top: 35%;
+      z-index: 3;
+  }
+
+  #imgFileInput{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 100%;
+    border: solid black 1px;
+    display: inline-block;
+  }
+
+  .image-upload>input {
+    display: none;
+  }
+
+  .modal-content{
+      background-color: #00000000;
+  }
+
+  .card{
+      background-color: #00000000;
+  }

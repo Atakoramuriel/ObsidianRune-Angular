@@ -533,6 +533,9 @@ imagePool: [string] = [""];
   //Final Updated
   finalNewArr: any[]= [];
 
+  //Data Collection 
+  dataCollected: boolean = false;
+
 
   //Constructor 
   constructor(
@@ -561,11 +564,28 @@ imagePool: [string] = [""];
     // console.log(this.currentUserID)
     //Update the banner images
     // setInterval(this.shuffleImg, 7000);
-   
+    this.dataCollected = false;
 
     //Check User Status
     this.checkAuthStatus()
-    
+  
+    this.loadAllData();
+
+
+
+  }
+
+  //Check user status
+  checkAuthStatus(){
+    this.userService.authStatus()
+  }
+
+
+
+  //Load all the data
+  loadAllData(){
+      if(!this.dataCollected){
+          
     //Load the aevum collection items
     this.loadAevum();
 
@@ -575,13 +595,8 @@ imagePool: [string] = [""];
     //load the legacies
     this.loadLegacies();
 
-
-
-  }
-
-  //Check user status
-  checkAuthStatus(){
-    this.userService.authStatus()
+    this.dataCollected = true
+      }
   }
 
   //Load in the Aevum collections
@@ -887,7 +902,7 @@ imagePool: [string] = [""];
     this.loadUserInfo(card)
   }
   
-//Working loadPosts MEthod
+//Working loadPosts Method
   loadPosts(){
     
 //Load the post into the array
@@ -966,6 +981,7 @@ imagePool: [string] = [""];
 
         }else  if(this.countWords(dataUpload['text']) > 99 ||dataUpload['type'] == "Writing"){
           var short_description = dataUpload['text'].split(' ').slice(100).join(' ');
+          dataUpload['type'] = "Writing";
           this.recentWritings.push(dataUpload);
         }else  if(this.recentCount > 15){
        
@@ -997,6 +1013,7 @@ imagePool: [string] = [""];
 
   }
 
+  
   loadUserInfo(userInfo: any){
 
       var userKey = userInfo['userKey']

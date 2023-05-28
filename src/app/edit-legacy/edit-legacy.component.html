@@ -1,0 +1,197 @@
+<!-- Open [] -->
+<div class="row">
+    <app-navbar></app-navbar>
+</div>
+<!-- Sub navBar -->
+<div *ngIf="displayNavTool" class="row black" id="subNav">
+    <div class="row">
+
+        <!-- Additional Horizontal Spacing Required -->
+        <div class="col m1"></div>
+
+        <!-- Area for the New title Input  -->
+        <div class="col s12 m3">
+            <br>
+            <input 
+            [(ngModel)]="newTitle"
+            id="title"
+            placeholder="Title. . ." 
+            type="text" 
+            class="validate">
+        </div>
+
+
+        <!-- Additional Horizontal Spacing Required -->
+  
+
+        <!-- The Three Foillowing Buttons, Save; Post; Delete -->
+        <div class="hide col m4 offset-m1">
+            <div class="row" style="padding-top: 5%;">  
+                       
+                <div class="col s2">
+                    <h5 class="saveBtn" (click)="savedProgress=true; menuCall('SAVE')" >Save</h5>
+                </div>
+                <div class="col s1">
+                    <h5 *ngIf="!savedProgress" class="saveBtn" style="color: rgb(61, 123, 255);"><i class="material-icons" style="font-size: 30px;">bookmark_border</i></h5> 
+                    <h5 *ngIf="savedProgress" class=" savedBtn"><i class="material-icons" style="font-size: 30px;">bookmark</i></h5> 
+                </div>
+                <div class="col s2">
+                    <h5 class="postBtn" (click)="displayPostMenu=!displayPostMenu;">Post</h5>
+                </div>
+                <div class="col s1">
+                    <h5 class=""><i class="material-icons " style="font-size: 30px; color: rgb(61, 123, 255);">send</i></h5> 
+                </div>
+                <div class="col s2">
+                    <h5 class="postBtn" (click)="menuCall('DELETE')">Delete</h5>
+                </div>
+                <div class="col s1">
+                 <h5 class="right"><i class="material-icons " style="font-size: 30px; color: rgb(61, 123, 255);">close</i></h5> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Start of Area for Editing Writing (Desktop)-->
+<div 
+ *ngIf="authorTheme && editingWork"
+  class="hide-on-med-and-down">
+    <img src="{{coverImg}}" alt="cover" id="coverImg">
+    <!-- Desktop Display -->
+    <div class="center white-text">
+            <div class="page">
+                <div class="row">
+                    <!-- Additional Spacing Required -->                      
+                    <div class="col l10 offset-l1" id="page">
+                        <textarea
+                        [value]="text"                             
+                        id="writtenPassageEdit" 
+                        class="materialize-textarea">               
+                        </textarea>
+                    </div>
+                </div>      
+            </div>                      
+    </div>
+</div>
+
+
+
+<!-- Area for Other Items -->
+
+<!-- Start with left menu -->
+<div 
+(click)="serviceMenu=!serviceMenu; themeMenu=false;"
+class="leftMenu">
+</div>
+
+<!-- Start with right menu -->
+<div 
+*ngIf="author"
+(click)="authorMenu=!authorMenu; privacyMenu=false; "
+class="rightMenu">
+</div>
+
+
+<!-- Service Buttons for Author-->
+<div     
+*ngIf="authorMenu"
+class="serviceMenuAuthor">
+    <div id="serviceAuthorList">
+        <div
+        *ngFor="let card of serviceAuthorCards; let i = index;">            
+        <div
+        (click)="authorMenuAction(card.action)"
+        class="card" id="serviceMenuAuthorBtn">
+            <div class="card-content white-text">
+            <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+            <p style="font-size: small;"><i>{{card.desc}}</i></p>
+            </div>        
+        </div>
+        <br>
+        </div>
+    </div>
+</div>
+
+<!-- Service Buttons -->
+    <div     
+    *ngIf="serviceMenu"
+    class="serviceMenu">
+        <div id="serviceList">
+            <div
+            *ngFor="let card of serviceCards; let i = index;">            
+            <div
+            (click)="menuAction(card.action)"
+            class="card" id="serviceMenuBtn">
+                <div class="card-content white-text">
+                <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+                <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                </div>        
+            </div>
+            <br>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Theme Buttons -->   
+     <div     
+    *ngIf="themeMenu"
+    class="serviceMenu">
+        <div id="serviceList">
+            <div
+            *ngFor="let card of themeCards; let i = index;">            
+            <div
+            (click)="themeMenuAction(card.action)"
+            class="card" id="serviceMenuBtn">
+                <div class="card-content white-text">
+                <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+                <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                </div>        
+            </div>
+            <br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Buttons -->    
+    <div     
+    *ngIf="privacyMenu"
+    class="serviceMenuAuthor">
+        <div id="serviceAuthorList">
+            <div
+            *ngFor="let card of authorPrivacyCards; let i = index;">            
+            <div
+            (click)="privacyAction(card.action)"
+            class="card" id="serviceMenuAuthorBtn">
+                <div class="card-content white-text">
+                <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+                <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                </div>        
+            </div>
+            <br>
+            </div>
+        </div>
+    </div>
+
+        <!-- Deletion Buttons -->    
+        <div     
+        *ngIf="deletionMenu"
+        class="serviceMenuAuthor">
+            <div id="serviceAuthorList">
+                <div
+                *ngFor="let card of deletionCards; let i = index;">            
+                <div
+                (click)="deletionMenuAction(card.action)"
+                class="card" id="serviceMenuAuthorBtn">
+                    <div class="card-content white-text">
+                    <span class="card-title"><i class="material-icons small">{{card.icon}}</i> &nbsp; <b> {{card.title}}</b></span>                
+                    <p style="font-size: small;"><i>{{card.desc}}</i></p>
+                    </div>        
+                </div>
+                <br>
+                </div>
+            </div>
+        </div>
+
+

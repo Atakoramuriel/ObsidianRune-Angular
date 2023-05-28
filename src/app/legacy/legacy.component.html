@@ -1,11 +1,16 @@
 <!-- Area for the NavBar -->
-<app-navbar></app-navbar>
+<div style ="position: fixed; top: 0%; width: 100%; z-index: 5;">
+    <app-navbar></app-navbar>
+</div>
 
+<!-- Slight additional spacing required -->
+<div class="row">
+    <br><br>
+</div>
 
 <!-- Area for the Legacy Page Desktop -->
 <div 
-class="hide-on-med-only hide-on-small-only">
-    
+class="hide-on-med-only hide-on-small-only">    
     <div     
     (click)="upload($event);"
     id="editParallax"

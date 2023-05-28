@@ -238,8 +238,6 @@ export class ReadWritingComponent implements OnInit {
 
   navigateLegacy(legacyID: string){
 
-  
-
     //Navigate forwarad to legacy page
     const queryParams: Params = { id: legacyID };
     this.router.navigate(['/Legacy'],
@@ -288,7 +286,7 @@ export class ReadWritingComponent implements OnInit {
         }
       break;
       case "CLOSE":
-        
+       
       this.navigateLegacy(this.legacyID);
 
         break;

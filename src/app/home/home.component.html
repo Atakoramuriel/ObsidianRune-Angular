@@ -64,8 +64,9 @@
                                                 <div 
                                                     (click)="goProfile()"
                                                     id="userInfo">
-                                                    <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileImg" alt="">
-                                                    <h5 class="left" id="modalUser">{{modalPostUser}}</h5>
+                                                    <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileImg0" alt="">
+                                                    <br>
+                                                    <h5 class="left" id="modalUser0">{{modalPostUser}}</h5>
                                                 </div>
                                                 
                                                 <br><br>
@@ -233,26 +234,39 @@
                         <!-- This is for the display of the writing Modal -->
                            <!--Regular Post Modal -->
                            <div class="row" *ngIf="displayWritingModal">
-                            <div class="container" >
+                            
+                            <!-- Display of the Link and Comment Button  -->
+                            div.
+
+                            
+                            <div class="container" >                                
+
+                                <!-- This is the section with the writing and the userprofile/name  -->
                                 <div class="center">
                                     <div 
                                     (click)="closeModalDialogue();" 
                                     id="writingModal">
-                                        <div class="col m8 l8 s12 offset-l2 offset-m2">
+                                        <div class="col m8 l8 s12 offset-l2 offset-m2">                                            
                                             <div id="WritingModal1">
-                                                <div 
-                                                    (click)="goProfile()"
-                                                    id="userInfo">
-                                                    <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileImg" alt="">
-                                                    <h5 class="left" id="modalUser">{{modalPostUser}}</h5>
-                                                </div>
                                                 
-                                                <br><br>
+                                                <!-- This is the center with the user name and profile photo -->
+                                                <div class="row">
+                                                    <div class="center">
+                                                        <div 
+                                                        (click)="goProfile()"
+                                                        id="userInfoModal">
+                                                        <img class="center" src="{{modalPostUserProfileImg}}" id="modalProfileImgNew" alt="">
+                                                        <h1 class="center" id="modalUserName">{{modalPostUser}}</h1>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                                           
                                                 <div 
                                                 (click)="preSelection=true"
-                                                class="modal-content">
-                                                    <h4 class="modalTitle">{{modalPostTitle}}</h4>
-                                                    <br><br>
+                                                class="modal-content"
+                                                >
+                                                    <h3 class="modalTitle">{{modalPostTitle}}</h3>
+                                                    <br>
                                                     <img 
                                                     (click)="setImageModal()"
                                                     src="{{modalPostImage}}" 
@@ -270,32 +284,32 @@
                                                 <div 
                                                 (click)="preSelection=true"
                                                 class="modal-footer">
-                                                    <h6 class="extra left">
+                                                    <h4 class="extra center">
                                                         <span class="white-text">
                                                             <i 
                                                             id="favoriteIcon"
                                                             *ngIf="modalPostLiked==false;"
-                                                            class="material-icons red-text" 
+                                                            class="medium material-icons red-text" 
                                                             (click)="likeModalPost(modalPostID); modalPostLiked = true">
                                                             favorite_border
                                                             </i>
                                                             <i 
                                                             id="favoriteIcon"
                                                             *ngIf="modalPostLiked==true;"
-                                                            class="material-icons red-text" 
+                                                            class="medium material-icons red-text" 
                                                             (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
                                                             favorite
                                                             </i>
 
                                                              {{modalPostLikes}} &nbsp;
                                                          <i 
-                                                           class="material-icons" 
+                                                           class="medium material-icons" 
                                                            (click)="commentPost()" 
                                                            id="chatBubble" 
                                                            >chat_bubble_outline</i> {{modalPostComments}}
                                                          </span>
-                                                    </h6>
-                                                    <h6 class="right" id="postDate">{{modalPostDate}}</h6><br>                                
+                                                    </h4>
+                                                    <h5 class="center" id="postDate">{{modalPostDate}}</h5><br>                                
                                                 </div>
                                         </div>
                                         </div>

@@ -310,8 +310,8 @@ export class LegacyComponent implements OnInit {
 
   //Basic idea is... get the image from the cloud
   setImage(){
-    alert(this.downloadLink)
-    alert(this.cover)
+    // alert(this.downloadLink)
+    // alert(this.cover)
       //Set the upload link to true
       this.imageUploaded = true;
       this.cover = this.downloadLink;
@@ -348,7 +348,7 @@ export class LegacyComponent implements OnInit {
 
   deleteChapters(){
       this.forDeletion.forEach(postID => {
-        alert("Deleting Story ==> " + postID)
+        // alert("Deleting Story ==> " + postID)
         this.AuthService.deleteLegacyChapter(this.legacyID, postID).then(response => {
           M.toast({html: "Successfully Deleted"});
         }).catch(error => {
@@ -396,7 +396,7 @@ export class LegacyComponent implements OnInit {
       })
     })
     if(this.legacyBookmarks.includes(this.legacyID)){
-        alert("FOLLOWING")
+        // alert("FOLLOWING")
         this.isFollowing = true;
     }
   }
@@ -449,6 +449,39 @@ export class LegacyComponent implements OnInit {
   }
 
   editLegacy(){
+
+ 
+
+    var chapter:any = {};
+
+    chapter["LegacyId"] = this.legacyID;
+
+  
+    const dataValue = sessionStorage.getItem('chapterData');
+
+    if(dataValue)
+    {
+   
+          //Remove Data
+          console.log("Cleaning chapter Data")
+          sessionStorage.removeItem('chapterData');
+    
+          console.log("Cleaning chapter from Service")
+          this.chapterService.cleanChapter();
+    
+          //Now progress forward
+          this.chapterService.setChapter(chapter);
+          sessionStorage.setItem('chapterData',this.legacyID);
+          this.router.navigate(['/editLegacyChapter']);
+    }else{
+     
+      // this.chapterService.setChapter(chapter);
+      console.log("Storing new chapter");
+      sessionStorage.setItem('chapterData',this.legacyID);
+      this.router.navigate(['/editLegacyChapter']);
+    }
+ 
+    
     sessionStorage.setItem("chapterData", this.legacyID)
     //Navigate Away 
     this.router.navigate(['/editLegacyChapter']);
