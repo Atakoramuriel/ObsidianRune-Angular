@@ -439,26 +439,20 @@ updateLegacyPrivacy(LegacyID: string, chapterID: string, privacy: string){
     return this.fireService.collection("users").doc(userKey).ref.get();
   }
 
-  getUsername(userKey: string) {
-    const data = this.fireService.collection("users").doc(userKey).ref.get();
 
-    
-    
-  }
 
-  collection(fromUserID: string){
-            
-    var FromUserName
-    
-    //Get the usernames in order to display the messages  
-    return this.fireService.collection("users").doc(fromUserID).ref.get();
-    
+
+//Get the Chat for a user 
+
+getUserChatMessages(userID: string, secondUserID: string){
   
-
+  return this.fireService.collection("Message").doc(userID).collection(secondUserID, ref => ref.orderBy('timestamp',"desc")).snapshotChanges();
 }
 
 
-
+// getUserPosts(userID: string){
+//   return this.fireService.collection("posts", ref => ref.where("userkey","==",userID).orderBy('timestamp','desc')).get();
+// }
 
 
 

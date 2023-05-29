@@ -98,10 +98,29 @@ export class NavbarComponent implements OnInit {
     message: '',
     messageID: '',
     timestamp: '',
-    toUserKey: ''
+    toUserKey: '',
+    username: '',
+    profileImg: ''
   },
  ];
 
+
+ //For the actualChat 
+  chatList = [
+    {
+      id: '',
+      message: '',
+      fromUserKey:'',
+      timestamp: '',
+      toUserKey: '',
+      username: '',
+      profileImg: ''
+    }
+  ]
+
+ viewNewMessageList: boolean = false;
+ viewChatList: boolean = true;
+ newChatMessage: string = "";
  newMessageTxt: string = "";
 
 
@@ -149,6 +168,7 @@ export class NavbarComponent implements OnInit {
     // this.modalPostUserProfileImg = this.userData['photoURL']
     // console.log(this.userData[''])
     this.loadNewMessages();
+    this.loadChatMessages("0Zqug3cne4PxbbXeaEbIrsBNwlA2");
   }
 
 
@@ -158,42 +178,90 @@ export class NavbarComponent implements OnInit {
     this.loadNewMessages();
   }
 
-  loadNewMessages(){
+  async loadNewMessages(){
     this.newMessageList.splice(0,1);
-    this.AuthService.getUserNewMessages(this.curentUserID).subscribe(data => {
+    await this.AuthService.getUserNewMessages(this.curentUserID).subscribe(data => {
       this.newMessageList = [];
       data.map(e => {
         const data = e.payload.doc.data();
-
-
-        // id: "",
-        // message: '',
-        // messageID: '',
-        // timestamp: '',
-        // toUserKey: ''
-
-        //Set up 
+        let foundUser:string;
 
         
+        this.getUserInfo(e.payload.doc.id)
+        .then(user => {
+          // console.log("User INfo: " + JSON.stringify(user));
+          var test = JSON.stringify(user);
+          var temp = JSON.parse(test);
+          foundUser = temp.displayName! as string;
+          var photoURL = temp.photoURL! as string;
 
+          var username;
+ 
+        // console.log(displayName)
         const messageData = {
           id: e.payload.doc.id,
           fromUserKey: data['fromUserKey'],
           message: data['message'],
           messageID: data['messageID'],
           timestamp: data['timestamp'],
-          toUserKey: data['toUserKey']
+          toUserKey: data['toUserKey'],
+          username: foundUser,
+          profileImg: photoURL
         };
 
-        this.getUserInfo(messageData.id);
-
         this.newMessageList.push(messageData);
+
+      });
       });
     });
   
   }
 
 
+  //Load the chat Messages
+  async loadChatMessages(secondUserID: string){
+    this.chatList.splice(0,1);
+    await this.AuthService.getUserChatMessages(this.curentUserID, secondUserID)
+    .subscribe(data => {
+      this.chatList = [];
+      data.map(e => {
+        const olddata = JSON.stringify(e.payload.doc.data());
+        const data = JSON.parse(olddata);
+        var foundUser:string;
+        // console.log("CHAT DATA ")
+        
+        var from:string = data.fromUserKey;
+        // console.log(from)
+        this.getUserInfo(from)
+        .then(user => {
+          // console.log("User INfo: " + JSON.stringify(user));
+          var test = JSON.stringify(user);
+          var temp = JSON.parse(test);
+          foundUser = temp.displayName! as string;
+          var photoURL = temp.photoURL! as string;
+
+          var username;
+ 
+        console.log(foundUser)
+        const chatData = {
+          id: e.payload.doc.id,
+          fromUserKey: data['fromUserKey'],
+          message: data['message'],
+          messageID: data['messageID'],
+          timestamp: data['timestamp'],
+          toUserKey: data['toUserKey'],
+          username: foundUser,
+          profileImg: photoURL
+        };
+        console.log("Chat DATA II")
+        // console.log(chatData);
+        this.chatList.push(chatData);
+
+      });
+      });
+    });
+    
+  }
 
   redirectPage(path: string){
     switch(path){
@@ -206,13 +274,26 @@ export class NavbarComponent implements OnInit {
 
 
   //Get user info
-  getUserInfo(userkey: String){
-    this.AuthService.getUserInfo(userkey as string).then(data => {
+  async getUserInfo(userkey: String){
+    var USER; 
+    await this.AuthService.getUserInfo(userkey as string).then(data => {
       const userData = data.data() as User;
-      console.log(data.data())
-
-      
+      // console.log(userData['displayName']);    
+      USER = data.data();
     })
+    return USER;
+
+}
+
+
+async getUsername(userkey: String){
+  var userName;
+  await   this.AuthService.getUserInfo(userkey as string).then(data => {
+    const userData = data.data() as User;    
+    userName = userData['displayName']    
+  })
+  // console.log("UNC: " + userName);
+  return userName;
 }
 
 reduceMessage(messageTxt: string){
@@ -469,5 +550,9 @@ getCount(value: string){
 
   }
   
+
+  displayMessages(){
+    this.viewNewMessageList=!this.viewNewMessageList
+  }
 
 }

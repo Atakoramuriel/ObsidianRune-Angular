@@ -122,9 +122,9 @@
                                         <li><i
                                             (click)="toggleMenu('Messages')"
                                             class="material-icons" id="activeMenuIcon">email</i></li>
-                                        <li><h5 class="activeMenuBtn">New_Message</h5></li>
-                                        <li><h5 class="activeMenuBtn">View_Messages</h5></li>
-                                        <li><h5 class="activeMenuBtn">Saved_Messages</h5></li>
+                                        <li><h5 class="activeMenuBtn">New</h5></li>
+                                        <li><h5 class="activeMenuBtn" (click)="viewNewMessageList=!viewNewMessageList">View </h5></li>
+                                 
                                         
                                     </div>
 
@@ -304,23 +304,63 @@
 
 
     <!-- Messages  -->
-  <div class="messageList">
+  <div class="messageList" *ngIf="viewNewMessageList">
+    <h4 class="white-text"><i><u><b>Messages</b></u></i></h4>
     <div 
     id="testCardAevum"
     class="card"
     *ngFor="let card of newMessageList; let i = index;">
         <div class="space">
+         
             <div                     
             class="card" 
             id="aevumItem">
-                <h4 class="legacyTitle">{{card.id}}</h4>
-                <h5 class="messageTxt">{{card.message}}</h5>
+            <img src="{{card.profileImg}}" class="" id="legacyImg">
+            <div class="messageContext">
+                <h5 class="messageTitle"><b>{{card.username}}</b></h5>
+                <h6 class="messageTxt">{{card.message}}</h6>
+            </div>
+
                 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
-                <!-- <img src="{{card.cover}}" class="" id="legacyImg"> -->
+                
             </div>                        
         </div>  
     </div>
 
+  </div>
+
+  <!-- This is the actual message Chat -->
+  <div class="chatList">
+      <h4 class="white-text">Chat</h4>
+      <div 
+      id="testCardAevum"
+      class="card"
+      *ngFor="let card of chatList; let i = index;">
+          <div class="space">
+           
+              <div                     
+              class="card" 
+              id="aevumItem">
+              
+              <div class="messageContext">
+                  <div class="row" 
+                  *ngIf="card.fromUserKey != currentUser">
+                      <div class="col s3">
+                          <div class="row">
+                              <img src="{{card.profileImg}}" class="" id="chatImg">
+                          </div>
+                      </div>
+                      <div class="col s9">
+                        <h6 class="messageTxt">{{card.message}}</h6>      
+                      </div>
+                  </div>
+                  
+              </div>
+                  
+                  
+              </div>                        
+          </div>  
+      </div>
   </div>
 
 
