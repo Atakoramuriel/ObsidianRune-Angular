@@ -286,9 +286,7 @@ export class ReadWritingComponent implements OnInit {
         }
       break;
       case "CLOSE":
-       
       this.navigateLegacy(this.legacyID);
-
         break;
     }
   }

@@ -834,7 +834,8 @@ background-color: rgba(0, 0, 0, 0.123);
 }
 
   #testCardAevum{
-
+    position: relative;
+    top: 10%;
     background-color: #00000000;
 }
 
@@ -851,6 +852,28 @@ background-color: rgba(0, 0, 0, 0.123);
     overflow-x: hidden;
 }
 
+
+#chatCard{
+    background-color:rgba(0, 0, 0, 0);    
+    /* width: 425px; */
+    width: 400px;
+    height: fit-content;
+    display: inline-block;
+    padding: 3%;
+    
+}
+
+
+#chatCardU{
+    background-color:rgba(0, 0, 0, 0);    
+    /* width: 425px; */
+    width: 400px;
+    height: fit-content;
+    display: inline-block;
+    padding: 3%;
+    
+    
+}
 
 #aevumItem:hover{
     background-color:rgba(41, 4, 8, 0.397);
@@ -871,6 +894,35 @@ background-color: rgba(0, 0, 0, 0.123);
     font-family: 'Times New Roman', Times, serif;
 }
 
+.fromMessageTxt{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding: 5%;
+    background-color: rgb(65, 66, 75);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.UserMessageTxt{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding: 5%;
+    background-color: rgb(65, 66, 75);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.UserMessageTxt{
+
+    padding: 5%;
+    background-color: rgba(148, 101, 13, 0.664);
+    border-radius: 10px;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+}
+
 #legacyImg{
     object-fit:cover;
     width: 100%;
@@ -884,21 +936,32 @@ background-color: rgba(0, 0, 0, 0.123);
   }
 
 #chatImg{
-
     vertical-align: middle;
-    width: 90%;
-    border: solid white 2px;
+    width: 50%;
     border-radius: 100%;
 }
 
   .messageContext{
-      position: absolute;
+      position: relative;
       top: 0%;
       left: 5%;
       width: 100%;
-      z-index: 1;
+      z-index: 1;      
   }
-
+  .fromMessageContext{
+    position: relative;
+    top: 0%;
+    left: 5%;
+    width: 100%;
+    z-index: 1;      
+}
+.toMessageContext{
+    position: relative;
+    top: 0%;
+    left: 5%;
+    width: 100%;
+    z-index: 1;      
+}
   /* Animation for any menu coming from the right side */
   @keyframes slideInLeft {
       0% {

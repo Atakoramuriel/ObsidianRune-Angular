@@ -1,7 +1,7 @@
 
 /* This is the image in the background */
 #editCoverImg{
-    border: solid red 2px;
+    
     width: 25%;
     filter: brightness(35%);
 }

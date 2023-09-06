@@ -14,6 +14,7 @@ import { Timestamp } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {ActivatedRoute, Params, Router} from '@angular/router'; // import router from angular router
 import { ChapterService } from '../services/chapter.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-home',
@@ -400,6 +401,22 @@ mobilePosts = [
   }
 ];
 
+
+allPosts = [
+  {
+    id: "",
+    title: "",
+    text: "",
+    image: "https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/Classes%2FMint.png?alt=media&token=1d6925dd-efc9-4f5e-9110-79ca1d7200ea",
+    numLikes: "",
+    username: "",
+    date: "",
+    timestamp: ""
+  }
+]; 
+
+allLegacies = []
+
 //Regular Posts
 regularPosts = [
   {
@@ -412,6 +429,8 @@ regularPosts = [
     date: ""
   }
 ]; 
+
+
 regularPostsB = [
   {
     id: "",
@@ -535,6 +554,8 @@ imagePool: [string] = [""];
 
   //Data Collection 
   dataCollected: boolean = false;
+  legacyCollected: boolean = false;
+  aevumCollected: boolean = false;
 
 
   //Constructor 
@@ -560,7 +581,32 @@ imagePool: [string] = [""];
       
   }
 
+
+  //Test Globals 
+  first: any;
+  firstPostID: any;
+  firstLocalPostID: any;
+  last: any; //For tracking 
+  lastTimestamp: any;
+
+ //For Legacy
+ firstLegacy: any;
+ firstLegacyPID: any;
+ firstLocalLegacyPID: any;
+ lastLegacy: any;
+ lastLegacyTimestamp: any;
+
+  //For Aevum 
+  firstAevum: any;
+  firstAevumPID: any;
+  firstLocalAevumPID: any;
+  lastAevum: any;
+  lastAevumTimestamp: any;
+
+
   ngOnInit(): void {
+  
+    // localStorage.removeItem("AllPosts"); //Just to be safe
     // console.log(this.currentUserID)
     //Update the banner images
     // setInterval(this.shuffleImg, 7000);
@@ -569,35 +615,204 @@ imagePool: [string] = [""];
     //Check User Status
     this.checkAuthStatus()
   
+    //Check to see if there is local data 
+
     this.loadAllData();
 
-
+    this.recentPostScrollCheck();
+    this.recentImageScrollCheck();
+    this.recentWritingScrollCheck();
 
   }
+
+  recentPostScrollCheck(){
+
+    //check logic for the scroll
+    const element = document.getElementById('regularPostScroll');
+    let lastScrollTop = 0;
+    if(element != null){
+      // alert("Element = " + element);
+      console.log("Element = " + element);
+    element.onscroll = (e)=>{
+    if (element.scrollTop < lastScrollTop){
+          // console.log("LastScroll = " + lastScrollTop);
+          // upscroll 
+          return;
+       } 
+       lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
+        if (element.scrollLeft + element.offsetWidth>= element.scrollWidth ){
+          //Search more in the query
+          alert("Add more to query recent posts");
+        }
+    }
+  }
+  }
+
+  recentImageScrollCheck(){
+    //check logic for the scroll
+    const element = document.getElementById('recentImagePostsScroll');
+    let lastScrollTop = 0;
+    if(element != null){
+      // alert("Element = " + element);
+      console.log("Element = " + element);
+    element.onscroll = (e)=>{
+    if (element.scrollTop < lastScrollTop){
+          // console.log("LastScroll = " + lastScrollTop);
+          // upscroll 
+          return;
+       } 
+       lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
+        if (element.scrollLeft + element.offsetWidth>= element.scrollWidth ){
+          //Search more in the query
+          alert("Add more to query recent Image posts");
+        }
+    }
+    }
+  }
+
+  recentWritingScrollCheck(){
+    //check logic for the scroll
+    const element = document.getElementById('recentWritingScroll');
+    let lastScrollTop = 0;
+    if(element != null){
+      // alert("Element = " + element);
+      console.log("Element = " + element);
+    element.onscroll = (e)=>{
+    if (element.scrollTop < lastScrollTop){
+          // console.log("LastScroll = " + lastScrollTop);
+          // upscroll 
+          return;
+       } 
+       lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
+        if (element.scrollLeft + element.offsetWidth>= element.scrollWidth ){
+          //Search more in the query
+          alert("Add more to query recent Writing posts");
+        }
+    }
+    }
+  }
+
 
   //Check user status
   checkAuthStatus(){
     this.userService.authStatus()
   }
 
-
+  localDataValue: any;
+  localLegacyDV: any;
+  localAevumDV: any;
 
   //Load all the data
   loadAllData(){
+
+    //check to see if there is any local data
+
+      //if not proceed
+
+      //if so, compare the first item of the local storage to the first data item pulled
+
+
+    //Quick check to see if data is in localstorage
+    if(localStorage.getItem("AllPosts") == null){
+      alert("No Posts ... Fetching...");
+      this.dataCollected = false;
+    }else{
+      console.log("Data Found No need to fetch...")
+      console.log("Fetching Localstorage. . . ")
+      
+      this.localDataValue = localStorage.getItem("AllPosts");
+      this.localLegacyDV = localStorage.getItem("AllLegacies");
+
+      if(this.localDataValue){
+        //This is the working way of displaying the localDataValue
+        //console.log("Local Data Collected Below ---");
+        // console.log(this.localDataValue);
+        
+        this.loadLocalPosts();
+        this.loadLocalLegacies();
+
+
+      }
+      this.dataCollected = true;
+    }
+
       if(!this.dataCollected){
           
-    //Load the aevum collection items
-    this.loadAevum();
+            //Load the aevum collection items
+            this.loadAevum();
 
-    //Load the posts 
-    this.loadPosts();
-    
-    //load the legacies
-    this.loadLegacies();
+            //Load the posts 
+            this.loadPosts();
+            
+            //load the legacies
+            this.loadLegacies();
 
-    this.dataCollected = true
+            this.dataCollected = true
       }
+
   }
+
+  loadLocalPosts(){
+        
+  //Load the post into the array
+  this.allPosts.splice(0,1);
+  this.recentPosts.splice(0,1);
+  this.recentCollages.splice(0,1);
+  this.recentStoryboards.splice(0,1);
+  this.recentImgs.splice(0,1);
+  this.recentWritings.splice(0,1);
+  this.post.splice(0,1);
+  this.postColB.splice(0,1);
+  this.postColC.splice(0,1);
+
+    //Get data from local wine   
+    const dataLocal = this.localDataValue;
+    const data = JSON.parse(dataLocal);
+    // console.log("Loading Local Posts. . .")
+    // console.log(data[0]);
+
+    data.forEach((Post: any) =>{
+      // console.log("Post Img: " + Post.image);
+        //  console.log("Post title: " + Post.title);
+        // console.log("Post type: " + Post.type);
+      //recent Post
+
+          //Add all single images to section 
+          if(Post.image != ""  && (Post.type == "standard" || Post.type == null)){
+            this.recentImgs.push(Post)
+          }else if(Post.image == "" && Post.type == null && this.countWords(Post.text) < 99){
+            
+            this.recentPosts.push(Post);
+            
+           
+          }else if(Post.type == "standard" && this.countWords(Post.text) < 99){
+            
+            this.recentPosts.push(Post);
+            
+           
+          }else if(Post.type == "Images" || Post.type == "Storyboard"){
+            Post.postImg = Post.postImgs[0];
+            this.recentCollages.push(Post);
+  
+          }else if(this.countWords(Post.text) > 99 ||Post.type == "Writing"){
+            var short_description = Post.text.split(' ').slice(100).join(' ');
+            Post.type = "Writing";
+            this.recentWritings.push(Post);
+          }
+    });
+    
+    //Assign the first and last post 
+    this.first = data[0];
+    this.last = data[data.length - 1];
+
+    // console.log("First Post");
+    // console.log(this.first);
+
+    // console.log("Last Post");
+    // console.log(this.last);
+
+  }
+
 
   //Load in the Aevum collections
   loadAevum(){
@@ -609,6 +824,11 @@ imagePool: [string] = [""];
 
     //Get the aevum elements 
     this.AuthService.getAevum().subscribe(data => {
+
+      //Clear
+      localStorage.removeItem("AllAevum");
+
+      //starting Variables 
       this.aevumActiveList = [];
       this.aevumUpcomingList = [];
       this.aevumClosedList = [];
@@ -639,10 +859,19 @@ imagePool: [string] = [""];
         }
         // this.aevumList.push(dataUpload);
 
-      })
-    })
+      });
+        //some additional work required
+        
+
+
+
+    });
+
+    
 
   }
+
+
 
   //Load in the user Legacies
   loadLegacies(){
@@ -652,6 +881,8 @@ imagePool: [string] = [""];
 
     //use the authservice to get the legacies
     this.AuthService.getLegacies().subscribe(data => {
+
+      localStorage.removeItem("AllLegacies"); //Just to be safe
   
       data.map(e => {
         this.legacyList = [];
@@ -677,7 +908,16 @@ imagePool: [string] = [""];
           this.finalNewArr.push(dataUpload);
         }
        
-      })
+      });
+
+          //Additional info required for local storage 
+          localStorage.setItem("AllLegacies", JSON.stringify(this.legacyList));
+
+          this.firstLegacy = this.legacyList[0];
+          this.lastLegacy = this.legacyList[this.legacyList.length - 1];
+          
+
+
     })
 
     if(this.legacyList.length == 0){
@@ -699,6 +939,9 @@ imagePool: [string] = [""];
     //use the authservice to get the legacies
     this.AuthService.getAllLegacyPosts().subscribe(data => {
   
+      localStorage.removeItem("AllLegacies"); //Just to be safe
+
+
       data.map(e => {
         // this.legacyList = [];
         const data = e.payload.doc.data() as Legacy
@@ -723,13 +966,41 @@ imagePool: [string] = [""];
           this.finalNewArr.push(dataUpload);
         }
        
-      })
+      });
+      //Additional info required for local storage 
+        localStorage.setItem("AllLegacies", JSON.stringify(this.legacyList));
+
+        this.firstLegacy = this.legacyList[0];
+        this.lastLegacy = this.legacyList[this.legacyList.length - 1];
+        
+
+
     })
 
     
   }
 
- 
+ loadLocalLegacies(){
+
+  //Clean up 
+  this.legacyList.splice(0,1);
+
+  const dataLocal = this.localLegacyDV;
+  const data = JSON.parse(dataLocal);
+
+  data.forEach((Legacy: any) => {
+      if(Legacy.privacy == "public"){
+        this.legacyList.push(Legacy);
+        this.finalNewArr.push(Legacy);
+      }
+    
+  });
+
+  this.firstLegacy = data[0];
+  this.lastLegacy = data[data.length - 1];
+
+
+ }
 
   showModalDialog(card:any){
   //Reset the Modal Variables
@@ -906,6 +1177,7 @@ imagePool: [string] = [""];
   loadPosts(){
     
 //Load the post into the array
+    this.allPosts.splice(0,1);
     this.recentPosts.splice(0,1);
     this.recentCollages.splice(0,1);
     this.recentStoryboards.splice(0,1);
@@ -919,12 +1191,27 @@ imagePool: [string] = [""];
 
 
     this.AuthService.getPosts().subscribe(data => {
+      //Set data in local storage
+      localStorage.removeItem("AllPosts"); //Just to be safe
+      
+
+      
+      //Set the last variable
+      
+      
+      //Prep each of the columns 
+      this.allPosts = [];
       this.recentCollages = [] 
       this.recentPosts = []
       this.recentStoryboards = []
       this.recentImgs = []
       this.recentWritings = []
-      data.map(e => {         
+
+
+      data.map(e => {    
+        
+        
+
         //Const Data e.payload.doc.data() as Type needed to avoid error of object unknown
         const data = e.payload.doc.data() as Post
    
@@ -951,6 +1238,7 @@ imagePool: [string] = [""];
           numComments: ((data.NumComments != null) ? data.NumComments as string : "0"),
           userKey: data.userkey as string,
           date: data.date as string,
+          timestamp: data.timestamp as string,
           type: data.type as String,
           postImgs: data.postImgs as any,
           username: data.username as string
@@ -962,37 +1250,31 @@ imagePool: [string] = [""];
         //Add all posts to mobile posts 
         this.mobilePosts.push(mobileUpload);
 
+        //Append to all post
+        this.allPosts.push(dataUpload);
+
+
           //Add all single images to section 
         if(dataUpload['image'] != ""  && (dataUpload['type'] == "standard" || dataUpload['type'] == null)){
           this.recentImgs.push(dataUpload)
-        }else  if(this.recentCount <= 15 && dataUpload['image'] == "" &&dataUpload['type'] == null && this.countWords(dataUpload['text']) < 99){
+        }else if(dataUpload['image'] == "" && dataUpload['type'] == null && this.countWords(dataUpload['text']) < 99){
           
           this.recentPosts.push(dataUpload);
-          this.recentCount = this.recentCount + 1;
+          
          
-        }else  if(this.recentCount <= 15 && dataUpload['type'] == "standard" && this.countWords(dataUpload['text']) < 99){
+        }else if(dataUpload['type'] == "standard" && this.countWords(dataUpload['text']) < 99){
           
           this.recentPosts.push(dataUpload);
-          this.recentCount = this.recentCount + 1;
+          
          
         }else if(dataUpload['type'] == "Images" || dataUpload['type'] == "Storyboard"){
           dataUpload['image'] = data.postImgs[0];
           this.recentCollages.push(dataUpload);
 
-        }else  if(this.countWords(dataUpload['text']) > 99 ||dataUpload['type'] == "Writing"){
+        }else if(this.countWords(dataUpload['text']) > 99 ||dataUpload['type'] == "Writing"){
           var short_description = dataUpload['text'].split(' ').slice(100).join(' ');
           dataUpload['type'] = "Writing";
           this.recentWritings.push(dataUpload);
-        }else  if(this.recentCount > 15){
-       
-       //Randomly add posts to different rows
-            if(this.post.length < 30){
-              this.post.push(dataUpload)
-          }else if(this.postColB.length < 30){
-              this.postColB.push(dataUpload)
-          }else if(this.postColC.length < 30){
-              this.postColC.push(dataUpload)
-          }
         }
  
      
@@ -1007,9 +1289,27 @@ imagePool: [string] = [""];
    
 
       })
+       console.log("Number of Posts collected: " + this.allPosts.length);
+       localStorage.setItem("AllPosts", JSON.stringify(this.allPosts));
+
+       //Set up the first and Last 
+       this.first = this.allPosts[0];
+       this.last = this.allPosts[this.allPosts.length - 1];
+       this.lastTimestamp = this.allPosts[this.allPosts.length - 1].timestamp;
+
+        // console.log("First Post");
+        // console.log(this.first);
+
+        // console.log("Last Post");
+        // console.log(this.last);
+
+        // console.log("Last TimeStamp");
+        // console.log(this.lastTimestamp);
+
     })
 
-   
+    // console.log("Number of Posts collected: " + this.allPosts.length);
+    
 
   }
 

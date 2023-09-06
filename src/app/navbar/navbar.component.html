@@ -312,7 +312,8 @@
     *ngFor="let card of newMessageList; let i = index;">
         <div class="space">
          
-            <div                     
+            <div
+            (click)="selectMessage(card.id)"               
             class="card" 
             id="aevumItem">
             <img src="{{card.profileImg}}" class="" id="legacyImg">
@@ -330,41 +331,45 @@
   </div>
 
   <!-- This is the actual message Chat -->
-  <div class="chatList">
-      <h4 class="white-text">Chat</h4>
+  <div class="chatList" *ngIf="viewChatList">
+      <br>
+      <div 
+      style="width: 35%; background-color: #000000; position: fixed; top: 7%; z-index: 10;">
+        <div class="row">
+            <div class="col s4">
+              <img src="{{activeChatUserPhoto}}" class="" id="chatImg">
+            </div>
+            <div class="col s8">
+                <h4 class="orange-text text-darken-3" style="position: fixed; top: 7%; left: 5%; z-index: 5; padding-left: 1%;"><b>{{activeChatUser}}</b></h4>
+            </div>
+        </div>
+      </div>
       <div 
       id="testCardAevum"
       class="card"
       *ngFor="let card of chatList; let i = index;">
-          <div class="space">
-           
-              <div                     
+          <div class="space">   
+            <div
+            *ngIf="card.fromUserKey == curentUserID"                
+            class="card" 
+            id="chatCardU">              
+                <div class="fromMessageContext">
+                    <h6 class="UserMessageTxt">{{card.message}} + {{i}}</h6>                      
+                </div>                                    
+            </div>             
+            <!-- <div
+                *ngIf="card.fromUserKey != curentUserID;"
               class="card" 
-              id="aevumItem">
-              
-              <div class="messageContext">
-                  <div class="row" >
-                      <div class="col s3">
-                          <div class="row">
-                              <img src="{{card.profileImg}}" class="" id="chatImg">
-                          </div>
-                      </div>
-                      <div class="col s9">
-                        <h6 class="messageTxt">{{card.message}}</h6>      
-                      </div>
-                  </div>
-                  
-              </div>
-                  
-                  
-              </div>                        
+              id="chatCard">              
+                <div class="toMessageContext">
+                    <h6 class="fromMessageTxt">{{card.message}} + {{i}}</h6>                      
+                </div>                                    
+              </div>     -->
+                             
           </div>  
       </div>
+      
   </div>
-
-
-
-
 
 
 </div>

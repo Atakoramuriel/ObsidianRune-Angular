@@ -78,8 +78,13 @@ export class AuthService {
 
   //For loading the posts in 
   getPosts(){
-    return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
+    return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc').limit(50)).snapshotChanges();
   }
+
+    //For loading the posts in 
+    getPostsNew(startPoint: string){
+      return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc')).snapshotChanges();
+    }
 
   getUserPosts(userID: string){
     return this.fireService.collection("posts", ref => ref.where("userkey","==",userID).orderBy('timestamp','desc')).get();
@@ -446,7 +451,7 @@ updateLegacyPrivacy(LegacyID: string, chapterID: string, privacy: string){
 
 getUserChatMessages(userID: string, secondUserID: string){
   
-  return this.fireService.collection("Message").doc(userID).collection(secondUserID, ref => ref.orderBy('timestamp',"desc")).snapshotChanges();
+  return this.fireService.collection("Message").doc(userID).collection(secondUserID, ref => ref.orderBy('timestamp',"desc"),).snapshotChanges();
 }
 
 

@@ -119,7 +119,9 @@ export class NavbarComponent implements OnInit {
   ]
 
  viewNewMessageList: boolean = false;
- viewChatList: boolean = true;
+ viewChatList: boolean = false;
+ activeChatUser: string = "";
+ activeChatUserPhoto: string = "";
  newChatMessage: string = "";
  newMessageTxt: string = "";
 
@@ -167,10 +169,12 @@ export class NavbarComponent implements OnInit {
     // this.modalPostUser = this.userData['displayName'];
     // this.modalPostUserProfileImg = this.userData['photoURL']
     // console.log(this.userData[''])
-    this.loadNewMessages();
+    // this.loadNewMessages();
     this.loadChatMessages("0Zqug3cne4PxbbXeaEbIrsBNwlA2");
+    
   }
 
+ 
 
   cleanList(){
     this.newMessageList.splice(0,1);
@@ -238,11 +242,13 @@ export class NavbarComponent implements OnInit {
           var test = JSON.stringify(user);
           var temp = JSON.parse(test);
           foundUser = temp.displayName! as string;
+          this.activeChatUser = foundUser;
           var photoURL = temp.photoURL! as string;
+          this.activeChatUserPhoto = photoURL;
 
           var username;
  
-        console.log(foundUser)
+        
         const chatData = {
           id: e.payload.doc.id,
           fromUserKey: data['fromUserKey'],
@@ -253,10 +259,13 @@ export class NavbarComponent implements OnInit {
           username: foundUser,
           profileImg: photoURL
         };
-        console.log("Chat DATA II")
+        if(chatData['fromUserKey'] == this.curentUserID)
+        {
+          
+        }
         // console.log(chatData);
         this.chatList.push(chatData);
-
+        
       });
       });
     });
@@ -322,6 +331,13 @@ reduceMessage(messageTxt: string){
       }
   
   }
+
+ async selectMessage(userID: string)
+  {
+    alert(userID);
+    await this.loadChatMessages(userID)
+  }
+
 
   async loadUserInfo(){
 

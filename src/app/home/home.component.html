@@ -64,8 +64,7 @@
                                                 <div 
                                                     (click)="goProfile()"
                                                     id="userInfo">
-                                                    <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileImg0" alt="">
-                                                    <br>
+                                                    <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileImg0" alt="">                                                    
                                                     <h5 class="left" id="modalUser0">{{modalPostUser}}</h5>
                                                 </div>
                                                 
@@ -235,8 +234,7 @@
                            <!--Regular Post Modal -->
                            <div class="row" *ngIf="displayWritingModal">
                             
-                            <!-- Display of the Link and Comment Button  -->
-                            div.
+ 
 
                             
                             <div class="container" >                                
@@ -322,7 +320,6 @@
 
 
         <!-- Start of the Aevum if there are any active -->
-
         <div class="row" id="main" *ngIf="newAevum">
             <h4  id="aevumTitle">New</h4>
             <div
@@ -398,6 +395,7 @@
                             <div class="row" id="main">
                                 <h4  id="menuTitle">Recent Posts</h4>
                                 <div
+                                id="regularPostScroll"
                                 class="box">
                                 <div 
                                 id="testCard"
@@ -408,9 +406,9 @@
                                         (click)="showModalDialog(card)"
                                         class="card" 
                                         id="userRecentPosts2">
-                                        <div class="card" id="userLongWriting">
+                                        <div class="card" id="userPostWriting">
                                             <br>
-                                            <h5 class="writingTitle">{{card.title}}</h5>
+                                            <h6 class="writingTitle">{{card.title}}</h6>
                                             <!-- <img src="https://firebasestorage.googleapis.com/v0/b/obsidianrune-vuejs.appspot.com/o/N4Posts%2FItVzlZqqYXQukCYVI3TZodI7oQq2%2Fimages%2FFEB89DFE-9095-406D-BCDB-6D4E97F2BF40_1_101_o.jpeg?alt=media&token=9b32266d-727c-454a-8a22-2dbe0671621e" class="" id="legacyImg"> -->
                                             <div class="center">
                                                 <img
@@ -433,6 +431,7 @@
                         <div class="row" id="main">
                             <h4  id="menuTitle">Recent Image Posts</h4>
                             <div
+                            id="recentImagePostsScroll"
                             class="box2">
                             <div 
                             id="testCard"
@@ -485,6 +484,7 @@
                             <div class="row" id="main">
                                 <h4  id="menuTitle">Recent Writings ~</h4>
                                 <div
+                                id="recentWritingScroll"
                                 class="box2">
                                 <div 
                                 id="WritingCard"
