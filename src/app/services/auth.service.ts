@@ -77,6 +77,10 @@ export class AuthService {
   
 
   //For loading the posts in 
+  getSinglePost(){
+    return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc').limit(1)).snapshotChanges();
+  }
+
   getPosts(){
     return this.fireService.collection("posts", ref => ref.orderBy('timestamp','desc').limit(50)).snapshotChanges();
   }

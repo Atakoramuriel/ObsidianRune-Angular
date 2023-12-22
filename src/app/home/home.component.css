@@ -163,6 +163,7 @@ width: 100%;
     padding-left: 5%;
 }
 
+/* This is the scroll here */
 .box{
     overflow: scroll;
     flex-direction: row;
