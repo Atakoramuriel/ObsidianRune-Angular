@@ -371,7 +371,7 @@
         <div 
              class="row" 
              id="main">
-            <h4  id="menuTitle">Legacy Posts</h4>
+            <h5  id="menuTitle">Legacy Posts</h5>
             <div
             class="box2">
                 <div 
@@ -388,13 +388,14 @@
                 </div>
             </div>
         </div>
+
     
                 <!-- Computer and Tablet only -->
                 <div class="hide-on-small-only">
                             <!-- Recent Posts -->
                                 <!-- Timeline of recent posts from all friends -->
                                 <div class="row" id="main">
-                                    <h4  id="menuTitle">Recent Posts</h4>
+                                    <h5  id="menuTitle">Recent Posts</h5>
                                     <div
                                     id="regularPostScroll"
                                     class="box">
@@ -429,8 +430,29 @@
                                 </div>
                                 </div>
     
+                                <div 
+                                class="row" 
+                                id="main">
+                               <h5  id="menuTitle">Recent Images</h5>
+                               <div
+                               class="box2">
+                                   <div 
+                                   id="testCardAevum"
+                                   class="card"                                
+                                   (click)="showModalDialog(card)"
+                                   *ngFor="let card of recentImgs; let i = index;">
+                                       <div class="space">
+                                           <div class="card" id="aevumItem">
+                                               <h4 class="legacyTitle">{{card.title}}</h4>
+                                               <img src="{{card.image}}" class="" id="legacyImg">
+                                           </div>                        
+                                       </div>  
+                                   </div>
+                               </div>
+                           </div>
+
                             <div class="row" id="main">
-                                <h4  id="menuTitle">Recent Image Posts</h4>
+                                <h5  id="menuTitle">Recent Image Posts</h5>
                                 <div
                                 id="recentImagePostsScroll"
                                 class="box2">
@@ -481,9 +503,11 @@
                                 </div>
                                </div>
                             </div>
+
+                            
                                 <!-- Area for Recent Long Writings -->
                                 <div class="row" id="main">
-                                    <h4  id="menuTitle">Recent Writings ~</h4>
+                                    <h5  id="menuTitle">Recent Writings ~</h5>
                                     <div
                                     id="recentWritingScroll"
                                     class="box2">
