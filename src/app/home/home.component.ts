@@ -514,6 +514,7 @@ imagePool: [string] = [""];
   //For image displays
   displayImgModal: boolean = false;
   displayWritingModal: boolean = false;
+  displayWritingModalDesktop: boolean = false;
   imgModal: String = "";
   preSelection: boolean = false;
 
@@ -602,6 +603,11 @@ imagePool: [string] = [""];
   firstLocalAevumPID: any;
   lastAevum: any;
   lastAevumTimestamp: any;
+
+
+ //For Modal Word Count 
+ wordCount: any = 0;
+ writtenPages: Array<any> = [];
 
 
   ngOnInit(): void {
@@ -1002,6 +1008,8 @@ imagePool: [string] = [""];
 
  }
 
+
+
   showModalDialog(card:any){
   //Reset the Modal Variables
     this.modalPostLiked = false;
@@ -1077,6 +1085,119 @@ imagePool: [string] = [""];
     // console.log(card)
     this.loadUserInfo(card)
   }
+  showModalDialogDesktop(card:any){
+  //Reset the Modal Variables
+  this.wordCount = 0;
+  this.writtenPages = [];
+    this.modalPostLiked = false;
+    this.modalPostSaved = false;
+    //Empty out array values
+    this.likesList = [];
+    this.savedList = [];
+
+    console.log("CARD INFO")
+    console.log(card);
+
+        //Get total likes for legacy id 
+        //From list of likes see if the current user is hidden amonst list 
+        this.AuthService.getLikes(card['id']).subscribe(data => {
+          //Creation of data struction 
+          data.map(e => {
+            const data = e.payload.doc.id;
+            this.likesList.push(data);
+          })
+          
+          //Check to see if username is included     
+            if(this.likesList.includes(this.userData['uid'])){
+              this.modalPostLiked = true;
+            }else{
+              this.modalPostLiked = false;
+            }
+      })
+
+    //Get the value of the likes 
+      this.AuthService.getLikesCount(card['id']).subscribe(data => {
+        this.modalPostLikes = data.size as unknown as string;
+      })
+
+    //Update the modal 
+      //Modal variables
+      if(card['type'] == "Images" || card['type'] == "standard" || card['image'] != ""){
+        this.modalPostID = card['id'];
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  (card['type'] != "Images") ? card['image'] : ""
+        this.modalPostImages =  (card['type'] == "Images") ? card['postImgs'] :  card['postImgs']
+          //Display the modal
+    this.displayModal=true;
+   
+      }
+      else if(card['type'] == "Storyboard" ){
+        this.modalPostID = card['id'];
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  ""
+        this.modalPostImages =  card['postImgs'] 
+          //Display the modal
+    this.displayModal=true;
+      }
+      else if(card['type'] == "Writing" ){
+        
+        this.modalPostID = card['id'];
+        this.modalPostTitle = card['title']
+        this.modalPostTxt = card['text']
+        this.modalPostDate = card['date']
+        this.modalPostImage =  ""
+        this.modalPostImages =  card['postImgs'] 
+        this.displayWritingModalDesktop = true;
+      }
+ 
+
+      //Start of the Word Count Theory 
+      let text = this.modalPostTxt;
+      var  pretext = "";
+      var index = 0;
+
+            // Loop through the text
+            // and count spaces in it
+
+            for (let i = 0; i < text.length; i++) {
+              let currentCharacter = text[i];
+              pretext += text[i];
+
+              // Check if the character is a space
+              if (currentCharacter == " ") {
+                  this.wordCount += 1;
+              }
+
+              if(this.wordCount == 250)
+              {
+                index++;
+                this.wordCount = 0;
+                this.writtenPages.push({
+                  "PageText" : pretext,
+                  "Page": index
+                })
+              }
+          }
+
+          // Add 1 to make the count equal to
+          // the number of words 
+          // (count of words = count of spaces + 1)
+          this.wordCount += 1;
+
+       
+
+      //End of the word count theory 
+     
+
+  
+
+    // console.log(card)
+    this.loadUserInfo(card)
+  }
 
   
   closeModalDialogue(){
@@ -1088,6 +1209,7 @@ imagePool: [string] = [""];
       // alert("Close Modal");
       this.displayModal=false
       this.displayWritingModal=false;
+      this.displayWritingModalDesktop=false;
     }
   }
  
