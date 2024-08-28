@@ -9,7 +9,7 @@ width: 100%;
 #liveBanner{
     height: 225px;
     position: absolute;
-    top: 7.5%;
+    top: 6.5%;
     width: 100%;
     z-index: 3;
  
@@ -311,6 +311,9 @@ width: 100%;
     cursor: pointer;
     border:solid rgb(255, 123, 0) 2px;
 }
+
+
+
 /* //For legacy cards */
 #aevumItem{
     background-color:rgb(3, 4, 36);
@@ -911,6 +914,15 @@ ul#menu li {
     padding: 1%;
 }
 
+#mangamodal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#000000a9;
+    border: solid #535D80 2px;
+    width: 100%;
+    height: 100%;
+    padding: 1%;
+}
+
 #WritingModal1{
     animation: 1s ease-out 0s 1 slideInFromBelow;
     /* background-color:#161A23;
@@ -959,6 +971,16 @@ ul#menu li {
     
 }
 
+#modalProfileMangaImg0{
+    position: absolute;
+    top: 5%;
+    left: 2%;
+    width: 5%;
+    border-radius: 50%;
+    z-index: 1;
+    
+}
+
 #modalUser0{
     color:rgb(202, 144, 58);
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -1002,6 +1024,21 @@ ul#menu li {
 .modal-content{
     position: relative;
     text-align: center;
+}
+
+#MangaCover{
+    width: 85%;
+    border: solid white 1px;
+}
+
+#MangaPage1{
+    width: 80%;
+    border: solid white 2px;
+}
+
+#MangaPage2{
+    width: 80%;
+    border: solid red 2px;
 }
 
 #modalImg{

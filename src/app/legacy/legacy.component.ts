@@ -19,8 +19,10 @@ export class LegacyComponent implements OnInit {
 
   //refresh Rate 
   alreadyLoaded: string = 'false';
+  newMode: boolean = false;
   editMode: boolean = false;
   newEntryMenu: boolean = false;
+
 
   //LegacyID
   legacyID: string= "";

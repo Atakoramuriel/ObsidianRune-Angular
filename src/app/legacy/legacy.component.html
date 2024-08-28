@@ -78,16 +78,43 @@ class="hide-on-med-only hide-on-small-only">
                         class="btn-large red darken-3" 
                         id="authorMenuBtn">Delete Selected</div>
                     </div>
+
+                    <!-- ?For all buttons NEW  -->
+                    <div 
+                    *ngIf="newMode"
+                    class="regMenu">                                            
+                        <div
+                        *ngIf="isAuthor && newMode"                        
+                        class="btn-large" 
+                        id="authorMenuBtnPost">Standard Post</div>
+                        
+                        <div class="row"><br></div>        
+                        <div
+                        *ngIf="isAuthor && newMode"                        
+                        class="btn-large" 
+                        (click)="editLegacy()"
+                        id="authorMenuBtnPost">New Chapter</div>
+                        <div class="row"><br></div>     
+                        <div
+                        *ngIf="isAuthor && newMode"
+                        (click)="newMode=!newMode"
+                        class="btn-large" 
+                        id="authorMenuBtnCancel">Cancel</div>
+                        <div class="row"><br></div>     
+
+                    </div>
+
+
                     <!-- ?For all buttons NONEDIT -->
                     <div 
-                    *ngIf="!editMode"
+                    *ngIf="!newMode"
                     class="regMenu">                    
                         <!-- Additional Spacing Required -->
                         <div class="row"><br></div>
                         <!-- Special Button For Author -->
                         <div
                         *ngIf="isAuthor"
-                        (click)="editLegacy()"
+                        (click)="newMode = true"
                         class="btn-large" 
                         id="authorMenuBtn">New Entry</div>
                         
@@ -207,7 +234,7 @@ class="hide-on-med-only hide-on-small-only">
                 <div class="col s3 offset-s3">
                     <!-- Type of posting -->
                     <div style="padding-left: 5%;">
-                        <h3 class="bannerTxt"><b>Entries</b></h3>
+                        <h3 class="bannerTxt"><b>Chapters</b></h3>
                         <hr class="solid">
                     </div>
                 </div>
@@ -217,7 +244,7 @@ class="hide-on-med-only hide-on-small-only">
         <div class="row" *ngIf="!hasEntries">
             <div class="col s9 offset-s4">
                 <div class="">
-                    <h3 class="white-text" id="legacyDesc"><i>No Entries as of yet. . . </i></h3> <br>
+                    <h3 class="white-text" id="legacyDesc"><i>No Chapters as of yet. . . </i></h3> <br>
                 </div>
                 <div style="padding-bottom: 25%;"></div>
             </div>

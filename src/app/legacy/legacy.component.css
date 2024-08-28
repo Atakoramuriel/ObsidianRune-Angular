@@ -98,8 +98,25 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
+
+
 #authorMenuBtn{
     background-color: rgb(128, 87, 11);
+    width: 100%;
+}
+
+#authorMenuBtnPost{
+    background-color: rgb(11, 56, 128);
+    width: 100%;
+}
+
+#authorMenuBtnChapter{
+    background-color: rgb(11, 56, 128);
+    width: 100%;
+}
+
+#authorMenuBtnCancel{
+    background-color: rgb(128, 11, 11);
     width: 100%;
 }
 
@@ -165,20 +182,19 @@
 
 
 .box2{    
+    width: 100%;
+    height: 200px;
     overflow-x: scroll;   
-    overflow-y: hidden;
+    
     flex-direction: row;
     display: flex;
     position: relative;
-    animation: rightSlide 3.5s;
-    animation-direction: normal;
-  
+
 }
 
-.space{
-    padding-left: 5%;
-    padding-right: 5%;   
-}
+
+
+
 
 /* these are each of the book frames */
 .cardTitle{
@@ -256,6 +272,9 @@
     background-color: #00000000;
  
 }
+
+
+
 #testCardAevumMed{
     
     width: 60%;
@@ -338,6 +357,7 @@
 }
 
 
+
 #editlegacyTitle{
     color: rgb(66, 154, 255);
     font-family: 'Times New Roman', Times, serif;
@@ -399,4 +419,35 @@
 
 #fancyTxt{
     font-family: 'Times New Roman', Times, serif;
+}
+
+
+/* Addition of the new image section */
+
+/* Part 1 */
+#PreImg{
+    object-fit:cover;
+    width: 200px;
+    height: 100px;
+    border-radius: 15px;
+  }
+
+  #preImgCard{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 400px;
+    border: solid black 1px;
+    display: inline-block;
+}
+#preImgCard:hover{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:200px;
+    /* width: 425px; */
+    width: 400px;
+    border: solid rgb(241, 158, 32) 1px;
+    display: inline-block;
+    cursor: pointer;
 }

@@ -833,6 +833,51 @@ background-color: rgba(0, 0, 0, 0.123);
     animation-direction: normal;
 }
 
+
+.box2{    
+    overflow: scroll;
+    flex-direction: row;
+    display: flex;
+    position: relative;
+    
+    /* animation: rightSlide 3.5s;
+    animation-direction: normal; */
+}
+
+/* .space{
+    padding-left: 5%;
+    padding-right: 5%;   
+} */
+
+
+#legacyImg{
+    object-fit:cover;        
+  }
+
+#aevumItem{
+    background-color:rgb(3, 4, 36);
+    border-radius:15px;
+    height:150px;
+    /* width: 425px; */
+    width: 100%;
+    /* border:solid rgb(255, 123, 0) 2px; */
+    display: inline-block;
+ 
+}
+
+#testCardAevum{
+    width: 35%;
+    min-width: 25%;
+    max-width: 35%;
+    display: inline-block;
+    background-color: #00000000;
+ 
+}
+
+input[type="file"] {
+    display: none;
+  }
+
   #testCardAevum{
     position: relative;
     top: 10%;
@@ -971,3 +1016,74 @@ background-color: rgba(0, 0, 0, 0.123);
           right: 0%; 
       }
   }
+
+
+
+/* Addition of the new image section */
+
+/* Part 1 */
+
+/* This is the actual card Image itself */
+#PreImg{
+    object-fit:cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 15px;
+  }
+
+  /* This is the actual card itself */
+  #preImgCard{
+    background-color:rgba(3, 4, 36, 0.379);
+    border-radius:15px;
+    height:200px;    
+    width: 400px; 
+    border: solid black 1px;    
+    }
+
+#preImgCard:hover{
+    background-color:rgba(3, 4, 36, 0.341);
+    border-radius:15px;
+    height:200px;    
+    width: 400px; 
+    border: solid rgb(241, 158, 32) 1px;    
+    cursor: pointer;
+}
+
+.space{
+    padding-left: 5%;
+    padding-right: 5%;   
+}
+
+/* Last Known place the scrolling-y was working */
+/* .box2{
+    border: solid red 2px;
+    max-height: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x: scroll;
+} */
+
+
+
+/* This is the fix */
+.array{
+    background-color: #0F0F12;
+    border-radius: 10px;
+    max-height: 200px;
+    height: 185px;
+    display: flex;
+    padding-left: 2%;
+    padding-right: 2%;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+.postRow{
+    width: 100%;
+    min-width: 100;            
+    background-color: #00000000;     
+    overflow-x: scroll;      
+}

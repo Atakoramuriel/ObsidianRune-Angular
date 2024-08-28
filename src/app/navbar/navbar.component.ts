@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, DebugElement, OnInit } from '@angular/core';
 import { FirebaseService } from '../services/firebase.service';
 import {Router} from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
@@ -9,6 +9,9 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { User } from 'firebase/auth';
 import { Writing } from '../models/Writing';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import {ref} from 'firebase/storage';
+import { finalize } from 'rxjs';
+import { CarouselModule } from 'primeng/carousel';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +19,18 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+
+  inp = document.querySelector(".inp");
+  progressBar = document.querySelector(".progress");
+  img = document.querySelector('.img');
+ body  = document.querySelector("body");
+loading = document.querySelector(".loading");
+  file: any; 
+  files : any; 
+  fileName : any;
+  progress : any;
+  uploadedFileName : any;
+  metaData = document.querySelector(".metaData");
 
   //Importante Variables
   currentUser: string = "";
@@ -118,12 +133,20 @@ export class NavbarComponent implements OnInit {
     }
   ]
 
+  prePostImgs: string[] = [];
+
+
  viewNewMessageList: boolean = false;
  viewChatList: boolean = false;
  activeChatUser: string = "";
  activeChatUserPhoto: string = "";
  newChatMessage: string = "";
  newMessageTxt: string = "";
+
+
+ 
+
+
 
 
   constructor(
@@ -171,6 +194,8 @@ export class NavbarComponent implements OnInit {
     // console.log(this.userData[''])
     // this.loadNewMessages();
     this.loadChatMessages("0Zqug3cne4PxbbXeaEbIrsBNwlA2");
+
+  
     
   }
 
@@ -180,6 +205,11 @@ export class NavbarComponent implements OnInit {
     this.newMessageList.splice(0,1);
     this.newMessageList = [];
     this.loadNewMessages();
+  }
+
+  removePreImg(index: number){
+    alert("Removing Image: " + index);
+    this.prePostImgs.splice(index,1);
   }
 
   async loadNewMessages(){
@@ -380,6 +410,94 @@ savePost(){
 
 }
 
+ 
+savePostNew(){
+   
+  if(this.prePostImgs.length == 1){
+
+  //Structure data to be posted
+  const postData = {
+    title: this.newTitle,
+    text: this.newText,
+    userkey: this.userData['uid'],
+    date: this.timeSaved,
+    type: this.prePostImgs.length  <= 1 ? "standard" : "Manga",
+    timestamp: this.timeStamp,
+    NumComments: "0",
+    NumLikess: "0",
+    hashtags: [],
+    postImg: this.prePostImgs[0],
+    postImgs: null,
+    post_id: this.tempID,
+    username: this.userData['displayName']
+  } 
+
+    //Call to the Function 
+  this.AuthService.newPost(postData,  this.tempID)
+  .then(()=>{
+    M.toast({html: "Posted to Obsidian"});
+    this.displayPostModal = false;
+    location.reload();
+  })
+
+  }else if(this.prePostImgs.length > 1){
+  //Structure data to be posted
+  const postData = {
+    title: this.newTitle,
+    text: this.newText,
+    userkey: this.userData['uid'],
+    date: this.timeSaved,
+    type: this.getCount(this.newText) < 1000 ? "standard" : "Writing",
+    timestamp: this.timeStamp,
+    NumComments: "0",
+    NumLikess: "0",
+    hashtags: [],
+    postImg: "",
+    postImgs: this.prePostImgs,
+    post_id: this.tempID,
+    username: this.userData['displayName']
+  } 
+
+  //Call to the Function 
+  this.AuthService.newPost(postData,  this.tempID)
+  .then(()=>{
+    M.toast({html: "Posted to Obsidian"});
+    this.displayPostModal = false;
+    location.reload();
+  })
+
+  } else {
+      //Structure data to be posted
+  const postData = {
+    title: this.newTitle,
+    text: this.newText,
+    userkey: this.userData['uid'],
+    date: this.timeSaved,
+    type: this.getCount(this.newText) < 1000 ? "standard" : "Writing",
+    timestamp: this.timeStamp,
+    NumComments: "0",
+    NumLikess: "0",
+    hashtags: [],
+    postImg: "",
+    postImgs: null,
+    post_id: this.tempID,
+    username: this.userData['displayName']
+  } 
+
+    //Call to the Function 
+  this.AuthService.newPost(postData,  this.tempID)
+  .then(()=>{
+    M.toast({html: "Posted to Obsidian"});
+    this.displayPostModal = false;
+    location.reload();
+  }) 
+
+  }
+
+
+
+
+}
 
 
 validate(){
@@ -424,6 +542,121 @@ if(this.validate()){
 
 // this.AuthService.saveWritingProgress()
 }
+
+getImageData(e: any){
+  console.log("GID called")
+  this.files = e.target.files;  
+  
+  for (let i = 0; i < this.files.length; i++) {
+    var imageFile = e.target.files[i];
+    this.uploadImageTest(imageFile);
+  }
+
+  // for (let i = 0; i < this.files.length; i++) {
+  //   console.log("File Caught " + i);
+  //   let imageData = document.createEl  ement("span");
+  //   imageData.className = "filedata";
+  //   imageData.style.display = "block";
+  //   imageData.innerHTML = this.files[i].name;
+  //   this.metaData?.appendChild(imageData);
+  // } 
+}
+
+async uploadImageTest(imageFile: any){
+  
+  console.log("Image File caught : " + imageFile);
+
+  var storageRef = this.af.storage.ref("TestMultiImage/" + imageFile.name);
+
+  //upload task 
+  var task = storageRef.put(imageFile);
+
+  var imgURLS: any[] = [""];
+
+  var completePush = false;
+
+  var This = this;
+
+  task.on('stage_changed',
+
+     
+
+    function progress(snapshot){
+      var percentage = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+      console.log("uploading file to Firebase : " + percentage + "%");
+      completePush = false;
+    },
+    function error(err){
+      console.log("Error uploading : " + err)
+    },
+    function complete(){
+      task.snapshot.ref.getDownloadURL().then( (downloadURL) => {
+        console.log("Obtained Img Download URL : " + downloadURL);
+        imgURLS.push(downloadURL);
+        This.prePostImgs.push(downloadURL);
+      });
+    }
+  )
+
+  
+
+
+
+
+
+ 
+
+
+  // for (let i = 0; i < this.files.length; i++) {
+
+  //   let url = await this.uploadFile(this.files[i]);   
+  // }
+}
+
+
+test(){
+  alert(this.prePostImgs.length);
+  console.log(this.prePostImgs);
+}
+
+async uploadFile(fileNamex: string) {
+
+  //Test console output 
+  console.log("UploadFile Called. . .")
+
+  
+  //upload file 
+  console.log("Attempting upload to firebase ")
+
+  var fullPath =  "TESTCollage" + "/" + fileNamex;
+
+  //Place file within Firebase Storage
+   var uploadTask = this.af.upload(fullPath, fileNamex)
+
+
+  var fileRef = this.af.ref(fullPath);
+
+
+  
+  //Get the percentage of the upload progress
+  var uploadPercent = uploadTask.percentageChanges();
+  
+  //Find out when download URL is available
+  uploadTask.snapshotChanges().pipe(
+    finalize(() => {
+      var imageLink = fileRef.getDownloadURL();
+       imageLink.subscribe((url: string) => {
+        console.log("URL Obtained " + url);
+        // this.downloadLink = url;
+      })
+      //this.setImage();
+      //this.imageUploaded = true;
+    })
+  )
+  .subscribe();
+}
+
+
 
 
 getCount(value: string){
@@ -485,6 +718,7 @@ getCount(value: string){
     }else{
       this.displayPostModal = false;  
       this.displayModal=false
+      this.prePostImgs = []; //empty out the array 
     }
   }
 

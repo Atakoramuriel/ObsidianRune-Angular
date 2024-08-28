@@ -611,7 +611,7 @@ imagePool: [string] = [""];
     //Update the banner images
     // setInterval(this.shuffleImg, 7000);
     this.dataCollected = false;
-
+    
     //Check User Status
     this.checkAuthStatus()
   
@@ -706,35 +706,35 @@ imagePool: [string] = [""];
   loadAllData(){
 
     //check to see if there is any local data
-
+    this.dataCollected = false;
       //if not proceed
 
       //if so, compare the first item of the local storage to the first data item pulled
 
 
     //Quick check to see if data is in localstorage
-    if(localStorage.getItem("AllPosts") == null){
-      alert("No Posts ... Fetching...");
-      this.dataCollected = false;
-    }else{
-      console.log("Data Found No need to fetch...")
-      console.log("Fetching Localstorage. . . ")
+    // if(localStorage.getItem("AllPosts") == null){
+    //   alert("No Posts ... Fetching...");
+    //   this.dataCollected = false;
+    // }else{
+    //   console.log("Data Found No need to fetch...")
+    //   console.log("Fetching Localstorage. . . ")
       
-      this.localDataValue = localStorage.getItem("AllPosts");
-      this.localLegacyDV = localStorage.getItem("AllLegacies");
+    //   this.localDataValue = localStorage.getItem("AllPosts");
+    //   this.localLegacyDV = localStorage.getItem("AllLegacies");
 
-      if(this.localDataValue){
-        //This is the working way of displaying the localDataValue
-        //console.log("Local Data Collected Below ---");
-        // console.log(this.localDataValue);
+    //   if(this.localDataValue){
+    //     //This is the working way of displaying the localDataValue
+    //     //console.log("Local Data Collected Below ---");
+    //     // console.log(this.localDataValue);
         
-        this.loadLocalPosts();
-        this.loadLocalLegacies();
+    //     this.loadLocalPosts();
+    //     this.loadLocalLegacies();
 
 
-      }
-      this.dataCollected = true;
-    }
+    //   }
+    //   this.dataCollected = true;
+    // }
 
       if(!this.dataCollected){
           
@@ -790,7 +790,7 @@ imagePool: [string] = [""];
             this.recentPosts.push(Post);
             
            
-          }else if(Post.type == "Images" || Post.type == "Storyboard"){
+          }else if(Post.type == "Images" || Post.type == "Manga"){
             Post.postImg = Post.postImgs[0];
             this.recentCollages.push(Post);
   
@@ -1078,7 +1078,79 @@ imagePool: [string] = [""];
     this.loadUserInfo(card)
   }
 
+  showModalMangaDialog(card:any){
+    //Reset the Modal Variables
+      this.modalPostLiked = false;
+      this.modalPostSaved = false;
+      //Empty out array values
+      this.likesList = [];
+      this.savedList = [];
   
+      console.log("CARD INFO")
+      console.log(card);
+  
+          //Get total likes for legacy id 
+          //From list of likes see if the current user is hidden amonst list 
+          this.AuthService.getLikes(card['id']).subscribe(data => {
+            //Creation of data struction 
+            data.map(e => {
+              const data = e.payload.doc.id;
+              this.likesList.push(data);
+            })
+            
+            //Check to see if username is included     
+              if(this.likesList.includes(this.userData['uid'])){
+                this.modalPostLiked = true;
+              }else{
+                this.modalPostLiked = false;
+              }
+        })
+  
+      //Get the value of the likes 
+        this.AuthService.getLikesCount(card['id']).subscribe(data => {
+          
+          this.modalPostLikes = data.size as unknown as string;
+        })
+  
+      //Update the modal 
+      if(card['type'] == "Manga" ){
+          this.modalPostID = card['id'];
+          this.modalPostTitle = card['title']
+          this.modalPostTxt = card['text']
+          this.modalPostDate = card['date']
+          
+          this.modalPostImages =  card['postImgs'] 
+          this.mangaPageLimit = this.modalPostImages.length;
+            //Display the modal
+      this.displayMangaModal=true;
+        }
+   
+       
+  
+    
+  
+      // console.log(card)
+      this.loadUserInfo(card)
+    }
+  
+
+  incrementMangaPage(){
+    // 1 & 2
+    // 3 & 4 
+    if((this.mangaPage+1) == this.mangaPageLimit){
+      this.closeModalDialogue();
+    }
+
+    if(!this.readingManga){
+      this.readingManga = true;
+    }else {
+      this.mangaPage = this.mangaPage + 2;
+    }
+
+
+    
+  }
+
   closeModalDialogue(){
     //Close the modal
     // this.displayModal = false;
@@ -1088,6 +1160,7 @@ imagePool: [string] = [""];
       // alert("Close Modal");
       this.displayModal=false
       this.displayWritingModal=false;
+      this.displayMangaModal = false;
     }
   }
  
@@ -1267,7 +1340,10 @@ imagePool: [string] = [""];
           this.recentPosts.push(dataUpload);
           
          
-        }else if(dataUpload['type'] == "Images" || dataUpload['type'] == "Storyboard"){
+        }else if((dataUpload['type'] == "Images" || dataUpload['type'] == "Storyboard" || dataUpload['type'] == "Manga") && data.postImgs != null){
+          console.log("Data upload Test for image")
+          console.log("Data upload Test for image II : " + data.postImgs[0]);
+          console.log(dataUpload);
           dataUpload['image'] = data.postImgs[0];
           this.recentCollages.push(dataUpload);
 
@@ -1455,6 +1531,11 @@ if(dataValue){
   //For modal display
   displayModal: boolean =false;
   displayLegacyModal: boolean = false;
+  displayMangaModal: boolean = false;
+  mangaPage: number = 0;
+  mangaPageLimit: number = 0;
+  readingManga: boolean = false;
+
   countWords(str: any) {
     str = str.replace(/(^\s*)|(\s*$)/gi,"");
     str = str.replace(/[ ]{2,}/gi," ");
