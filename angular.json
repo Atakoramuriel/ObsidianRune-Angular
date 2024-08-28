@@ -110,5 +110,8 @@
       }
     }
   },
-  "defaultProject": "obsidianrune"
+  "defaultProject": "obsidianrune",
+  "cli": {
+    "analytics": false
+  }
 }
