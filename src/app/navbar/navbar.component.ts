@@ -447,7 +447,7 @@ savePostNew(){
     text: this.newText,
     userkey: this.userData['uid'],
     date: this.timeSaved,
-    type: this.getCount(this.newText) < 1000 ? "standard" : "Writing",
+    type: "Manga",
     timestamp: this.timeStamp,
     NumComments: "0",
     NumLikess: "0",

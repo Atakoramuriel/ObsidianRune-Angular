@@ -939,13 +939,25 @@ ul#menu li {
     padding: 1%;
 }
 
-#mangamodal1{
-    animation: 1s ease-out 0s 1 slideInFromBelow;
-    background-color:#000000a9;
+#mangaModal{
+    /* animation: 1s ease-out 0s 1 slideInFromBelow; */
+    background-color:#000000ce;
     border: solid #535D80 2px;
     width: 100%;
     height: 100%;
     padding: 1%;
+    position: fixed;
+    overflow: hidden;
+    top: 0%;
+}
+
+#mangamodal1{
+    animation: 1s ease-out 0s 1 slideInFromBelow;
+    background-color:#000000dc;
+    border: solid #535D80 2px;
+    width: 100%;
+    height: 100%;
+    padding: 1%;    
 }
 
 #WritingModal1{
@@ -1009,7 +1021,7 @@ ul#menu li {
 #modalUser0{
     color:rgb(202, 144, 58);
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 250%;
+    font-size: 125%;
     padding-left: 10px;
     position: relative;
     z-index: 3;
@@ -1052,18 +1064,48 @@ ul#menu li {
 }
 
 #MangaCover{
-    width: 85%;
+    width: 600px;
+    min-width: 600px; 
+    max-width: 600px;   
+    text-align: center;
+}
+
+#MangaCover:hover{
+    width: 40%;
     border: solid white 1px;
+    text-align: center;
+    cursor: pointer;
 }
 
 #MangaPage1{
     width: 80%;
-    border: solid white 2px;
+    max-height: 850px;
+    border: solid white 0.5px;
 }
 
 #MangaPage2{
     width: 80%;
-    border: solid red 2px;
+    max-height: 850px;
+    border: solid white 0.5px;
+}
+
+#MangaPage1:hover{
+    width: 80%;
+    border: solid white 0.5px;
+    cursor: pointer;
+}
+
+#endTxt{
+    text-align: center;
+    height: 100%;
+    width: 100%;
+
+}
+
+#MangaPage2:hover{
+    width: 80%;
+    border: solid white 2px;
+    cursor: pointer;
 }
 
 #modalImg{
