@@ -2,7 +2,7 @@
 <!-- Desktop Onliy -->
 
             <app-navbar></app-navbar>
-            <div class="hide-on-med-and-down">
+            <div class="">
                 <div id="topBanner" class="">
                     <!-- Area for the logo to rest -->
                         <div class="center" id="liveBanner">
@@ -17,7 +17,7 @@
                                 <div class="row">
                                 </div>
                             </div>
-                    </div>   
+                </div>   
     
                         <!-- The Concept is 'Multiple Rows' -->
                         <div class="row" id="sections">
@@ -221,28 +221,32 @@
                                             <div 
                                             (click)="closeModalDialogue();" 
                                             id="modal">
+                                      
                                                 <div class="col m12 l12 s12 ">
                                                     <div id="mangaModal">
                                                         <div 
                                                             (click)="goProfile()"
-                                                            id="userInfo"
+                                                            id="userInfoManga"
                                                             >
                                                             <img class="left" src="{{modalPostUserProfileImg}}" id="modalProfileMangaImg0" alt="">                                                    
-                                                            <h5 class="left" id="modalUser0">{{modalPostUser}} - Author</h5>
+                                                            <h3 class="left" id="modalMangaUser0">{{modalPostUser}} - Author</h3>
                                                         </div>
-                                                        
+                                                        <span><h4 class="modalMangaTitle">{{modalPostTitle}}</h4></span>
                                                                                                                                                                                                                         
                                                         <div 
                                                         (click)="preSelection=true"
-                                                        class="modal-content">
-                                                        <span><h4 class="modalTitle">{{modalPostTitle}}</h4></span>
+                                                        class="modal-manga-content">  
+                                                        
+                                                         
+                                                                                                           
+                                                        
                                                             <!-- A simple test -->
                                                              <div class="row">
                                                                 <!-- This is the cover - always the cover -->
                                                                 <div 
                                                                 *ngIf="mangaPage == 0"
                                                                 class="center" (click)="incrementMangaPage()">
-                                                                        <div class="row" style="border: solid blue 1px;">                        
+                                                                        <div class="row" style="">                        
                                                                             <div class="col s12">
                                                                                 <img src="{{modalPostImages[0]}}" alt="coverPage" id="MangaCover">                                                                            
                                                                             </div>                                                                                                                                
@@ -253,14 +257,12 @@
                                                                 <div
                                                                 *ngIf="mangaPage > 0"                                                                
                                                                 style="width: 100%;"
-                                                                >            
-                                                        
+                                                                >                                                                    
                                                                             <div class="col s6">
                                                                                 <img src="{{modalPostImages[mangaPage]}}" alt="Page1" id="MangaPage1" (click)="decrementMangaPage()">                                                                                
                                                                             </div>  
                                                                             <div class="col s6">                                                                                
-                                                                                <img  src="{{modalPostImages[mangaPage+1]}}" alt="Page2" id="MangaPage2" (click)="incrementMangaPage()" *ngIf="(mangaPage+1) < mangaPageLimit" >
-                                                                                <div  class="white-text" id="endTxt" *ngIf="(mangaPage + 1) >= mangaPageLimit"><span>End of Pages</span></div>
+                                                                                <img src="{{modalPostImages[mangaPage+1]}}" alt="Page2" id="MangaPage2" (click)="incrementMangaPage()" *ngIf="(mangaPage+1) < mangaPageLimit" >                                                                                
                                                                             </div>  
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                                                 </div>
@@ -324,177 +326,174 @@
                         
                             <!-- This is for the display of the writing Modal -->
 
-   <!--Long Writing Post Modal (Small)-->
-   <div class="row hide-on-small-only" *ngIf="displayWritingModal">
-                                                                
-    <div class="container" >                                
+        <!--Long Writing Post Modal (Small)-->
+        <div class="row hide-on-small-only" *ngIf="displayWritingModal">
+                                                                        
+            <div class="container" >                                
 
-        <!-- This is the section with the writing and the userprofile/name  -->
-        <div class="center">
-            <div 
-            (click)="closeModalDialogue();" 
-            id="writingModal">
-                <div class="col m8 l8 s12 offset-l2 offset-m2">                                            
-                    <div id="WritingModal1">
-                        
-                        <!-- This is the center with the user name and profile photo -->
-                        <div class="row">
-                            <div class="center">
+                <!-- This is the section with the writing and the userprofile/name  -->
+                <div class="center">
+                    <div 
+                    (click)="closeModalDialogue();" 
+                    id="writingModal">
+                        <div class="col m8 l8 s12 offset-l2 offset-m2">                                            
+                            <div id="WritingModal1">
+                                
+                                <!-- This is the center with the user name and profile photo -->
+                                <div class="row">
+                                    <div class="center">
+                                        <div 
+                                        (click)="goProfile()"
+                                        id="userInfoModal">
+                                        <img class="center" src="{{modalPostUserProfileImg}}" id="modalProfileImgNew" alt="">
+                                        <h1 class="center" id="modalUserName">{{modalPostUser}}</h1>
+                                    </div>
+                                    </div>
+                                </div>
+                                                        
                                 <div 
-                                (click)="goProfile()"
-                                id="userInfoModal">
-                                <img class="center" src="{{modalPostUserProfileImg}}" id="modalProfileImgNew" alt="">
-                                <h1 class="center" id="modalUserName">{{modalPostUser}}</h1>
-                            </div>
-                            </div>
-                        </div>
-                                                   
-                        <div 
-                        (click)="preSelection=true"
-                        class="modal-content"
-                        >
-                            <h3 class="modalTitle">{{modalPostTitle}}</h3>
-                            <br>
-                            <img 
-                            (click)="setImageModal()"
-                            src="{{modalPostImage}}" 
-                            id="postedImg" alt="">
-                            <div
-                            class="center"
-                            *ngFor="let collageImg of modalPostImages; let j = index;"
-                             >
-                            <img src="{{collageImg}}" 
-                            (click)="setCollageImageModal(collageImg)"
-                            class="postModalCollageImg{{j}} z-depth-5" >
-                        </div>
-                            <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>
-                        </div>
-                        <div 
-                        (click)="preSelection=true"
-                        class="modal-footer">
-                            <h4 class="extra center">
-                                <span class="white-text">
-                                    <i 
-                                    id="favoriteIcon"
-                                    *ngIf="modalPostLiked==false;"
-                                    class="medium material-icons red-text" 
-                                    (click)="likeModalPost(modalPostID); modalPostLiked = true">
-                                    favorite_border
-                                    </i>
-                                    <i 
-                                    id="favoriteIcon"
-                                    *ngIf="modalPostLiked==true;"
-                                    class="medium material-icons red-text" 
-                                    (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
-                                    favorite
-                                    </i>
+                                (click)="preSelection=true"
+                                class="modal-content"
+                                >
+                                    <h3 class="modalTitle">{{modalPostTitle}}</h3>
+                                    <br>
+                                    <img 
+                                    (click)="setImageModal()"
+                                    src="{{modalPostImage}}" 
+                                    id="postedImg" alt="">
+                                    <div
+                                    class="center"
+                                    *ngFor="let collageImg of modalPostImages; let j = index;"
+                                    >
+                                    <img src="{{collageImg}}" 
+                                    (click)="setCollageImageModal(collageImg)"
+                                    class="postModalCollageImg{{j}} z-depth-5" >
+                                </div>
+                                    <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>
+                                </div>
+                                <div 
+                                (click)="preSelection=true"
+                                class="modal-footer">
+                                    <h4 class="extra center">
+                                        <span class="white-text">
+                                            <i 
+                                            id="favoriteIcon"
+                                            *ngIf="modalPostLiked==false;"
+                                            class="medium material-icons red-text" 
+                                            (click)="likeModalPost(modalPostID); modalPostLiked = true">
+                                            favorite_border
+                                            </i>
+                                            <i 
+                                            id="favoriteIcon"
+                                            *ngIf="modalPostLiked==true;"
+                                            class="medium material-icons red-text" 
+                                            (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
+                                            favorite
+                                            </i>
 
-                                     {{modalPostLikes}} &nbsp;
-                                 <i 
-                                   class="medium material-icons" 
-                                   (click)="commentPost()" 
-                                   id="chatBubble" 
-                                   >chat_bubble_outline</i> {{modalPostComments}}
-                                 </span>
-                            </h4>
-                            <h5 class="center" id="postDate">{{modalPostDate}}</h5><br>                                
+                                            {{modalPostLikes}} &nbsp;
+                                        <i 
+                                        class="medium material-icons" 
+                                        (click)="commentPost()" 
+                                        id="chatBubble" 
+                                        >chat_bubble_outline</i> {{modalPostComments}}
+                                        </span>
+                                    </h4>
+                                    <h5 class="center" id="postDate">{{modalPostDate}}</h5><br>                                
+                                </div>
                         </div>
-                </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </div>
-        </div>
+        </div>  
 
-    </div>
-   </div>  
+        <!--Long Writing Post Modal (Small)-->
+        <div class="row hide-on-med-and-up" *ngIf="displayWritingModal">
+                                        
+        <div class="container" >                                
 
-                               <!--Long Writing Post Modal (Small)-->
-                               <div class="row hide-on-med-and-up" *ngIf="displayWritingModal">
-                                                                
-                                <div class="container" >                                
-    
-                                    <!-- This is the section with the writing and the userprofile/name  -->
-                                    <div class="center">
-                                        <div 
-                                        (click)="closeModalDialogue();" 
-                                        id="writingModal">
-                                            <div class="col m8 l8 s12 offset-l2 offset-m2">                                            
-                                                <div id="WritingModal1">
-                                                    
-                                                    <!-- This is the center with the user name and profile photo -->
-                                                    <div class="row">
-                                                        <div class="center">
-                                                            <div 
-                                                            (click)="goProfile()"
-                                                            id="userInfoModal">
-                                                            <img class="center" src="{{modalPostUserProfileImg}}" id="modalProfileImgNew" alt="">
-                                                            <h1 class="center" id="modalUserName">{{modalPostUser}}</h1>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                                               
-                                                    <div 
-                                                    (click)="preSelection=true"
-                                                    class="modal-content"
-                                                    >
-                                                        <h3 class="modalTitle">{{modalPostTitle}}</h3>
-                                                        <br>
-                                                        <img 
-                                                        (click)="setImageModal()"
-                                                        src="{{modalPostImage}}" 
-                                                        id="postedImg" alt="">
-                                                        <div
-                                                        class="center"
-                                                        *ngFor="let collageImg of modalPostImages; let j = index;"
-                                                         >
-                                                        <img src="{{collageImg}}" 
-                                                        (click)="setCollageImageModal(collageImg)"
-                                                        class="postModalCollageImg{{j}} z-depth-5" >
-                                                    </div>
-                                                        <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>
-                                                    </div>
-                                                    <div 
-                                                    (click)="preSelection=true"
-                                                    class="modal-footer">
-                                                        <h4 class="extra center">
-                                                            <span class="white-text">
-                                                                <i 
-                                                                id="favoriteIcon"
-                                                                *ngIf="modalPostLiked==false;"
-                                                                class="medium material-icons red-text" 
-                                                                (click)="likeModalPost(modalPostID); modalPostLiked = true">
-                                                                favorite_border
-                                                                </i>
-                                                                <i 
-                                                                id="favoriteIcon"
-                                                                *ngIf="modalPostLiked==true;"
-                                                                class="medium material-icons red-text" 
-                                                                (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
-                                                                favorite
-                                                                </i>
-    
-                                                                 {{modalPostLikes}} &nbsp;
-                                                             <i 
-                                                               class="medium material-icons" 
-                                                               (click)="commentPost()" 
-                                                               id="chatBubble" 
-                                                               >chat_bubble_outline</i> {{modalPostComments}}
-                                                             </span>
-                                                        </h4>
-                                                        <h5 class="center" id="postDate">{{modalPostDate}}</h5><br>                                
-                                                    </div>
-                                            </div>
-                                            </div>
-                    
-                                        </div>
-                                    </div>
-                    
+            <!-- This is the section with the writing and the userprofile/name  -->
+            <div class="center">
+                <div 
+                (click)="closeModalDialogue();" 
+                id="writingModal">
+                    <div class="col m8 l8 s12 offset-l2 offset-m2">                                            
+                        <div id="WritingModal1">
+                            
+                            <!-- This is the center with the user name and profile photo -->
+                            <div class="row">
+                                <div class="center">
+                                    <div 
+                                    (click)="goProfile()"
+                                    id="userInfoModal">
+                                    <img class="center" src="{{modalPostUserProfileImg}}" id="modalProfileImgNew" alt="">
+                                    <h1 class="center" id="modalUserName">{{modalPostUser}}</h1>
                                 </div>
-                               </div>  
+                                </div>
+                            </div>
+                                                        
+                            <div 
+                            (click)="preSelection=true"
+                            class="modal-content"
+                            >
+                                <h3 class="modalTitle">{{modalPostTitle}}</h3>
+                                <br>
+                                <img 
+                                (click)="setImageModal()"
+                                src="{{modalPostImage}}" 
+                                id="postedImg" alt="">
+                                <div
+                                class="center"
+                                *ngFor="let collageImg of modalPostImages; let j = index;"
+                                    >
+                                <img src="{{collageImg}}" 
+                                (click)="setCollageImageModal(collageImg)"
+                                class="postModalCollageImg{{j}} z-depth-5" >
+                            </div>
+                                <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5>
+                            </div>
+                            <div 
+                            (click)="preSelection=true"
+                            class="modal-footer">
+                                <h4 class="extra center">
+                                    <span class="white-text">
+                                        <i 
+                                        id="favoriteIcon"
+                                        *ngIf="modalPostLiked==false;"
+                                        class="medium material-icons red-text" 
+                                        (click)="likeModalPost(modalPostID); modalPostLiked = true">
+                                        favorite_border
+                                        </i>
+                                        <i 
+                                        id="favoriteIcon"
+                                        *ngIf="modalPostLiked==true;"
+                                        class="medium material-icons red-text" 
+                                        (click)="unLikeModalPost(modalPostID); modalPostLiked = false">
+                                        favorite
+                                        </i>
 
+                                            {{modalPostLikes}} &nbsp;
+                                        <i 
+                                        class="medium material-icons" 
+                                        (click)="commentPost()" 
+                                        id="chatBubble" 
+                                        >chat_bubble_outline</i> {{modalPostComments}}
+                                        </span>
+                                </h4>
+                                <h5 class="center" id="postDate">{{modalPostDate}}</h5><br>                                
+                            </div>
+                    </div>
+                    </div>
 
-    
-    
+                </div>
+            </div>
+
+        </div>
+        </div>  
+
             <!-- Start of the Aevum if there are any active -->
             <div class="row" id="main" *ngIf="newAevum">
                 <h4  id="aevumTitle">New</h4>
@@ -535,18 +534,12 @@
                     </div>
                 </div>
             </div> -->
-     
-    
-            <!-- Divider -->
-            <div class="row container">
-                <hr>
-            </div>
-        
+             
             <!-- Timeline of recent posts from all friends -->
         <div 
              class="row" 
              id="main">
-            <h5  id="menuTitle">Legacy Posts</h5>
+            <!-- <h5  id="menuTitle">Legacy Posts</h5> -->
             <div
             class="box2">
                 <div 
