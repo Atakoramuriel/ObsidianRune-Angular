@@ -648,7 +648,7 @@ imagePool: [string] = [""];
        lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
         if (element.scrollLeft + element.offsetWidth>= element.scrollWidth ){
           //Search more in the query
-          alert("Add more to query recent posts");
+          // alert("Add more to query recent posts");
         }
     }
   }
@@ -670,7 +670,7 @@ imagePool: [string] = [""];
        lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
         if (element.scrollLeft + element.offsetWidth>= element.scrollWidth ){
           //Search more in the query
-          alert("Add more to query recent Image posts");
+          // alert("Add more to query recent Image posts");
         }
     }
     }
@@ -692,7 +692,7 @@ imagePool: [string] = [""];
        lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
         if (element.scrollLeft + element.offsetWidth>= element.scrollWidth ){
           //Search more in the query
-          alert("Add more to query recent Writing posts");
+          // alert("Add more to query recent Writing posts");
         }
     }
     }
@@ -1740,7 +1740,7 @@ if(dataValue){
 
   //Test redirections
   goProfile(){
-    alert("Going to Profile Page")
+    // alert("Going to Profile Page")
     this.preSelection=true;
   }
 
