@@ -1264,6 +1264,7 @@ imagePool: [string] = [""];
 
     if(!this.readingManga){
       this.readingManga = true;
+      this.mangaPage = this.mangaPage + 2;
     }else {
       this.mangaPage = this.mangaPage + 2;
     }
@@ -1278,6 +1279,17 @@ imagePool: [string] = [""];
       this.mangaPage = this.mangaPage - 2;
     }
    
+  }
+
+
+  closeManga(){
+    this.closeModalDialogue();
+    this.mangaPage = 0;
+  }
+
+  validateMangaClose(){
+    // alert("Page: " + this.mangaPage + "Limit: " + this.mangaPageLimit);
+    
   }
 
   closeModalDialogue(){

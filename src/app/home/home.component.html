@@ -241,7 +241,7 @@
                                                                                                            
                                                         
                                                             <!-- A simple test -->
-                                                             <div class="row">
+                                                             <div class="row" (click)="validateMangaClose()">
                                                                 <!-- This is the cover - always the cover -->
                                                                 <div 
                                                                 *ngIf="mangaPage == 0"
@@ -249,22 +249,34 @@
                                                                         <div class="row" style="">                        
                                                                             <div class="col s12">
                                                                                 <img src="{{modalPostImages[0]}}" alt="coverPage" id="MangaCover">                                                                            
-                                                                            </div>                                                                                                                                
-                                                                                
-                                                                            
+                                                                            </div>                                                                                                                                                                                                                                                                                            
                                                                         </div>                                                                  
                                                                 </div>
                                                                 <div
-                                                                *ngIf="mangaPage > 0"                                                                
-                                                                style="width: 100%;"
+                                                                *ngIf="mangaPage > 0 && mangaPage != mangaPageLimit"                                                                
+                                                                style="width: 100%;"                                                                
                                                                 >                                                                    
                                                                             <div class="col s6">
                                                                                 <img src="{{modalPostImages[mangaPage]}}" alt="Page1" id="MangaPage1" (click)="decrementMangaPage()">                                                                                
                                                                             </div>  
                                                                             <div class="col s6">                                                                                
-                                                                                <img src="{{modalPostImages[mangaPage+1]}}" alt="Page2" id="MangaPage2" (click)="incrementMangaPage()" *ngIf="(mangaPage+1) < mangaPageLimit" >                                                                                
+                                                                                <img src="{{modalPostImages[mangaPage+1]}}" alt="Page2" id="MangaPage2" (click)="incrementMangaPage()" *ngIf="(mangaPage+1) < mangaPageLimit" >                                                                                                                                                                
                                                                             </div>  
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                </div>
+                                                                <div 
+                                                                *ngIf="mangaPage == mangaPageLimit"
+                                                                class="center" (click)="closeManga()">
+                                                                        <div class="row" style="">                        
+                                                                            <div class="col s12">
+                                                                                <!-- <img src="{{modalPostImages[mangaPageLimit - 1]}}" alt="coverPage" id="MangaCover">                                                                             -->
+                                                                                 <div class="row">
+                                                                                    <br><br>
+                                                                                    <span><h3 class="white-text">The End</h3></span>
+                                                                                 </div>
+                                                                                
+                                                                            </div>                                                                                                                                                                                                                                                                                            
+                                                                        </div>                                                                  
                                                                 </div>
                                                              </div> 
                                                             <!-- <h5 class="white-text center" style="text-overflow: ellipsis;  width:100%; white-space: pre-wrap; word-wrap: break-word;" id="post" disabled>{{modalPostTxt}}</h5> -->
